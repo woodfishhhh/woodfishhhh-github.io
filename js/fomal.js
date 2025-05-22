@@ -3197,6 +3197,7 @@ let unsplash = "url(https://source.unsplash.com/random/1920x1080/)";
 if (localStorage.getItem("blogbg") != undefined) {
   setBg(localStorage.getItem("blogbg"));
 } else {
+  // 修改此处的图片链接
   document.getElementById("defineBg").innerText = `:root{
     --default-bg: url(https://pic1.imgdb.cn/item/682f3d1458cb8da5c807b6fa.jpg);
     --darkmode-bg:url(https://pic1.imgdb.cn/item/682f3d1458cb8da5c807b6fa.jpg);
@@ -3431,7 +3432,7 @@ function createWinbox() {
 <h3>1. 二次元</h3>
 <details class="folding-tag" cyan><summary> 查看二次元背景 </summary>
               <div class='content'>
-              <div class="bgbox"><a href="javascript:;" rel="noopener external nofollow" style="background-image:url(https://lskypro.acozycotage.net/Fomalhaut/img/home_bg.webp)" class="imgbox" onclick="changeBg('url(https://lskypro.acozycotage.net/Fomalhaut/img/home_bg.webp)')"></a></div>
+              <div class="bgbox">  <!-- 添加新的背景选项 -->  <a href="javascript:;" rel="noopener external nofollow" style="background-image:url(https://pic1.imgdb.cn/item/682f3d1458cb8da5c807b6fa.jpg)" class="imgbox" onclick="changeBg('url(https://pic1.imgdb.cn/item/682f3d1458cb8da5c807b6fa.jpg)')"></a>  <!-- 原有的背景选项 -->  <a href="javascript:;" rel="noopener external nofollow" style="background-image:url(https://lskypro.acozycotage.net/Fomalhaut/img/home_bg.webp)" class="imgbox" onclick="changeBg('url(https://lskypro.acozycotage.net/Fomalhaut/img/home_bg.webp)')"></a></div>
               </div>
             </details>
 
