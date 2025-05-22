@@ -54,7 +54,7 @@ function tonav() {
     position = scroll;
   });
   //修复没有弄右键菜单的童鞋无法回顶部的问题
-  document.getElementById("page-name").innerText = document.title.split(" | Fomalhaut🥝")[0];
+  document.getElementById("page-name").innerText = document.title.split(" | WoodFish")[0];
 }
 
 function scrollToTop() {
@@ -1119,21 +1119,25 @@ function createtime1() {
   var dnum = Math.floor(days);
 
   var ascll = [
-    `欢迎来到Fomalhaut🥝の小家!`,
-    `Future is now 🍭🍭🍭`,
+    `泥嚎(*´▽｀)ノノ，我是木鱼！`,
+    `我们是朋友啦！`,
     `
         
-███████  ██████  ███    ███  █████  ██      ██   ██  █████  ██    ██ ████████ 
-██      ██    ██ ████  ████ ██   ██ ██      ██   ██ ██   ██ ██    ██    ██    
-█████   ██    ██ ██ ████ ██ ███████ ██      ███████ ███████ ██    ██    ██    
-██      ██    ██ ██  ██  ██ ██   ██ ██      ██   ██ ██   ██ ██    ██    ██    
-██       ██████  ██      ██ ██   ██ ███████ ██   ██ ██   ██  ██████     ██   
+
+    ██╗    ██╗ ██████╗  ██████╗ ██████╗ ███████╗██╗███████╗██╗  ██╗
+    ██║    ██║██╔═══██╗██╔═══██╗██╔══██╗██╔════╝██║██╔════╝██║  ██║
+    ██║ █╗ ██║██║   ██║██║   ██║██║  ██║█████╗  ██║███████╗███████║
+    ██║███╗██║██║   ██║██║   ██║██║  ██║██╔══╝  ██║╚════██║██╔══██║
+    ╚███╔███╔╝╚██████╔╝╚██████╔╝██████╔╝██║     ██║███████║██║  ██║
+     ╚══╝╚══╝  ╚═════╝  ╚═════╝ ╚═════╝ ╚═╝     ╚═╝╚══════╝╚═╝  ╚═╝
+                                                                   
+    
                                               
 `,
-    "小站已经苟活",
+    "本站出生了",
     dnum,
     "天啦!",
-    "©2022 By Fomalhaut",
+    "©2025 By WoodFish",
   ];
 
   setTimeout(
@@ -1172,7 +1176,7 @@ function createtime2() {
   setTimeout(
     console.warn.bind(
       console,
-      "%c ⚡ Powered by Fomalhaut🥝 %c 你正在访问Fomalhaut🥝の小家",
+      "%c ⚡ Powered by WoodFish %c 你正在访问WoodFishの小家",
       "color:white; background-color:#f0ad4e",
       ""
     )
@@ -1282,8 +1286,8 @@ function share_() {
   try {
     // 截取标题
     var title = document.title;
-    var subTitle = title.endsWith("| Fomalhaut🥝") ? title.substring(0, title.length - 14) : title;
-    navigator.clipboard.writeText('Fomalhaut🥝的站内分享\n标题：' + subTitle + '\n链接：' + url + '\n欢迎来访！🍭🍭🍭');
+    var subTitle = title.endsWith("| WoodFish") ? title.substring(0, title.length - 14) : title;
+    navigator.clipboard.writeText('WoodFish的站内分享\n标题：' + subTitle + '\n链接：' + url + '\n欢迎来访！🍭🍭🍭');
     new Vue({
       data: function () {
         this.$notify({
@@ -1321,11 +1325,11 @@ var titleTime;
 document.addEventListener('visibilitychange', function () {
   if (document.hidden) {
     //离开当前页面时标签显示内容
-    document.title = '👀跑哪里去了~';
+    document.title = '不要忘记我';
     clearTimeout(titleTime);
   } else {
     //返回当前页面时标签显示内容
-    document.title = '🐖抓到你啦～';
+    document.title = '我喜欢你';
     //两秒后变回正常标题
     titleTime = setTimeout(function () {
       document.title = OriginTitile;
@@ -2519,18 +2523,38 @@ if (m == 12 && dd == 25) {//圣诞节
     sessionStorage.setItem("isPopupWindow", "1");
   }
 }
-if (m == 8 && dd == 11) {//站长生日
+if (m == 6 && dd == 2) {//站长生日
   if (sessionStorage.getItem("isPopupWindow") != "1") {
     Swal.fire("祝站长" + (y - 1998).toString() + "岁生日快乐！🥝");
     sessionStorage.setItem("isPopupWindow", "1");
   }
 }
-if (m == 6 && dd == 30) {//小猫咪生日
-  if (sessionStorage.getItem("isPopupWindow") != "1") {
-    Swal.fire("祝小猫咪" + (y - 1999).toString() + "岁生日快乐！🐱");
+if (m == 12 && dd == 24) {//平安夜
+  if (sessionStorage.getItem("isPopupWindow")!= "1") {
+    Swal.fire("平安夜快乐！");
     sessionStorage.setItem("isPopupWindow", "1");
   }
 }
+if (m == 12 && dd == 31) {//除夕
+  if (sessionStorage.getItem("isPopupWindow")!= "1") {
+    Swal.fire("除夕快乐！");
+    sessionStorage.setItem("isPopupWindow", "1");
+  }
+}
+if (m == 1 && dd == 15) {//元宵节
+  if (sessionStorage.getItem("isPopupWindow")!= "1") {
+    Swal.fire("元宵节快乐！🍭");
+    sessionStorage.setItem("isPopupWindow", "1");
+  }
+}
+
+// if (m == 6 && dd == 30) {//小猫咪生日
+//   if (sessionStorage.getItem("isPopupWindow") != "1") {
+//     Swal.fire("祝小猫咪" + (y - 1999).toString() + "岁生日快乐！🐱");
+//     sessionStorage.setItem("isPopupWindow", "1");
+//   }
+// }
+
 
 //传统节日部分
 
@@ -2789,7 +2813,7 @@ function createtime() {
   var dis = Math.trunc(23400000000 + ((now - start) / 1000) * 17); // 距离=秒数*速度 记住转换毫秒
   var unit = (dis / 149600000).toFixed(6);  // 天文单位
   // 网站诞生时间
-  var grt = new Date("08/09/2022 00:00:00");
+  var grt = new Date("22/05/2025 00:00:00");
   var days = (now - grt) / 1e3 / 60 / 60 / 24,
     dnum = Math.floor(days),
     hours = (now - grt) / 1e3 / 60 / 60 - 24 * dnum,
