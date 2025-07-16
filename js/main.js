@@ -1,6 +1,3 @@
-import { inject } from '@vercel/analytics';
-inject();
-
 // 第一次播放音乐
 var anzhiyu_musicFirst = false;
 // 快捷键
