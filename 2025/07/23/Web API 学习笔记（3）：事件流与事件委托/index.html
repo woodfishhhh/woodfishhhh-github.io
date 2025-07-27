@@ -1,0 +1,563 @@
+<!DOCTYPE html><html lang="zh-Hans" data-theme="light"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>Web API 学习笔记（三）：事件流与事件委托 | 木鱼的鱼窝</title><meta name="keywords" content="web,JavaScript"><meta name="author" content="woodfish"><meta name="copyright" content="woodfish"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#f7f9fe"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="Web API 学习笔记（三）：事件流与事件委托"><meta name="application-name" content="Web API 学习笔记（三）：事件流与事件委托"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#f7f9fe"><meta property="og:type" content="article"><meta property="og:title" content="Web API 学习笔记（三）：事件流与事件委托"><meta property="og:url" content="https://www.woodfishhhh.xyz/2025/07/23/Web%20API%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%883%EF%BC%89%EF%BC%9A%E4%BA%8B%E4%BB%B6%E6%B5%81%E4%B8%8E%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98/index.html"><meta property="og:site_name" content="木鱼的鱼窝"><meta property="og:description" content="一、事件流1. 事件流的两个阶段 捕获阶段：事件从最顶层的父元素（如 html）向目标元素（触发事件的元素）逐层传递，addEventListener 第三个参数为 true 时在此阶段触发。 冒泡阶段：事件从目标元素向最顶层的父元素逐层回溯，addEventListener 第三个参数为 fal"><meta property="og:locale" content="zh-Hans"><meta property="og:image" content="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg"><meta property="article:author" content="woodfish"><meta property="article:tag" content="woodfish的keyword"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg"><meta name="description" content="一、事件流1. 事件流的两个阶段 捕获阶段：事件从最顶层的父元素（如 html）向目标元素（触发事件的元素）逐层传递，addEventListener 第三个参数为 true 时在此阶段触发。 冒泡阶段：事件从目标元素向最顶层的父元素逐层回溯，addEventListener 第三个参数为 fal"><link rel="shortcut icon" href="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg"><link rel="canonical" href="https://www.woodfishhhh.xyz/2025/07/23/Web%20API%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%883%EF%BC%89%EF%BC%9A%E4%BA%8B%E4%BB%B6%E6%B5%81%E4%B8%8E%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script>const GLOBAL_CONFIG = {
+  linkPageTop: {"enable":true,"title":"交换友链！芜湖！","addFriendPlaceholder":"昵称（请勿包含博客等字样）：\n网站地址（要求博客地址，请勿提交个人主页）：\n头像图片url（请提供尽可能清晰的图片，我会上传到我自己的图床）：\n描述：\n站点截图（可选）：\n"},
+  peoplecanvas: {"enable":true,"img":"https://pic1.imgdb.cn/item/683eda9f58cb8da5c8293c2e.png"},
+  postHeadAiDescription: undefined,
+  diytitle: {"enable":true,"leaveTitle":"不要忘记我----------------------------------------","backTitle":"我喜欢你-------------------------------------------"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  music_page_default: "nav_music",
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: false,
+  mainTone: undefined,
+  authorStatus: {"skills":[null,null,null,null,null,null,null,null,null,null,null]},
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":true,"limitCount":50,"languages":{"author":"作者: woodfish","link":"链接: ","source":"来源: 木鱼的鱼窝","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: true
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: '木鱼的鱼窝',
+  title: 'Web API 学习笔记（三）：事件流与事件委托',
+  postAI: '',
+  pageFillDescription: '一、事件流, 1. 事件流的两个阶段, 2. 阻止事件冒泡, 3. 解绑事件, 二、事件委托, 1. 核心原理, 2. 优势, 三、其他常用事件, 1. 页面加载事件（load）, 2. 滚动事件（scroll）, 3. 窗口尺寸事件（resize）, 小贴士, 四、元素尺寸与位置, 1. 元素宽高（offsetWidthx2FoffsetHeight）, 五、总结, 复习：自定义属性, 1. 定义自定义属性, 2. 访问自定义属性, 方式一：使用 getAttribute() 方法, 方式二：使用 dataset 属性（推荐）, 3. 修改自定义属性, 方式一：使用 setAttribute() 方法, 方式二：使用 dataset 属性, 4. 删除自定义属性, 5. 自定义属性的应用场景, 注意事项一事件流事件流的两个阶段捕获阶段事件从最顶层的父元素如向目标元素触发事件的元素逐层传递第三个参数为时在此阶段触发冒泡阶段事件从目标元素向最顶层的父元素逐层回溯第三个参数为默认时在此阶段触发示例事件流执行顺序捕获阶段触发捕获捕获捕获冒泡阶段触发默认冒泡冒泡冒泡点击元素的输出顺序捕获捕获捕获冒泡冒泡冒泡阻止事件冒泡默认情况下事件会沿冒泡阶段向上传播可能触发父元素的相同事件可通过事件对象的方法阻止冒泡被点击阻止冒泡父元素的事件不再触发注意会触发冒泡不会后者更适合处理鼠标进出效果解绑事件绑定解绑方式使用绑定事件后需通过事件类型事件处理函数捕获冒泡阶段解绑示例代码点击了绑定事件解绑事件关键注意匿名函数无法被解绑需用具名函数如示例中才能正常绑定和解绑二事件委托事件委托利用事件冒泡的特性将子元素的事件监听委托给父元素从而减少事件绑定次数提升性能尤其适合动态生成的元素核心原理父元素监听事件通过事件对象的属性判断触发事件的具体子元素无需为每个子元素单独绑定事件新增子元素也能自动响应事件关键字示例为多个按钮绑定点击事件按钮按钮按钮只处理按钮的点击事件按钮被点击优势减少事件绑定无需为大量子元素绑定事件降低内存消耗动态适配新增子元素无需重新绑定事件自动继承事件处理逻辑三其他常用事件页面加载事件一句话总结等页面里所有东西图样式脚本都加载完了才会触发用在哪儿比如要获取图片的实际大小或者初始化一个必须等页面加载好才能用的插件就适合用它代码例子页面资源加载完毕滚动事件一句话总结只要滚动条一动不管是页面还是某个元素的它就会一直触发用在哪儿常见的有滚动到一定位置导航栏就固定在顶部往下滚的时候自动加载更多内容还有显示回到顶部按钮都靠它小技巧想知道滚了多远用或者就能拿到距离顶部的距离代码例子获取滚动距离距离顶部滚动距离被卷去头部左侧的属性及操作权限对应属性头部被卷去距离左侧被卷去距离特性既可以读取当前被卷去数值也能修改赋值来设置滚动位置检测页面滚动头部距离被卷去头部的属性适用属性用于获取页面整体滚动后顶部被卷去的垂直距离常用来做滚动监听吸顶效果等交互逻辑窗口尺寸事件一句话总结窗口大小变了比如拉大缩小最大化它就会触发用在哪儿做响应式页面特别有用比如窗口变窄了就让内容从一排变成两排或者调整图表的大小让它一直合适小技巧想知道窗口现在多大是宽度是高度代码例子窗口宽度窗口高度小贴士像和这两个事件可能会触发得特别频繁比如快速滚动的时候如果处理函数里代码太多可能会让页面卡这时候可以用节流或者防抖的小技巧让它们触发得不那么勤这些事件不只能绑在整个窗口上比如事件也能绑在带滚动条的上专门监听那个的滚动四元素尺寸与位置元素宽高返回元素的可视宽高包含内容不包含和滚动条结果为数值类型可直接用于计算和获取元素宽高计算方式为内容和定位基准有带有定位的父级时以该父级为准若没有以文档左上角为准宽度数值如高度数值如注意如果元素隐藏返回值为五总结事件流分为捕获和冒泡阶段默认在冒泡阶段触发事件可通过阻止冒泡事件委托利用冒泡特性将子元素事件委托给父元素提升性能并适配动态元素滚动加载尺寸改变等事件是实现交互效果的重要工具结合元素尺寸属性可实现复杂交互如滚动动画响应式布局复习自定义属性定义自定义属性可以直接在标签中定义自定义属性通常建议以为前缀这是规范推荐的方式便于识别张三这里的都是自定义属性访问自定义属性方式一使用方法张三方式二使用属性推荐提供了属性专门用于访问以为前缀的自定义属性使用时需要去掉前缀并将连字符命名如转换为驼峰命名张三修改自定义属性同样可以通过两种方式修改自定义属性方式一使用方法修改属性男添加新的自定义属性方式二使用属性修改属性男添加新的自定义属性删除自定义属性方式一方式二设置为自定义属性的应用场景存储元素相关的额外数据如状态等避免频繁查询服务器或在事件处理中传递数据例如点击列表项时获取对应的数据用于选择器通过选择特定元素中使用自定义属性选择器男注意事项自定义属性的值始终是字符串类型使用时可能需要进行类型转换如转换为数字虽然可以使用不带前缀的自定义属性但建议遵循规范避免与未来的标准属性冲突只能访问以为前缀的属性对于其他自定义属性需要使用',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-07-26 17:28:18',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+          const isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+          const isLightMode = window.matchMedia('(prefers-color-scheme: light)').matches
+          const isNotSpecified = window.matchMedia('(prefers-color-scheme: no-preference)').matches
+          const hasNoSupport = !isDarkMode && !isLightMode && !isNotSpecified
+
+          if (t === undefined) {
+            if (isLightMode) activateLightMode()
+            else if (isDarkMode) activateDarkMode()
+            else if (isNotSpecified || hasNoSupport) {
+              const now = new Date()
+              const hour = now.getHours()
+              const isNight = hour <= 6 || hour >= 24
+              isNight ? activateDarkMode() : activateLightMode()
+            }
+            window.matchMedia('(prefers-color-scheme: dark)').addListener(e => {
+              if (saveToLocal.get('theme') === undefined) {
+                e.matches ? activateDarkMode() : activateLightMode()
+              }
+            })
+          } else if (t === 'light') activateLightMode()
+          else activateDarkMode()
+        
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><!-- hexo injector head_end start --><link rel="stylesheet" href="https://www.fomal.cc/static/css/runtime.min.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://www.woodfishhhh.xyz/" title="woodfishhhh博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png&quot;" data-lazy-src="/img/favicon.ico" alt="woodfishhhh博客"/><span class="back-menu-item-text">woodfishhhh博客</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">木鱼的鱼窝</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a><div id="he-plugin-simple"></div><script>var WIDGET = {
+  "CONFIG": {
+    "modules": "0124",
+    "background": "2",
+    "tmpColor": "FFFFFF",
+    "tmpSize": "16",
+    "cityColor": "FFFFFF",
+    "citySize": "16",
+    "aqiColor": "E8D87B",
+    "aqiSize": "16",
+    "weatherIconSize": "24",
+    "alertIconSize": "18",
+    "padding": "10px 10px 10px 10px",
+    "shadow": "0",
+    "language": "auto",
+    "borderRadius": "20",
+    "fixed": "true",
+    "vertical": "top",
+    "horizontal": "left",
+    "left": "20",
+    "top": "7.1",
+    "key": "df245676fb434a0691ead1c63341cd94"
+  }
+}
+</script><link rel="stylesheet" href="https://widget.qweather.net/simple/static/css/he-simple.css?v=1.4.0"/><script src="https://widget.qweather.net/simple/static/js/he-simple.js?v=1.4.0"></script></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/"><i class="fas fa-home faa-tada"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/tags/"><i class="fas fa-tags faa-tada"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/categories/"><i class="fas fa-th faa-tada"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/link/"><i class="fas fa-link faa-tada"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/about/"><i class="fas fa-user faa-tada"></i><span> 关于我</span></a></div></div></div><div id="nav-right"><div class="nav-button only-home" id="travellings_button" title="随机前往一个开往项目网站"><a class="site-page" onclick="anzhiyu.totraveling()" title="随机前往一个开往项目网站" href="javascript:void(0);" rel="external nofollow" data-pjax-state="external"><i class="anzhiyufont anzhiyu-icon-train"></i></a></div><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://www.woodfishhhh.xyz/images/e926e309585e5a5826ab0c3b485f8b6.png?_t=1751445131356" target="_blank"><img class="post-qr-code-img" alt="微信" src="https://www.woodfishhhh.xyz/images/e926e309585e5a5826ab0c3b485f8b6.png?_t=1751445131356"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://www.woodfishhhh.xyz/images/8147e2d92fa8287fac8774305c99661.jpg.jpeg?_t=1751445131356" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="https://www.woodfishhhh.xyz/images/8147e2d92fa8287fac8774305c99661.jpg.jpeg?_t=1751445131356"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/CSS/" style="font-size: 1.05rem;">CSS<sup>15</sup></a><a href="/tags/HTML/" style="font-size: 1.05rem;">HTML<sup>17</sup></a><a href="/tags/Java/" style="font-size: 1.05rem;">Java<sup>9</sup></a><a href="/tags/JavaScript/" style="font-size: 1.05rem;">JavaScript<sup>8</sup></a><a href="/tags/web/" style="font-size: 1.05rem;">web<sup>8</sup></a><a href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/" style="font-size: 1.05rem;">期末复习<sup>2</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/07/"><span class="card-archive-list-date">July 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">19</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/06/"><span class="card-archive-list-date">June 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">11</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/05/"><span class="card-archive-list-date">May 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">5</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url">前端</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/web/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>web</span></a><a class="article-meta__tags" href="/tags/JavaScript/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>JavaScript</span></a></span></div></div><h1 class="post-title" itemprop="name headline">Web API 学习笔记（三）：事件流与事件委托</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2025-07-23T15:18:40.000Z" title="发表于 2025-07-23 23:18:40">2025-07-23</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2025-07-26T09:28:18.629Z" title="更新于 2025-07-26 17:28:18">2025-07-26</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">2.3k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>8分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="Web API 学习笔记（三）：事件流与事件委托"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为南昌"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>南昌</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src=""></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://www.woodfishhhh.xyz/2025/07/23/Web%20API%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%883%EF%BC%89%EF%BC%9A%E4%BA%8B%E4%BB%B6%E6%B5%81%E4%B8%8E%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98/"><header><a class="post-meta-categories" href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url">前端</a><a href="/tags/web/" tabindex="-1" itemprop="url">web</a><a href="/tags/JavaScript/" tabindex="-1" itemprop="url">JavaScript</a><h1 id="CrawlerTitle" itemprop="name headline">Web API 学习笔记（三）：事件流与事件委托</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">woodfish</span><time itemprop="dateCreated datePublished" datetime="2025-07-23T15:18:40.000Z" title="发表于 2025-07-23 23:18:40">2025-07-23</time><time itemprop="dateCreated datePublished" datetime="2025-07-26T09:28:18.629Z" title="更新于 2025-07-26 17:28:18">2025-07-26</time></header><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png&quot;" data-lazy-src="https://www.woodfishhhh.xyz/images/event.png?_t=1753287581197"></p>
+<h2 id="一、事件流"><a href="#一、事件流" class="headerlink" title="一、事件流"></a>一、事件流</h2><h3 id="1-事件流的两个阶段"><a href="#1-事件流的两个阶段" class="headerlink" title="1. 事件流的两个阶段"></a>1. 事件流的两个阶段</h3><ul>
+<li><strong>捕获阶段</strong>：事件从最顶层的父元素（如 <code>html</code>）向目标元素（触发事件的元素）逐层传递，<code>addEventListener</code> 第三个参数为 <code>true</code> 时在此阶段触发。</li>
+<li><strong>冒泡阶段</strong>：事件从目标元素向最顶层的父元素逐层回溯，<code>addEventListener</code> 第三个参数为 <code>false</code>（默认）时在此阶段触发。</li>
+</ul>
+<p> <strong>示例：事件流执行顺序</strong></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;outer&quot;</span> </span></span><br><span class="line"><span class="tag">  &lt;<span class="attr">div</span> <span class="attr">class</span>=<span class="string">&quot;inner&quot;</span> </span></span><br><span class="line"><span class="tag">    &lt;<span class="attr">div</span> <span class="attr">class</span>=<span class="string">&quot;child&quot;</span> &lt;/<span class="attr">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">const</span> outer = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.outer&#x27;</span>);</span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">const</span> inner = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.inner&#x27;</span>);</span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">const</span> child = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.child&#x27;</span>);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">// 捕获阶段触发（true）</span></span></span><br><span class="line"><span class="language-javascript">  outer.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;outer 捕获&#x27;</span>), <span class="literal">true</span>);</span></span><br><span class="line"><span class="language-javascript">  inner.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;inner 捕获&#x27;</span>), <span class="literal">true</span>);</span></span><br><span class="line"><span class="language-javascript">  child.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;child 捕获&#x27;</span>), <span class="literal">true</span>);</span></span><br><span class="line"><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="comment">// 冒泡阶段触发（false，默认）</span></span></span><br><span class="line"><span class="language-javascript">  outer.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;outer 冒泡&#x27;</span>));</span></span><br><span class="line"><span class="language-javascript">  inner.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;inner 冒泡&#x27;</span>));</span></span><br><span class="line"><span class="language-javascript">  child.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="function">() =&gt;</span> <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;child 冒泡&#x27;</span>));</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p> <strong>点击 <code>child</code> 元素的输出顺序</strong>：<br> <code>outer 捕获</code> → <code>inner 捕获</code> → <code>child 捕获</code> → <code>child 冒泡</code> → <code>inner 冒泡</code> → <code>outer 冒泡</code></p>
+<h3 id="2-阻止事件冒泡"><a href="#2-阻止事件冒泡" class="headerlink" title="2. 阻止事件冒泡"></a>2. 阻止事件冒泡</h3><p> 默认情况下，事件会沿冒泡阶段向上传播，可能触发父元素的相同事件。可通过事件对象的<code>stopPropagation()</code> 方法阻止冒泡。</p>
+ <figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">child.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;child 被点击&#x27;</span>);</span><br><span class="line">  e.<span class="title function_">stopPropagation</span>(); <span class="comment">// 阻止冒泡，父元素的事件不再触发</span></span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<p> <strong>注意</strong>：</p>
+<ul>
+<li><code>mouseover</code>&#x2F;<code>mouseout</code> 会触发冒泡，<code>mouseenter</code>&#x2F;<code>mouseleave</code> 不会，后者更适合处理鼠标进出效果。</li>
+</ul>
+<h3 id="3-解绑事件"><a href="#3-解绑事件" class="headerlink" title="3. 解绑事件"></a>3. 解绑事件</h3><ul>
+<li><strong>绑定 &#x2F; 解绑方式</strong>：使用 <code>addEventListener</code> 绑定事件后，需通过 <code>removeEventListener(事件类型, 事件处理函数, [捕获/冒泡阶段])</code> 解绑。</li>
+<li><strong>示例代码</strong>：</li>
+</ul>
+<figure class="highlight js"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">function</span> <span class="title function_">fn</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="title function_">alert</span>(<span class="string">&#x27;点击了&#x27;</span>)</span><br><span class="line">&#125;</span><br><span class="line"><span class="comment">// 绑定事件</span></span><br><span class="line">btn.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, fn) </span><br><span class="line"><span class="comment">// 解绑事件</span></span><br><span class="line">btn.<span class="title function_">removeEventListener</span>(<span class="string">&#x27;click&#x27;</span>, fn) </span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li><strong>关键注意</strong>：匿名函数无法被解绑，需用具名函数（如示例中 <code>fn</code> ）才能正常绑定和解绑 。</li>
+</ul>
+<h2 id="二、事件委托"><a href="#二、事件委托" class="headerlink" title="二、事件委托"></a>二、事件委托</h2><p> 事件委托利用事件冒泡的特性，将子元素的事件监听委托给父元素，从而减少事件绑定次数，提升性能（尤其适合动态生成的元素）。</p>
+<h3 id="1-核心原理"><a href="#1-核心原理" class="headerlink" title="1. 核心原理"></a>1. 核心原理</h3><ul>
+<li><p>父元素监听事件，通过事件对象的 <strong><code>target</code></strong> 属性判断触发事件的具体子元素。</p>
+</li>
+<li><p>无需为每个子元素单独绑定事件，新增子元素也能自动响应事件。</p>
+<blockquote>
+<p>关键字：.target  .tagName</p>
+</blockquote>
+</li>
+</ul>
+<p> <strong>示例：为多个按钮绑定点击事件</strong></p>
+ <figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">&quot;list&quot;</span> </span></span><br><span class="line"><span class="tag">  &lt;<span class="attr">li</span>&gt;</span><span class="tag">&lt;<span class="name">button</span>&gt;</span>按钮1<span class="tag">&lt;/<span class="name">button</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">button</span>&gt;</span>按钮2<span class="tag">&lt;/<span class="name">button</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">li</span>&gt;</span><span class="tag">&lt;<span class="name">button</span>&gt;</span>按钮3<span class="tag">&lt;/<span class="name">button</span>&gt;</span><span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line"></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span>&gt;</span><span class="language-javascript"></span></span><br><span class="line"><span class="language-javascript">  <span class="keyword">const</span> list = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.list&#x27;</span>);</span></span><br><span class="line"><span class="language-javascript">  list.<span class="title function_">addEventListener</span>(<span class="string">&#x27;click&#x27;</span>, <span class="function">(<span class="params">e</span>) =&gt;</span> &#123;</span></span><br><span class="line"><span class="language-javascript">    <span class="comment">// 只处理按钮的点击事件</span></span></span><br><span class="line"><span class="language-javascript">    <span class="keyword">if</span> (e.<span class="property">target</span>.<span class="property">tagName</span> === <span class="string">&#x27;BUTTON&#x27;</span>) &#123;</span></span><br><span class="line"><span class="language-javascript">      <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;按钮被点击：&#x27;</span>, e.<span class="property">target</span>.<span class="property">textContent</span>);</span></span><br><span class="line"><span class="language-javascript">    &#125;</span></span><br><span class="line"><span class="language-javascript">  &#125;);</span></span><br><span class="line"><span class="language-javascript"></span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="2-优势"><a href="#2-优势" class="headerlink" title="2. 优势"></a>2. 优势</h3><ul>
+<li><strong>减少事件绑定</strong>：无需为大量子元素绑定事件，降低内存消耗。</li>
+<li><strong>动态适配</strong>：新增子元素无需重新绑定事件，自动继承事件处理逻辑。</li>
+</ul>
+<h2 id="三、其他常用事件"><a href="#三、其他常用事件" class="headerlink" title="三、其他常用事件"></a>三、其他常用事件</h2><h3 id="1-页面加载事件（load）"><a href="#1-页面加载事件（load）" class="headerlink" title="1. 页面加载事件（load）"></a>1. 页面加载事件（<code>load</code>）</h3><p><strong>一句话总结</strong>：等页面里所有东西（图、样式、脚本）都加载完了才会触发。<br><strong>用在哪儿</strong>：比如要获取图片的实际大小，或者初始化一个必须等页面加载好才能用的插件，就适合用它。<br><strong>代码例子</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;load&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;页面资源加载完毕&#x27;</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="2-滚动事件（scroll）"><a href="#2-滚动事件（scroll）" class="headerlink" title="2. 滚动事件（scroll）"></a>2. 滚动事件（<code>scroll</code>）</h3><p><strong>一句话总结</strong>：只要滚动条一动（不管是页面还是某个元素的），它就会一直触发。<br><strong>用在哪儿</strong>：常见的有 —— 滚动到一定位置，导航栏就固定在顶部；往下滚的时候，自动加载更多内容；还有显示 “回到顶部” 按钮，都靠它。<br><strong>小技巧</strong>：想知道滚了多远？用<code>window.pageYOffset</code>或者**<code>document.documentElement.scrollTop</code>**就能拿到距离顶部的距离。<br><strong>代码例子</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;scroll&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 获取滚动距离（距离顶部）</span></span><br><span class="line">  <span class="keyword">const</span> scrollTop = <span class="variable language_">window</span>.<span class="property">pageYOffset</span> || <span class="variable language_">document</span>.<span class="property">documentElement</span>.<span class="property">scrollTop</span>;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;滚动距离：&#x27;</span>, scrollTop);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<ol>
+<li><strong>被卷去头部 &#x2F; 左侧的属性及操作权限</strong><ul>
+<li>对应属性：<code>scrollTop</code>（头部被卷去距离 ）、<code>scrollLeft</code>（左侧被卷去距离 ）</li>
+<li>特性：既可以<strong>读取</strong>当前被卷去数值，也能 <strong>修改（赋值）</strong> 来设置滚动位置</li>
+</ul>
+</li>
+<li><strong>检测页面滚动头部距离（被卷去头部）的属性</strong><ul>
+<li>适用属性：<code>document.documentElement.scrollTop</code> ，用于获取页面整体滚动后，顶部被卷去的垂直距离 ，常用来做滚动监听、吸顶效果等交互逻辑 。</li>
+</ul>
+</li>
+</ol>
+<h3 id="3-窗口尺寸事件（resize）"><a href="#3-窗口尺寸事件（resize）" class="headerlink" title="3. 窗口尺寸事件（resize）"></a>3. 窗口尺寸事件（<code>resize</code>）</h3><p><strong>一句话总结</strong>：窗口大小变了（比如拉大、缩小、最大化），它就会触发。<br><strong>用在哪儿</strong>：做响应式页面特别有用，比如窗口变窄了，就让内容从一排变成两排；或者调整图表的大小，让它一直合适。<br><strong>小技巧</strong>：想知道窗口现在多大？<code>window.innerWidth</code>是宽度，<code>window.innerHeight</code>是高度。<br><strong>代码例子</strong>：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="variable language_">window</span>.<span class="title function_">addEventListener</span>(<span class="string">&#x27;resize&#x27;</span>, <span class="function">() =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;窗口宽度：&#x27;</span>, <span class="variable language_">window</span>.<span class="property">innerWidth</span>);</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;窗口高度：&#x27;</span>, <span class="variable language_">window</span>.<span class="property">innerHeight</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+<h3 id="小贴士"><a href="#小贴士" class="headerlink" title="小贴士"></a>小贴士</h3><ul>
+<li><p>像<code>scroll</code>和<code>resize</code>这两个事件，可能会触发得特别频繁（比如快速滚动的时候），如果处理函数里代码太多，可能会让页面卡。这时候可以用 “节流” 或者 “防抖” 的小技巧，让它们触发得不那么勤</p>
+</li>
+<li><p>这些事件不只能绑在整个窗口（<code>window</code>）上，比如<code>scroll</code>事件，也能绑在带滚动条的<code>div</code>上，专门监听那个<code>div</code>的滚动</p>
+<h2 id="四、元素尺寸与位置"><a href="#四、元素尺寸与位置" class="headerlink" title="四、元素尺寸与位置"></a>四、元素尺寸与位置</h2><h3 id="1-元素宽高（offsetWidth-offsetHeight）"><a href="#1-元素宽高（offsetWidth-offsetHeight）" class="headerlink" title="1. 元素宽高（offsetWidth&#x2F;offsetHeight）"></a>1. 元素宽高（<code>offsetWidth</code>&#x2F;<code>offsetHeight</code>）</h3><ul>
+<li>返回元素的可视宽高（包含内容、padding、border，不包含 margin 和滚动条）。</li>
+<li>结果为数值类型，可直接用于计算。</li>
+<li>offsetWidth 和 offsetHeight：获取元素宽高，计算方式为 “内容 + padding + border”</li>
+</ul>
+</li>
+<li><p>offsetTop 和 offsetLeft：定位基准，有带有定位的父级时，以该父级为准；若没有，以文档左上角为准</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> box = <span class="variable language_">document</span>.<span class="title function_">querySelector</span>(<span class="string">&#x27;.box&#x27;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;宽度：&#x27;</span>, box.<span class="property">offsetWidth</span>); <span class="comment">// 数值，如 200</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&#x27;高度：&#x27;</span>, box.<span class="property">offsetHeight</span>); <span class="comment">// 数值，如 150</span></span><br></pre></td></tr></table></figure>
+
+<p><strong>注意</strong>：如果元素隐藏（<code>display: none</code>），返回值为 0。</p>
+<h2 id="五、总结"><a href="#五、总结" class="headerlink" title="五、总结"></a>五、总结</h2><ul>
+<li>事件流分为捕获和冒泡阶段，默认在冒泡阶段触发事件，可通过 <code>stopPropagation()</code> 阻止冒泡。</li>
+<li>事件委托利用冒泡特性，将子元素事件委托给父元素，提升性能并适配动态元素。</li>
+<li>滚动、加载、尺寸改变等事件是实现交互效果的重要工具，结合元素尺寸属性可实现复杂交互（如滚动动画、响应式布局）。</li>
+</ul>
+</li>
+</ul>
+<h2 id="复习：自定义属性"><a href="#复习：自定义属性" class="headerlink" title="复习：自定义属性"></a>复习：自定义属性</h2><h3 id="1-定义自定义属性"><a href="#1-定义自定义属性" class="headerlink" title="1. 定义自定义属性"></a>1. 定义自定义属性</h3><p>可以直接在 HTML 标签中定义自定义属性，通常建议以 <code>data-</code> 为前缀（这是 HTML5 规范推荐的方式，便于识别）：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;user&quot;</span> <span class="attr">data-id</span>=<span class="string">&quot;123&quot;</span> <span class="attr">data-name</span>=<span class="string">&quot;张三&quot;</span> <span class="attr">data-age</span>=<span class="string">&quot;25&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>这里的 <code>data-id</code>、<code>data-name</code>、<code>data-age</code> 都是自定义属性。</p>
+<h3 id="2-访问自定义属性"><a href="#2-访问自定义属性" class="headerlink" title="2. 访问自定义属性"></a>2. 访问自定义属性</h3><h4 id="方式一：使用-getAttribute-方法"><a href="#方式一：使用-getAttribute-方法" class="headerlink" title="方式一：使用 getAttribute() 方法"></a>方式一：使用 <code>getAttribute()</code> 方法</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> userDiv = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;user&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> userId = userDiv.<span class="title function_">getAttribute</span>(<span class="string">&#x27;data-id&#x27;</span>); <span class="comment">// &quot;123&quot;</span></span><br><span class="line"><span class="keyword">const</span> userName = userDiv.<span class="title function_">getAttribute</span>(<span class="string">&#x27;data-name&#x27;</span>); <span class="comment">// &quot;张三&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="方式二：使用-dataset-属性（推荐）"><a href="#方式二：使用-dataset-属性（推荐）" class="headerlink" title="方式二：使用 dataset 属性（推荐）"></a>方式二：使用 <code>dataset</code> 属性（推荐）</h4><p>HTML5 提供了 <code>dataset</code> 属性，专门用于访问以 <code>data-</code> 为前缀的自定义属性，使用时需要去掉 <code>data-</code> 前缀，并将连字符命名（如 <code>data-user-name</code>）转换为驼峰命名（<code>userName</code>）：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> userDiv = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;user&#x27;</span>);</span><br><span class="line"><span class="keyword">const</span> userId = userDiv.<span class="property">dataset</span>.<span class="property">id</span>; <span class="comment">// &quot;123&quot;</span></span><br><span class="line"><span class="keyword">const</span> userName = userDiv.<span class="property">dataset</span>.<span class="property">name</span>; <span class="comment">// &quot;张三&quot;</span></span><br><span class="line"><span class="keyword">const</span> userAge = userDiv.<span class="property">dataset</span>.<span class="property">age</span>; <span class="comment">// &quot;25&quot;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="3-修改自定义属性"><a href="#3-修改自定义属性" class="headerlink" title="3. 修改自定义属性"></a>3. 修改自定义属性</h3><p>同样可以通过两种方式修改自定义属性：</p>
+<h4 id="方式一：使用-setAttribute-方法"><a href="#方式一：使用-setAttribute-方法" class="headerlink" title="方式一：使用 setAttribute() 方法"></a>方式一：使用 <code>setAttribute()</code> 方法</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> userDiv = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;user&#x27;</span>);</span><br><span class="line">userDiv.<span class="title function_">setAttribute</span>(<span class="string">&#x27;data-age&#x27;</span>, <span class="string">&#x27;26&#x27;</span>); <span class="comment">// 修改 data-age 属性</span></span><br><span class="line">userDiv.<span class="title function_">setAttribute</span>(<span class="string">&#x27;data-gender&#x27;</span>, <span class="string">&#x27;男&#x27;</span>); <span class="comment">// 添加新的自定义属性</span></span><br></pre></td></tr></table></figure>
+
+<h4 id="方式二：使用-dataset-属性"><a href="#方式二：使用-dataset-属性" class="headerlink" title="方式二：使用 dataset 属性"></a>方式二：使用 <code>dataset</code> 属性</h4><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> userDiv = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;user&#x27;</span>);</span><br><span class="line">userDiv.<span class="property">dataset</span>.<span class="property">age</span> = <span class="string">&#x27;26&#x27;</span>; <span class="comment">// 修改 data-age 属性</span></span><br><span class="line">userDiv.<span class="property">dataset</span>.<span class="property">gender</span> = <span class="string">&#x27;男&#x27;</span>; <span class="comment">// 添加新的自定义属性</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="4-删除自定义属性"><a href="#4-删除自定义属性" class="headerlink" title="4. 删除自定义属性"></a>4. 删除自定义属性</h3><figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> userDiv = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&#x27;user&#x27;</span>);</span><br><span class="line"><span class="comment">// 方式一：removeAttribute()</span></span><br><span class="line">userDiv.<span class="title function_">removeAttribute</span>(<span class="string">&#x27;data-age&#x27;</span>);</span><br><span class="line"></span><br><span class="line"><span class="comment">// 方式二：设置为 null</span></span><br><span class="line">userDiv.<span class="property">dataset</span>.<span class="property">age</span> = <span class="literal">null</span>;</span><br></pre></td></tr></table></figure>
+
+<h3 id="5-自定义属性的应用场景"><a href="#5-自定义属性的应用场景" class="headerlink" title="5. 自定义属性的应用场景"></a>5. 自定义属性的应用场景</h3><ul>
+<li>存储元素相关的额外数据（如 ID、状态等），避免频繁查询服务器或 DOM</li>
+<li>在事件处理中传递数据，例如点击列表项时获取对应的数据 ID</li>
+<li>用于 CSS 选择器，通过 <code>[data-*]</code> 选择特定元素</li>
+</ul>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* CSS 中使用自定义属性选择器 */</span></span><br><span class="line"><span class="selector-tag">div</span><span class="selector-attr">[data-gender=<span class="string">&quot;男&quot;</span>]</span> &#123;</span><br><span class="line">  <span class="attribute">background-color</span>: <span class="number">#e6f7ff</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<h3 id="注意事项"><a href="#注意事项" class="headerlink" title="注意事项"></a>注意事项</h3><ul>
+<li>自定义属性的值始终是字符串类型，使用时可能需要进行类型转换（如转换为数字）</li>
+<li>虽然可以使用不带 <code>data-</code> 前缀的自定义属性，但建议遵循规范，避免与未来的 HTML 标准属性冲突</li>
+<li><code>dataset</code> 只能访问以 <code>data-</code> 为前缀的属性，对于其他自定义属性需要使用 <code>getAttribute()</code></li>
+</ul>
+</article><nav class="pagination-post" id="pagination"><div class="prev-post pull-full"><a href="/2025/07/22/Web%20API%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89%EF%BC%9A%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E4%B8%8E-this-%E6%8C%87%E5%90%91/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png&quot;" data-lazy-src="/" onerror="onerror=null;src='https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Web API 学习笔记（二）：事件处理与 this 指向</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2025/07/21/Web%20API%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89%EF%BC%9ADOM%20%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/" title="Web API 学习笔记（一）：DOM 基础操作"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-07-21</div><div class="title">Web API 学习笔记（一）：DOM 基础操作</div></div></a></div><div><a href="/2025/07/22/Web%20API%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89%EF%BC%9A%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E4%B8%8E-this-%E6%8C%87%E5%90%91/" title="Web API 学习笔记（二）：事件处理与 this 指向"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-07-22</div><div class="title">Web API 学习笔记（二）：事件处理与 this 指向</div></div></a></div><div><a href="/2025/07/13/CSS%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%8810%EF%BC%89%EF%BC%9A%E7%A7%BB%E5%8A%A8%20Web%20%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80%E4%B8%8E%20rem%20%E5%B8%83%E5%B1%80%E3%80%81Less%20%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8/" title="CSS 学习笔记（10）：移动 Web 开发基础与 rem 布局、Less 预处理器"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-07-13</div><div class="title">CSS 学习笔记（10）：移动 Web 开发基础与 rem 布局、Less 预处理器</div></div></a></div><div><a href="/2025/07/14/CSS%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%8811%EF%BC%89%EF%BC%9A%E7%A7%BB%E5%8A%A8%20Web%20%E5%BC%80%E5%8F%91%E4%B9%8B%20vw%20%E9%80%82%E9%85%8D%E4%B8%8E%E9%85%B7%E6%88%91%E9%9F%B3%E4%B9%90%E6%A1%88%E4%BE%8B%E5%AE%9E%E8%B7%B5/" title="CSS 学习笔记（11）：移动 Web 开发之 vw 适配与酷我音乐案例实践"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-07-14</div><div class="title">CSS 学习笔记（11）：移动 Web 开发之 vw 适配与酷我音乐案例实践</div></div></a></div><div><a href="/2025/07/15/CSS%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%8812%EF%BC%89%EF%BC%9A%E5%93%8D%E5%BA%94%E5%BC%8F%E5%B8%83%E5%B1%80%E4%B8%8E%20Bootstrap%20%E6%A1%86%E6%9E%B6%E5%BA%94%E7%94%A8/" title="CSS 学习笔记（12）：响应式布局与 Bootstrap 框架应用"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-07-15</div><div class="title">CSS 学习笔记（12）：响应式布局与 Bootstrap 框架应用</div></div></a></div><div><a href="/2025/07/11/CSS%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%888%EF%BC%89%EF%BC%9A%E7%A7%BB%E5%8A%A8%20Web%20%E5%BC%80%E5%8F%91%E4%B9%8B%E5%B9%B3%E9%9D%A2%E8%BD%AC%E6%8D%A2%E4%B8%8E%E6%B8%90%E5%8F%98%E6%95%88%E6%9E%9C/" title="CSS 学习笔记（8）：移动 Web 开发之平面转换与渐变效果"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-07-11</div><div class="title">CSS 学习笔记（8）：移动 Web 开发之平面转换与渐变效果</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png&quot;" data-lazy-src="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png&quot;" data-lazy-src="https://bu.dusays.com/2023/08/24/64e6ce9c507bb.png" alt="status"/></div></div><div class="author-info__description">河汉微明星乍稀，碧莲香湿袭人衣。夜凉如水琉璃滑，自起开窗放月归。</div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">woodfish</h1><div class="author-info__desc">HOLA,this is woodfish!</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/woodfishhhh" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/359728114" target="_blank" title="BiliBili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a><a class="social-icon faa-parent animated-hover" href="https://www.woodfishhhh.xyz/images/af1a055d14e4f7f6eae2886f2865d13.jpg.jpeg?_t=1750312382930" target="_blank" title="QQ"><i class="anzhiyufont anzhiyu-icon-qq"></i></a><a class="social-icon faa-parent animated-hover" href="https://www.woodfishhhh.xyz/images/f59723db9159310b6056abe8341f5d7.jpg.jpeg?_t=1750312263368" target="_blank" title="WeChat"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><a class="social-icon faa-parent animated-hover" href="https://www.woodfishhhh.xyz/images/4dbae56e4d02fff0bfde8ec219d62aa.png?_t=1751444807234" target="_blank" title="Email"><i class="anzhiyufont anzhiyu-icon-envelope"></i></a><a class="social-icon faa-parent animated-hover" href="https://www.douyin.com/user/MS4wLjABAAAAgbOrIhdi7Rl5RfaQ3fE3i7c2WnyR3zEOyLiK2Cjtcqk?from_tab_name=main" target="_blank" title="Douyin"><i class="anzhiyufont anzhiyu-icon-tiktok"></i></a></div></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到我的鱼窝~</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E4%BA%8B%E4%BB%B6%E6%B5%81"><span class="toc-number">1.</span> <span class="toc-text">一、事件流</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E4%BA%8B%E4%BB%B6%E6%B5%81%E7%9A%84%E4%B8%A4%E4%B8%AA%E9%98%B6%E6%AE%B5"><span class="toc-number">1.1.</span> <span class="toc-text">1. 事件流的两个阶段</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E9%98%BB%E6%AD%A2%E4%BA%8B%E4%BB%B6%E5%86%92%E6%B3%A1"><span class="toc-number">1.2.</span> <span class="toc-text">2. 阻止事件冒泡</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E8%A7%A3%E7%BB%91%E4%BA%8B%E4%BB%B6"><span class="toc-number">1.3.</span> <span class="toc-text">3. 解绑事件</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98"><span class="toc-number">2.</span> <span class="toc-text">二、事件委托</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86"><span class="toc-number">2.1.</span> <span class="toc-text">1. 核心原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%BC%98%E5%8A%BF"><span class="toc-number">2.2.</span> <span class="toc-text">2. 优势</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%85%B6%E4%BB%96%E5%B8%B8%E7%94%A8%E4%BA%8B%E4%BB%B6"><span class="toc-number">3.</span> <span class="toc-text">三、其他常用事件</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E9%A1%B5%E9%9D%A2%E5%8A%A0%E8%BD%BD%E4%BA%8B%E4%BB%B6%EF%BC%88load%EF%BC%89"><span class="toc-number">3.1.</span> <span class="toc-text">1. 页面加载事件（load）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%BB%9A%E5%8A%A8%E4%BA%8B%E4%BB%B6%EF%BC%88scroll%EF%BC%89"><span class="toc-number">3.2.</span> <span class="toc-text">2. 滚动事件（scroll）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E7%AA%97%E5%8F%A3%E5%B0%BA%E5%AF%B8%E4%BA%8B%E4%BB%B6%EF%BC%88resize%EF%BC%89"><span class="toc-number">3.3.</span> <span class="toc-text">3. 窗口尺寸事件（resize）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B0%8F%E8%B4%B4%E5%A3%AB"><span class="toc-number">3.4.</span> <span class="toc-text">小贴士</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%85%83%E7%B4%A0%E5%B0%BA%E5%AF%B8%E4%B8%8E%E4%BD%8D%E7%BD%AE"><span class="toc-number">4.</span> <span class="toc-text">四、元素尺寸与位置</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%85%83%E7%B4%A0%E5%AE%BD%E9%AB%98%EF%BC%88offsetWidth-offsetHeight%EF%BC%89"><span class="toc-number">4.1.</span> <span class="toc-text">1. 元素宽高（offsetWidth&#x2F;offsetHeight）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E6%80%BB%E7%BB%93"><span class="toc-number">5.</span> <span class="toc-text">五、总结</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%A4%8D%E4%B9%A0%EF%BC%9A%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B1%9E%E6%80%A7"><span class="toc-number">6.</span> <span class="toc-text">复习：自定义属性</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%AE%9A%E4%B9%89%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B1%9E%E6%80%A7"><span class="toc-number">6.1.</span> <span class="toc-text">1. 定义自定义属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E8%AE%BF%E9%97%AE%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B1%9E%E6%80%A7"><span class="toc-number">6.2.</span> <span class="toc-text">2. 访问自定义属性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%B8%80%EF%BC%9A%E4%BD%BF%E7%94%A8-getAttribute-%E6%96%B9%E6%B3%95"><span class="toc-number">6.2.1.</span> <span class="toc-text">方式一：使用 getAttribute() 方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%BA%8C%EF%BC%9A%E4%BD%BF%E7%94%A8-dataset-%E5%B1%9E%E6%80%A7%EF%BC%88%E6%8E%A8%E8%8D%90%EF%BC%89"><span class="toc-number">6.2.2.</span> <span class="toc-text">方式二：使用 dataset 属性（推荐）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%BF%AE%E6%94%B9%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B1%9E%E6%80%A7"><span class="toc-number">6.3.</span> <span class="toc-text">3. 修改自定义属性</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%B8%80%EF%BC%9A%E4%BD%BF%E7%94%A8-setAttribute-%E6%96%B9%E6%B3%95"><span class="toc-number">6.3.1.</span> <span class="toc-text">方式一：使用 setAttribute() 方法</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%96%B9%E5%BC%8F%E4%BA%8C%EF%BC%9A%E4%BD%BF%E7%94%A8-dataset-%E5%B1%9E%E6%80%A7"><span class="toc-number">6.3.2.</span> <span class="toc-text">方式二：使用 dataset 属性</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-%E5%88%A0%E9%99%A4%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B1%9E%E6%80%A7"><span class="toc-number">6.4.</span> <span class="toc-text">4. 删除自定义属性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-%E8%87%AA%E5%AE%9A%E4%B9%89%E5%B1%9E%E6%80%A7%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-number">6.5.</span> <span class="toc-text">5. 自定义属性的应用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">6.6.</span> <span class="toc-text">注意事项</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/23/Web%20API%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%883%EF%BC%89%EF%BC%9A%E4%BA%8B%E4%BB%B6%E6%B5%81%E4%B8%8E%E4%BA%8B%E4%BB%B6%E5%A7%94%E6%89%98/" title="Web API 学习笔记（三）：事件流与事件委托">Web API 学习笔记（三）：事件流与事件委托</a><time datetime="2025-07-23T15:18:40.000Z" title="发表于 2025-07-23 23:18:40">2025-07-23</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/22/Web%20API%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89%EF%BC%9A%E4%BA%8B%E4%BB%B6%E5%A4%84%E7%90%86%E4%B8%8E-this-%E6%8C%87%E5%90%91/" title="Web API 学习笔记（二）：事件处理与 this 指向">Web API 学习笔记（二）：事件处理与 this 指向</a><time datetime="2025-07-22T05:18:40.000Z" title="发表于 2025-07-22 13:18:40">2025-07-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/21/Web%20API%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89%EF%BC%9ADOM%20%E5%9F%BA%E7%A1%80%E6%93%8D%E4%BD%9C/" title="Web API 学习笔记（一）：DOM 基础操作">Web API 学习笔记（一）：DOM 基础操作</a><time datetime="2025-07-21T05:18:40.000Z" title="发表于 2025-07-21 13:18:40">2025-07-21</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/20/JavaScript%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%885%EF%BC%89%EF%BC%9A%E5%AF%B9%E8%B1%A1%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B%E4%B8%8E%E5%86%85%E7%BD%AE%E6%95%B0%E5%AD%A6%E5%AF%B9%E8%B1%A1/" title="JavaScript 学习笔记（5）：对象数据类型与内置数学对象">JavaScript 学习笔记（5）：对象数据类型与内置数学对象</a><time datetime="2025-07-20T07:18:40.000Z" title="发表于 2025-07-20 15:18:40">2025-07-20</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/07/19/JavaScript%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%884%EF%BC%89%EF%BC%9A%E5%87%BD%E6%95%B0%E5%B0%81%E8%A3%85%E4%B8%8E%E5%AF%B9%E8%B1%A1%E5%9F%BA%E7%A1%80/" title="JavaScript 学习笔记（4）：函数封装与对象基础">JavaScript 学习笔记（4）：函数封装与对象基础</a><time datetime="2025-07-19T07:18:40.000Z" title="发表于 2025-07-19 15:18:40">2025-07-19</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div id="workboard"><div id="runtimeTextTip"></div></div></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2025 By <a class="footer-bar-link" href="/" title="woodfish" target="_blank">woodfish</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">35</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">6</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">2</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://www.woodfishhhh.xyz/" title="woodfishhhh博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png&quot;" data-lazy-src="/img/favicon.ico" alt="woodfishhhh博客"/><span class="back-menu-item-text">woodfishhhh博客</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/"><i class="fas fa-home faa-tada"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/tags/"><i class="fas fa-tags faa-tada"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/categories/"><i class="fas fa-th faa-tada"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/link/"><i class="fas fa-link faa-tada"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/about/"><i class="fas fa-user faa-tada"></i><span> 关于我</span></a></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/CSS/" style="font-size: 0.88rem;">CSS<sup>15</sup></a><a href="/tags/HTML/" style="font-size: 0.88rem;">HTML<sup>17</sup></a><a href="/tags/Java/" style="font-size: 0.88rem;">Java<sup>9</sup></a><a href="/tags/JavaScript/" style="font-size: 0.88rem;">JavaScript<sup>8</sup></a><a href="/tags/web/" style="font-size: 0.88rem;">web<sup>8</sup></a><a href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/" style="font-size: 0.88rem;">期末复习<sup>2</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("06/02/2025 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2025 By 安知鱼 V1.6.14",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 woodfish 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><script async="async">(function () {
+  var grt = new Date("06/02/2025 00:00:00"); //设置网站上线时间
+  var now = new Date();
+  var dnum;
+  var hnum;
+  var mnum;
+  var snum;
+  var nowHour;
+
+  // 计算并更新天数、小时数、分钟数和秒数
+  function updateTime() {
+    now = new Date(); // 更新 now 的值
+    nowHour = now.getHours(); // 更新 nowHour 的值
+    var days = (now - grt) / 1000 / 60 / 60 / 24;
+    dnum = Math.floor(days);
+    var hours = (now - grt) / 1000 / 60 / 60 - 24 * dnum;
+    hnum = Math.floor(hours);
+    if (String(hnum).length == 1) {
+      hnum = "0" + hnum;
+    }
+    var minutes = (now - grt) / 1000 / 60 - 24 * 60 * dnum - 60 * hnum;
+    mnum = Math.floor(minutes);
+    if (String(mnum).length == 1) {
+      mnum = "0" + mnum;
+    }
+    var seconds = (now - grt) / 1000 - 24 * 60 * 60 * dnum - 60 * 60 * hnum - 60 * mnum;
+    snum = Math.round(seconds);
+    if (String(snum).length == 1) {
+      snum = "0" + snum;
+    }
+  }
+
+  // 更新网页中显示的网站运行时间
+  function updateHtml() {
+    const footer = document.getElementById("footer");
+    if (!footer) return
+    let currentTimeHtml = "";
+    if (nowHour < 18 && nowHour >= 9) {
+      // 如果是上班时间，默认就是"安知鱼-上班摸鱼中.svg"图片，不需要更改
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    } else {
+      // 如果是下班时间，插入"安知鱼-下班啦.svg"图片
+      let img = document.querySelector("#workboard .workSituationImg");
+      if (img != null) {
+        img.src = "";
+        img.title = "";
+        img.alt = "";
+      }
+
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    }
+
+    if (document.getElementById("runtimeTextTip")) {
+      document.getElementById("runtimeTextTip").innerHTML = currentTimeHtml;
+    }
+  }
+
+  setInterval(() => {
+    updateTime();
+    updateHtml();
+  }, 1000);
+})();</script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script async data-pjax src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.1/bubble/bubble.js"></script><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><script src="/js/anzhiyu/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/dist/canvas-fluttering-ribbon.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div><!-- hexo injector body_end start --><script data-pjax>
+  function butterfly_footer_beautify_injector_config(){
+    var parent_div_git = document.getElementById('footer-wrap');
+    var item_html = '<div id="workboard"></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v6.2.0" title=""><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png&quot;" data-lazy-src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&amp;logo=hexo" alt=""/></a><a class="github-badge" target="_blank" href="https://butterfly.js.org/" style="margin-inline:5px" data-title="主题版本Butterfly_v4.3.1" title=""><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png&quot;" data-lazy-src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&amp;logo=bitdefender" alt=""/></a><a class="github-badge" target="_blank" href="https://vercel.com/" style="margin-inline:5px" data-title="本站采用多线部署，主线路托管于Vercel" title=""><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png&quot;" data-lazy-src="https://img.shields.io/badge/Hosted-Vercel-brightgreen?style=flat&amp;logo=Vercel" alt=""/></a><a class="github-badge" target="_blank" href="https://dashboard.4everland.org/" style="margin-inline:5px" data-title="本站采用多线部署，备用线路托管于4EVERLAND" title=""><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png&quot;" data-lazy-src="https://img.shields.io/badge/Hosted-4EVERLAND-22DDDD?style=flat&amp;logo=IPFS" alt=""/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title=""><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png&quot;" data-lazy-src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&amp;logo=GitHub" alt=""/></a><a class="github-badge" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" data-title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可" title=""><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png&quot;" data-lazy-src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&amp;logo=Claris" alt=""/></a></p>';
+    console.log('已挂载butterfly_footer_beautify')
+    parent_div_git.insertAdjacentHTML("beforeend",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_footer_beautify_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_footer_beautify_injector_config();
+  }
+  </script><script async src="/js/runtime.js"></script><!-- hexo injector body_end end --></body></html>
