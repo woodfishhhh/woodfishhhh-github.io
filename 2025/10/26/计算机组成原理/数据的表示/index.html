@@ -1,0 +1,502 @@
+<!DOCTYPE html><html lang="zh-Hans" data-theme="light"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Untitled | 木鱼的鱼窝</title><noscript>开启JavaScript才能访问本站哦~</noscript><link rel="icon" href="/img/favicon.ico"><link rel="stylesheet" href="/css/index.css?v=3.0.20"><link rel="canonical" href="https://www.woodfishhhh.xyz/2025/10/26/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%95%B0%E6%8D%AE%E7%9A%84%E8%A1%A8%E7%A4%BA/index.html"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css"><!-- Feature-specific CSS--><!-- aplayer--><!-- swiper--><!-- fancybox ui--><!-- katex--><!-- Open Graph--><meta name="description" content="数据表示的相关基本 核心前提：计算机内部用二进制表示数据，外部信息（数值、字符、音视频等）需转二进制存入寄存器 &amp;#x2F; 存储器 数值数据分类： 无符号数：无正负，可表存储地址（如门牌号） 有符号数：含正负，分定点数（整数 &amp;#x2F; 纯小数，小数点固定）、浮点数（带小数，小数点可移） 关"><!-- pwa--><meta name="apple-mobile-web-app-capable" content="木鱼的鱼窝"><meta name="theme-color" content="var(--efu-main)"><meta name="apple-mobile-web-app-status-bar-style" content="var(--efu-main)"><link rel="bookmark" href="/img/favicon.ico"><link rel="apple-touch-icon" href="/img/favicon.ico" sizes="180x180"><script>console.log(' %c Solitude %c ' + '3.0.20' + ' %c https://github.com/everfu/hexo-theme-solitude',
+    'background:#35495e ; padding: 1px; border-radius: 3px 0 0 3px;  color: #fff',
+    'background:#ff9a9a ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff',
+    'background:unset ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff')
+</script><script>(()=>{
+        const saveToLocal = {
+            set: function setWithExpiry(key, value, ttl) {
+                if (ttl === 0)
+                    return
+                const now = new Date()
+                const expiryDay = ttl * 86400000
+                const item = {
+                    value: value,
+                    expiry: now.getTime() + expiryDay
+                }
+                localStorage.setItem(key, JSON.stringify(item))
+            },
+            get: function getWithExpiry(key) {
+                const itemStr = localStorage.getItem(key)
+
+                if (!itemStr) {
+                    return undefined
+                }
+                const item = JSON.parse(itemStr)
+                const now = new Date()
+
+                if (now.getTime() > item.expiry) {
+                    localStorage.removeItem(key)
+                    return undefined
+                }
+                return item.value
+            }
+        };
+        window.utils = {
+            saveToLocal: saveToLocal,
+            getCSS: (url, id = false) => new Promise((resolve, reject) => {
+              const link = document.createElement('link')
+              link.rel = 'stylesheet'
+              link.href = url
+              if (id) link.id = id
+              link.onerror = reject
+              link.onload = link.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                link.onload = link.onreadystatechange = null
+                resolve()
+              }
+              document.head.appendChild(link)
+            }),
+            getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+              const script = document.createElement('script')
+              script.src = url
+              script.async = true
+              script.onerror = reject
+              script.onload = script.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                script.onload = script.onreadystatechange = null
+                resolve()
+              }
+
+              Object.keys(attr).forEach(key => {
+                script.setAttribute(key, attr[key])
+              })
+
+              document.head.appendChild(script)
+            }),
+            addGlobalFn: (key, fn, name = false, parent = window) => {
+                const globalFn = parent.globalFn || {}
+                const keyObj = globalFn[key] || {}
+
+                if (name && keyObj[name]) return
+
+                name = name || Object.keys(keyObj).length
+                keyObj[name] = fn
+                globalFn[key] = keyObj
+                parent.globalFn = globalFn
+            },
+            addEventListenerPjax: (ele, event, fn, option = false) => {
+              ele.addEventListener(event, fn, option)
+              utils.addGlobalFn('pjax', () => {
+                  ele.removeEventListener(event, fn, option)
+              })
+            },
+            diffDateFormat: (selector) => {
+                selector.forEach(item => {
+                    const date = new Date(item.getAttribute('datetime') || item.textContent);
+                    item.textContent = (date.getMonth() + 1).toString()+'/'+date.getDate().toString();
+                });
+            },
+        }
+    })()</script><!-- theme--><script>initTheme = () => {
+    let isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const cachedMode = utils.saveToLocal.get('theme');
+    if (cachedMode === undefined) {
+        const nowMode =
+            isDarkMode ? 'dark' : 'light'
+        document.documentElement.setAttribute('data-theme', nowMode);
+    } else {
+        document.documentElement.setAttribute('data-theme', cachedMode);
+    }
+    typeof rm === 'object' && rm.mode(cachedMode === 'dark' && isDarkMode)
+}
+initTheme()</script><script>const GLOBAL_CONFIG = {
+    root: '/',
+    algolia: undefined,
+    localsearch: undefined,
+    runtime: '2023-04-20 00:00:00',
+    lazyload: {
+        enable: false,
+        error: '/img/error_load.avif'
+    },
+    copyright: false,
+    highlight: {"limit":200,"expand":true,"copy":true,"syntax":"highlight.js"},
+    randomlink: false,
+    lang: {"theme":{"dark":"已切换至深色模式","light":"已切换至浅色模式"},"copy":{"success":"复制成功","error":"复制失败"},"backtop":"返回顶部","time":{"day":"天前","hour":"小时前","just":"刚刚","min":"分钟前","month":"个月前"},"day":" 天","f12":"开发者模式已打开，请遵循GPL协议。","totalk":"无需删除空行，直接输入评论即可"},
+    aside: {
+        state: {
+            morning: "✨ 早上好，新的一天开始了",
+            noon: "🍲 午餐时间",
+            afternoon: "🌞 下午好",
+            night: "早点休息",
+            goodnight: "晚安 😴",
+        },
+        witty_words: [],
+        witty_comment: {
+            prefix: '好久不见，',
+            back: '欢迎再次回来，',
+        },
+    },
+    covercolor: {
+        enable: false
+    },
+    comment: false,
+    lightbox: 'null',
+    right_menu: false,
+    translate: {"translateDelay":0,"defaultEncoding":2},
+    lure: false,
+    expire: false,
+};</script><script id="config-diff">var PAGE_CONFIG = {
+    is_post: true,
+    is_page: false,
+    is_home: false,
+    page: '',
+    toc: true,
+    comment: false,
+    ai_text: false,
+    color: false,
+}</script><!-- hexo injector head_end start --><link rel="stylesheet" href="https://www.fomal.cc/static/css/runtime.min.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body id="body"><div id="console"><div class="close-btn" onclick="sco.hideConsole()"><i class="solitude fas fa-xmark"></i></div><div class="console-card-group"><div class="console-card-group-right"><div class="console-card tags" onclick="sco.hideConsole()"><div class="card-content"><div class="author-content-item-tips">标签</div><div class="author-content-item-title">寻找感兴趣的领域</div></div><div class="card-tag-cloud"><a href="/tags/Linux/">Linux<sup>1</sup></a><a href="/tags/Java/">Java<sup>9</sup></a><a href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/">期末复习<sup>2</sup></a><a href="/tags/CSS/">CSS<sup>15</sup></a><a href="/tags/HTML/">HTML<sup>17</sup></a><a href="/tags/web/">web<sup>11</sup></a><a href="/tags/Ajax/">Ajax<sup>4</sup></a><a href="/tags/JavaScript/">JavaScript<sup>16</sup></a></div></div><div class="console-card history" onclick="sco.hideConsole()"><ul class="card-archive-list"><li class="item"><a href="/archives/2025/11/"><span class="date">2025/11</span><div class="count-group"><span class="count">1</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/10/"><span class="date">2025/10</span><div class="count-group"><span class="count">13</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/09/"><span class="date">2025/09</span><div class="count-group"><span class="count">6</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/08/"><span class="date">2025/08</span><div class="count-group"><span class="count">5</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/07/"><span class="date">2025/07</span><div class="count-group"><span class="count">23</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/06/"><span class="date">2025/06</span><div class="count-group"><span class="count">11</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/05/"><span class="date">2025/05</span><div class="count-group"><span class="count">5</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/"><span class="date">全部文章</span><div class="count-group"><span class="count">64</span><span class="unit">篇</span></div></a></li></ul></div></div></div><div class="button-group"><div class="console-btn-item"><span class="darkmode_switchbutton" onclick="sco.switchDarkMode()" title="昼夜切换"><i class="solitude fas fa-circle-half-stroke"></i></span></div><div class="console-btn-item" id="consoleHideAside"><span class="asideSwitch" onclick="sco.switchHideAside()" title="边栏显示控制"><i class="solitude fas fa-arrows-left-right-to-line"></i></span></div></div><div class="console-mask" onclick="sco.hideConsole()"></div></div><div id="sidebar" style="zoom: 1;"><div id="menu-mask" style="display: none;"></div><div id="sidebar-menus"><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">64</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a></div></div></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><span class="darkmode_switchbutton menu-child" onclick="sco.switchDarkMode()"><i class="solitude fas fa-circle-half-stroke"></i><span>显示模式</span></span></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">0</div><div class="back-menu-list"><a class="back-menu-item" href="/p" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">1</div><div class="back-menu-list"><a class="back-menu-item" href="/r" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">2</div><div class="back-menu-list"><a class="back-menu-item" href="/o" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">3</div><div class="back-menu-list"><a class="back-menu-item" href="/j" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">4</div><div class="back-menu-list"><a class="back-menu-item" href="/e" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">5</div><div class="back-menu-list"><a class="back-menu-item" href="/c" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">6</div><div class="back-menu-list"><a class="back-menu-item" href="/t" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">7</div><div class="back-menu-list"><a class="back-menu-item" href="/:" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">8</div><div class="back-menu-list"><a class="back-menu-item" href="#" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">9</div><div class="back-menu-list"><a class="back-menu-item" href="/" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">10</div><div class="back-menu-list"><a class="back-menu-item" href="/n" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">11</div><div class="back-menu-list"><a class="back-menu-item" href="/a" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">12</div><div class="back-menu-list"><a class="back-menu-item" href="/m" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">13</div><div class="back-menu-list"><a class="back-menu-item" href="/e" title="0"><span class="back-menu-item-text">0</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/%20%7C%7C%20fas%20fa-home"><span>主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%20%7C%7C%20fas%20fa-tags"><span>标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%20%7C%7C%20fas%20fa-th"><span>分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/%20%7C%7C%20fas%20fa-link"><span>友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/%20%7C%7C%20fas%20fa-user"><span>关于我</span></a></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="card-tag-cloud"><a href="/tags/Linux/">Linux<sup>1</sup></a><a href="/tags/Java/">Java<sup>9</sup></a><a href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/">期末复习<sup>2</sup></a><a href="/tags/CSS/">CSS<sup>15</sup></a><a href="/tags/HTML/">HTML<sup>17</sup></a><a href="/tags/web/">web<sup>11</sup></a><a href="/tags/Ajax/">Ajax<sup>4</sup></a><a href="/tags/JavaScript/">JavaScript<sup>16</sup></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="show" id="nav"><div id="nav-group"><div id="blog_name"><div><div class="back-home-button" tabindex="-1"><i class="solitude fas fa-bars-progress"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">0</div><div class="back-menu-list"><a class="back-menu-item" href="/p" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">1</div><div class="back-menu-list"><a class="back-menu-item" href="/r" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">2</div><div class="back-menu-list"><a class="back-menu-item" href="/o" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">3</div><div class="back-menu-list"><a class="back-menu-item" href="/j" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">4</div><div class="back-menu-list"><a class="back-menu-item" href="/e" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">5</div><div class="back-menu-list"><a class="back-menu-item" href="/c" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">6</div><div class="back-menu-list"><a class="back-menu-item" href="/t" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">7</div><div class="back-menu-list"><a class="back-menu-item" href="/:" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">8</div><div class="back-menu-list"><a class="back-menu-item" href="#" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">9</div><div class="back-menu-list"><a class="back-menu-item" href="/" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">10</div><div class="back-menu-list"><a class="back-menu-item" href="/n" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">11</div><div class="back-menu-list"><a class="back-menu-item" href="/a" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">12</div><div class="back-menu-list"><a class="back-menu-item" href="/m" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">13</div><div class="back-menu-list"><a class="back-menu-item" href="/e" title="0"><span class="back-menu-item-text">0</span></a></div></div></div></div></div><a href="/" title="返回博客主页" id="site-name"><i class="solitude fas fa-home"></i></a></div><div id="page-name-mask"><div id="page-name"><a id="page-name-text" onclick="sco.toTop()">Untitled</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/%20%7C%7C%20fas%20fa-home"><span>主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%20%7C%7C%20fas%20fa-tags"><span>标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%20%7C%7C%20fas%20fa-th"><span>分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/%20%7C%7C%20fas%20fa-link"><span>友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/%20%7C%7C%20fas%20fa-user"><span>关于我</span></a></div></div></div><div id="nav-left"></div><div id="nav-right"><div class="nav-button" id="travellings_button"><a class="site-page" target="_blank" rel="noopener" href="https://www.travellings.cn/go.html" onclick="javascript:travelling()" title=""><i class="solitude fas fa-train"></i></a></div><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机一篇文章" href="javascript:void(0);"><i class="solitude fas fa-dice-d6"></i></a></div><div class="nav-button" id="nav-totop" onclick="sco.toTop()"><a class="totopbtn"><i class="solitude fas fa-arrow-up"></i><span id="percent">0</span></a></div><div id="toggle-menu"><a class="site-page"><i class="solitude fas fa-bars"></i></a></div></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original" title="该文章为原创文章，注意版权协议">原创</a><div class="tag_share"><div class="post-meta__tag-list"></div></div></div></div><h1 class="post-title">Untitled</h1><div id="post-meta"><div class="meta-secondline"></div></div></div><div class="post-radius-bottom"></div><article class="post-content article-container"><h1 id="数据表示的相关基本"><a href="#数据表示的相关基本" class="headerlink" title="数据表示的相关基本"></a>数据表示的相关基本</h1><ol>
+<li><strong>核心前提</strong>：计算机内部用二进制表示数据，外部信息（数值、字符、音视频等）需转二进制存入寄存器 &#x2F; 存储器</li>
+<li><strong>数值数据分类</strong>：<ul>
+<li>无符号数：无正负，可表存储地址（如门牌号）</li>
+<li>有符号数：含正负，分定点数（整数 &#x2F; 纯小数，小数点固定）、浮点数（带小数，小数点可移）</li>
+</ul>
+</li>
+<li><strong>关键概念</strong>：<ul>
+<li>机器码：含原码、补码、反码、移码，是数值的计算机编码形式</li>
+<li>真值：日常生活中使用的数值（如 - 8.25）</li>
+</ul>
+</li>
+<li><strong>表示格式</strong>：<ul>
+<li>无符号数：N 位全表数值，B₀（最低位）-Bₙ₋₁（最高位）</li>
+<li>定点数：最高位为符号位，数值位取值依赖真值与编码格式</li>
+<li>浮点数：单精度（32 位：1 符 + 8 阶 + 23 尾）、双精度（64 位：1 符 + 11 阶 + 52 尾），遵循 IEEE 754 标准（阶码移码、尾数原码）</li>
+</ul>
+</li>
+</ol>
+<table>
+<thead>
+<tr>
+<th>分类维度</th>
+<th>具体类型</th>
+<th>关键特征</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>有无符号</td>
+<td>无符号数</td>
+<td>无正负，全位表数值；可作存储单元地址（如门牌号）</td>
+</tr>
+<tr>
+<td></td>
+<td>有符号数</td>
+<td>含正负，分定点数、浮点数两类</td>
+</tr>
+<tr>
+<td>小数点位置</td>
+<td>定点数（有符号）</td>
+<td>小数点位置<strong>固定隐含</strong>，无需存储；分定点整数（小数点在数值位右侧）、定点小数（小数点在符号位与数值位之间）</td>
+</tr>
+<tr>
+<td></td>
+<td>浮点数（有符号）</td>
+<td>小数点位置<strong>可移动</strong>（如 - 8.25 与 - 82.5）；含单精度（32 位）、双精度（64 位）</td>
+</tr>
+<tr>
+<td>计算机内部表示</td>
+<td>机器码（机器数）</td>
+<td>无符号数 &#x2F; 有符号数的二进制编码形式；有符号数编码含原码、补码、反码、移码（定点小数不用移码）</td>
+</tr>
+<tr>
+<td>日常数值</td>
+<td>真值</td>
+<td>日常生活中熟悉的数值形式（如 123、-0.6875），需转机器码才能被计算机处理</td>
+</tr>
+</tbody></table>
+<h1 id="不同类型数据的存储格式"><a href="#不同类型数据的存储格式" class="headerlink" title="不同类型数据的存储格式"></a>不同类型数据的存储格式</h1><ol>
+<li><strong>无符号数</strong>：N 位全表数值，B₀（最低位）~Bₙ₋₁（最高位），编码仅需进制转换。</li>
+<li><strong>定点数</strong>：最高位为符号位（表正负），剩余为数值位；定点整数小数点隐含在数值位右侧，定点小数隐含在符号位与数值位之间。</li>
+<li><strong>浮点数</strong>：<ul>
+<li>单精度（32 位）：1 位符号位 + 8 位阶码（定点整数） + 23 位尾数（定点小数）</li>
+<li>双精度（64 位）：1 位符号位 + 11 位阶码（定点整数） + 52 位尾数（定点小数）</li>
+<li>遵循 IEEE 754 标准：阶码用移码，尾数用原码。</li>
+</ul>
+</li>
+</ol>
+<h1 id="常用进位计数制"><a href="#常用进位计数制" class="headerlink" title="常用进位计数制"></a>常用进位计数制</h1><table>
+<thead>
+<tr>
+<th>进制</th>
+<th>用途</th>
+<th>基数</th>
+<th>数码</th>
+<th>进位规则</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>十进制</td>
+<td>日常生活</td>
+<td>10</td>
+<td>0-9</td>
+<td>逢十进一</td>
+</tr>
+<tr>
+<td>二进制</td>
+<td>计算机内部数据表示</td>
+<td>2</td>
+<td>0-1</td>
+<td>逢二进一（因逻辑电路仅两状态）</td>
+</tr>
+<tr>
+<td>八进制</td>
+<td>计算机外部（方便书写阅读）</td>
+<td>8</td>
+<td>0-7</td>
+<td>逢八进一</td>
+</tr>
+<tr>
+<td>16 进制</td>
+<td>计算机外部（解决二进制过长问题）</td>
+<td>16</td>
+<td>0-9、A-F（对应 10-15）</td>
+<td>逢十六进一</td>
+</tr>
+<tr>
+<td>其他</td>
+<td>12&#x2F;24&#x2F;60 进制（时间相关）</td>
+<td>-</td>
+<td>-</td>
+<td>-</td>
+</tr>
+</tbody></table>
+<h2 id="进制书写表示方法"><a href="#进制书写表示方法" class="headerlink" title="进制书写表示方法"></a>进制书写表示方法</h2><ol>
+<li>括号 + 右下角标基数：如 (123)₁₀、(101)₂</li>
+<li>英文首字母后缀（不区分大小写，常用大写）：如 123D、101B、77O、A8H</li>
+<li>C 语言表示：十进制无修饰，二进制前缀 0B，八进制前缀 0，16 进制前缀 0X（B&#x2F;X 常用小写）</li>
+</ol>
+<h2 id="进制转换方法"><a href="#进制转换方法" class="headerlink" title="进制转换方法"></a>进制转换方法</h2><h3 id="（一）非十进制→十进制：安全展开法"><a href="#（一）非十进制→十进制：安全展开法" class="headerlink" title="（一）非十进制→十进制：安全展开法"></a>（一）非十进制→十进制：安全展开法</h3><ul>
+<li>公式：任意进制数 &#x3D; 各数位数码 × 基数 ^ 数位权值之和</li>
+<li>示例：二进制 1011.101&#x3D;1×2³+0×2²+1×2¹+1×2⁰+1×2⁻¹+0×2⁻²+1×2⁻³&#x3D;11.625₁₀；16 进制 A9D1.cf 需先将 A-F 转 10-15 再计算</li>
+</ul>
+<h3 id="（二）二进制↔八进制-16-进制：分组对应法"><a href="#（二）二进制↔八进制-16-进制：分组对应法" class="headerlink" title="（二）二进制↔八进制 &#x2F; 16 进制：分组对应法"></a>（二）二进制↔八进制 &#x2F; 16 进制：分组对应法</h3><table>
+<thead>
+<tr>
+<th>转换方向</th>
+<th>核心规则</th>
+<th>分组方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>二进制→八进制</td>
+<td>1 位八进制 &#x3D; 3 位二进制</td>
+<td>整数：低位→高位每 3 位分组，高位不足补 0；小数：高位→低位每 3 位分组，低位不足补 0</td>
+</tr>
+<tr>
+<td>二进制→16 进制</td>
+<td>1 位 16 进制 &#x3D; 4 位二进制</td>
+<td>整数：低位→高位每 4 位分组，高位不足补 0；小数：高位→低位每 4 位分组，低位不足补 0</td>
+</tr>
+<tr>
+<td>八进制 &#x2F; 16 进制→二进制</td>
+<td>1 位八进制转 3 位二进制，1 位 16 进制转 4 位二进制</td>
+<td>直接转换，去除整数最高位 &#x2F; 小数最低位无效 0</td>
+</tr>
+<tr>
+<td>八进制↔16 进制</td>
+<td>以二进制为桥梁转换</td>
+<td>八进制→二进制→16 进制，反之亦然</td>
+</tr>
+</tbody></table>
+<h3 id="（三）十进制→任意进制：除基取余（整数）-乘基取整（小数）"><a href="#（三）十进制→任意进制：除基取余（整数）-乘基取整（小数）" class="headerlink" title="（三）十进制→任意进制：除基取余（整数）+ 乘基取整（小数）"></a>（三）十进制→任意进制：除基取余（整数）+ 乘基取整（小数）</h3><ol>
+<li>整数部分（除基取余）：十进制整数 ÷ 目标基数，取余数，商继续除基取余，直至商为 0，余数<strong>从下到上</strong>排列（低位先得）</li>
+<li>小数部分（乘基取整）：十进制小数 × 目标基数，取整数部分，剩余小数继续乘基取整，直至小数为 0 或达指定精度，整数<strong>从上到下</strong>排列（高位先得）</li>
+<li>注意：小数转换可能精度缺失（无限循环），达所需精度即可</li>
+<li>示例：123₁₀→二进制（除 2 取余）得 1111011；0.6875₁₀→二进制（乘 2 取整）得 0.1011</li>
+</ol>
+<h3 id="（四）十进制整数→二进制：凑值法（快捷）"><a href="#（四）十进制整数→二进制：凑值法（快捷）" class="headerlink" title="（四）十进制整数→二进制：凑值法（快捷）"></a>（四）十进制整数→二进制：凑值法（快捷）</h3><ul>
+<li>前提：熟记 2 的幂次（至少 128、64、32、16、8、4、2、1）</li>
+<li>方法：用 2 的幂次相加凑目标数，对应位为 1，其余为 0。示例：166&#x3D;128+32+4+2→10100110₂</li>
+</ul>
+<h1 id="原码、补码、反码、移码"><a href="#原码、补码、反码、移码" class="headerlink" title="原码、补码、反码、移码"></a>原码、补码、反码、移码</h1><h2 id="核心定义（8-位为例，1-位符号位-7-位数值位）"><a href="#核心定义（8-位为例，1-位符号位-7-位数值位）" class="headerlink" title="核心定义（8 位为例，1 位符号位 + 7 位数值位）"></a>核心定义（8 位为例，1 位符号位 + 7 位数值位）</h2><ol>
+<li><p><strong>原码</strong></p>
+<p>符号位（0 正 1 负）+ 数值绝对值</p>
+<ul>
+<li>例：+5→00000101，-5→10000101；正负零不唯一（+0&#x3D;00000000，-0&#x3D;10000000）</li>
+</ul>
+</li>
+<li><p><strong>反码</strong></p>
+<p>符号位同原码，正数数值位不变，负数数值位取反</p>
+<ul>
+<li>例：+5→00000101，-5→11111010；正负零不唯一</li>
+</ul>
+</li>
+<li><p><strong>补码</strong></p>
+<p>正数同原码 &#x2F; 反码，负数 &#x3D; 反码 + 1（进位传递）</p>
+<ul>
+<li>例：+5→00000101，-5→11111011；正负零唯一（0&#x3D;00000000），支持减法转加法</li>
+</ul>
+</li>
+<li><p><strong>移码</strong>：真值 + 偏移量（8 位取 128），映射为非负数方便比较</p>
+<ul>
+<li>例：+5→10000101（5+128），-5→01111011（-5+128）；符号位与补码相反，范围 - 128~+127，用于浮点数阶码。</li>
+</ul>
+</li>
+</ol>
+<h2 id="转换逻辑"><a href="#转换逻辑" class="headerlink" title="转换逻辑"></a>转换逻辑</h2><ul>
+<li>正数：原码 &#x3D; 反码 &#x3D; 补码</li>
+<li>负数：<br>原码→补码：原码→反码→+1<br>补码→原码：补码→反码→+1</li>
+</ul>
+<h2 id="前置知识：定点数表示复习"><a href="#前置知识：定点数表示复习" class="headerlink" title="前置知识：定点数表示复习"></a>前置知识：定点数表示复习</h2><ol>
+<li><strong>定点小数定义</strong>：机器字长为 N+1 位（1 位符号位 + N 位数值位），小数点固定在符号位与数值位之间（无需记录），仅用于表示浮点数尾数，无对应高级语言数据类型。例如：若机器字长为 4 位（1 位符号位 + 3 位数值位），则定点小数格式为 “符号位。数值位 1 数值位 2 数值位 3”，如 “0.101” 表示 + 0.625。</li>
+<li>定点数编码特性<ul>
+<li>补码、移码比原码、反码多表示 1 个最小负数。例如：8 位二进制中，原码 &#x2F; 反码最小负数为 - 127（11111111），补码最小负数为 - 128（10000000），移码最小负数为 00000000（对应真值 - 128）。</li>
+<li>表示范围由 “机器字长 + 机器码类型” 决定：字长越长、用补码 &#x2F; 移码时，范围越广。</li>
+</ul>
+</li>
+</ol>
+<h3 id="32-位浮点数（单精度）的存储结构"><a href="#32-位浮点数（单精度）的存储结构" class="headerlink" title="32 位浮点数（单精度）的存储结构"></a>32 位浮点数（单精度）的存储结构</h3><p>整体占 4 字节（32 位），按 “符号位→阶码→尾数” 的顺序拼接，位数分配如下：</p>
+<table>
+<thead>
+<tr>
+<th>组件</th>
+<th>位数</th>
+<th>作用与编码规则</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>符号位（S）</td>
+<td>1 位</td>
+<td>0 &#x3D; 正数，1 &#x3D; 负数（直接存储，无额外编码）</td>
+</tr>
+<tr>
+<td>阶码（E）</td>
+<td>8 位</td>
+<td>用 “偏移码” 存储（避免存负数阶码，简化运算），<strong>偏移量固定为 127</strong>（即：存储值 &#x3D; 真实阶码 + 127）</td>
+</tr>
+<tr>
+<td>尾数（M）</td>
+<td>23 位</td>
+<td>存储 “标准化尾数 1.xxxx” 中 “xxxx” 的部分（因 “1.” 固定，不存，仅存 23 位有效位，不足补 0）</td>
+</tr>
+</tbody></table>
+<h3 id="2-32-位存储的完整实例：存-“6-5”"><a href="#2-32-位存储的完整实例：存-“6-5”" class="headerlink" title="2. 32 位存储的完整实例：存 “6.5”"></a>2. 32 位存储的完整实例：存 “6.5”</h3><p>结合前面 “6.5” 的标准化结果（S&#x3D;0，真实阶码 E&#x3D;2，尾数有效位 M&#x3D;101），按步骤编码存储：</p>
+<h4 id="步骤-1：编码符号位（S）"><a href="#步骤-1：编码符号位（S）" class="headerlink" title="步骤 1：编码符号位（S）"></a>步骤 1：编码符号位（S）</h4><p>6.5 是正数，S&#x3D;0（直接存 “0”）。</p>
+<h4 id="步骤-2：编码阶码（E）"><a href="#步骤-2：编码阶码（E）" class="headerlink" title="步骤 2：编码阶码（E）"></a>步骤 2：编码阶码（E）</h4><ul>
+<li>真实阶码 E&#x3D;2；</li>
+<li>按 32 位规则，偏移量 &#x3D; 127，所以 “阶码存储值”&#x3D;2+127&#x3D;129；</li>
+<li>将 129 转 8 位二进制：129 是 “10000001B”（这就是最终存在 8 位阶码区的值）。</li>
+</ul>
+<h4 id="步骤-3：编码尾数（M）"><a href="#步骤-3：编码尾数（M）" class="headerlink" title="步骤 3：编码尾数（M）"></a>步骤 3：编码尾数（M）</h4><ul>
+<li>标准化尾数是 “1.101B”，需存 “101” 部分；</li>
+<li>32 位尾数区需 23 位，不足补 0，所以 M 的存储值是 “10100000000000000000000B”（“101” 后补 20 个 0，凑够 23 位）。</li>
+</ul>
+<h4 id="步骤-4：拼接-32-位二进制串"><a href="#步骤-4：拼接-32-位二进制串" class="headerlink" title="步骤 4：拼接 32 位二进制串"></a>步骤 4：拼接 32 位二进制串</h4><p>按 “S→E→M” 顺序拼接：</p>
+<p>0（S） + 10000001（E） + 10100000000000000000000（M） &#x3D; <code>01000000110100000000000000000000B</code></p>
+<p>这串二进制就是 “6.5” 在内存中 32 位浮点数的存储形式（转十六进制为<code>0x40D00000</code>，可通过编程验证）。</p>
+<h2 id="浮点数表示范围（以-“3-位阶码-3-位尾数”-为例，均用原码）"><a href="#浮点数表示范围（以-“3-位阶码-3-位尾数”-为例，均用原码）" class="headerlink" title="浮点数表示范围（以 “3 位阶码 + 3 位尾数” 为例，均用原码）"></a>浮点数表示范围（以 “3 位阶码 + 3 位尾数” 为例，均用原码）</h2><ul>
+<li>阶码：1 位阶符 + 2 位数值位，范围为 - 2~+2（阶符 0 为正、1 为负，数值位全 1 时最大，如 “011” 表示 + 2，“111” 表示 - 2）；</li>
+<li>尾数：1 位数符 + 2 位数值位，范围为 - 0.75~+0.75（数符 0 为正、1 为负，数值位全 1 时最大，如 “011” 表示 + 0.75，“111” 表示 - 0.75）；</li>
+<li>各范围计算：<ul>
+<li>正最大值：<code>R^E_max × M_max = 2^2 × 0.75 = 3.0</code>；</li>
+<li>正最小值：<code>R^E_min（正） × M_min（正） = 2^(-2) × 0.25 = 0.0625</code>；</li>
+<li>负最小值：<code>R^E_max × M_min（负） = 2^2 × (-0.75) = -3.0</code>；</li>
+<li>负最大值：<code>R^E_min（正） × M_max（负） = 2^(-2) × (-0.25) = -0.0625</code>。</li>
+</ul>
+</li>
+</ul>
+<h2 id="浮点数溢出问题"><a href="#浮点数溢出问题" class="headerlink" title="浮点数溢出问题"></a>浮点数溢出问题</h2><ol>
+<li><strong>上溢</strong>：阶码＞最大阶码（如上述例子中阶码为 + 3），数值超范围，机器停止运算并显溢出标志。例如：<code>2^3 × 0.5</code>，因阶码 + 3 超出 “-2~+2” 范围，触发上溢。</li>
+<li><strong>下溢</strong>：阶码＜最小阶码（如上述例子中阶码为 - 3），数值接近 0，机器按 “机器零” 处理（可继续运行）。例如：<code>2^(-3) × 0.5</code>，阶码 - 3 超出范围，按 0 处理。</li>
+<li><strong>精度溢出</strong>：数值在范围之内，但无法精确表示（因尾数是二进制定点小数）。例如：十进制 0.1 转换为二进制是<code>0.000110011…</code>（无限循环），存储时需截断，导致精度损失。</li>
+</ol>
+<h2 id="核心习题与答案"><a href="#核心习题与答案" class="headerlink" title="核心习题与答案"></a>核心习题与答案</h2><ol>
+<li>二进制浮点数的机器表示由哪两部分构成？答案：基数隐含，由阶码和尾数构成（如<code>2^3 × 0.101</code>，机器存储 “3” 和 “0.101”）。</li>
+<li>浮点数的表示范围和精度分别由什么决定？答案：阶码位数决定范围（如 8 位阶码比 6 位阶码范围广），尾数位数决定精度（如 24 位尾数比 16 位尾数精度高）。</li>
+<li>已知阶码 3 位（1 阶符 + 2 数值位）、尾数 3 位（1 数符 + 2 数值位），均为原码，求最大正数？答案：<code>2^(+2) × 0.75 = 3.0</code>。</li>
+</ol>
+<p><img src="D:\BlogFile\Blog\source_posts\计算机组成原理\数据的表示.assets\image-20251105214455215.png" alt="image-20251105214455215"></p>
+</article><div class="post-copyright"><div class="post-copyright__author_group"><div class="post-copyright__author_img"><img class="post-copyright__author_img_front" src="/img/logo.png"></div><div class="post-copyright__author_name">woodfish</div><div class="post-copyright__author_desc">HOLA,this is woodfish!</div></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div id="quit-box" onclick="RemoveRewardMask()"></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本文是原创文章，采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans">CC BY-NC-SA 4.0</a>协议，完整转载请注明来自<a href="/">木鱼的鱼窝</a></span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__tag-list"></div></div></div><nav class="needEndHide pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2025/10/26/%E9%A2%98%E8%A7%A3/E%E9%A2%98%E8%B6%85%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%B8%AE%E5%93%88%E5%9F%BA%E9%B1%BC%E7%AE%97%E6%A0%87%E7%AD%BE/"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Untitled</div></div></a></div><div class="next-post pull-right"><a href="/2025/10/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%AC%E4%B8%89%E7%AB%A0%EF%BC%9A%E9%93%BE%E8%B7%AF%E5%B1%82/"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Untitled</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><div class="top-group"><div class="sayhi" id="sayhi" onclick="sco.changeWittyWord()"></div></div></div><div class="avatar"><img alt="头像" src="/img/logo.png"></div><div class="description"></div><div class="bottom-group"><span class="left"><div class="name">woodfish</div><div class="desc">只有迎风，风筝才能飞得更高。</div></span><div class="social-icons is-center"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="solitude fas fa-bars"></i><span>文章目录</span></div><div class="toc-content" id="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A4%BA%E7%9A%84%E7%9B%B8%E5%85%B3%E5%9F%BA%E6%9C%AC"><span class="toc-text">数据表示的相关基本</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E4%B8%8D%E5%90%8C%E7%B1%BB%E5%9E%8B%E6%95%B0%E6%8D%AE%E7%9A%84%E5%AD%98%E5%82%A8%E6%A0%BC%E5%BC%8F"><span class="toc-text">不同类型数据的存储格式</span></a></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%B8%B8%E7%94%A8%E8%BF%9B%E4%BD%8D%E8%AE%A1%E6%95%B0%E5%88%B6"><span class="toc-text">常用进位计数制</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E5%88%B6%E4%B9%A6%E5%86%99%E8%A1%A8%E7%A4%BA%E6%96%B9%E6%B3%95"><span class="toc-text">进制书写表示方法</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BF%9B%E5%88%B6%E8%BD%AC%E6%8D%A2%E6%96%B9%E6%B3%95"><span class="toc-text">进制转换方法</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E4%B8%80%EF%BC%89%E9%9D%9E%E5%8D%81%E8%BF%9B%E5%88%B6%E2%86%92%E5%8D%81%E8%BF%9B%E5%88%B6%EF%BC%9A%E5%AE%89%E5%85%A8%E5%B1%95%E5%BC%80%E6%B3%95"><span class="toc-text">（一）非十进制→十进制：安全展开法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E4%BA%8C%EF%BC%89%E4%BA%8C%E8%BF%9B%E5%88%B6%E2%86%94%E5%85%AB%E8%BF%9B%E5%88%B6-16-%E8%BF%9B%E5%88%B6%EF%BC%9A%E5%88%86%E7%BB%84%E5%AF%B9%E5%BA%94%E6%B3%95"><span class="toc-text">（二）二进制↔八进制 &#x2F; 16 进制：分组对应法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E4%B8%89%EF%BC%89%E5%8D%81%E8%BF%9B%E5%88%B6%E2%86%92%E4%BB%BB%E6%84%8F%E8%BF%9B%E5%88%B6%EF%BC%9A%E9%99%A4%E5%9F%BA%E5%8F%96%E4%BD%99%EF%BC%88%E6%95%B4%E6%95%B0%EF%BC%89-%E4%B9%98%E5%9F%BA%E5%8F%96%E6%95%B4%EF%BC%88%E5%B0%8F%E6%95%B0%EF%BC%89"><span class="toc-text">（三）十进制→任意进制：除基取余（整数）+ 乘基取整（小数）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E5%9B%9B%EF%BC%89%E5%8D%81%E8%BF%9B%E5%88%B6%E6%95%B4%E6%95%B0%E2%86%92%E4%BA%8C%E8%BF%9B%E5%88%B6%EF%BC%9A%E5%87%91%E5%80%BC%E6%B3%95%EF%BC%88%E5%BF%AB%E6%8D%B7%EF%BC%89"><span class="toc-text">（四）十进制整数→二进制：凑值法（快捷）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link" href="#%E5%8E%9F%E7%A0%81%E3%80%81%E8%A1%A5%E7%A0%81%E3%80%81%E5%8F%8D%E7%A0%81%E3%80%81%E7%A7%BB%E7%A0%81"><span class="toc-text">原码、补码、反码、移码</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E5%AE%9A%E4%B9%89%EF%BC%888-%E4%BD%8D%E4%B8%BA%E4%BE%8B%EF%BC%8C1-%E4%BD%8D%E7%AC%A6%E5%8F%B7%E4%BD%8D-7-%E4%BD%8D%E6%95%B0%E5%80%BC%E4%BD%8D%EF%BC%89"><span class="toc-text">核心定义（8 位为例，1 位符号位 + 7 位数值位）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E8%BD%AC%E6%8D%A2%E9%80%BB%E8%BE%91"><span class="toc-text">转换逻辑</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%89%8D%E7%BD%AE%E7%9F%A5%E8%AF%86%EF%BC%9A%E5%AE%9A%E7%82%B9%E6%95%B0%E8%A1%A8%E7%A4%BA%E5%A4%8D%E4%B9%A0"><span class="toc-text">前置知识：定点数表示复习</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#32-%E4%BD%8D%E6%B5%AE%E7%82%B9%E6%95%B0%EF%BC%88%E5%8D%95%E7%B2%BE%E5%BA%A6%EF%BC%89%E7%9A%84%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84"><span class="toc-text">32 位浮点数（单精度）的存储结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-32-%E4%BD%8D%E5%AD%98%E5%82%A8%E7%9A%84%E5%AE%8C%E6%95%B4%E5%AE%9E%E4%BE%8B%EF%BC%9A%E5%AD%98-%E2%80%9C6-5%E2%80%9D"><span class="toc-text">2. 32 位存储的完整实例：存 “6.5”</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4-1%EF%BC%9A%E7%BC%96%E7%A0%81%E7%AC%A6%E5%8F%B7%E4%BD%8D%EF%BC%88S%EF%BC%89"><span class="toc-text">步骤 1：编码符号位（S）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4-2%EF%BC%9A%E7%BC%96%E7%A0%81%E9%98%B6%E7%A0%81%EF%BC%88E%EF%BC%89"><span class="toc-text">步骤 2：编码阶码（E）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4-3%EF%BC%9A%E7%BC%96%E7%A0%81%E5%B0%BE%E6%95%B0%EF%BC%88M%EF%BC%89"><span class="toc-text">步骤 3：编码尾数（M）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A4-4%EF%BC%9A%E6%8B%BC%E6%8E%A5-32-%E4%BD%8D%E4%BA%8C%E8%BF%9B%E5%88%B6%E4%B8%B2"><span class="toc-text">步骤 4：拼接 32 位二进制串</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%AE%E7%82%B9%E6%95%B0%E8%A1%A8%E7%A4%BA%E8%8C%83%E5%9B%B4%EF%BC%88%E4%BB%A5-%E2%80%9C3-%E4%BD%8D%E9%98%B6%E7%A0%81-3-%E4%BD%8D%E5%B0%BE%E6%95%B0%E2%80%9D-%E4%B8%BA%E4%BE%8B%EF%BC%8C%E5%9D%87%E7%94%A8%E5%8E%9F%E7%A0%81%EF%BC%89"><span class="toc-text">浮点数表示范围（以 “3 位阶码 + 3 位尾数” 为例，均用原码）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%AE%E7%82%B9%E6%95%B0%E6%BA%A2%E5%87%BA%E9%97%AE%E9%A2%98"><span class="toc-text">浮点数溢出问题</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E4%B9%A0%E9%A2%98%E4%B8%8E%E7%AD%94%E6%A1%88"><span class="toc-text">核心习题与答案</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="solitude fas fa-map"></i><span>最近发布</span></div><div class="aside-list"><a class="aside-list-item" href="/2025/11/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E5%8A%A0%E5%87%8F%E4%B9%98%E9%99%A4/" title="Untitled"><div class="content"><span class="title" href="/2025/11/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E5%8A%A0%E5%87%8F%E4%B9%98%E9%99%A4/" title="Untitled">Untitled</span></div></a><a class="aside-list-item" href="/2025/10/29/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%89%A9%E7%90%86%E5%B1%82%E8%AF%A6%E7%BB%86%E7%AC%94%E8%AE%B0/" title="Untitled"><div class="content"><span class="title" href="/2025/10/29/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%89%A9%E7%90%86%E5%B1%82%E8%AF%A6%E7%BB%86%E7%AC%94%E8%AE%B0/" title="Untitled">Untitled</span></div></a><a class="aside-list-item" href="/2025/10/29/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%AC%E4%B8%80%E7%AB%A0%EF%BC%9A%E6%A6%82%E8%AE%BA/" title="Untitled"><div class="content"><span class="title" href="/2025/10/29/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%AC%E4%B8%80%E7%AB%A0%EF%BC%9A%E6%A6%82%E8%AE%BA/" title="Untitled">Untitled</span></div></a><a class="aside-list-item" href="/2025/10/28/roadmap/" title="Untitled"><div class="content"><span class="title" href="/2025/10/28/roadmap/" title="Untitled">Untitled</span></div></a><a class="aside-list-item" href="/2025/10/27/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E5%88%92%E5%88%86%E5%AD%90%E7%BD%91/" title="Untitled"><div class="content"><span class="title" href="/2025/10/27/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E5%88%92%E5%88%86%E5%AD%90%E7%BD%91/" title="Untitled">Untitled</span></div></a></div></div></div></div></main><footer id="footer"><div id="st-footer"><div class="footer-group"><div class="footer-title-group"><h3 class="footer-title">友链</h3><button class="random-friends-btn" onclick="randomLinksList()" title="友链"><i class="solitude fas fa-arrows-rotate"></i></button></div><div class="footer-links" id="friend-links-in-footer"></div></div></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div class="copyright">© 2023 - 2025 By<a class="footer-bar-link" href="/" title="woodfish">woodfish</a></div><div class="beian-group"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://hexo.io/" title="框架：Hexo">框架：Hexo</a><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/everfu/hexo-theme-solitude" title="主题：Solitude">主题：Solitude</a></div></div><div class="footer-bar-right"></div></div></div><div class="comment-barrage needEndHide"></div></footer></div><div><!-- Critical scripts loaded synchronously--><script src="/js/utils.js?v=3.0.20"></script><script src="/js/main.js?v=3.0.20"></script><!-- Non-critical scripts loaded asynchronously--><script async src="/js/third_party/waterfall.min.js?v=3.0.20"></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><!-- Feature-specific scripts loaded asynchronously--><script defer src="/js/tw_cn.js?v=3.0.20"></script><!-- UI enhancement scripts--><script defer src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><!-- Music player scripts--><!-- Cover color processing scripts--><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+utils.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+</script><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!-- Search functionality--><!-- Right menu functionality--><div class="js-pjax"></div></div><!-- pjax--><script>let pjax = null;
+
+function initPjax() {
+    if (typeof Pjax === 'undefined') {
+        console.warn('Pjax is not loaded yet, retrying...');
+        setTimeout(initPjax, 100);
+        return;
+    }
+
+    pjax = new Pjax({
+        elements: 'a:not([target="_blank"])',
+        selectors: ["title","#body-wrap","#site-config","meta[name=\"description\"]",".js-pjax","meta[property^=\"og:\"]","#config-diff",".rs_show",".rs_hide"],
+        cacheBust: false,
+        analytics: false,
+        scrollRestoration: false
+    })
+
+    // 将 pjax 实例挂载到全局
+    window.pjax = pjax;
+
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+        const newScript = document.createElement('script')
+        const content = item.text || item.textContent || item.innerHTML || ""
+        Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+        newScript.appendChild(document.createTextNode(content))
+        item.parentNode.replaceChild(newScript, item)
+    })
+
+    document.addEventListener('pjax:complete', () => {
+        window.refreshFn()
+
+        document.querySelectorAll('script[data-pjax]').forEach(item => {
+            const newScript = document.createElement('script')
+            const content = item.text || item.textContent || item.innerHTML || ""
+            Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+            newScript.appendChild(document.createTextNode(content))
+            item.parentNode.replaceChild(newScript, item)
+        })
+
+        GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+    })
+
+    document.addEventListener('pjax:error', (e) => {
+        if (e.request.status === 404) {
+            pjax.loadUrl('/404.html')
+        }
+    })
+}
+
+// 初始化 Pjax
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPjax);
+} else {
+    initPjax();
+}</script><!-- google adsense--><!-- hexo injector body_end start --><script data-pjax>
+  function butterfly_footer_beautify_injector_config(){
+    var parent_div_git = document.getElementById('footer-wrap');
+    var item_html = '<div id="workboard"></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v6.2.0" title=""><img src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&amp;logo=hexo" alt=""/></a><a class="github-badge" target="_blank" href="https://butterfly.js.org/" style="margin-inline:5px" data-title="主题版本Butterfly_v4.3.1" title=""><img src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&amp;logo=bitdefender" alt=""/></a><a class="github-badge" target="_blank" href="https://vercel.com/" style="margin-inline:5px" data-title="本站采用多线部署，主线路托管于Vercel" title=""><img src="https://img.shields.io/badge/Hosted-Vercel-brightgreen?style=flat&amp;logo=Vercel" alt=""/></a><a class="github-badge" target="_blank" href="https://dashboard.4everland.org/" style="margin-inline:5px" data-title="本站采用多线部署，备用线路托管于4EVERLAND" title=""><img src="https://img.shields.io/badge/Hosted-4EVERLAND-22DDDD?style=flat&amp;logo=IPFS" alt=""/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title=""><img src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&amp;logo=GitHub" alt=""/></a><a class="github-badge" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" data-title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可" title=""><img src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&amp;logo=Claris" alt=""/></a></p>';
+    console.log('已挂载butterfly_footer_beautify')
+    parent_div_git.insertAdjacentHTML("beforeend",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_footer_beautify_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_footer_beautify_injector_config();
+  }
+  </script><script async src="/js/runtime.js"></script><!-- hexo injector body_end end --></body></html>
+        <script>
+            const posts = ["2025/11/08/计算机组成原理/加减乘除/","2025/10/29/计算机网络/物理层详细笔记/","2025/10/29/计算机网络/计算机网络第一章：概论/","2025/10/28/roadmap/","2025/10/27/计算机网络/划分子网/","2025/10/27/最长前缀匹配原则/","2025/10/26/题解/E题超详解：帮哈基鱼算标签/","2025/10/26/计算机组成原理/数据的表示/","2025/10/23/计算机网络/计算机网络第三章：链路层/","2025/10/22/指令系统/","2025/10/22/题解/F. Beautiful Intervals/","2025/10/21/计算机网络/计算机网络第四章：网络层/","2025/10/21/计算机网络/计算机网络第四章：网络层（edit）/","2025/10/04/题解/Day5题解/","2025/09/26/计算机组成原理/计算机组成原理/","2025/09/12/前端/AJAX基础入门教程/","2025/09/11/前端/Day04_AJAX进阶/","2025/09/10/前端/Day03_AJAX原理/","2025/09/09/前端/Day02_AJAX综合案例/","2025/09/08/前端/Day01_AJAX入门/","2025/08/25/Linux课程笔记/","2025/08/13/前端/js易错点/","2025/08/11/前端/JavaScript 学习笔记（9）：深浅拷贝、异常处理、this 指向与防抖节流/","2025/08/03/前端/JavaScript 学习笔记（8）：面向对象编程与原型机制详解/","2025/08/02/前端/JavaScript 学习笔记（7）：面向对象与内置构造函数/","2025/07/31/前端/JavaScript 学习笔记（6）：作用域、闭包与函数进阶/","2025/07/28/前端/Web API 学习笔记（6）：正则表达式与表单验证/","2025/07/27/前端/Web API 学习笔记（5）：BOM 操作与本地存储/","2025/07/26/前端/Web API 学习笔记（4）：Date 对象与 DOM-节点操作要点/","2025/07/23/前端/Web API 学习笔记（3）：事件流与事件委托/","2025/07/22/前端/Web API 学习笔记（2）：事件处理与-this-指向/","2025/07/21/前端/Web API 学习笔记（1）：DOM 基础操作/","2025/07/20/前端/JavaScript 学习笔记（5）：对象数据类型与内置数学对象/","2025/07/19/前端/JavaScript 学习笔记（4）：函数封装与对象基础/","2025/07/18/前端/JavaScript 学习笔记（3）：数组的增删操作方法详解/","2025/07/17/前端/JavaScript 学习笔记（2）：运算符、语句与综合案例/","2025/07/17/前端/JavaScript 学习笔记（1）：基础语法与数据类型/","2025/07/15/前端/CSS 学习笔记（12）：响应式布局与 Bootstrap 框架应用/","2025/07/14/前端/CSS 学习笔记（11）：移动 Web 开发之 vw 适配与酷我音乐案例实践/","2025/07/13/前端/CSS 学习笔记（10）：移动 Web 开发基础与 rem 布局、Less 预处理器/","2025/07/12/前端/CSS 学习笔记（9）：移动 Web 开发之空间转换与动画效果/","2025/07/11/前端/CSS 学习笔记（8）：移动 Web 开发之平面转换与渐变效果/","2025/07/10/前端/小兔仙/","2025/07/08/前端/学成在线/","2025/07/08/前端/CSS 学习笔记（6）：小兔鲜儿项目搭建及基础配置（目录结构、SEO 标签、版心设置）/","2025/07/04/前端/CSS我的易错点/","2025/07/03/前端/CSS 学习笔记（7）：CSS 优先级叠加计算规则详解/","2025/07/02/前端/CSS 学习笔记（5）：定位模式、CSS 精灵、字体图标及过渡效果应用/","2025/06/30/前端/CSS 学习笔记（4）：浮动布局与 Flex 弹性布局详解及应用案例/","2025/06/27/前端/CSS 学习笔记（3）：伪类与伪元素选择器、盒子模型及相关特性详解/","2025/06/24/前端/CSS 学习笔记（2）：复合选择器、CSS 特性及背景与显示模式设置/","2025/06/23/前端/CSS 学习笔记（1）：引入方式、选择器及文字样式控制/","2025/06/23/前端/HTML 学习笔记（2）：列表、表格、表单及布局标签详解/","2025/06/22/前端/HTML 学习笔记（1）：核心标签、文档结构及多媒体应用/","2025/06/19/JAVA/Java期末复习重点易错点/","2025/06/18/杂项/中国近代史复习重点/","2025/06/03/JAVA/Java的final/","2025/06/03/JAVA/Java的继承/","2025/06/03/JAVA/Java的多态/","2025/05/27/JAVA/Java的List集合/","2025/05/27/JAVA/Java的Collection集合/","2025/05/27/JAVA/Java的包装类/","2025/05/15/JAVA/Java的内部类/","2025/05/15/JAVA/Java的抽象与接口类/"];
+            function toRandomPost() {
+                const randomPost = posts[Math.floor(Math.random() * posts.length)];
+                pjax.loadUrl(GLOBAL_CONFIG.root + randomPost);
+            }
+        </script>

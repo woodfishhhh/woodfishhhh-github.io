@@ -1,0 +1,330 @@
+<!DOCTYPE html><html lang="zh-Hans" data-theme="light"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Untitled | 木鱼的鱼窝</title><noscript>开启JavaScript才能访问本站哦~</noscript><link rel="icon" href="/img/favicon.ico"><link rel="stylesheet" href="/css/index.css?v=3.0.20"><link rel="canonical" href="https://www.woodfishhhh.xyz/2025/10/27/%E6%9C%80%E9%95%BF%E5%89%8D%E7%BC%80%E5%8C%B9%E9%85%8D%E5%8E%9F%E5%88%99/index.html"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css"><!-- Feature-specific CSS--><!-- aplayer--><!-- swiper--><!-- fancybox ui--><!-- katex--><!-- Open Graph--><meta name="description" content="一、什么是“前缀匹配”？在IP路由表中，每条路由通常表示为： 1网络前缀&amp;#x2F;前缀长度 → 下一跳 例如： 192.168.1.0&amp;#x2F;24 表示：前24位（即前3个字节）必须匹配，后8位可以任意。 这个前缀覆盖的IP范围是：192.168.1.0 到 192.168.1.255 当一个数据包到达路由"><!-- pwa--><meta name="apple-mobile-web-app-capable" content="木鱼的鱼窝"><meta name="theme-color" content="var(--efu-main)"><meta name="apple-mobile-web-app-status-bar-style" content="var(--efu-main)"><link rel="bookmark" href="/img/favicon.ico"><link rel="apple-touch-icon" href="/img/favicon.ico" sizes="180x180"><script>console.log(' %c Solitude %c ' + '3.0.20' + ' %c https://github.com/everfu/hexo-theme-solitude',
+    'background:#35495e ; padding: 1px; border-radius: 3px 0 0 3px;  color: #fff',
+    'background:#ff9a9a ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff',
+    'background:unset ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff')
+</script><script>(()=>{
+        const saveToLocal = {
+            set: function setWithExpiry(key, value, ttl) {
+                if (ttl === 0)
+                    return
+                const now = new Date()
+                const expiryDay = ttl * 86400000
+                const item = {
+                    value: value,
+                    expiry: now.getTime() + expiryDay
+                }
+                localStorage.setItem(key, JSON.stringify(item))
+            },
+            get: function getWithExpiry(key) {
+                const itemStr = localStorage.getItem(key)
+
+                if (!itemStr) {
+                    return undefined
+                }
+                const item = JSON.parse(itemStr)
+                const now = new Date()
+
+                if (now.getTime() > item.expiry) {
+                    localStorage.removeItem(key)
+                    return undefined
+                }
+                return item.value
+            }
+        };
+        window.utils = {
+            saveToLocal: saveToLocal,
+            getCSS: (url, id = false) => new Promise((resolve, reject) => {
+              const link = document.createElement('link')
+              link.rel = 'stylesheet'
+              link.href = url
+              if (id) link.id = id
+              link.onerror = reject
+              link.onload = link.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                link.onload = link.onreadystatechange = null
+                resolve()
+              }
+              document.head.appendChild(link)
+            }),
+            getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+              const script = document.createElement('script')
+              script.src = url
+              script.async = true
+              script.onerror = reject
+              script.onload = script.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                script.onload = script.onreadystatechange = null
+                resolve()
+              }
+
+              Object.keys(attr).forEach(key => {
+                script.setAttribute(key, attr[key])
+              })
+
+              document.head.appendChild(script)
+            }),
+            addGlobalFn: (key, fn, name = false, parent = window) => {
+                const globalFn = parent.globalFn || {}
+                const keyObj = globalFn[key] || {}
+
+                if (name && keyObj[name]) return
+
+                name = name || Object.keys(keyObj).length
+                keyObj[name] = fn
+                globalFn[key] = keyObj
+                parent.globalFn = globalFn
+            },
+            addEventListenerPjax: (ele, event, fn, option = false) => {
+              ele.addEventListener(event, fn, option)
+              utils.addGlobalFn('pjax', () => {
+                  ele.removeEventListener(event, fn, option)
+              })
+            },
+            diffDateFormat: (selector) => {
+                selector.forEach(item => {
+                    const date = new Date(item.getAttribute('datetime') || item.textContent);
+                    item.textContent = (date.getMonth() + 1).toString()+'/'+date.getDate().toString();
+                });
+            },
+        }
+    })()</script><!-- theme--><script>initTheme = () => {
+    let isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const cachedMode = utils.saveToLocal.get('theme');
+    if (cachedMode === undefined) {
+        const nowMode =
+            isDarkMode ? 'dark' : 'light'
+        document.documentElement.setAttribute('data-theme', nowMode);
+    } else {
+        document.documentElement.setAttribute('data-theme', cachedMode);
+    }
+    typeof rm === 'object' && rm.mode(cachedMode === 'dark' && isDarkMode)
+}
+initTheme()</script><script>const GLOBAL_CONFIG = {
+    root: '/',
+    algolia: undefined,
+    localsearch: undefined,
+    runtime: '2023-04-20 00:00:00',
+    lazyload: {
+        enable: false,
+        error: '/img/error_load.avif'
+    },
+    copyright: false,
+    highlight: {"limit":200,"expand":true,"copy":true,"syntax":"highlight.js"},
+    randomlink: false,
+    lang: {"theme":{"dark":"已切换至深色模式","light":"已切换至浅色模式"},"copy":{"success":"复制成功","error":"复制失败"},"backtop":"返回顶部","time":{"day":"天前","hour":"小时前","just":"刚刚","min":"分钟前","month":"个月前"},"day":" 天","f12":"开发者模式已打开，请遵循GPL协议。","totalk":"无需删除空行，直接输入评论即可"},
+    aside: {
+        state: {
+            morning: "✨ 早上好，新的一天开始了",
+            noon: "🍲 午餐时间",
+            afternoon: "🌞 下午好",
+            night: "早点休息",
+            goodnight: "晚安 😴",
+        },
+        witty_words: [],
+        witty_comment: {
+            prefix: '好久不见，',
+            back: '欢迎再次回来，',
+        },
+    },
+    covercolor: {
+        enable: false
+    },
+    comment: false,
+    lightbox: 'null',
+    right_menu: false,
+    translate: {"translateDelay":0,"defaultEncoding":2},
+    lure: false,
+    expire: false,
+};</script><script id="config-diff">var PAGE_CONFIG = {
+    is_post: true,
+    is_page: false,
+    is_home: false,
+    page: '',
+    toc: true,
+    comment: false,
+    ai_text: false,
+    color: false,
+}</script><!-- hexo injector head_end start --><link rel="stylesheet" href="https://www.fomal.cc/static/css/runtime.min.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body id="body"><div id="console"><div class="close-btn" onclick="sco.hideConsole()"><i class="solitude fas fa-xmark"></i></div><div class="console-card-group"><div class="console-card-group-right"><div class="console-card tags" onclick="sco.hideConsole()"><div class="card-content"><div class="author-content-item-tips">标签</div><div class="author-content-item-title">寻找感兴趣的领域</div></div><div class="card-tag-cloud"><a href="/tags/Linux/">Linux<sup>1</sup></a><a href="/tags/Java/">Java<sup>9</sup></a><a href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/">期末复习<sup>2</sup></a><a href="/tags/CSS/">CSS<sup>15</sup></a><a href="/tags/HTML/">HTML<sup>17</sup></a><a href="/tags/web/">web<sup>11</sup></a><a href="/tags/Ajax/">Ajax<sup>4</sup></a><a href="/tags/JavaScript/">JavaScript<sup>16</sup></a></div></div><div class="console-card history" onclick="sco.hideConsole()"><ul class="card-archive-list"><li class="item"><a href="/archives/2025/11/"><span class="date">2025/11</span><div class="count-group"><span class="count">1</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/10/"><span class="date">2025/10</span><div class="count-group"><span class="count">13</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/09/"><span class="date">2025/09</span><div class="count-group"><span class="count">6</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/08/"><span class="date">2025/08</span><div class="count-group"><span class="count">5</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/07/"><span class="date">2025/07</span><div class="count-group"><span class="count">23</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/06/"><span class="date">2025/06</span><div class="count-group"><span class="count">11</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/05/"><span class="date">2025/05</span><div class="count-group"><span class="count">5</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/"><span class="date">全部文章</span><div class="count-group"><span class="count">64</span><span class="unit">篇</span></div></a></li></ul></div></div></div><div class="button-group"><div class="console-btn-item"><span class="darkmode_switchbutton" onclick="sco.switchDarkMode()" title="昼夜切换"><i class="solitude fas fa-circle-half-stroke"></i></span></div><div class="console-btn-item" id="consoleHideAside"><span class="asideSwitch" onclick="sco.switchHideAside()" title="边栏显示控制"><i class="solitude fas fa-arrows-left-right-to-line"></i></span></div></div><div class="console-mask" onclick="sco.hideConsole()"></div></div><div id="sidebar" style="zoom: 1;"><div id="menu-mask" style="display: none;"></div><div id="sidebar-menus"><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">64</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a></div></div></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><span class="darkmode_switchbutton menu-child" onclick="sco.switchDarkMode()"><i class="solitude fas fa-circle-half-stroke"></i><span>显示模式</span></span></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">0</div><div class="back-menu-list"><a class="back-menu-item" href="/p" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">1</div><div class="back-menu-list"><a class="back-menu-item" href="/r" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">2</div><div class="back-menu-list"><a class="back-menu-item" href="/o" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">3</div><div class="back-menu-list"><a class="back-menu-item" href="/j" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">4</div><div class="back-menu-list"><a class="back-menu-item" href="/e" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">5</div><div class="back-menu-list"><a class="back-menu-item" href="/c" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">6</div><div class="back-menu-list"><a class="back-menu-item" href="/t" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">7</div><div class="back-menu-list"><a class="back-menu-item" href="/:" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">8</div><div class="back-menu-list"><a class="back-menu-item" href="#" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">9</div><div class="back-menu-list"><a class="back-menu-item" href="/" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">10</div><div class="back-menu-list"><a class="back-menu-item" href="/n" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">11</div><div class="back-menu-list"><a class="back-menu-item" href="/a" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">12</div><div class="back-menu-list"><a class="back-menu-item" href="/m" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">13</div><div class="back-menu-list"><a class="back-menu-item" href="/e" title="0"><span class="back-menu-item-text">0</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/%20%7C%7C%20fas%20fa-home"><span>主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%20%7C%7C%20fas%20fa-tags"><span>标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%20%7C%7C%20fas%20fa-th"><span>分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/%20%7C%7C%20fas%20fa-link"><span>友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/%20%7C%7C%20fas%20fa-user"><span>关于我</span></a></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="card-tag-cloud"><a href="/tags/Linux/">Linux<sup>1</sup></a><a href="/tags/Java/">Java<sup>9</sup></a><a href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/">期末复习<sup>2</sup></a><a href="/tags/CSS/">CSS<sup>15</sup></a><a href="/tags/HTML/">HTML<sup>17</sup></a><a href="/tags/web/">web<sup>11</sup></a><a href="/tags/Ajax/">Ajax<sup>4</sup></a><a href="/tags/JavaScript/">JavaScript<sup>16</sup></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="show" id="nav"><div id="nav-group"><div id="blog_name"><div><div class="back-home-button" tabindex="-1"><i class="solitude fas fa-bars-progress"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">0</div><div class="back-menu-list"><a class="back-menu-item" href="/p" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">1</div><div class="back-menu-list"><a class="back-menu-item" href="/r" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">2</div><div class="back-menu-list"><a class="back-menu-item" href="/o" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">3</div><div class="back-menu-list"><a class="back-menu-item" href="/j" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">4</div><div class="back-menu-list"><a class="back-menu-item" href="/e" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">5</div><div class="back-menu-list"><a class="back-menu-item" href="/c" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">6</div><div class="back-menu-list"><a class="back-menu-item" href="/t" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">7</div><div class="back-menu-list"><a class="back-menu-item" href="/:" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">8</div><div class="back-menu-list"><a class="back-menu-item" href="#" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">9</div><div class="back-menu-list"><a class="back-menu-item" href="/" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">10</div><div class="back-menu-list"><a class="back-menu-item" href="/n" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">11</div><div class="back-menu-list"><a class="back-menu-item" href="/a" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">12</div><div class="back-menu-list"><a class="back-menu-item" href="/m" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">13</div><div class="back-menu-list"><a class="back-menu-item" href="/e" title="0"><span class="back-menu-item-text">0</span></a></div></div></div></div></div><a href="/" title="返回博客主页" id="site-name"><i class="solitude fas fa-home"></i></a></div><div id="page-name-mask"><div id="page-name"><a id="page-name-text" onclick="sco.toTop()">Untitled</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/%20%7C%7C%20fas%20fa-home"><span>主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%20%7C%7C%20fas%20fa-tags"><span>标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%20%7C%7C%20fas%20fa-th"><span>分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/%20%7C%7C%20fas%20fa-link"><span>友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/%20%7C%7C%20fas%20fa-user"><span>关于我</span></a></div></div></div><div id="nav-left"></div><div id="nav-right"><div class="nav-button" id="travellings_button"><a class="site-page" target="_blank" rel="noopener" href="https://www.travellings.cn/go.html" onclick="javascript:travelling()" title=""><i class="solitude fas fa-train"></i></a></div><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机一篇文章" href="javascript:void(0);"><i class="solitude fas fa-dice-d6"></i></a></div><div class="nav-button" id="nav-totop" onclick="sco.toTop()"><a class="totopbtn"><i class="solitude fas fa-arrow-up"></i><span id="percent">0</span></a></div><div id="toggle-menu"><a class="site-page"><i class="solitude fas fa-bars"></i></a></div></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original" title="该文章为原创文章，注意版权协议">原创</a><div class="tag_share"><div class="post-meta__tag-list"></div></div></div></div><h1 class="post-title">Untitled</h1><div id="post-meta"><div class="meta-secondline"></div></div></div><div class="post-radius-bottom"></div><article class="post-content article-container"><h2 id="一、什么是“前缀匹配”？"><a href="#一、什么是“前缀匹配”？" class="headerlink" title="一、什么是“前缀匹配”？"></a>一、什么是“前缀匹配”？</h2><p>在IP路由表中，每条路由通常表示为：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">网络前缀/前缀长度 → 下一跳</span><br></pre></td></tr></table></figure>
+
+<p>例如：</p>
+<ul>
+<li><code>192.168.1.0/24</code> 表示：前24位（即前3个字节）必须匹配，后8位可以任意。</li>
+<li>这个前缀覆盖的IP范围是：<code>192.168.1.0</code> 到 <code>192.168.1.255</code></li>
+</ul>
+<p>当一个数据包到达路由器时，路由器会查看其<strong>目的IP地址</strong>，并尝试在路由表中找到<strong>所有能匹配该地址的路由条目</strong>。</p>
+<hr>
+<h2 id="二、为什么需要“最长”前缀匹配？"><a href="#二、为什么需要“最长”前缀匹配？" class="headerlink" title="二、为什么需要“最长”前缀匹配？"></a>二、为什么需要“最长”前缀匹配？</h2><h3 id="举个生活化的比喻："><a href="#举个生活化的比喻：" class="headerlink" title="举个生活化的比喻："></a>举个生活化的比喻：</h3><blockquote>
+<p>你寄一封信到“北京市海淀区中关村大街1号 清华大学”，邮局不会只看“北京市”就投递，而是会尽可能精确到“清华大学”这个最具体的地址。</p>
+</blockquote>
+<p>同样，路由器希望选择<strong>最具体、最精确</strong>的路径，而不是一个宽泛的默认路径。</p>
+<h3 id="技术原因："><a href="#技术原因：" class="headerlink" title="技术原因："></a>技术原因：</h3><ul>
+<li>网络中可能存在多个重叠的路由条目。</li>
+<li>例如：<ul>
+<li><code>192.168.0.0/16</code> → R1（覆盖 192.168.0.0 ~ 192.168.255.255）</li>
+<li><code>192.168.1.0/24</code> → R2（覆盖 192.168.1.0 ~ 192.168.1.255）</li>
+<li>默认路由 <code>0.0.0.0/0</code> → R3</li>
+</ul>
+</li>
+</ul>
+<p>如果目的地址是 <code>192.168.1.10</code>，它同时匹配以上三条路由。<br>但显然，<code>/24</code> 比 <code>/16</code> 更具体，<code>/16</code> 又比 <code>/0</code> 更具体。</p>
+<p>✅ 所以选择 <strong>前缀最长</strong>（即掩码位数最大）的那条：<code>192.168.1.0/24 → R2</code></p>
+<hr>
+<h2 id="三、如何判断“是否匹配”？"><a href="#三、如何判断“是否匹配”？" class="headerlink" title="三、如何判断“是否匹配”？"></a>三、如何判断“是否匹配”？</h2><p>对每个路由条目 <code>网络地址/前缀长度</code>：</p>
+<ol>
+<li>将目的IP和路由前缀都转换为二进制。</li>
+<li>比较前 <code>前缀长度</code> 位是否完全相同。</li>
+<li>如果相同，则匹配。</li>
+</ol>
+<h3 id="例子："><a href="#例子：" class="headerlink" title="例子："></a>例子：</h3><p>目的IP：<code>128.96.40.151</code><br>路由条目：<code>128.96.40.0/25</code></p>
+<ul>
+<li><p><code>/25</code> 表示前25位必须匹配。</p>
+</li>
+<li><p><code>128.96.40.0</code> 的二进制（前25位）：</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10000000.01100000.00101000.0  ← 第25位是第4字节的最高位（0）</span><br></pre></td></tr></table></figure>
+</li>
+<li><p><code>128.96.40.151</code> 的二进制（前25位）：</p>
+  <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">10000000.01100000.00101000.1  ← 第25位是1！</span><br></pre></td></tr></table></figure>
+</li>
+<li><p>前25位不一致 → <strong>不匹配</strong></p>
+</li>
+</ul>
+<blockquote>
+<p>所以即使IP看起来“很接近”，只要前缀位不完全一致，就不算匹配！</p>
+</blockquote>
+<hr>
+<h2 id="四、最长前缀匹配的实现（补充知识）"><a href="#四、最长前缀匹配的实现（补充知识）" class="headerlink" title="四、最长前缀匹配的实现（补充知识）"></a>四、最长前缀匹配的实现（补充知识）</h2><p>在实际路由器中，为了高效查找（每秒百万级包），会使用专门的数据结构，例如：</p>
+<ul>
+<li><strong>Trie树</strong>（前缀树）</li>
+<li><strong>压缩Trie</strong>（如Patricia Trie）</li>
+<li><strong>TCAM</strong>（三态内容可寻址存储器，硬件实现）</li>
+</ul>
+<p>这些技术能快速找到“最长匹配项”，而不需要逐条比较。</p>
+<hr>
+<h2 id="五、总结：关键点"><a href="#五、总结：关键点" class="headerlink" title="五、总结：关键点"></a>五、总结：关键点</h2><table>
+<thead>
+<tr>
+<th>概念</th>
+<th>说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>前缀匹配</strong></td>
+<td>目的IP的前N位与路由表项的前N位相同</td>
+</tr>
+<tr>
+<td><strong>最长前缀匹配</strong></td>
+<td>在所有匹配项中，选择N最大的那条</td>
+</tr>
+<tr>
+<td><strong>默认路由</strong></td>
+<td><code>0.0.0.0/0</code> 或 <code>::/0</code>，前缀长度为0，永远匹配，但优先级最低</td>
+</tr>
+<tr>
+<td><strong>子网掩码越长，网络越小，路由越精确</strong></td>
+<td>&#x2F;30 比 &#x2F;24 更具体</td>
+</tr>
+</tbody></table>
+<hr>
+<p>✅ <strong>记住一句话</strong>：</p>
+<blockquote>
+<p>“<strong>能走小路，不走大路；没有小路，才走大路。</strong>”</p>
+</blockquote>
+<p>这就是最长前缀匹配的精髓！</p>
+<p>如果你有具体的IP或路由表想练习，我可以帮你一步步分析 😊</p>
+</article><div class="post-copyright"><div class="post-copyright__author_group"><div class="post-copyright__author_img"><img class="post-copyright__author_img_front" src="/img/logo.png"></div><div class="post-copyright__author_name">woodfish</div><div class="post-copyright__author_desc">HOLA,this is woodfish!</div></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div id="quit-box" onclick="RemoveRewardMask()"></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本文是原创文章，采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans">CC BY-NC-SA 4.0</a>协议，完整转载请注明来自<a href="/">木鱼的鱼窝</a></span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__tag-list"></div></div></div><nav class="needEndHide pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2025/10/27/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E5%88%92%E5%88%86%E5%AD%90%E7%BD%91/"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Untitled</div></div></a></div><div class="next-post pull-right"><a href="/2025/10/26/%E9%A2%98%E8%A7%A3/E%E9%A2%98%E8%B6%85%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%B8%AE%E5%93%88%E5%9F%BA%E9%B1%BC%E7%AE%97%E6%A0%87%E7%AD%BE/"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Untitled</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><div class="top-group"><div class="sayhi" id="sayhi" onclick="sco.changeWittyWord()"></div></div></div><div class="avatar"><img alt="头像" src="/img/logo.png"></div><div class="description"></div><div class="bottom-group"><span class="left"><div class="name">woodfish</div><div class="desc">只有迎风，风筝才能飞得更高。</div></span><div class="social-icons is-center"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="solitude fas fa-bars"></i><span>文章目录</span></div><div class="toc-content" id="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E4%BB%80%E4%B9%88%E6%98%AF%E2%80%9C%E5%89%8D%E7%BC%80%E5%8C%B9%E9%85%8D%E2%80%9D%EF%BC%9F"><span class="toc-text">一、什么是“前缀匹配”？</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E4%B8%BA%E4%BB%80%E4%B9%88%E9%9C%80%E8%A6%81%E2%80%9C%E6%9C%80%E9%95%BF%E2%80%9D%E5%89%8D%E7%BC%80%E5%8C%B9%E9%85%8D%EF%BC%9F"><span class="toc-text">二、为什么需要“最长”前缀匹配？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BE%E4%B8%AA%E7%94%9F%E6%B4%BB%E5%8C%96%E7%9A%84%E6%AF%94%E5%96%BB%EF%BC%9A"><span class="toc-text">举个生活化的比喻：</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8A%80%E6%9C%AF%E5%8E%9F%E5%9B%A0%EF%BC%9A"><span class="toc-text">技术原因：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%A6%82%E4%BD%95%E5%88%A4%E6%96%AD%E2%80%9C%E6%98%AF%E5%90%A6%E5%8C%B9%E9%85%8D%E2%80%9D%EF%BC%9F"><span class="toc-text">三、如何判断“是否匹配”？</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%8B%E5%AD%90%EF%BC%9A"><span class="toc-text">例子：</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E6%9C%80%E9%95%BF%E5%89%8D%E7%BC%80%E5%8C%B9%E9%85%8D%E7%9A%84%E5%AE%9E%E7%8E%B0%EF%BC%88%E8%A1%A5%E5%85%85%E7%9F%A5%E8%AF%86%EF%BC%89"><span class="toc-text">四、最长前缀匹配的实现（补充知识）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E6%80%BB%E7%BB%93%EF%BC%9A%E5%85%B3%E9%94%AE%E7%82%B9"><span class="toc-text">五、总结：关键点</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="solitude fas fa-map"></i><span>最近发布</span></div><div class="aside-list"><a class="aside-list-item" href="/2025/11/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E5%8A%A0%E5%87%8F%E4%B9%98%E9%99%A4/" title="Untitled"><div class="content"><span class="title" href="/2025/11/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E5%8A%A0%E5%87%8F%E4%B9%98%E9%99%A4/" title="Untitled">Untitled</span></div></a><a class="aside-list-item" href="/2025/10/29/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%89%A9%E7%90%86%E5%B1%82%E8%AF%A6%E7%BB%86%E7%AC%94%E8%AE%B0/" title="Untitled"><div class="content"><span class="title" href="/2025/10/29/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%89%A9%E7%90%86%E5%B1%82%E8%AF%A6%E7%BB%86%E7%AC%94%E8%AE%B0/" title="Untitled">Untitled</span></div></a><a class="aside-list-item" href="/2025/10/29/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%AC%E4%B8%80%E7%AB%A0%EF%BC%9A%E6%A6%82%E8%AE%BA/" title="Untitled"><div class="content"><span class="title" href="/2025/10/29/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%AC%E4%B8%80%E7%AB%A0%EF%BC%9A%E6%A6%82%E8%AE%BA/" title="Untitled">Untitled</span></div></a><a class="aside-list-item" href="/2025/10/28/roadmap/" title="Untitled"><div class="content"><span class="title" href="/2025/10/28/roadmap/" title="Untitled">Untitled</span></div></a><a class="aside-list-item" href="/2025/10/27/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E5%88%92%E5%88%86%E5%AD%90%E7%BD%91/" title="Untitled"><div class="content"><span class="title" href="/2025/10/27/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E5%88%92%E5%88%86%E5%AD%90%E7%BD%91/" title="Untitled">Untitled</span></div></a></div></div></div></div></main><footer id="footer"><div id="st-footer"><div class="footer-group"><div class="footer-title-group"><h3 class="footer-title">友链</h3><button class="random-friends-btn" onclick="randomLinksList()" title="友链"><i class="solitude fas fa-arrows-rotate"></i></button></div><div class="footer-links" id="friend-links-in-footer"></div></div></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div class="copyright">© 2023 - 2025 By<a class="footer-bar-link" href="/" title="woodfish">woodfish</a></div><div class="beian-group"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://hexo.io/" title="框架：Hexo">框架：Hexo</a><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/everfu/hexo-theme-solitude" title="主题：Solitude">主题：Solitude</a></div></div><div class="footer-bar-right"></div></div></div><div class="comment-barrage needEndHide"></div></footer></div><div><!-- Critical scripts loaded synchronously--><script src="/js/utils.js?v=3.0.20"></script><script src="/js/main.js?v=3.0.20"></script><!-- Non-critical scripts loaded asynchronously--><script async src="/js/third_party/waterfall.min.js?v=3.0.20"></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><!-- Feature-specific scripts loaded asynchronously--><script defer src="/js/tw_cn.js?v=3.0.20"></script><!-- UI enhancement scripts--><script defer src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><!-- Music player scripts--><!-- Cover color processing scripts--><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+utils.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+</script><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!-- Search functionality--><!-- Right menu functionality--><div class="js-pjax"></div></div><!-- pjax--><script>let pjax = null;
+
+function initPjax() {
+    if (typeof Pjax === 'undefined') {
+        console.warn('Pjax is not loaded yet, retrying...');
+        setTimeout(initPjax, 100);
+        return;
+    }
+
+    pjax = new Pjax({
+        elements: 'a:not([target="_blank"])',
+        selectors: ["title","#body-wrap","#site-config","meta[name=\"description\"]",".js-pjax","meta[property^=\"og:\"]","#config-diff",".rs_show",".rs_hide"],
+        cacheBust: false,
+        analytics: false,
+        scrollRestoration: false
+    })
+
+    // 将 pjax 实例挂载到全局
+    window.pjax = pjax;
+
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+        const newScript = document.createElement('script')
+        const content = item.text || item.textContent || item.innerHTML || ""
+        Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+        newScript.appendChild(document.createTextNode(content))
+        item.parentNode.replaceChild(newScript, item)
+    })
+
+    document.addEventListener('pjax:complete', () => {
+        window.refreshFn()
+
+        document.querySelectorAll('script[data-pjax]').forEach(item => {
+            const newScript = document.createElement('script')
+            const content = item.text || item.textContent || item.innerHTML || ""
+            Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+            newScript.appendChild(document.createTextNode(content))
+            item.parentNode.replaceChild(newScript, item)
+        })
+
+        GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+    })
+
+    document.addEventListener('pjax:error', (e) => {
+        if (e.request.status === 404) {
+            pjax.loadUrl('/404.html')
+        }
+    })
+}
+
+// 初始化 Pjax
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPjax);
+} else {
+    initPjax();
+}</script><!-- google adsense--><!-- hexo injector body_end start --><script data-pjax>
+  function butterfly_footer_beautify_injector_config(){
+    var parent_div_git = document.getElementById('footer-wrap');
+    var item_html = '<div id="workboard"></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v6.2.0" title=""><img src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&amp;logo=hexo" alt=""/></a><a class="github-badge" target="_blank" href="https://butterfly.js.org/" style="margin-inline:5px" data-title="主题版本Butterfly_v4.3.1" title=""><img src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&amp;logo=bitdefender" alt=""/></a><a class="github-badge" target="_blank" href="https://vercel.com/" style="margin-inline:5px" data-title="本站采用多线部署，主线路托管于Vercel" title=""><img src="https://img.shields.io/badge/Hosted-Vercel-brightgreen?style=flat&amp;logo=Vercel" alt=""/></a><a class="github-badge" target="_blank" href="https://dashboard.4everland.org/" style="margin-inline:5px" data-title="本站采用多线部署，备用线路托管于4EVERLAND" title=""><img src="https://img.shields.io/badge/Hosted-4EVERLAND-22DDDD?style=flat&amp;logo=IPFS" alt=""/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title=""><img src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&amp;logo=GitHub" alt=""/></a><a class="github-badge" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" data-title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可" title=""><img src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&amp;logo=Claris" alt=""/></a></p>';
+    console.log('已挂载butterfly_footer_beautify')
+    parent_div_git.insertAdjacentHTML("beforeend",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_footer_beautify_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_footer_beautify_injector_config();
+  }
+  </script><script async src="/js/runtime.js"></script><!-- hexo injector body_end end --></body></html>
+        <script>
+            const posts = ["2025/11/08/计算机组成原理/加减乘除/","2025/10/29/计算机网络/物理层详细笔记/","2025/10/29/计算机网络/计算机网络第一章：概论/","2025/10/28/roadmap/","2025/10/27/计算机网络/划分子网/","2025/10/27/最长前缀匹配原则/","2025/10/26/题解/E题超详解：帮哈基鱼算标签/","2025/10/26/计算机组成原理/数据的表示/","2025/10/23/计算机网络/计算机网络第三章：链路层/","2025/10/22/指令系统/","2025/10/22/题解/F. Beautiful Intervals/","2025/10/21/计算机网络/计算机网络第四章：网络层/","2025/10/21/计算机网络/计算机网络第四章：网络层（edit）/","2025/10/04/题解/Day5题解/","2025/09/26/计算机组成原理/计算机组成原理/","2025/09/12/前端/AJAX基础入门教程/","2025/09/11/前端/Day04_AJAX进阶/","2025/09/10/前端/Day03_AJAX原理/","2025/09/09/前端/Day02_AJAX综合案例/","2025/09/08/前端/Day01_AJAX入门/","2025/08/25/Linux课程笔记/","2025/08/13/前端/js易错点/","2025/08/11/前端/JavaScript 学习笔记（9）：深浅拷贝、异常处理、this 指向与防抖节流/","2025/08/03/前端/JavaScript 学习笔记（8）：面向对象编程与原型机制详解/","2025/08/02/前端/JavaScript 学习笔记（7）：面向对象与内置构造函数/","2025/07/31/前端/JavaScript 学习笔记（6）：作用域、闭包与函数进阶/","2025/07/28/前端/Web API 学习笔记（6）：正则表达式与表单验证/","2025/07/27/前端/Web API 学习笔记（5）：BOM 操作与本地存储/","2025/07/26/前端/Web API 学习笔记（4）：Date 对象与 DOM-节点操作要点/","2025/07/23/前端/Web API 学习笔记（3）：事件流与事件委托/","2025/07/22/前端/Web API 学习笔记（2）：事件处理与-this-指向/","2025/07/21/前端/Web API 学习笔记（1）：DOM 基础操作/","2025/07/20/前端/JavaScript 学习笔记（5）：对象数据类型与内置数学对象/","2025/07/19/前端/JavaScript 学习笔记（4）：函数封装与对象基础/","2025/07/18/前端/JavaScript 学习笔记（3）：数组的增删操作方法详解/","2025/07/17/前端/JavaScript 学习笔记（2）：运算符、语句与综合案例/","2025/07/17/前端/JavaScript 学习笔记（1）：基础语法与数据类型/","2025/07/15/前端/CSS 学习笔记（12）：响应式布局与 Bootstrap 框架应用/","2025/07/14/前端/CSS 学习笔记（11）：移动 Web 开发之 vw 适配与酷我音乐案例实践/","2025/07/13/前端/CSS 学习笔记（10）：移动 Web 开发基础与 rem 布局、Less 预处理器/","2025/07/12/前端/CSS 学习笔记（9）：移动 Web 开发之空间转换与动画效果/","2025/07/11/前端/CSS 学习笔记（8）：移动 Web 开发之平面转换与渐变效果/","2025/07/10/前端/小兔仙/","2025/07/08/前端/学成在线/","2025/07/08/前端/CSS 学习笔记（6）：小兔鲜儿项目搭建及基础配置（目录结构、SEO 标签、版心设置）/","2025/07/04/前端/CSS我的易错点/","2025/07/03/前端/CSS 学习笔记（7）：CSS 优先级叠加计算规则详解/","2025/07/02/前端/CSS 学习笔记（5）：定位模式、CSS 精灵、字体图标及过渡效果应用/","2025/06/30/前端/CSS 学习笔记（4）：浮动布局与 Flex 弹性布局详解及应用案例/","2025/06/27/前端/CSS 学习笔记（3）：伪类与伪元素选择器、盒子模型及相关特性详解/","2025/06/24/前端/CSS 学习笔记（2）：复合选择器、CSS 特性及背景与显示模式设置/","2025/06/23/前端/CSS 学习笔记（1）：引入方式、选择器及文字样式控制/","2025/06/23/前端/HTML 学习笔记（2）：列表、表格、表单及布局标签详解/","2025/06/22/前端/HTML 学习笔记（1）：核心标签、文档结构及多媒体应用/","2025/06/19/JAVA/Java期末复习重点易错点/","2025/06/18/杂项/中国近代史复习重点/","2025/06/03/JAVA/Java的final/","2025/06/03/JAVA/Java的继承/","2025/06/03/JAVA/Java的多态/","2025/05/27/JAVA/Java的List集合/","2025/05/27/JAVA/Java的Collection集合/","2025/05/27/JAVA/Java的包装类/","2025/05/15/JAVA/Java的内部类/","2025/05/15/JAVA/Java的抽象与接口类/"];
+            function toRandomPost() {
+                const randomPost = posts[Math.floor(Math.random() * posts.length)];
+                pjax.loadUrl(GLOBAL_CONFIG.root + randomPost);
+            }
+        </script>

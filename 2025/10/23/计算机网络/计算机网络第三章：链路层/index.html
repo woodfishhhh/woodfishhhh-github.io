@@ -1,0 +1,3298 @@
+<!DOCTYPE html><html lang="zh-Hans" data-theme="light"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>Untitled | 木鱼的鱼窝</title><noscript>开启JavaScript才能访问本站哦~</noscript><link rel="icon" href="/img/favicon.ico"><link rel="stylesheet" href="/css/index.css?v=3.0.20"><link rel="canonical" href="https://www.woodfishhhh.xyz/2025/10/23/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%AC%E4%B8%89%E7%AB%A0%EF%BC%9A%E9%93%BE%E8%B7%AF%E5%B1%82/index.html"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css"><!-- Feature-specific CSS--><!-- aplayer--><!-- swiper--><!-- fancybox ui--><!-- katex--><!-- Open Graph--><meta name="description" content="3.1 数据链路层概述3.1.1 数据链路层的基本概念数据链路层的定位： OSI 参考模型：第二层（自下而上） TCP&amp;#x2F;IP 模型：属于网络接口层的一部分 主要功能：在物理层提供的比特流传输服务基础上，为网络层提供可靠的数据传输服务 核心概念详解： 链路（Link） 定义：一条"><!-- pwa--><meta name="apple-mobile-web-app-capable" content="木鱼的鱼窝"><meta name="theme-color" content="var(--efu-main)"><meta name="apple-mobile-web-app-status-bar-style" content="var(--efu-main)"><link rel="bookmark" href="/img/favicon.ico"><link rel="apple-touch-icon" href="/img/favicon.ico" sizes="180x180"><script>console.log(' %c Solitude %c ' + '3.0.20' + ' %c https://github.com/everfu/hexo-theme-solitude',
+    'background:#35495e ; padding: 1px; border-radius: 3px 0 0 3px;  color: #fff',
+    'background:#ff9a9a ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff',
+    'background:unset ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff')
+</script><script>(()=>{
+        const saveToLocal = {
+            set: function setWithExpiry(key, value, ttl) {
+                if (ttl === 0)
+                    return
+                const now = new Date()
+                const expiryDay = ttl * 86400000
+                const item = {
+                    value: value,
+                    expiry: now.getTime() + expiryDay
+                }
+                localStorage.setItem(key, JSON.stringify(item))
+            },
+            get: function getWithExpiry(key) {
+                const itemStr = localStorage.getItem(key)
+
+                if (!itemStr) {
+                    return undefined
+                }
+                const item = JSON.parse(itemStr)
+                const now = new Date()
+
+                if (now.getTime() > item.expiry) {
+                    localStorage.removeItem(key)
+                    return undefined
+                }
+                return item.value
+            }
+        };
+        window.utils = {
+            saveToLocal: saveToLocal,
+            getCSS: (url, id = false) => new Promise((resolve, reject) => {
+              const link = document.createElement('link')
+              link.rel = 'stylesheet'
+              link.href = url
+              if (id) link.id = id
+              link.onerror = reject
+              link.onload = link.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                link.onload = link.onreadystatechange = null
+                resolve()
+              }
+              document.head.appendChild(link)
+            }),
+            getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+              const script = document.createElement('script')
+              script.src = url
+              script.async = true
+              script.onerror = reject
+              script.onload = script.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                script.onload = script.onreadystatechange = null
+                resolve()
+              }
+
+              Object.keys(attr).forEach(key => {
+                script.setAttribute(key, attr[key])
+              })
+
+              document.head.appendChild(script)
+            }),
+            addGlobalFn: (key, fn, name = false, parent = window) => {
+                const globalFn = parent.globalFn || {}
+                const keyObj = globalFn[key] || {}
+
+                if (name && keyObj[name]) return
+
+                name = name || Object.keys(keyObj).length
+                keyObj[name] = fn
+                globalFn[key] = keyObj
+                parent.globalFn = globalFn
+            },
+            addEventListenerPjax: (ele, event, fn, option = false) => {
+              ele.addEventListener(event, fn, option)
+              utils.addGlobalFn('pjax', () => {
+                  ele.removeEventListener(event, fn, option)
+              })
+            },
+            diffDateFormat: (selector) => {
+                selector.forEach(item => {
+                    const date = new Date(item.getAttribute('datetime') || item.textContent);
+                    item.textContent = (date.getMonth() + 1).toString()+'/'+date.getDate().toString();
+                });
+            },
+        }
+    })()</script><!-- theme--><script>initTheme = () => {
+    let isDarkMode = window.matchMedia('(prefers-color-scheme: dark)').matches
+    const cachedMode = utils.saveToLocal.get('theme');
+    if (cachedMode === undefined) {
+        const nowMode =
+            isDarkMode ? 'dark' : 'light'
+        document.documentElement.setAttribute('data-theme', nowMode);
+    } else {
+        document.documentElement.setAttribute('data-theme', cachedMode);
+    }
+    typeof rm === 'object' && rm.mode(cachedMode === 'dark' && isDarkMode)
+}
+initTheme()</script><script>const GLOBAL_CONFIG = {
+    root: '/',
+    algolia: undefined,
+    localsearch: undefined,
+    runtime: '2023-04-20 00:00:00',
+    lazyload: {
+        enable: false,
+        error: '/img/error_load.avif'
+    },
+    copyright: false,
+    highlight: {"limit":200,"expand":true,"copy":true,"syntax":"highlight.js"},
+    randomlink: false,
+    lang: {"theme":{"dark":"已切换至深色模式","light":"已切换至浅色模式"},"copy":{"success":"复制成功","error":"复制失败"},"backtop":"返回顶部","time":{"day":"天前","hour":"小时前","just":"刚刚","min":"分钟前","month":"个月前"},"day":" 天","f12":"开发者模式已打开，请遵循GPL协议。","totalk":"无需删除空行，直接输入评论即可"},
+    aside: {
+        state: {
+            morning: "✨ 早上好，新的一天开始了",
+            noon: "🍲 午餐时间",
+            afternoon: "🌞 下午好",
+            night: "早点休息",
+            goodnight: "晚安 😴",
+        },
+        witty_words: [],
+        witty_comment: {
+            prefix: '好久不见，',
+            back: '欢迎再次回来，',
+        },
+    },
+    covercolor: {
+        enable: false
+    },
+    comment: false,
+    lightbox: 'null',
+    right_menu: false,
+    translate: {"translateDelay":0,"defaultEncoding":2},
+    lure: false,
+    expire: false,
+};</script><script id="config-diff">var PAGE_CONFIG = {
+    is_post: true,
+    is_page: false,
+    is_home: false,
+    page: '',
+    toc: true,
+    comment: false,
+    ai_text: false,
+    color: false,
+}</script><!-- hexo injector head_end start --><link rel="stylesheet" href="https://www.fomal.cc/static/css/runtime.min.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body id="body"><div id="console"><div class="close-btn" onclick="sco.hideConsole()"><i class="solitude fas fa-xmark"></i></div><div class="console-card-group"><div class="console-card-group-right"><div class="console-card tags" onclick="sco.hideConsole()"><div class="card-content"><div class="author-content-item-tips">标签</div><div class="author-content-item-title">寻找感兴趣的领域</div></div><div class="card-tag-cloud"><a href="/tags/Linux/">Linux<sup>1</sup></a><a href="/tags/Java/">Java<sup>9</sup></a><a href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/">期末复习<sup>2</sup></a><a href="/tags/CSS/">CSS<sup>15</sup></a><a href="/tags/HTML/">HTML<sup>17</sup></a><a href="/tags/web/">web<sup>11</sup></a><a href="/tags/Ajax/">Ajax<sup>4</sup></a><a href="/tags/JavaScript/">JavaScript<sup>16</sup></a></div></div><div class="console-card history" onclick="sco.hideConsole()"><ul class="card-archive-list"><li class="item"><a href="/archives/2025/11/"><span class="date">2025/11</span><div class="count-group"><span class="count">1</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/10/"><span class="date">2025/10</span><div class="count-group"><span class="count">13</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/09/"><span class="date">2025/09</span><div class="count-group"><span class="count">6</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/08/"><span class="date">2025/08</span><div class="count-group"><span class="count">5</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/07/"><span class="date">2025/07</span><div class="count-group"><span class="count">23</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/06/"><span class="date">2025/06</span><div class="count-group"><span class="count">11</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/05/"><span class="date">2025/05</span><div class="count-group"><span class="count">5</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/"><span class="date">全部文章</span><div class="count-group"><span class="count">64</span><span class="unit">篇</span></div></a></li></ul></div></div></div><div class="button-group"><div class="console-btn-item"><span class="darkmode_switchbutton" onclick="sco.switchDarkMode()" title="昼夜切换"><i class="solitude fas fa-circle-half-stroke"></i></span></div><div class="console-btn-item" id="consoleHideAside"><span class="asideSwitch" onclick="sco.switchHideAside()" title="边栏显示控制"><i class="solitude fas fa-arrows-left-right-to-line"></i></span></div></div><div class="console-mask" onclick="sco.hideConsole()"></div></div><div id="sidebar" style="zoom: 1;"><div id="menu-mask" style="display: none;"></div><div id="sidebar-menus"><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">64</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">3</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">8</div></a></div></div></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><span class="darkmode_switchbutton menu-child" onclick="sco.switchDarkMode()"><i class="solitude fas fa-circle-half-stroke"></i><span>显示模式</span></span></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">0</div><div class="back-menu-list"><a class="back-menu-item" href="/p" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">1</div><div class="back-menu-list"><a class="back-menu-item" href="/r" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">2</div><div class="back-menu-list"><a class="back-menu-item" href="/o" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">3</div><div class="back-menu-list"><a class="back-menu-item" href="/j" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">4</div><div class="back-menu-list"><a class="back-menu-item" href="/e" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">5</div><div class="back-menu-list"><a class="back-menu-item" href="/c" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">6</div><div class="back-menu-list"><a class="back-menu-item" href="/t" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">7</div><div class="back-menu-list"><a class="back-menu-item" href="/:" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">8</div><div class="back-menu-list"><a class="back-menu-item" href="#" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">9</div><div class="back-menu-list"><a class="back-menu-item" href="/" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">10</div><div class="back-menu-list"><a class="back-menu-item" href="/n" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">11</div><div class="back-menu-list"><a class="back-menu-item" href="/a" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">12</div><div class="back-menu-list"><a class="back-menu-item" href="/m" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">13</div><div class="back-menu-list"><a class="back-menu-item" href="/e" title="0"><span class="back-menu-item-text">0</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/%20%7C%7C%20fas%20fa-home"><span>主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%20%7C%7C%20fas%20fa-tags"><span>标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%20%7C%7C%20fas%20fa-th"><span>分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/%20%7C%7C%20fas%20fa-link"><span>友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/%20%7C%7C%20fas%20fa-user"><span>关于我</span></a></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="card-tag-cloud"><a href="/tags/Linux/">Linux<sup>1</sup></a><a href="/tags/Java/">Java<sup>9</sup></a><a href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/">期末复习<sup>2</sup></a><a href="/tags/CSS/">CSS<sup>15</sup></a><a href="/tags/HTML/">HTML<sup>17</sup></a><a href="/tags/web/">web<sup>11</sup></a><a href="/tags/Ajax/">Ajax<sup>4</sup></a><a href="/tags/JavaScript/">JavaScript<sup>16</sup></a></div></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="show" id="nav"><div id="nav-group"><div id="blog_name"><div><div class="back-home-button" tabindex="-1"><i class="solitude fas fa-bars-progress"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">0</div><div class="back-menu-list"><a class="back-menu-item" href="/p" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">1</div><div class="back-menu-list"><a class="back-menu-item" href="/r" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">2</div><div class="back-menu-list"><a class="back-menu-item" href="/o" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">3</div><div class="back-menu-list"><a class="back-menu-item" href="/j" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">4</div><div class="back-menu-list"><a class="back-menu-item" href="/e" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">5</div><div class="back-menu-list"><a class="back-menu-item" href="/c" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">6</div><div class="back-menu-list"><a class="back-menu-item" href="/t" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">7</div><div class="back-menu-list"><a class="back-menu-item" href="/:" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">8</div><div class="back-menu-list"><a class="back-menu-item" href="#" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">9</div><div class="back-menu-list"><a class="back-menu-item" href="/" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">10</div><div class="back-menu-list"><a class="back-menu-item" href="/n" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">11</div><div class="back-menu-list"><a class="back-menu-item" href="/a" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">12</div><div class="back-menu-list"><a class="back-menu-item" href="/m" title="0"><span class="back-menu-item-text">0</span></a></div></div><div class="back-menu-list-group"><div class="back-menu-list-title">13</div><div class="back-menu-list"><a class="back-menu-item" href="/e" title="0"><span class="back-menu-item-text">0</span></a></div></div></div></div></div><a href="/" title="返回博客主页" id="site-name"><i class="solitude fas fa-home"></i></a></div><div id="page-name-mask"><div id="page-name"><a id="page-name-text" onclick="sco.toTop()">Untitled</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/%20%7C%7C%20fas%20fa-home"><span>主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%20%7C%7C%20fas%20fa-tags"><span>标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%20%7C%7C%20fas%20fa-th"><span>分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/%20%7C%7C%20fas%20fa-link"><span>友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/%20%7C%7C%20fas%20fa-user"><span>关于我</span></a></div></div></div><div id="nav-left"></div><div id="nav-right"><div class="nav-button" id="travellings_button"><a class="site-page" target="_blank" rel="noopener" href="https://www.travellings.cn/go.html" onclick="javascript:travelling()" title=""><i class="solitude fas fa-train"></i></a></div><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机一篇文章" href="javascript:void(0);"><i class="solitude fas fa-dice-d6"></i></a></div><div class="nav-button" id="nav-totop" onclick="sco.toTop()"><a class="totopbtn"><i class="solitude fas fa-arrow-up"></i><span id="percent">0</span></a></div><div id="toggle-menu"><a class="site-page"><i class="solitude fas fa-bars"></i></a></div></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original" title="该文章为原创文章，注意版权协议">原创</a><div class="tag_share"><div class="post-meta__tag-list"></div></div></div></div><h1 class="post-title">Untitled</h1><div id="post-meta"><div class="meta-secondline"></div></div></div><div class="post-radius-bottom"></div><article class="post-content article-container"><h2 id="3-1-数据链路层概述"><a href="#3-1-数据链路层概述" class="headerlink" title="3.1 数据链路层概述"></a>3.1 数据链路层概述</h2><h3 id="3-1-1-数据链路层的基本概念"><a href="#3-1-1-数据链路层的基本概念" class="headerlink" title="3.1.1 数据链路层的基本概念"></a>3.1.1 数据链路层的基本概念</h3><p><strong>数据链路层的定位：</strong></p>
+<ul>
+<li><p><strong>OSI 参考模型</strong>：第二层（自下而上）</p>
+</li>
+<li><p><strong>TCP&#x2F;IP 模型</strong>：属于网络接口层的一部分</p>
+</li>
+<li><p><strong>主要功能</strong>：在物理层提供的比特流传输服务基础上，为网络层提供可靠的数据传输服务</p>
+</li>
+</ul>
+<p><strong>核心概念详解：</strong></p>
+<p><strong>链路（Link）</strong></p>
+<ul>
+<li><p><strong>定义</strong>：一条无源的点到点物理线路段</p>
+</li>
+<li><p><strong>特征</strong>：中间没有任何交换节点</p>
+</li>
+<li><p><strong>组成</strong>：仅包含物理介质（铜缆、光纤、无线电波等）</p>
+</li>
+</ul>
+<p><strong>数据链路（Data Link）</strong></p>
+<ul>
+<li><p><strong>定义</strong>：在物理链路基础上增加通信协议的逻辑链路</p>
+</li>
+<li><p><strong>组成</strong>：物理线路 + 通信协议 + 必要的硬件设备</p>
+</li>
+<li><p><strong>功能</strong>：实现两个相邻节点之间的可靠数据传输</p>
+</li>
+</ul>
+<p><strong>帧（Frame）</strong></p>
+<ul>
+<li><p><strong>定义</strong>：数据链路层的协议数据单元（PDU）</p>
+</li>
+<li><p><strong>结构</strong>：首部 + 数据 + 尾部</p>
+</li>
+<li><p><strong>作用</strong>：作为数据链路层之间逻辑通信的基本单位</p>
+</li>
+</ul>
+<h3 id="3-1-2-数据链路层的主要功能"><a href="#3-1-2-数据链路层的主要功能" class="headerlink" title="3.1.2 数据链路层的主要功能"></a>3.1.2 数据链路层的主要功能</h3><p><strong>1. 帧同步</strong></p>
+<ul>
+<li><p>确保接收方能够正确识别帧的开始和结束</p>
+</li>
+<li><p>使用帧定界符或定时同步机制实现</p>
+</li>
+</ul>
+<p><strong>2. 流量控制</strong></p>
+<ul>
+<li><p>控制发送方的发送速率，避免接收方缓冲区溢出</p>
+</li>
+<li><p>常用机制：滑动窗口、停止 - 等待</p>
+</li>
+</ul>
+<p><strong>3. 差错控制</strong></p>
+<ul>
+<li><p>检测和纠正传输过程中出现的错误</p>
+</li>
+<li><p>常用技术：CRC 校验、奇偶校验、海明码</p>
+</li>
+</ul>
+<p><strong>4. 介质访问控制</strong></p>
+<ul>
+<li><p>解决多个节点共享传输介质的冲突问题</p>
+</li>
+<li><p>常用协议：CSMA&#x2F;CD、CSMA&#x2F;CA、令牌环</p>
+</li>
+</ul>
+<p><strong>5. 链路管理</strong></p>
+<ul>
+<li><p>负责数据链路的建立、维持和释放</p>
+</li>
+<li><p>包含认证、协商、重连等机制</p>
+</li>
+</ul>
+<h2 id="3-2-数据链路层的三个重要问题"><a href="#3-2-数据链路层的三个重要问题" class="headerlink" title="3.2 数据链路层的三个重要问题"></a>3.2 数据链路层的三个重要问题</h2><h3 id="3-2-1-封装成帧和透明传输"><a href="#3-2-1-封装成帧和透明传输" class="headerlink" title="3.2.1 封装成帧和透明传输"></a>3.2.1 封装成帧和透明传输</h3><h4 id="3-2-1-1-封装成帧的实现机制"><a href="#3-2-1-1-封装成帧的实现机制" class="headerlink" title="3.2.1.1 封装成帧的实现机制"></a>3.2.1.1 封装成帧的实现机制</h4><p><strong>帧结构设计原则：</strong></p>
+<ul>
+<li><p><strong>首部</strong>：包含地址信息、控制信息、序号等</p>
+</li>
+<li><p><strong>数据</strong>：网络层交付的 IP 数据报</p>
+</li>
+<li><p><strong>尾部</strong>：包含差错检测码（FCS）</p>
+</li>
+</ul>
+<p><strong>封装过程：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">网络层IP数据报 → 添加帧首部 → 添加帧尾部 → 物理层传输</span><br><span class="line"></span><br><span class="line">&amp;#x20;     \|                   |                   |</span><br><span class="line"></span><br><span class="line">&amp;#x20;     v                   v                   v</span><br><span class="line"></span><br><span class="line">&amp;#x20;   数据字段             地址控制             差错检测</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-2-1-2-透明传输的实现方法"><a href="#3-2-1-2-透明传输的实现方法" class="headerlink" title="3.2.1.2 透明传输的实现方法"></a>3.2.1.2 透明传输的实现方法</h4><p><strong>字节填充法（字符填充法）：</strong></p>
+<p><strong>工作原理：</strong></p>
+<ul>
+<li><p>使用特定控制字符作为帧定界符（如 SOH、EOT）</p>
+</li>
+<li><p>当数据中出现与定界符相同的字符时，在其前面插入转义字符（ESC）</p>
+</li>
+</ul>
+<p><strong>填充规则：</strong></p>
+<ul>
+<li><p>SOH（Start Of Header）：帧开始符（0x01）</p>
+</li>
+<li><p>EOT（End Of Transmission）：帧结束符（0x04）</p>
+</li>
+<li><p>ESC（Escape）：转义字符（0x1B）</p>
+</li>
+</ul>
+<p><strong>填充示例：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">原始数据：   D1 SOH D2 EOT D3</span><br><span class="line"></span><br><span class="line">填充后数据： D1 ESC SOH D2 ESC EOT D3</span><br></pre></td></tr></table></figure>
+
+<p><strong>比特填充法：</strong></p>
+<p><strong>适用场景：</strong></p>
+<ul>
+<li>面向比特的物理链路（如同步链路）</li>
+</ul>
+<p><strong>工作原理：</strong></p>
+<ul>
+<li><p>发送方：在 5 个连续的 1 后面插入一个 0</p>
+</li>
+<li><p>接收方：在 5 个连续的 1 后面如果是 0 则删除它</p>
+</li>
+</ul>
+<p><strong>填充示例：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">原始数据：   110111111110</span><br><span class="line"></span><br><span class="line">填充后数据： 1101111101110</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-2-2-差错检测"><a href="#3-2-2-差错检测" class="headerlink" title="3.2.2 差错检测"></a>3.2.2 差错检测</h3><h4 id="3-2-2-1-奇偶校验"><a href="#3-2-2-1-奇偶校验" class="headerlink" title="3.2.2.1 奇偶校验"></a>3.2.2.1 奇偶校验</h4><p><strong>奇校验（Odd Parity）：</strong></p>
+<ul>
+<li><p>在数据后面添加 1 个校验位</p>
+</li>
+<li><p>使整个数据（包括校验位）中 “1” 的个数为奇数</p>
+</li>
+<li><p>检错能力：只能检测奇数个错误</p>
+</li>
+</ul>
+<p><strong>偶校验（Even Parity）：</strong></p>
+<ul>
+<li><p>在数据后面添加 1 个校验位</p>
+</li>
+<li><p>使整个数据（包括校验位）中 “1” 的个数为偶数</p>
+</li>
+<li><p>检错能力：只能检测奇数个错误</p>
+</li>
+</ul>
+<p><strong>校验示例：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">数据：1011010</span><br><span class="line"></span><br><span class="line">奇校验：10110101（8个&quot;1&quot;？不，原数据有4个&quot;1&quot;，加1个&quot;1&quot;变成5个）</span><br><span class="line"></span><br><span class="line">偶校验：10110100（4个&quot;1&quot;加0个&quot;1&quot;保持4个）</span><br></pre></td></tr></table></figure>
+
+<h4 id="3-2-2-2-循环冗余检验（CRC）"><a href="#3-2-2-2-循环冗余检验（CRC）" class="headerlink" title="3.2.2.2 循环冗余检验（CRC）"></a>3.2.2.2 循环冗余检验（CRC）</h4><p><strong>CRC 的数学原理：</strong></p>
+<p><strong>生成多项式表示：</strong></p>
+<ul>
+<li><p>G(x) &#x3D; gₙxⁿ + gₙ₋₁xⁿ⁻¹ + … + g₁x + g₀</p>
+</li>
+<li><p>系数 gᵢ ∈ {0, 1}</p>
+</li>
+</ul>
+<p><strong>常用生成多项式：</strong></p>
+<ul>
+<li><p><strong>CRC-16</strong>：G(x) &#x3D; x¹⁶ + x¹⁵ + x² + 1</p>
+</li>
+<li><p><strong>CRC-CCITT</strong>：G(x) &#x3D; x¹⁶ + x¹² + x⁵ + 1</p>
+</li>
+<li><p><strong>CRC-32</strong>：G(x) &#x3D; x³² + x²⁶ + x²³ + x²² + x¹⁶ + x¹² + x¹¹ + x¹⁰ + x⁸ + x⁷ + x⁵ + x⁴ + x² + x + 1</p>
+</li>
+</ul>
+<p><strong>CRC 计算步骤详解：</strong></p>
+<p><strong>发送端计算过程：</strong></p>
+<ol>
+<li><strong>数据表示</strong></li>
+</ol>
+<ul>
+<li><p>设数据为 D (x)，长度为 k 位</p>
+</li>
+<li><p>生成多项式 G (x)，长度为 r+1 位</p>
+</li>
+</ul>
+<ol>
+<li><strong>数据预处理</strong></li>
+</ol>
+<ul>
+<li><p>在 D (x) 后面添加 r 个 0，得到 D’(x) &#x3D; D (x) × xʳ</p>
+</li>
+<li><p>对应的二进制数据为：原始数据 + r 个 0</p>
+</li>
+</ul>
+<ol>
+<li><strong>二进制模 2 除法</strong></li>
+</ol>
+<ul>
+<li><p>用 G (x) 对应的二进制数去除 D’(x) 对应的二进制数</p>
+</li>
+<li><p>模 2 除法规则：0÷0&#x3D;0，0÷1&#x3D;0，1÷0 &#x3D; 无意义，1÷1&#x3D;1</p>
+</li>
+<li><p>减法操作为异或运算，不借位</p>
+</li>
+</ul>
+<ol>
+<li><strong>计算冗余码</strong></li>
+</ol>
+<ul>
+<li><p>除法得到的余数即为冗余码 R (x)</p>
+</li>
+<li><p>冗余码长度为 r 位（比生成多项式少 1 位）</p>
+</li>
+</ul>
+<ol>
+<li><strong>构造发送帧</strong></li>
+</ol>
+<ul>
+<li><p>发送数据 &#x3D; D (x) + R (x)</p>
+</li>
+<li><p>对应的二进制数据为：原始数据 + 冗余码</p>
+</li>
+</ul>
+<p><strong>接收端检验过程：</strong></p>
+<ol>
+<li><strong>接收数据</strong></li>
+</ol>
+<ul>
+<li>接收的数据为 T (x) &#x3D; D (x) × xʳ + R (x)</li>
+</ul>
+<ol>
+<li><strong>模 2 除法检验</strong></li>
+</ol>
+<ul>
+<li><p>用 G (x) 对应的二进制数去除 T (x) 对应的二进制数</p>
+</li>
+<li><p>如果余数为 0，说明数据正确</p>
+</li>
+<li><p>如果余数不为 0，说明数据出错</p>
+</li>
+</ul>
+<p><strong>CRC 检错能力：</strong></p>
+<ul>
+<li><p>能检测出所有单比特错误</p>
+</li>
+<li><p>能检测出所有双比特错误（生成多项式含有 x+1 因子时）</p>
+</li>
+<li><p>能检测出所有奇数个错误（生成多项式含有 x+1 因子时）</p>
+</li>
+<li><p>能检测出所有长度小于等于 r 的突发错误</p>
+</li>
+<li><p>能以很高的概率检测出长度大于 r 的突发错误</p>
+</li>
+</ul>
+<h3 id="3-2-3-可靠传输"><a href="#3-2-3-可靠传输" class="headerlink" title="3.2.3 可靠传输"></a>3.2.3 可靠传输</h3><h4 id="3-2-3-1-可靠传输的基本概念"><a href="#3-2-3-1-可靠传输的基本概念" class="headerlink" title="3.2.3.1 可靠传输的基本概念"></a>3.2.3.1 可靠传输的基本概念</h4><p><strong>可靠传输的定义：</strong></p>
+<ul>
+<li><p>发送方发送什么，接收方就收到什么</p>
+</li>
+<li><p>保证数据的完整性、有序性、无重复性</p>
+</li>
+</ul>
+<p><strong>不可靠传输的问题：</strong></p>
+<ul>
+<li><p><strong>数据丢失</strong>：帧在传输过程中完全消失</p>
+</li>
+<li><p><strong>数据重复</strong>：接收方收到重复的帧</p>
+</li>
+<li><p><strong>数据失序</strong>：帧的到达顺序与发送顺序不同</p>
+</li>
+<li><p><strong>数据错误</strong>：帧的内容被篡改</p>
+</li>
+</ul>
+<p><strong>可靠传输的实现机制：</strong></p>
+<ul>
+<li><p><strong>确认机制</strong>：接收方收到数据后向发送方发送确认</p>
+</li>
+<li><p><strong>超时重传</strong>：发送方在超时时间内未收到确认则重传</p>
+</li>
+<li><p><strong>序号机制</strong>：为每个帧分配唯一序号，解决重复和失序问题</p>
+</li>
+<li><p><strong>窗口机制</strong>：控制发送方连续发送的帧数，提高效率</p>
+</li>
+</ul>
+<h4 id="3-2-3-2-停止-等待协议（Stop-and-Wait）"><a href="#3-2-3-2-停止-等待协议（Stop-and-Wait）" class="headerlink" title="3.2.3.2 停止 - 等待协议（Stop-and-Wait）"></a>3.2.3.2 停止 - 等待协议（Stop-and-Wait）</h4><p><strong>协议基本原理：</strong></p>
+<p><strong>发送方流程：</strong></p>
+<ol>
+<li><p>从网络层获取数据分组</p>
+</li>
+<li><p>为数据分组分配序号（0 或 1）</p>
+</li>
+<li><p>将数据分组封装成帧发送</p>
+</li>
+<li><p>启动超时计时器</p>
+</li>
+<li><p>等待接收方的确认或否认</p>
+</li>
+</ol>
+<p><strong>接收方流程：</strong></p>
+<ol>
+<li><p>接收帧并进行差错检测</p>
+</li>
+<li><p>如果帧正确且序号期望：</p>
+</li>
+</ol>
+<ul>
+<li><p>提取数据分组并提交给网络层</p>
+</li>
+<li><p>发送确认帧（ACK）</p>
+</li>
+<li><p>更新期望序号</p>
+</li>
+</ul>
+<ol>
+<li>如果帧错误或序号不期望：</li>
+</ol>
+<ul>
+<li><p>丢弃该帧</p>
+</li>
+<li><p>发送否认帧（NAK）或不发送任何帧</p>
+</li>
+</ul>
+<p><strong>超时重传机制：</strong></p>
+<ul>
+<li><p>发送方设置超时时间（略大于往返时间 RTT）</p>
+</li>
+<li><p>如果超时时间内未收到确认，则重传该帧</p>
+</li>
+<li><p>超时时间的设置需要考虑网络延迟的变化</p>
+</li>
+</ul>
+<p><strong>序号机制：</strong></p>
+<ul>
+<li><p>使用 1 比特序号（0 和 1 交替使用）</p>
+</li>
+<li><p>解决帧重复问题</p>
+</li>
+<li><p>序号在确认帧中返回给发送方</p>
+</li>
+</ul>
+<p><strong>停止 - 等待协议的性能分析：</strong></p>
+<p><strong>信道利用率：</strong></p>
+<ul>
+<li><p>利用率 &#x3D; (数据传输时间) &#x2F; (数据传输时间 + 往返延迟时间)</p>
+</li>
+<li><p>设数据传输时间为 T，往返延迟为 2τ</p>
+</li>
+<li><p>利用率 U &#x3D; T &#x2F; (T + 2τ)</p>
+</li>
+</ul>
+<p><strong>优缺点：</strong></p>
+<ul>
+<li><p><strong>优点</strong>：实现简单，控制开销小</p>
+</li>
+<li><p><strong>缺点</strong>：信道利用率低，不适合高速网络</p>
+</li>
+</ul>
+<h4 id="3-2-3-3-回退-N-帧协议（Go-Back-N-GBN）"><a href="#3-2-3-3-回退-N-帧协议（Go-Back-N-GBN）" class="headerlink" title="3.2.3.3 回退 N 帧协议（Go-Back-N, GBN）"></a>3.2.3.3 回退 N 帧协议（Go-Back-N, GBN）</h4><p><strong>协议基本原理：</strong></p>
+<p><strong>滑动窗口机制：</strong></p>
+<ul>
+<li><p><strong>发送窗口</strong>：发送方可连续发送的帧的序号范围</p>
+</li>
+<li><p><strong>接收窗口</strong>：接收方期望接收的帧的序号范围</p>
+</li>
+<li><p>窗口大小决定了最大可连续发送的帧数</p>
+</li>
+</ul>
+<p><strong>GBN 的窗口特点：</strong></p>
+<ul>
+<li><p>发送窗口大小 Wₛ 可以大于 1</p>
+</li>
+<li><p>接收窗口大小 Wᵣ &#x3D; 1</p>
+</li>
+<li><p>接收方只按序接收帧</p>
+</li>
+</ul>
+<p><strong>发送方操作：</strong></p>
+<ol>
+<li><strong>窗口初始化</strong></li>
+</ol>
+<ul>
+<li><p>发送窗口大小为 N（通常 N&#x3D;7 或 15）</p>
+</li>
+<li><p>窗口下界 L &#x3D; 0，窗口上界 U &#x3D; N-1</p>
+</li>
+<li><p>下一个要发送的帧序号 NextSeqNum &#x3D; 0</p>
+</li>
+</ul>
+<ol>
+<li><strong>发送帧</strong></li>
+</ol>
+<ul>
+<li><p>当 NextSeqNum 在 [L, U] 范围内时，可以发送帧</p>
+</li>
+<li><p>发送帧后启动该帧的超时计时器</p>
+</li>
+<li><p>NextSeqNum 递增</p>
+</li>
+</ul>
+<ol>
+<li><strong>接收确认</strong></li>
+</ol>
+<ul>
+<li><p>收到累积确认 ACK (n)，表示序号 n 及以前的帧都已正确接收</p>
+</li>
+<li><p>更新发送窗口：L &#x3D; n + 1，U &#x3D; L + N - 1</p>
+</li>
+<li><p>取消所有序号小于 L 的帧的超时计时器</p>
+</li>
+</ul>
+<ol>
+<li><strong>超时处理</strong></li>
+</ol>
+<ul>
+<li><p>某个帧超时，重传该帧及其后面所有已发送但未确认的帧</p>
+</li>
+<li><p>重置所有重传帧的超时计时器</p>
+</li>
+</ul>
+<p><strong>接收方操作：</strong></p>
+<ol>
+<li><strong>期望序号初始化</strong></li>
+</ol>
+<ul>
+<li>ExpectedSeqNum &#x3D; 0</li>
+</ul>
+<ol>
+<li><strong>接收帧处理</strong></li>
+</ol>
+<ul>
+<li><p>收到序号为 n 的帧：</p>
+<ul>
+<li><p>如果 n &#x3D;&#x3D; ExpectedSeqNum：</p>
+<ul>
+<li><p>提取数据，提交给网络层</p>
+</li>
+<li><p>发送 ACK (n)</p>
+</li>
+<li><p>ExpectedSeqNum 递增</p>
+</li>
+</ul>
+</li>
+<li><p>如果 n &gt; ExpectedSeqNum：</p>
+<ul>
+<li><p>丢弃该帧</p>
+</li>
+<li><p>发送 ACK (ExpectedSeqNum - 1)（重复确认）</p>
+</li>
+</ul>
+</li>
+<li><p>如果 n &lt; ExpectedSeqNum：</p>
+<ul>
+<li><p>丢弃该帧</p>
+</li>
+<li><p>发送 ACK (n)（确认已接收）</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>GBN 协议的性能分析：</strong></p>
+<p><strong>信道利用率：</strong></p>
+<ul>
+<li><p>利用率 U &#x3D; (N × T) &#x2F; (T + 2τ)</p>
+</li>
+<li><p>比停止 - 等待协议有显著提高</p>
+</li>
+</ul>
+<p><strong>优缺点：</strong></p>
+<ul>
+<li><p><strong>优点</strong>：提高了信道利用率，实现相对简单</p>
+</li>
+<li><p><strong>缺点</strong>：一个帧出错可能导致多个帧重传，效率损失</p>
+</li>
+</ul>
+<h4 id="3-2-3-4-选择重传协议（Selective-Repeat-SR）"><a href="#3-2-3-4-选择重传协议（Selective-Repeat-SR）" class="headerlink" title="3.2.3.4 选择重传协议（Selective Repeat, SR）"></a>3.2.3.4 选择重传协议（Selective Repeat, SR）</h4><p><strong>协议基本原理：</strong></p>
+<p><strong>SR 的窗口特点：</strong></p>
+<ul>
+<li><p>发送窗口大小 Wₛ &gt; 1</p>
+</li>
+<li><p>接收窗口大小 Wᵣ &#x3D; Wₛ</p>
+</li>
+<li><p>接收方可以接收失序的帧并缓存</p>
+</li>
+</ul>
+<p><strong>发送方操作：</strong></p>
+<ol>
+<li><strong>窗口初始化</strong></li>
+</ol>
+<ul>
+<li><p>发送窗口大小为 N</p>
+</li>
+<li><p>窗口下界 L &#x3D; 0，窗口上界 U &#x3D; N-1</p>
+</li>
+<li><p>维护一个发送缓存，存储已发送但未确认的帧</p>
+</li>
+</ul>
+<ol>
+<li><strong>发送帧</strong></li>
+</ol>
+<ul>
+<li><p>当 NextSeqNum 在 [L, U] 范围内时，可以发送帧</p>
+</li>
+<li><p>发送帧后启动该帧的超时计时器</p>
+</li>
+<li><p>将帧存入发送缓存</p>
+</li>
+</ul>
+<ol>
+<li><strong>接收确认</strong></li>
+</ol>
+<ul>
+<li><p>收到 ACK (n)：</p>
+<ul>
+<li><p>标记序号 n 的帧为已确认</p>
+</li>
+<li><p>如果 n &#x3D;&#x3D; L，向前滑动窗口，直到找到第一个未确认的帧</p>
+</li>
+<li><p>更新窗口边界：L &#x3D; 新的下界，U &#x3D; L + N - 1</p>
+</li>
+</ul>
+</li>
+</ul>
+<ol>
+<li><strong>超时处理</strong></li>
+</ol>
+<ul>
+<li><p>某个帧超时，只重传该帧</p>
+</li>
+<li><p>重置该帧的超时计时器</p>
+</li>
+</ul>
+<p><strong>接收方操作：</strong></p>
+<ol>
+<li><strong>窗口初始化</strong></li>
+</ol>
+<ul>
+<li><p>接收窗口大小为 N</p>
+</li>
+<li><p>窗口下界 L &#x3D; 0，窗口上界 U &#x3D; N-1</p>
+</li>
+<li><p>维护一个接收缓存，存储失序到达的帧</p>
+</li>
+</ul>
+<ol>
+<li><strong>接收帧处理</strong></li>
+</ol>
+<ul>
+<li><p>收到序号为 n 的帧：</p>
+<ul>
+<li><p>如果 n 在 [L, U] 范围内：</p>
+<ul>
+<li><p>检查帧的完整性</p>
+</li>
+<li><p>如果帧正确：</p>
+<ul>
+<li><p>将帧存入接收缓存</p>
+</li>
+<li><p>发送 ACK (n)</p>
+</li>
+<li><p>如果 n &#x3D;&#x3D; L，按序提交给网络层，并向前滑动窗口</p>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p>如果 n &lt; L：</p>
+<ul>
+<li>发送 ACK (n)（重复确认）</li>
+</ul>
+</li>
+<li><p>如果 n &gt; U：</p>
+<ul>
+<li>丢弃该帧（超出窗口范围）</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>SR 协议的性能分析：</strong></p>
+<p><strong>优缺点：</strong></p>
+<ul>
+<li><p><strong>优点</strong>：只重传出错的帧，效率高，信道利用率高</p>
+</li>
+<li><p><strong>缺点</strong>：实现复杂，需要较大的缓存空间</p>
+</li>
+</ul>
+<p><strong>与 GBN 的比较：</strong></p>
+<ul>
+<li><p><strong>效率</strong>：SR &gt; GBN</p>
+</li>
+<li><p><strong>复杂度</strong>：SR &gt; GBN</p>
+</li>
+<li><p><strong>缓存需求</strong>：SR &gt; GBN</p>
+</li>
+</ul>
+<h2 id="3-3-点对点协议（PPP）"><a href="#3-3-点对点协议（PPP）" class="headerlink" title="3.3 点对点协议（PPP）"></a>3.3 点对点协议（PPP）</h2><h3 id="3-3-1-PPP-协议的组成和功能"><a href="#3-3-1-PPP-协议的组成和功能" class="headerlink" title="3.3.1 PPP 协议的组成和功能"></a>3.3.1 PPP 协议的组成和功能</h3><h4 id="3-3-1-1-PPP-协议的三层结构"><a href="#3-3-1-1-PPP-协议的三层结构" class="headerlink" title="3.3.1.1 PPP 协议的三层结构"></a>3.3.1.1 PPP 协议的三层结构</h4><p><strong>1. 链路控制协议（Link Control Protocol, LCP）</strong></p>
+<p><strong>主要功能：</strong></p>
+<ul>
+<li><p>建立数据链路连接</p>
+</li>
+<li><p>配置数据链路参数</p>
+</li>
+<li><p>测试数据链路连接</p>
+</li>
+<li><p>协商数据链路选项</p>
+</li>
+<li><p>终止数据链路连接</p>
+</li>
+</ul>
+<p><strong>LCP 分组类型：</strong></p>
+<ul>
+<li><p><strong>链路建立分组</strong>：用于建立链路连接</p>
+</li>
+<li><p><strong>链路配置分组</strong>：用于协商链路参数</p>
+</li>
+<li><p><strong>链路终止分组</strong>：用于终止链路连接</p>
+</li>
+<li><p><strong>链路维护分组</strong>：用于维护链路状态</p>
+</li>
+</ul>
+<p><strong>2. 网络层 PDU 封装方法</strong></p>
+<p><strong>封装原则：</strong></p>
+<ul>
+<li><p>网络层 PDU 作为 PPP 帧的数据载荷</p>
+</li>
+<li><p>支持多种网络层协议（IP、IPX、AppleTalk 等）</p>
+</li>
+<li><p>协议字段指示上层协议类型</p>
+</li>
+</ul>
+<p><strong>支持的链路类型：</strong></p>
+<ul>
+<li><p><strong>面向字节的异步链路</strong>：如 RS-232</p>
+</li>
+<li><p><strong>面向比特的同步链路</strong>：如 SONET&#x2F;SDH</p>
+</li>
+</ul>
+<p><strong>3. 网络控制协议（Network Control Protocol, NCP）</strong></p>
+<p><strong>NCP 的作用：</strong></p>
+<ul>
+<li><p>为不同的网络层协议提供专门的控制协议</p>
+</li>
+<li><p>配置网络层参数</p>
+</li>
+<li><p>建立和终止网络层连接</p>
+</li>
+</ul>
+<p><strong>常用 NCP 协议：</strong></p>
+<ul>
+<li><p><strong>IP 控制协议（IPCP）</strong>：支持 IP 协议</p>
+</li>
+<li><p><strong>IPX 控制协议（IPXCP）</strong>：支持 IPX 协议</p>
+</li>
+<li><p><strong>AppleTalk 控制协议（ATCP）</strong>：支持 AppleTalk 协议</p>
+</li>
+</ul>
+<h3 id="3-3-2-PPP-帧格式详解"><a href="#3-3-2-PPP-帧格式详解" class="headerlink" title="3.3.2 PPP 帧格式详解"></a>3.3.2 PPP 帧格式详解</h3><h4 id="3-3-2-1-PPP-帧的字段定义"><a href="#3-3-2-1-PPP-帧的字段定义" class="headerlink" title="3.3.2.1 PPP 帧的字段定义"></a>3.3.2.1 PPP 帧的字段定义</h4><p><strong>标准 PPP 帧格式：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">+----------------+---------------+---------------+---------------+---------------+----------------+</span><br><span class="line"></span><br><span class="line">\| 标志字段 (F)   | 地址字段 (A)  | 控制字段 (C)  | 协议字段 (P)  | 信息字段 (I)  | 帧检验序列 (FCS)|</span><br><span class="line"></span><br><span class="line">+----------------+---------------+---------------+---------------+---------------+----------------+</span><br><span class="line"></span><br><span class="line">\| 1字节          | 1字节         | 1字节         | 2字节         | 0\~1500字节    | 4字节          |</span><br><span class="line"></span><br><span class="line">+----------------+---------------+---------------+---------------+---------------+----------------+</span><br></pre></td></tr></table></figure>
+
+<p><strong>各字段详细说明：</strong></p>
+<p><strong>1. 标志字段（Flag, F）</strong></p>
+<ul>
+<li><p><strong>长度</strong>：1 字节</p>
+</li>
+<li><p><strong>值</strong>：固定为 0x7E（二进制：01111110）</p>
+</li>
+<li><p><strong>作用</strong>：标识帧的开始和结束</p>
+</li>
+<li><p><strong>特性</strong>：帧与帧之间可以连续发送，也可以有间隙</p>
+</li>
+</ul>
+<p><strong>2. 地址字段（Address, A）</strong></p>
+<ul>
+<li><p><strong>长度</strong>：1 字节</p>
+</li>
+<li><p><strong>标准值</strong>：0xFF（广播地址）</p>
+</li>
+<li><p><strong>作用</strong>：标识接收方地址</p>
+</li>
+<li><p><strong>说明</strong>：PPP 协议不支持多点链路，所以通常使用广播地址</p>
+</li>
+</ul>
+<p><strong>3. 控制字段（Control, C）</strong></p>
+<ul>
+<li><p><strong>长度</strong>：1 字节</p>
+</li>
+<li><p><strong>标准值</strong>：0x03（无编号信息帧）</p>
+</li>
+<li><p><strong>作用</strong>：提供链路控制功能</p>
+</li>
+<li><p><strong>格式</strong>：采用 HDLC 的控制字段格式</p>
+</li>
+</ul>
+<p><strong>4. 协议字段（Protocol, P）</strong></p>
+<ul>
+<li><p><strong>长度</strong>：2 字节</p>
+</li>
+<li><p><strong>作用</strong>：指示信息字段中数据的协议类型</p>
+</li>
+<li><p><strong>常用值</strong>：</p>
+<ul>
+<li><p>0x0021：IP 协议</p>
+</li>
+<li><p>0x002B：IPX 协议</p>
+</li>
+<li><p>0xC021：LCP 协议</p>
+</li>
+<li><p>0x8021：IPCP 协议</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>5. 信息字段（Information, I）</strong></p>
+<ul>
+<li><p><strong>长度</strong>：0~1500 字节</p>
+</li>
+<li><p><strong>内容</strong>：网络层 PDU、LCP 分组或 NCP 分组</p>
+</li>
+<li><p><strong>限制</strong>：最大长度由 MTU（Maximum Transmission Unit）决定</p>
+</li>
+</ul>
+<p><strong>6. 帧检验序列（Frame Check Sequence, FCS）</strong></p>
+<ul>
+<li><p><strong>长度</strong>：4 字节</p>
+</li>
+<li><p><strong>算法</strong>：CRC-32</p>
+</li>
+<li><p><strong>作用</strong>：检测帧在传输过程中是否发生错误</p>
+</li>
+</ul>
+<h4 id="3-3-2-2-PPP-协议的透明传输机制"><a href="#3-3-2-2-PPP-协议的透明传输机制" class="headerlink" title="3.3.2.2 PPP 协议的透明传输机制"></a>3.3.2.2 PPP 协议的透明传输机制</h4><p><strong>字节填充法（用于异步链路）：</strong></p>
+<p><strong>填充规则：</strong></p>
+<ol>
+<li><strong>转义帧定界符</strong></li>
+</ol>
+<ul>
+<li><p>当信息字段中出现 0x7E 时，将其转换为 0x7D 0x5E</p>
+</li>
+<li><p>计算方法：0x7E XOR 0x20 &#x3D; 0x5E</p>
+</li>
+</ul>
+<ol>
+<li><strong>转义转义字符</strong></li>
+</ol>
+<ul>
+<li><p>当信息字段中出现 0x7D 时，将其转换为 0x7D 0x5D</p>
+</li>
+<li><p>计算方法：0x7D XOR 0x20 &#x3D; 0x5D</p>
+</li>
+</ul>
+<ol>
+<li><strong>转义控制字符</strong></li>
+</ol>
+<ul>
+<li><p>当信息字段中出现 ASCII 控制字符（&lt; 0x20）时：</p>
+<ul>
+<li><p>将字符值加上 0x20（或 XOR 0x20）</p>
+</li>
+<li><p>在前面插入转义字符 0x7D</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>填充示例：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">原始数据：   7E 01 7D 1F 7E</span><br><span class="line"></span><br><span class="line">填充后数据： 7D 5E 01 7D 5D 7D 3F 7D 5E</span><br></pre></td></tr></table></figure>
+
+<p><strong>零比特填充法（用于同步链路）：</strong></p>
+<p><strong>填充规则：</strong></p>
+<ul>
+<li><p>发送方：在 5 个连续的 1 后面插入一个 0</p>
+</li>
+<li><p>接收方：在 5 个连续的 1 后面如果是 0 则删除它</p>
+</li>
+</ul>
+<p><strong>填充示例：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">原始数据：   01111110 01111101</span><br><span class="line"></span><br><span class="line">填充后数据： 011111010 011111001</span><br></pre></td></tr></table></figure>
+
+<h3 id="3-3-3-PPP-协议的状态机"><a href="#3-3-3-PPP-协议的状态机" class="headerlink" title="3.3.3 PPP 协议的状态机"></a>3.3.3 PPP 协议的状态机</h3><h4 id="3-3-3-1-PPP-协议的状态转换"><a href="#3-3-3-1-PPP-协议的状态转换" class="headerlink" title="3.3.3.1 PPP 协议的状态转换"></a>3.3.3.1 PPP 协议的状态转换</h4><p><strong>PPP 协议定义了 6 个主要状态：</strong></p>
+<p><strong>1. 链路静止状态（Link Dead）</strong></p>
+<ul>
+<li><p><strong>状态描述</strong>：链路未建立，物理层未激活</p>
+</li>
+<li><p><strong>触发事件</strong>：用户启动 PPP 连接</p>
+</li>
+<li><p><strong>状态转换</strong>：进入链路建立状态</p>
+</li>
+</ul>
+<p><strong>2. 链路建立状态（Link Establishment）</strong></p>
+<ul>
+<li><p><strong>状态描述</strong>：发送和接收 LCP 分组，建立链路连接</p>
+</li>
+<li><p><strong>主要操作</strong>：</p>
+<ul>
+<li><p>发送 Configure-Request 分组</p>
+</li>
+<li><p>协商链路参数（MTU、认证方式等）</p>
+</li>
+<li><p>进行链路质量测试</p>
+</li>
+</ul>
+</li>
+<li><p><strong>状态转换</strong>：</p>
+<ul>
+<li><p>协商成功：进入认证状态</p>
+</li>
+<li><p>协商失败：返回链路静止状态</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>3. 认证状态（Authentication）</strong></p>
+<ul>
+<li><p><strong>状态描述</strong>：进行身份认证</p>
+</li>
+<li><p><strong>认证方式</strong>：</p>
+<ul>
+<li><p><strong>PAP（Password Authentication Protocol）</strong>：密码认证</p>
+</li>
+<li><p><strong>CHAP（Challenge Handshake Authentication Protocol）</strong>：挑战握手认证</p>
+</li>
+</ul>
+</li>
+<li><p><strong>状态转换</strong>：</p>
+<ul>
+<li><p>认证成功：进入网络层协议状态</p>
+</li>
+<li><p>认证失败：进入链路终止状态</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>4. 网络层协议状态（Network-Layer Protocol）</strong></p>
+<ul>
+<li><p><strong>状态描述</strong>：配置网络层协议</p>
+</li>
+<li><p><strong>主要操作</strong>：</p>
+<ul>
+<li><p>发送和接收 NCP 分组</p>
+</li>
+<li><p>配置 IP 地址等网络参数</p>
+</li>
+<li><p>建立网络层连接</p>
+</li>
+</ul>
+</li>
+<li><p><strong>状态转换</strong>：</p>
+<ul>
+<li><p>配置成功：进入链路打开状态</p>
+</li>
+<li><p>配置失败：进入链路终止状态</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>5. 链路打开状态（Link Open）</strong></p>
+<ul>
+<li><p><strong>状态描述</strong>：链路完全建立，可以传输数据</p>
+</li>
+<li><p><strong>主要操作</strong>：</p>
+<ul>
+<li><p>传输网络层数据</p>
+</li>
+<li><p>维护链路连接</p>
+</li>
+<li><p>处理链路异常</p>
+</li>
+</ul>
+</li>
+<li><p><strong>状态转换</strong>：</p>
+<ul>
+<li><p>用户终止：进入链路终止状态</p>
+</li>
+<li><p>链路异常：进入链路终止状态</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>6. 链路终止状态（Link Termination）</strong></p>
+<ul>
+<li><p><strong>状态描述</strong>：终止链路连接</p>
+</li>
+<li><p><strong>主要操作</strong>：</p>
+<ul>
+<li><p>发送 Terminate-Request 分组</p>
+</li>
+<li><p>释放链路资源</p>
+</li>
+</ul>
+</li>
+<li><p><strong>状态转换</strong>：返回链路静止状态</p>
+</li>
+</ul>
+<h4 id="3-3-3-2-PPP-认证机制"><a href="#3-3-3-2-PPP-认证机制" class="headerlink" title="3.3.3.2 PPP 认证机制"></a>3.3.3.2 PPP 认证机制</h4><p><strong>1. 密码认证协议（PAP）</strong></p>
+<p><strong>认证过程：</strong></p>
+<ol>
+<li><p>链路建立后，认证方发送认证请求</p>
+</li>
+<li><p>被认证方发送包含用户名和密码的响应</p>
+</li>
+<li><p>认证方验证用户名和密码</p>
+</li>
+<li><p>认证方发送认证成功或失败的结果</p>
+</li>
+</ol>
+<p><strong>特点：</strong></p>
+<ul>
+<li><p>密码以明文形式传输</p>
+</li>
+<li><p>认证只在链路建立时进行一次</p>
+</li>
+<li><p>安全性较低</p>
+</li>
+<li><p>实现简单</p>
+</li>
+</ul>
+<p><strong>2. 挑战握手认证协议（CHAP）</strong></p>
+<p><strong>认证过程：</strong></p>
+<ol>
+<li><p>认证方生成随机挑战值（Challenge）</p>
+</li>
+<li><p>认证方将挑战值发送给被认证方</p>
+</li>
+<li><p>被认证方用密钥对挑战值进行哈希运算</p>
+</li>
+<li><p>被认证方将运算结果（Response）发送给认证方</p>
+</li>
+<li><p>认证方用相同的密钥和挑战值进行计算</p>
+</li>
+<li><p>认证方比较计算结果和收到的响应</p>
+</li>
+</ol>
+<p><strong>特点：</strong></p>
+<ul>
+<li><p>使用哈希算法（通常是 MD5）</p>
+</li>
+<li><p>密码不在网络上传输</p>
+</li>
+<li><p>可以周期性进行重认证</p>
+</li>
+<li><p>安全性较高</p>
+</li>
+<li><p>实现相对复杂</p>
+</li>
+</ul>
+<h2 id="3-4-共享式以太网"><a href="#3-4-共享式以太网" class="headerlink" title="3.4 共享式以太网"></a>3.4 共享式以太网</h2><h3 id="3-4-1-网络适配器和-MAC-地址"><a href="#3-4-1-网络适配器和-MAC-地址" class="headerlink" title="3.4.1 网络适配器和 MAC 地址"></a>3.4.1 网络适配器和 MAC 地址</h3><h4 id="3-4-1-1-网络适配器的结构和功能"><a href="#3-4-1-1-网络适配器的结构和功能" class="headerlink" title="3.4.1.1 网络适配器的结构和功能"></a>3.4.1.1 网络适配器的结构和功能</h4><p><strong>网络适配器（网卡）的硬件结构：</strong></p>
+<p><strong>1. 核心芯片</strong></p>
+<ul>
+<li><p><strong>功能</strong>：实现以太网的数据链路层和物理层功能</p>
+</li>
+<li><p><strong>常见芯片</strong>：REALTEK 8169SC、Intel 82545GM 等</p>
+</li>
+<li><p><strong>主要功能模块</strong>：</p>
+<ul>
+<li><p>MAC 控制器：实现 MAC 层功能</p>
+</li>
+<li><p>PHY 芯片：实现物理层功能</p>
+</li>
+<li><p>缓冲区管理：处理发送和接收缓冲区</p>
+</li>
+<li><p>接口控制器：管理与主机的接口</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>2. EEPROM（电可擦可编程只读存储器）</strong></p>
+<ul>
+<li><p><strong>容量</strong>：通常为 93C46（128 字节）或类似</p>
+</li>
+<li><p><strong>存储内容</strong>：</p>
+<ul>
+<li><p>MAC 地址（6 字节）</p>
+</li>
+<li><p>网卡型号信息</p>
+</li>
+<li><p>厂商信息</p>
+</li>
+<li><p>配置参数</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>3. BootROM 插槽</strong></p>
+<ul>
+<li><p><strong>功能</strong>：用于网络无盘工作站启动</p>
+</li>
+<li><p><strong>存储内容</strong>：启动程序和网络引导代码</p>
+</li>
+<li><p><strong>使用场景</strong>：无盘工作站、远程启动等</p>
+</li>
+</ul>
+<p><strong>4. PCI 接口</strong></p>
+<ul>
+<li><p><strong>功能</strong>：实现网卡与计算机主板的连接</p>
+</li>
+<li><p><strong>接口类型</strong>：PCI、PCI Express、USB 等</p>
+</li>
+<li><p><strong>数据传输速率</strong>：根据接口类型而定</p>
+</li>
+</ul>
+<p><strong>5. 指示灯</strong></p>
+<ul>
+<li><p><strong>连接指示灯（Link）</strong>：显示物理链路状态</p>
+</li>
+<li><p><strong>活动指示灯（Activity）</strong>：显示数据传输活动</p>
+</li>
+<li><p><strong>速度指示灯（Speed）</strong>：显示连接速度</p>
+</li>
+</ul>
+<p><strong>网络适配器的工作原理：</strong></p>
+<p><strong>发送过程：</strong></p>
+<ol>
+<li><p>从主机内存接收 IP 数据报</p>
+</li>
+<li><p>添加 MAC 帧首部和尾部</p>
+</li>
+<li><p>进行 CRC 计算并添加到帧尾部</p>
+</li>
+<li><p>将帧转换为串行比特流</p>
+</li>
+<li><p>通过物理介质发送</p>
+</li>
+</ol>
+<p><strong>接收过程：</strong></p>
+<ol>
+<li><p>从物理介质接收串行比特流</p>
+</li>
+<li><p>转换为并行数据</p>
+</li>
+<li><p>进行 CRC 校验</p>
+</li>
+<li><p>检查目的 MAC 地址</p>
+</li>
+<li><p>提取 IP 数据报并提交给主机</p>
+</li>
+</ol>
+<h4 id="3-4-1-2-MAC-地址的结构和分类"><a href="#3-4-1-2-MAC-地址的结构和分类" class="headerlink" title="3.4.1.2 MAC 地址的结构和分类"></a>3.4.1.2 MAC 地址的结构和分类</h4><p><strong>MAC 地址的格式：</strong></p>
+<p><strong>基本结构：</strong></p>
+<ul>
+<li><p><strong>长度</strong>：48 比特（6 字节）</p>
+</li>
+<li><p><strong>表示方法</strong>：十六进制表示，共 12 个字符</p>
+</li>
+<li><p><strong>分组方式</strong>：每两个字符分为一组，用短线连接</p>
+</li>
+<li><p><strong>示例</strong>：00-1B-44-11-3A-B7</p>
+</li>
+</ul>
+<p><strong>地址字段定义：</strong></p>
+<p><strong>1. 第一字节的最低位（I&#x2F;G 位）</strong></p>
+<ul>
+<li><p><strong>I&#x2F;G &#x3D; 0</strong>：单播地址（Individual Address）</p>
+</li>
+<li><p><strong>I&#x2F;G &#x3D; 1</strong>：多播地址（Group Address）</p>
+</li>
+</ul>
+<p><strong>2. 第一字节的次低位（G&#x2F;L 位）</strong></p>
+<ul>
+<li><p><strong>G&#x2F;L &#x3D; 0</strong>：全球管理地址（Globally Administered）</p>
+</li>
+<li><p><strong>G&#x2F;L &#x3D; 1</strong>：本地管理地址（Locally Administered）</p>
+</li>
+</ul>
+<p><strong>MAC 地址分类：</strong></p>
+<p><strong>表 3-1 MAC 地址分类</strong></p>
+<table>
+<thead>
+<tr>
+<th>I&#x2F;G 位</th>
+<th>G&#x2F;L 位</th>
+<th>地址类型</th>
+<th>用途</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>0</td>
+<td>0</td>
+<td>全球单播地址</td>
+<td>唯一标识单个网络设备</td>
+</tr>
+<tr>
+<td>0</td>
+<td>1</td>
+<td>本地单播地址</td>
+<td>本地管理的单播地址</td>
+</tr>
+<tr>
+<td>1</td>
+<td>0</td>
+<td>全球多播地址</td>
+<td>标识一组网络设备（全球范围）</td>
+</tr>
+<tr>
+<td>1</td>
+<td>1</td>
+<td>本地多播地址</td>
+<td>标识一组网络设备（本地范围）</td>
+</tr>
+</tbody></table>
+<p><strong>MAC 地址的管理：</strong></p>
+<ul>
+<li><p><strong>全球地址</strong>：由 IEEE 注册管理机构（RA）分配</p>
+</li>
+<li><p><strong>组织唯一标识符（OUI）</strong>：前 3 字节，标识设备制造商</p>
+</li>
+<li><p><strong>扩展标识符</strong>：后 3 字节，由制造商分配</p>
+</li>
+</ul>
+<p><strong>MAC 地址的使用规则：</strong></p>
+<p><strong>接收方地址处理：</strong></p>
+<ol>
+<li><p><strong>广播地址（FF-FF-FF-FF-FF-FF）</strong>：所有设备都接收</p>
+</li>
+<li><p><strong>单播地址</strong>：只有地址匹配的设备接收</p>
+</li>
+<li><p><strong>多播地址</strong>：属于该多播组的设备接收</p>
+</li>
+<li><p><strong>其他地址</strong>：设备可以配置为接收特定的多播地址</p>
+</li>
+</ol>
+<h3 id="3-4-2-CSMA-CD-协议"><a href="#3-4-2-CSMA-CD-协议" class="headerlink" title="3.4.2 CSMA&#x2F;CD 协议"></a>3.4.2 CSMA&#x2F;CD 协议</h3><h4 id="3-4-2-1-CSMA-CD-协议的工作原理"><a href="#3-4-2-1-CSMA-CD-协议的工作原理" class="headerlink" title="3.4.2.1 CSMA&#x2F;CD 协议的工作原理"></a>3.4.2.1 CSMA&#x2F;CD 协议的工作原理</h4><p><strong>CSMA&#x2F;CD（Carrier Sense Multiple Access with Collision Detection）</strong></p>
+<p><strong>协议基本思想：</strong></p>
+<ul>
+<li><p><strong>载波监听（CS）</strong>：发送前先监听信道</p>
+</li>
+<li><p><strong>多点接入（MA）</strong>：多个设备共享信道</p>
+</li>
+<li><p><strong>碰撞检测（CD）</strong>：发送过程中检测碰撞</p>
+</li>
+</ul>
+<p><strong>详细工作流程：</strong></p>
+<p><strong>1. 载波监听阶段</strong></p>
+<ul>
+<li><p><strong>监听内容</strong>：检测总线上是否有信号传输</p>
+</li>
+<li><p><strong>监听方法</strong>：</p>
+<ul>
+<li><p><strong>模拟信号监听</strong>：检测电压变化</p>
+</li>
+<li><p><strong>数字信号监听</strong>：检测比特流</p>
+</li>
+</ul>
+</li>
+<li><p><strong>监听结果</strong>：</p>
+<ul>
+<li><p><strong>信道空闲</strong>：等待 96 比特时间后发送</p>
+</li>
+<li><p><strong>信道忙</strong>：继续监听直到信道空闲</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>2. 发送数据阶段</strong></p>
+<ul>
+<li><p><strong>数据传输</strong>：将帧发送到总线上</p>
+</li>
+<li><p><strong>同时监听</strong>：发送过程中继续监听信道</p>
+</li>
+<li><p><strong>碰撞检测</strong>：检测总线上的信号是否异常</p>
+</li>
+</ul>
+<p><strong>3. 碰撞检测阶段</strong></p>
+<ul>
+<li><p><strong>碰撞判断</strong>：</p>
+<ul>
+<li><p>发送信号与接收信号不一致</p>
+</li>
+<li><p>信号强度异常增加</p>
+</li>
+</ul>
+</li>
+<li><p><strong>碰撞处理</strong>：</p>
+<ul>
+<li><p>立即停止发送</p>
+</li>
+<li><p>发送干扰信号（Jamming Signal）</p>
+</li>
+<li><p>启动退避算法</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>4. 退避重传阶段</strong></p>
+<ul>
+<li><p><strong>执行退避算法</strong>：计算退避时间</p>
+</li>
+<li><p><strong>等待退避</strong>：在退避时间内不发送数据</p>
+</li>
+<li><p><strong>重新尝试</strong>：退避时间结束后重新开始监听</p>
+</li>
+</ul>
+<h4 id="3-4-2-2-碰撞检测的实现机制"><a href="#3-4-2-2-碰撞检测的实现机制" class="headerlink" title="3.4.2.2 碰撞检测的实现机制"></a>3.4.2.2 碰撞检测的实现机制</h4><p><strong>碰撞检测的物理原理：</strong></p>
+<ul>
+<li><p>当两个设备同时发送信号时，总线上的信号会相互叠加</p>
+</li>
+<li><p>叠加后的信号幅度会超过单个信号的幅度</p>
+</li>
+<li><p>接收方可以通过检测信号幅度来判断是否发生碰撞</p>
+</li>
+</ul>
+<p><strong>碰撞检测的时间要求：</strong></p>
+<ul>
+<li><p><strong>关键时间</strong>：发送方必须在发送完一帧之前检测到碰撞</p>
+</li>
+<li><p><strong>争用期（Collision Window）</strong>：2τ，其中 τ 是信号在总线两端的传播延迟</p>
+</li>
+<li><p><strong>最小帧长</strong>：争用期 × 数据传输速率</p>
+</li>
+</ul>
+<p><strong>对于 10Mb&#x2F;s 以太网：</strong></p>
+<ul>
+<li><p><strong>争用期</strong>：51.2μs</p>
+</li>
+<li><p><strong>最小帧长</strong>：10Mb&#x2F;s × 51.2μs &#x3D; 512 比特 &#x3D; 64 字节</p>
+</li>
+<li><p><strong>最大总线长度</strong>：约 2500 米（考虑中继器）</p>
+</li>
+</ul>
+<h4 id="3-4-2-3-二进制指数退避算法"><a href="#3-4-2-3-二进制指数退避算法" class="headerlink" title="3.4.2.3 二进制指数退避算法"></a>3.4.2.3 二进制指数退避算法</h4><p><strong>算法详细步骤：</strong></p>
+<p><strong>1. 确定基本退避时间</strong></p>
+<ul>
+<li><p><strong>基本退避时间</strong>：争用期 &#x3D; 512 比特时间</p>
+</li>
+<li><p><strong>对于 10Mb&#x2F;s 以太网</strong>：512 比特时间 &#x3D; 51.2μs</p>
+</li>
+<li><p><strong>对于 100Mb&#x2F;s 以太网</strong>：512 比特时间 &#x3D; 5.12μs</p>
+</li>
+</ul>
+<p><strong>2. 确定退避次数 k</strong></p>
+<ul>
+<li><p><strong>k &#x3D; min (重传次数，10)</strong></p>
+</li>
+<li><p><strong>重传次数限制</strong>：最多 16 次</p>
+</li>
+<li><p><strong>超过 16 次</strong>：丢弃帧并向高层报告错误</p>
+</li>
+</ul>
+<p><strong>3. 选择随机数 r</strong></p>
+<ul>
+<li><p><strong>随机数范围</strong>：r ∈ {0, 1, …, (2ᵏ - 1)}</p>
+</li>
+<li><p><strong>选择方法</strong>：伪随机数生成器</p>
+</li>
+<li><p><strong>分布特性</strong>：均匀分布</p>
+</li>
+</ul>
+<p><strong>4. 计算退避时间</strong></p>
+<ul>
+<li><p><strong>退避时间</strong> &#x3D; r × 基本退避时间</p>
+</li>
+<li><p><strong>时间单位</strong>：比特时间</p>
+</li>
+</ul>
+<p><strong>退避算法示例：</strong></p>
+<p><strong>第一次重传（k&#x3D;1）：</strong></p>
+<ul>
+<li><p>随机数范围：{0, 1}</p>
+</li>
+<li><p>可能的退避时间：0×51.2μs 或 1×51.2μs</p>
+</li>
+</ul>
+<p><strong>第二次重传（k&#x3D;2）：</strong></p>
+<ul>
+<li><p>随机数范围：{0, 1, 2, 3}</p>
+</li>
+<li><p>可能的退避时间：0×51.2μs, 1×51.2μs, 2×51.2μs, 3×51.2μs</p>
+</li>
+</ul>
+<p><strong>第 10 次重传（k&#x3D;10）：</strong></p>
+<ul>
+<li><p>随机数范围：{0, 1, …, 1023}</p>
+</li>
+<li><p>退避时间范围：0~1023×51.2μs</p>
+</li>
+</ul>
+<p><strong>算法特点：</strong></p>
+<ul>
+<li><p><strong>自适应</strong>：重传次数越多，退避时间范围越大</p>
+</li>
+<li><p><strong>公平性</strong>：每个设备有平等的机会重新接入信道</p>
+</li>
+<li><p><strong>稳定性</strong>：有效避免了持续碰撞</p>
+</li>
+</ul>
+<h3 id="3-4-3-共享式以太网的性能分析"><a href="#3-4-3-共享式以太网的性能分析" class="headerlink" title="3.4.3 共享式以太网的性能分析"></a>3.4.3 共享式以太网的性能分析</h3><h4 id="3-4-3-1-信道利用率计算"><a href="#3-4-3-1-信道利用率计算" class="headerlink" title="3.4.3.1 信道利用率计算"></a>3.4.3.1 信道利用率计算</h4><p><strong>信道利用率的理论计算：</strong></p>
+<p><strong>定义：</strong></p>
+<ul>
+<li><p><strong>信道利用率 U</strong>：信道有效传输数据的时间占总时间的比例</p>
+</li>
+<li><p><strong>吞吐量 S</strong>：单位时间内实际传输的数据量</p>
+</li>
+</ul>
+<p><strong>计算公式：</strong></p>
+<ul>
+<li><p>U &#x3D; Tₜ &#x2F; (Tₜ + 2τ + Tⱼ)</p>
+</li>
+<li><p>其中：</p>
+<ul>
+<li><p>Tₜ：数据传输时间</p>
+</li>
+<li><p>τ：信号传播延迟</p>
+</li>
+<li><p>Tⱼ：干扰信号时间（48 比特时间）</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>对于 10Mb&#x2F;s 以太网：</strong></p>
+<ul>
+<li><p><strong>最小帧长</strong>：64 字节 &#x3D; 512 比特</p>
+</li>
+<li><p><strong>Tₜ</strong> &#x3D; 512 比特 &#x2F; 10Mb&#x2F;s &#x3D; 51.2μs</p>
+</li>
+<li><p><strong>τ</strong>：对于 2500 米总线，约为 12.5μs</p>
+</li>
+<li><p><strong>Tⱼ</strong> &#x3D; 48 比特 &#x2F; 10Mb&#x2F;s &#x3D; 4.8μs</p>
+</li>
+<li><p><strong>U</strong> &#x3D; 51.2 &#x2F; (51.2 + 2×12.5 + 4.8) ≈ 51.2 &#x2F; 81 ≈ 63%</p>
+</li>
+</ul>
+<p><strong>实际利用率通常在 30-40% 左右</strong></p>
+<h4 id="3-4-3-2-影响性能的因素"><a href="#3-4-3-2-影响性能的因素" class="headerlink" title="3.4.3.2 影响性能的因素"></a>3.4.3.2 影响性能的因素</h4><p><strong>1. 网络负载</strong></p>
+<ul>
+<li><p><strong>轻负载</strong>：碰撞少，利用率低</p>
+</li>
+<li><p><strong>重负载</strong>：碰撞多，效率下降</p>
+</li>
+<li><p><strong>最佳负载</strong>：中等负载时性能最佳</p>
+</li>
+</ul>
+<p><strong>2. 网络规模</strong></p>
+<ul>
+<li><p><strong>节点数量</strong>：节点越多，碰撞概率越大</p>
+</li>
+<li><p><strong>网络长度</strong>：长度越长，传播延迟越大，最小帧长要求越高</p>
+</li>
+</ul>
+<p><strong>3. 帧长度</strong></p>
+<ul>
+<li><p><strong>短帧</strong>：开销大，效率低</p>
+</li>
+<li><p><strong>长帧</strong>：效率高，但容易造成拥塞</p>
+</li>
+</ul>
+<p><strong>4. 传输速率</strong></p>
+<ul>
+<li><p><strong>低速网络</strong>：传播延迟相对较大，利用率受限</p>
+</li>
+<li><p><strong>高速网络</strong>：传播延迟相对较小，利用率较高</p>
+</li>
+</ul>
+<h2 id="3-5-交换式以太网"><a href="#3-5-交换式以太网" class="headerlink" title="3.5 交换式以太网"></a>3.5 交换式以太网</h2><h3 id="3-5-1-网桥的工作原理"><a href="#3-5-1-网桥的工作原理" class="headerlink" title="3.5.1 网桥的工作原理"></a>3.5.1 网桥的工作原理</h3><h4 id="3-5-1-1-透明网桥的自学习机制"><a href="#3-5-1-1-透明网桥的自学习机制" class="headerlink" title="3.5.1.1 透明网桥的自学习机制"></a>3.5.1.1 透明网桥的自学习机制</h4><p><strong>自学习过程详细分析：</strong></p>
+<p><strong>1. MAC 地址表的结构</strong></p>
+<ul>
+<li><p><strong>表项组成</strong>：MAC 地址 + 接口号 + 时间戳</p>
+</li>
+<li><p><strong>老化机制</strong>：定期清理长时间未使用的表项</p>
+</li>
+<li><p><strong>表项数量</strong>：根据网桥性能而定，通常几千到几万项</p>
+</li>
+</ul>
+<p><strong>2. 自学习算法</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">当网桥收到一个帧时：</span><br><span class="line"></span><br><span class="line">1\. 检查帧的源MAC地址</span><br><span class="line"></span><br><span class="line">2\. 如果地址不在MAC地址表中：</span><br><span class="line"></span><br><span class="line">&amp;#x20;  a. 将源MAC地址和接收接口号添加到表中</span><br><span class="line"></span><br><span class="line">&amp;#x20;  b. 记录当前时间作为时间戳</span><br><span class="line"></span><br><span class="line">3\. 如果地址已在MAC地址表中：</span><br><span class="line"></span><br><span class="line">&amp;#x20;  a. 更新对应的接口号（如果接口号改变）</span><br><span class="line"></span><br><span class="line">&amp;#x20;  b. 更新时间戳</span><br><span class="line"></span><br><span class="line">4\. 检查帧的目的MAC地址</span><br><span class="line"></span><br><span class="line">5\. 根据目的地址决定转发策略</span><br></pre></td></tr></table></figure>
+
+<p><strong>3. 地址表老化机制</strong></p>
+<ul>
+<li><p><strong>老化时间</strong>：通常为 5 分钟</p>
+</li>
+<li><p><strong>老化过程</strong>：定期检查表项的时间戳，超过老化时间的表项被删除</p>
+</li>
+<li><p><strong>作用</strong>：适应网络拓扑变化，清理无效表项</p>
+</li>
+</ul>
+<h4 id="3-5-1-2-帧转发机制"><a href="#3-5-1-2-帧转发机制" class="headerlink" title="3.5.1.2 帧转发机制"></a>3.5.1.2 帧转发机制</h4><p><strong>转发决策过程：</strong></p>
+<p><strong>1. 帧接收处理</strong></p>
+<ul>
+<li><p>接收帧并进行 CRC 校验</p>
+</li>
+<li><p>如果 CRC 错误，直接丢弃帧</p>
+</li>
+<li><p>提取源 MAC 地址和目的 MAC 地址</p>
+</li>
+</ul>
+<p><strong>2. 广播帧处理</strong></p>
+<ul>
+<li><p>从除接收接口外的所有接口转发</p>
+</li>
+<li><p>用于 ARP 请求、DHCP 发现等</p>
+</li>
+</ul>
+<p><strong>3. 单播帧处理</strong></p>
+<ul>
+<li><p>在 MAC 地址表中查找目的地址</p>
+</li>
+<li><p>如果找到：</p>
+<ul>
+<li><p>从对应的接口转发</p>
+</li>
+<li><p>如果目的接口与接收接口相同，丢弃帧</p>
+</li>
+</ul>
+</li>
+<li><p>如果找不到：</p>
+<ul>
+<li>进行广播转发（泛洪）</li>
+</ul>
+</li>
+</ul>
+<p><strong>4. 多播帧处理</strong></p>
+<ul>
+<li><p>根据多播组配置决定转发接口</p>
+</li>
+<li><p>可以配置为广播转发或选择性转发</p>
+</li>
+</ul>
+<h4 id="3-5-1-3-生成树协议（STP）"><a href="#3-5-1-3-生成树协议（STP）" class="headerlink" title="3.5.1.3 生成树协议（STP）"></a>3.5.1.3 生成树协议（STP）</h4><p><strong>STP 的基本原理：</strong></p>
+<p><strong>问题背景：</strong></p>
+<ul>
+<li><p>网桥之间的冗余连接会形成环路</p>
+</li>
+<li><p>环路会导致广播风暴、帧重复、地址表不稳定</p>
+</li>
+</ul>
+<p><strong>STP 的目标：</strong></p>
+<ul>
+<li><p>在保持冗余的同时消除环路</p>
+</li>
+<li><p>提供路径冗余和故障恢复能力</p>
+</li>
+</ul>
+<p><strong>STP 的工作机制：</strong></p>
+<p><strong>1. 选举根网桥（Root Bridge）</strong></p>
+<ul>
+<li><p><strong>选举标准</strong>：桥 ID（Bridge ID）最小的网桥成为根网桥</p>
+</li>
+<li><p><strong>桥 ID 组成</strong>：优先级（2 字节）+ MAC 地址（6 字节）</p>
+</li>
+<li><p><strong>优先级范围</strong>：0~65535，默认 32768</p>
+</li>
+<li><p><strong>选举过程</strong>：通过 BPDU（Bridge Protocol Data Unit）交换信息</p>
+</li>
+</ul>
+<p><strong>2. 确定根端口（Root Port）</strong></p>
+<ul>
+<li><p><strong>定义</strong>：每个非根网桥到根网桥路径最短的端口</p>
+</li>
+<li><p><strong>路径成本计算</strong>：根据链路带宽计算</p>
+</li>
+<li><p><strong>选择标准</strong>：</p>
+<ul>
+<li><p>路径成本最低</p>
+</li>
+<li><p>发送方桥 ID 最小</p>
+</li>
+<li><p>发送方端口 ID 最小</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>3. 确定指定端口（Designated Port）</strong></p>
+<ul>
+<li><p><strong>定义</strong>：每个网段上到根网桥路径最短的端口</p>
+</li>
+<li><p><strong>选择标准</strong>：</p>
+<ul>
+<li><p>路径成本最低</p>
+</li>
+<li><p>发送方桥 ID 最小</p>
+</li>
+<li><p>发送方端口 ID 最小</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>4. 阻塞非指定端口</strong></p>
+<ul>
+<li><p>非根端口、非指定端口被设置为阻塞状态</p>
+</li>
+<li><p>阻塞端口可以接收但不能转发数据帧</p>
+</li>
+<li><p>阻塞端口继续接收 BPDU 以维护 STP 状态</p>
+</li>
+</ul>
+<p><strong>STP 端口状态：</strong></p>
+<p><strong>1. 阻塞状态（Blocking）</strong></p>
+<ul>
+<li><p>不转发数据帧</p>
+</li>
+<li><p>接收但不发送 BPDU</p>
+</li>
+<li><p>等待 20 秒后进入监听状态</p>
+</li>
+</ul>
+<p><strong>2. 监听状态（Listening）</strong></p>
+<ul>
+<li><p>不转发数据帧</p>
+</li>
+<li><p>接收和发送 BPDU</p>
+</li>
+<li><p>等待 15 秒后进入学习状态</p>
+</li>
+</ul>
+<p><strong>3. 学习状态（Learning）</strong></p>
+<ul>
+<li><p>不转发数据帧</p>
+</li>
+<li><p>接收和发送 BPDU</p>
+</li>
+<li><p>学习 MAC 地址</p>
+</li>
+<li><p>等待 15 秒后进入转发状态</p>
+</li>
+</ul>
+<p><strong>4. 转发状态（Forwarding）</strong></p>
+<ul>
+<li><p>正常转发数据帧</p>
+</li>
+<li><p>接收和发送 BPDU</p>
+</li>
+<li><p>学习 MAC 地址</p>
+</li>
+</ul>
+<p><strong>5. 禁用状态（Disabled）</strong></p>
+<ul>
+<li><p>不参与 STP</p>
+</li>
+<li><p>不转发任何帧</p>
+</li>
+</ul>
+<p><strong>STP 的故障恢复：</strong></p>
+<ul>
+<li><p>当链路故障时，阻塞端口会在约 50 秒后转为转发状态</p>
+</li>
+<li><p>快速生成树协议（RSTP）可以将恢复时间缩短到几秒</p>
+</li>
+</ul>
+<h3 id="3-5-2-以太网交换机"><a href="#3-5-2-以太网交换机" class="headerlink" title="3.5.2 以太网交换机"></a>3.5.2 以太网交换机</h3><h4 id="3-5-2-1-交换机的工作原理"><a href="#3-5-2-1-交换机的工作原理" class="headerlink" title="3.5.2.1 交换机的工作原理"></a>3.5.2.1 交换机的工作原理</h4><p><strong>交换机与集线器的区别：</strong></p>
+<p><strong>集线器（Hub）：</strong></p>
+<ul>
+<li><p>工作在物理层</p>
+</li>
+<li><p>共享带宽</p>
+</li>
+<li><p>广播转发所有帧</p>
+</li>
+<li><p>半双工通信</p>
+</li>
+<li><p>容易产生碰撞</p>
+</li>
+</ul>
+<p><strong>交换机（Switch）：</strong></p>
+<ul>
+<li><p>工作在数据链路层</p>
+</li>
+<li><p>每个端口独立带宽</p>
+</li>
+<li><p>智能转发（基于 MAC 地址）</p>
+</li>
+<li><p>支持全双工通信</p>
+</li>
+<li><p>有效避免碰撞</p>
+</li>
+</ul>
+<p><strong>交换机的功能特点：</strong></p>
+<p><strong>1. 地址学习</strong></p>
+<ul>
+<li><p>自动学习连接设备的 MAC 地址</p>
+</li>
+<li><p>建立和维护 MAC 地址表</p>
+</li>
+<li><p>支持动态地址老化</p>
+</li>
+</ul>
+<p><strong>2. 帧转发</strong></p>
+<ul>
+<li><p>基于 MAC 地址表进行帧转发</p>
+</li>
+<li><p>支持单播、广播、多播转发</p>
+</li>
+<li><p>提供线速转发能力</p>
+</li>
+</ul>
+<p><strong>3. 流量控制</strong></p>
+<ul>
+<li><p>支持全双工通信</p>
+</li>
+<li><p>实现流量控制机制</p>
+</li>
+<li><p>避免缓冲区溢出</p>
+</li>
+</ul>
+<p><strong>4. 网络分段</strong></p>
+<ul>
+<li><p>将大型网络分割为多个冲突域</p>
+</li>
+<li><p>提高网络性能和安全性</p>
+</li>
+<li><p>支持 VLAN 功能</p>
+</li>
+</ul>
+<h4 id="3-5-2-2-交换机的转发方式"><a href="#3-5-2-2-交换机的转发方式" class="headerlink" title="3.5.2.2 交换机的转发方式"></a>3.5.2.2 交换机的转发方式</h4><p><strong>1. 存储转发（Store-and-Forward）</strong></p>
+<ul>
+<li><strong>工作过程</strong>：</li>
+</ul>
+<ol>
+<li><p>接收完整的帧</p>
+</li>
+<li><p>进行 CRC 校验</p>
+</li>
+<li><p>查找 MAC 地址表</p>
+</li>
+<li><p>转发帧到目标端口</p>
+</li>
+</ol>
+<ul>
+<li><p><strong>优点</strong>：</p>
+<ul>
+<li><p>可以过滤错误帧</p>
+</li>
+<li><p>支持不同速率的端口</p>
+</li>
+<li><p>支持帧的缓冲和排队</p>
+</li>
+</ul>
+</li>
+<li><p><strong>缺点</strong>：</p>
+<ul>
+<li><p>转发延迟较大</p>
+</li>
+<li><p>延迟随帧长变化</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>2. 直通交换（Cut-Through）</strong></p>
+<ul>
+<li><strong>工作过程</strong>：</li>
+</ul>
+<ol>
+<li><p>接收帧的目的 MAC 地址字段</p>
+</li>
+<li><p>立即查找 MAC 地址表</p>
+</li>
+<li><p>开始转发帧</p>
+</li>
+<li><p>同时继续接收剩余部分</p>
+</li>
+</ol>
+<ul>
+<li><p><strong>优点</strong>：</p>
+<ul>
+<li><p>转发延迟小</p>
+</li>
+<li><p>延迟固定（仅与地址字段长度有关）</p>
+</li>
+</ul>
+</li>
+<li><p><strong>缺点</strong>：</p>
+<ul>
+<li><p>不能过滤错误帧</p>
+</li>
+<li><p>要求所有端口速率相同</p>
+</li>
+<li><p>不支持帧的缓冲</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>3. 碎片隔离（Fragment Free）</strong></p>
+<ul>
+<li><strong>工作过程</strong>：</li>
+</ul>
+<ol>
+<li><p>接收帧的前 64 字节</p>
+</li>
+<li><p>进行 CRC 校验</p>
+</li>
+<li><p>查找 MAC 地址表</p>
+</li>
+<li><p>转发帧</p>
+</li>
+</ol>
+<ul>
+<li><p><strong>优点</strong>：</p>
+<ul>
+<li><p>可以过滤冲突碎片</p>
+</li>
+<li><p>延迟适中</p>
+</li>
+</ul>
+</li>
+<li><p><strong>缺点</strong>：</p>
+<ul>
+<li><p>不能过滤所有错误帧</p>
+</li>
+<li><p>实现相对复杂</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>三种转发方式的比较：</strong></p>
+<table>
+<thead>
+<tr>
+<th>转发方式</th>
+<th>延迟</th>
+<th>错误过滤</th>
+<th>速率适应性</th>
+<th>实现复杂度</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>存储转发</td>
+<td>大</td>
+<td>完全</td>
+<td>好</td>
+<td>中</td>
+</tr>
+<tr>
+<td>直通交换</td>
+<td>小</td>
+<td>无</td>
+<td>差</td>
+<td>低</td>
+</tr>
+<tr>
+<td>碎片隔离</td>
+<td>中</td>
+<td>部分</td>
+<td>中</td>
+<td>高</td>
+</tr>
+</tbody></table>
+<h2 id="3-6-以太网的-MAC-帧格式"><a href="#3-6-以太网的-MAC-帧格式" class="headerlink" title="3.6 以太网的 MAC 帧格式"></a>3.6 以太网的 MAC 帧格式</h2><h3 id="3-6-1-DIX-Ethernet-V2-格式"><a href="#3-6-1-DIX-Ethernet-V2-格式" class="headerlink" title="3.6.1 DIX Ethernet V2 格式"></a>3.6.1 DIX Ethernet V2 格式</h3><h4 id="3-6-1-1-帧结构详细定义"><a href="#3-6-1-1-帧结构详细定义" class="headerlink" title="3.6.1.1 帧结构详细定义"></a>3.6.1.1 帧结构详细定义</h4><p><strong>Ethernet V2 MAC 帧格式：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">+----------------+---------------+---------------+---------------+---------------+----------------+</span><br><span class="line"></span><br><span class="line">\| 前导码         | 帧开始定界符 | 目的地址      | 源地址        | 类型字段      | 数据字段      | FCS字段       |</span><br><span class="line"></span><br><span class="line">+----------------+---------------+---------------+---------------+---------------+---------------+----------------+</span><br><span class="line"></span><br><span class="line">\| 7字节          | 1字节         | 6字节         | 6字节         | 2字节         | 46\~1500字节   | 4字节          |</span><br><span class="line"></span><br><span class="line">+----------------+---------------+---------------+---------------+---------------+---------------+----------------+</span><br></pre></td></tr></table></figure>
+
+<p><strong>各字段详细说明：</strong></p>
+<p><strong>1. 前导码（Preamble）</strong></p>
+<ul>
+<li><p><strong>长度</strong>：7 字节</p>
+</li>
+<li><p><strong>内容</strong>：0xAA（10101010）重复 7 次</p>
+</li>
+<li><p><strong>作用</strong>：</p>
+<ul>
+<li><p>使接收方的时钟与发送方同步</p>
+</li>
+<li><p>为接收方提供帧即将到达的提示</p>
+</li>
+</ul>
+</li>
+<li><p><strong>接收处理</strong>：通常被物理层剥离，不交给 MAC 层</p>
+</li>
+</ul>
+<p><strong>2. 帧开始定界符（SFD）</strong></p>
+<ul>
+<li><p><strong>长度</strong>：1 字节</p>
+</li>
+<li><p><strong>内容</strong>：0xAB（10101011）</p>
+</li>
+<li><p><strong>作用</strong>：</p>
+<ul>
+<li><p>标志着帧的真正开始</p>
+</li>
+<li><p>通知接收方后面紧跟的是 MAC 帧首部</p>
+</li>
+</ul>
+</li>
+<li><p><strong>特点</strong>：前 6 位与前导码相同，最后两位为 “11”，表示帧的开始</p>
+</li>
+</ul>
+<p><strong>3. 目的地址（Destination Address）</strong></p>
+<ul>
+<li><p><strong>长度</strong>：6 字节</p>
+</li>
+<li><p><strong>格式</strong>：48 比特 MAC 地址</p>
+</li>
+<li><p><strong>类型</strong>：</p>
+<ul>
+<li><p><strong>单播地址</strong>：第一位为 0</p>
+</li>
+<li><p><strong>多播地址</strong>：第一位为 1</p>
+</li>
+<li><p><strong>广播地址</strong>：全为 1（FF-FF-FF-FF-FF-FF）</p>
+</li>
+</ul>
+</li>
+<li><p><strong>作用</strong>：标识帧的接收方</p>
+</li>
+</ul>
+<p><strong>4. 源地址（Source Address）</strong></p>
+<ul>
+<li><p><strong>长度</strong>：6 字节</p>
+</li>
+<li><p><strong>格式</strong>：48 比特 MAC 地址</p>
+</li>
+<li><p><strong>要求</strong>：必须是单播地址</p>
+</li>
+<li><p><strong>作用</strong>：标识帧的发送方</p>
+</li>
+</ul>
+<p><strong>5. 类型字段（Type）</strong></p>
+<ul>
+<li><p><strong>长度</strong>：2 字节</p>
+</li>
+<li><p><strong>作用</strong>：指示数据字段中内容的协议类型</p>
+</li>
+<li><p><strong>常用值</strong>：</p>
+<ul>
+<li><p>0x0800：IP 协议</p>
+</li>
+<li><p>0x0806：ARP 协议</p>
+</li>
+<li><p>0x8035：RARP 协议</p>
+</li>
+<li><p>0x8100：IEEE 802.1Q VLAN 标签</p>
+</li>
+<li><p>0x86DD：IPv6 协议</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>6. 数据字段（Data）</strong></p>
+<ul>
+<li><p><strong>长度</strong>：46~1500 字节</p>
+</li>
+<li><p><strong>内容</strong>：网络层 PDU（通常是 IP 数据报）</p>
+</li>
+<li><p><strong>最小长度要求</strong>：</p>
+<ul>
+<li><p>为了确保 CSMA&#x2F;CD 协议正常工作</p>
+</li>
+<li><p>当数据长度小于 46 字节时，需要填充</p>
+</li>
+<li><p>填充字节的内容可以是任意值</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>7. 帧检验序列（FCS）</strong></p>
+<ul>
+<li><p><strong>长度</strong>：4 字节</p>
+</li>
+<li><p><strong>算法</strong>：CRC-32</p>
+</li>
+<li><p><strong>计算范围</strong>：目的地址、源地址、类型、数据字段</p>
+</li>
+<li><p><strong>作用</strong>：检测帧在传输过程中是否发生错误</p>
+</li>
+</ul>
+<h4 id="3-6-1-2-帧大小限制"><a href="#3-6-1-2-帧大小限制" class="headerlink" title="3.6.1.2 帧大小限制"></a>3.6.1.2 帧大小限制</h4><p><strong>最小帧长：</strong></p>
+<ul>
+<li><p><strong>规定值</strong>：64 字节</p>
+</li>
+<li><p><strong>组成</strong>：18 字节首部 + 46 字节数据</p>
+</li>
+<li><p><strong>原因</strong>：确保发送方在发送完一帧之前能够检测到碰撞</p>
+</li>
+<li><p><strong>计算依据</strong>：最小帧长 &#x3D; 争用期 × 数据传输速率</p>
+</li>
+</ul>
+<p><strong>最大帧长：</strong></p>
+<ul>
+<li><p><strong>规定值</strong>：1518 字节</p>
+</li>
+<li><p><strong>组成</strong>：18 字节首部 + 1500 字节数据</p>
+</li>
+<li><p><strong>原因</strong>：</p>
+<ul>
+<li><p>限制单个帧占用信道的时间</p>
+</li>
+<li><p>避免长时间拥塞</p>
+</li>
+<li><p>便于内存管理</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>MTU（Maximum Transmission Unit）：</strong></p>
+<ul>
+<li><p><strong>定义</strong>：数据链路层能够传输的最大数据长度</p>
+</li>
+<li><p><strong>以太网 MTU</strong>：1500 字节</p>
+</li>
+<li><p><strong>作用</strong>：限制网络层 IP 数据报的大小</p>
+</li>
+<li><p><strong>意义</strong>：影响网络层的分片和重组</p>
+</li>
+</ul>
+<h3 id="3-6-2-IEEE-802-3-格式"><a href="#3-6-2-IEEE-802-3-格式" class="headerlink" title="3.6.2 IEEE 802.3 格式"></a>3.6.2 IEEE 802.3 格式</h3><h4 id="3-6-2-1-与-Ethernet-V2-的区别"><a href="#3-6-2-1-与-Ethernet-V2-的区别" class="headerlink" title="3.6.2.1 与 Ethernet V2 的区别"></a>3.6.2.1 与 Ethernet V2 的区别</h4><p><strong>主要区别：</strong></p>
+<p><strong>1. 类型字段 vs 长度字段</strong></p>
+<ul>
+<li><p><strong>Ethernet V2</strong>：类型字段（Type），指示上层协议</p>
+</li>
+<li><p><strong>IEEE 802.3</strong>：长度字段（Length），指示数据字段的长度</p>
+</li>
+</ul>
+<p><strong>2. LLC 子层的引入</strong></p>
+<ul>
+<li><p><strong>IEEE 802.3</strong>：在 MAC 帧中增加了 LLC（Logical Link Control）子层</p>
+</li>
+<li><p><strong>LLC 帧结构</strong>：DSAP + SSAP + Control + Data</p>
+</li>
+<li><p><strong>作用</strong>：提供统一的链路层接口</p>
+</li>
+</ul>
+<p><strong>3. 协议标识方式</strong></p>
+<ul>
+<li><p><strong>Ethernet V2</strong>：直接通过 Type 字段标识上层协议</p>
+</li>
+<li><p><strong>IEEE 802.3</strong>：通过 LLC 子层的 DSAP 和 SSAP 字段标识</p>
+</li>
+</ul>
+<p><strong>兼容性处理：</strong></p>
+<ul>
+<li><p>当 Length&#x2F;Type 字段的值大于等于 0x0600 时，被解释为 Type 字段</p>
+</li>
+<li><p>当值小于 0x0600 时，被解释为 Length 字段</p>
+</li>
+<li><p>这种设计确保了两种格式的兼容性</p>
+</li>
+</ul>
+<h2 id="3-7-虚拟局域网（VLAN）"><a href="#3-7-虚拟局域网（VLAN）" class="headerlink" title="3.7 虚拟局域网（VLAN）"></a>3.7 虚拟局域网（VLAN）</h2><h3 id="3-7-1-VLAN-的基本概念和作用"><a href="#3-7-1-VLAN-的基本概念和作用" class="headerlink" title="3.7.1 VLAN 的基本概念和作用"></a>3.7.1 VLAN 的基本概念和作用</h3><h4 id="3-7-1-1-VLAN-的定义和特点"><a href="#3-7-1-1-VLAN-的定义和特点" class="headerlink" title="3.7.1.1 VLAN 的定义和特点"></a>3.7.1.1 VLAN 的定义和特点</h4><p><strong>VLAN（Virtual Local Area Network）定义：</strong></p>
+<ul>
+<li><p><strong>逻辑划分</strong>：将物理上分散的设备按逻辑功能或应用需求划分</p>
+</li>
+<li><p><strong>广播隔离</strong>：不同 VLAN 之间的广播帧相互隔离</p>
+</li>
+<li><p><strong>灵活重组</strong>：可以根据需要动态调整 VLAN 成员</p>
+</li>
+</ul>
+<p><strong>VLAN 的技术特点：</strong></p>
+<p><strong>1. 逻辑隔离</strong></p>
+<ul>
+<li><p><strong>广播域隔离</strong>：每个 VLAN 是一个独立的广播域</p>
+</li>
+<li><p><strong>流量隔离</strong>：不同 VLAN 之间的流量需要通过路由器转发</p>
+</li>
+<li><p><strong>安全性</strong>：提高网络安全性，限制未授权访问</p>
+</li>
+</ul>
+<p><strong>2. 灵活性</strong></p>
+<ul>
+<li><p><strong>位置无关</strong>：设备可以在物理位置变化时保持 VLAN 成员身份</p>
+</li>
+<li><p><strong>动态调整</strong>：可以根据需要随时调整 VLAN 配置</p>
+</li>
+<li><p><strong>即插即用</strong>：支持自动 VLAN 分配</p>
+</li>
+</ul>
+<p><strong>3. 可扩展性</strong></p>
+<ul>
+<li><p><strong>网络分段</strong>：可以将大型网络分割为多个小型网络</p>
+</li>
+<li><p><strong>性能优化</strong>：减少广播风暴，提高网络性能</p>
+</li>
+<li><p><strong>管理简化</strong>：便于网络管理和维护</p>
+</li>
+</ul>
+<h4 id="3-7-1-2-VLAN-的优势"><a href="#3-7-1-2-VLAN-的优势" class="headerlink" title="3.7.1.2 VLAN 的优势"></a>3.7.1.2 VLAN 的优势</h4><p><strong>1. 提高网络性能</strong></p>
+<ul>
+<li><p><strong>减少广播流量</strong>：限制广播域的大小</p>
+</li>
+<li><p><strong>优化带宽利用</strong>：隔离不同类型的流量</p>
+</li>
+<li><p><strong>降低网络延迟</strong>：减少不必要的流量转发</p>
+</li>
+</ul>
+<p><strong>2. 增强网络安全性</strong></p>
+<ul>
+<li><p><strong>访问控制</strong>：限制不同 VLAN 之间的访问</p>
+</li>
+<li><p><strong>流量隔离</strong>：敏感数据可以在独立的 VLAN 中传输</p>
+</li>
+<li><p><strong>攻击防护</strong>：减少广播风暴和其他攻击的影响范围</p>
+</li>
+</ul>
+<p><strong>3. 简化网络管理</strong></p>
+<ul>
+<li><p><strong>集中管理</strong>：可以通过网管系统集中管理 VLAN</p>
+</li>
+<li><p><strong>灵活配置</strong>：支持多种 VLAN 划分方式</p>
+</li>
+<li><p><strong>故障隔离</strong>：便于故障定位和排除</p>
+</li>
+</ul>
+<h3 id="3-7-2-IEEE-802-1Q-VLAN-标签"><a href="#3-7-2-IEEE-802-1Q-VLAN-标签" class="headerlink" title="3.7.2 IEEE 802.1Q VLAN 标签"></a>3.7.2 IEEE 802.1Q VLAN 标签</h3><h4 id="3-7-2-1-VLAN-标签格式"><a href="#3-7-2-1-VLAN-标签格式" class="headerlink" title="3.7.2.1 VLAN 标签格式"></a>3.7.2.1 VLAN 标签格式</h4><p><strong>IEEE 802.1Q 标签结构：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">+----------------+---------------+---------------+---------------+</span><br><span class="line"></span><br><span class="line">\| TPID           | PRI           | CFI           | VID           |</span><br><span class="line"></span><br><span class="line">+----------------+---------------+---------------+---------------+</span><br><span class="line"></span><br><span class="line">\| 16比特         | 3比特         | 1比特         | 12比特        |</span><br><span class="line"></span><br><span class="line">+----------------+---------------+---------------+---------------+</span><br></pre></td></tr></table></figure>
+
+<p><strong>各字段详细说明：</strong></p>
+<p><strong>1. 标签协议标识符（TPID）</strong></p>
+<ul>
+<li><p><strong>长度</strong>：16 比特</p>
+</li>
+<li><p><strong>固定值</strong>：0x8100</p>
+</li>
+<li><p><strong>作用</strong>：标识这是一个 IEEE 802.1Q 标签帧</p>
+</li>
+<li><p><strong>位置</strong>：替代原 MAC 帧中的 Type 字段位置</p>
+</li>
+</ul>
+<p><strong>2. 优先级（PRI）</strong></p>
+<ul>
+<li><p><strong>长度</strong>：3 比特</p>
+</li>
+<li><p><strong>取值范围</strong>：0~7</p>
+</li>
+<li><p><strong>作用</strong>：提供 8 个级别的服务质量（QoS）优先级</p>
+</li>
+<li><p><strong>优先级映射</strong>：</p>
+<ul>
+<li><p>0：最低优先级</p>
+</li>
+<li><p>7：最高优先级</p>
+</li>
+<li><p>通常用于区分不同类型的流量</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>3. 规范格式指示符（CFI）</strong></p>
+<ul>
+<li><p><strong>长度</strong>：1 比特</p>
+</li>
+<li><p><strong>取值</strong>：0 或 1</p>
+</li>
+<li><p><strong>含义</strong>：</p>
+<ul>
+<li><p>0：MAC 地址以规范格式封装</p>
+</li>
+<li><p>1：MAC 地址以非规范格式封装</p>
+</li>
+</ul>
+</li>
+<li><p><strong>以太网中</strong>：通常设置为 0</p>
+</li>
+</ul>
+<p><strong>4. 虚拟局域网标识符（VID）</strong></p>
+<ul>
+<li><p><strong>长度</strong>：12 比特</p>
+</li>
+<li><p><strong>取值范围</strong>：0~4095</p>
+</li>
+<li><p><strong>有效范围</strong>：1~4094（0 和 4095 保留）</p>
+</li>
+<li><p><strong>作用</strong>：标识帧所属的 VLAN</p>
+</li>
+</ul>
+<h4 id="3-7-2-2-VLAN-帧的处理过程"><a href="#3-7-2-2-VLAN-帧的处理过程" class="headerlink" title="3.7.2.2 VLAN 帧的处理过程"></a>3.7.2.2 VLAN 帧的处理过程</h4><p><strong>带 VLAN 标签的帧结构：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">+----------------+---------------+---------------+---------------+---------------+---------------+----------------+</span><br><span class="line"></span><br><span class="line">\| 目的地址       | 源地址        | TPID          | PRI           | CFI           | VID           | 数据字段      | FCS           |</span><br><span class="line"></span><br><span class="line">+----------------+---------------+---------------+---------------+---------------+---------------+---------------+----------------+</span><br><span class="line"></span><br><span class="line">\| 6字节          | 6字节         | 2字节         | 3比特         | 1比特         | 12比特        | 46\~1500字节   | 4字节          |</span><br><span class="line"></span><br><span class="line">+----------------+---------------+---------------+---------------+---------------+---------------+---------------+----------------+</span><br></pre></td></tr></table></figure>
+
+<p><strong>交换机对 VLAN 帧的处理：</strong></p>
+<p><strong>1. Access 接口处理</strong></p>
+<ul>
+<li><p><strong>接收帧</strong>：</p>
+<ul>
+<li><p>接收 “未打标签” 的普通帧</p>
+</li>
+<li><p>根据接口的 PVID（Port VLAN ID）添加 VLAN 标签</p>
+</li>
+<li><p>将帧转发到相应的 VLAN</p>
+</li>
+</ul>
+</li>
+<li><p><strong>发送帧</strong>：</p>
+<ul>
+<li><p>检查帧的 VID 是否等于接口的 PVID</p>
+</li>
+<li><p>如果相等，去除 VLAN 标签后发送</p>
+</li>
+<li><p>如果不相等，直接丢弃或根据配置处理</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>2. Trunk 接口处理</strong></p>
+<ul>
+<li><p><strong>接收帧</strong>：</p>
+<ul>
+<li><p>接收带标签或不带标签的帧</p>
+</li>
+<li><p>对于不带标签的帧，根据 PVID 添加标签</p>
+</li>
+<li><p>根据 VLAN 配置决定是否转发</p>
+</li>
+</ul>
+</li>
+<li><p><strong>发送帧</strong>：</p>
+<ul>
+<li><p>根据 VLAN 配置决定是否发送</p>
+</li>
+<li><p>对于 Native VLAN 的帧，可以选择去除标签</p>
+</li>
+<li><p>其他 VLAN 的帧保留标签发送</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>3. Hybrid 接口处理</strong></p>
+<ul>
+<li><p><strong>特点</strong>：结合了 Access 和 Trunk 接口的功能</p>
+</li>
+<li><p><strong>灵活性</strong>：可以配置某些 VLAN 的帧带标签，某些不带标签</p>
+</li>
+<li><p><strong>应用场景</strong>：连接交换机和服务器的场景</p>
+</li>
+</ul>
+<h4 id="3-7-2-3-VLAN-的划分方式"><a href="#3-7-2-3-VLAN-的划分方式" class="headerlink" title="3.7.2.3 VLAN 的划分方式"></a>3.7.2.3 VLAN 的划分方式</h4><p><strong>1. 基于端口的 VLAN</strong></p>
+<ul>
+<li><p><strong>划分依据</strong>：交换机的端口</p>
+</li>
+<li><p><strong>配置方式</strong>：将交换机端口静态分配给特定 VLAN</p>
+</li>
+<li><p><strong>优点</strong>：配置简单，安全性高</p>
+</li>
+<li><p><strong>缺点</strong>：灵活性差，移动设备需要重新配置</p>
+</li>
+</ul>
+<p><strong>2. 基于 MAC 地址的 VLAN</strong></p>
+<ul>
+<li><p><strong>划分依据</strong>：设备的 MAC 地址</p>
+</li>
+<li><p><strong>配置方式</strong>：将 MAC 地址与 VLAN 关联</p>
+</li>
+<li><p><strong>优点</strong>：设备可以移动，配置灵活</p>
+</li>
+<li><p><strong>缺点</strong>：配置复杂，MAC 地址可能被伪造</p>
+</li>
+</ul>
+<p><strong>3. 基于 IP 地址的 VLAN</strong></p>
+<ul>
+<li><p><strong>划分依据</strong>：设备的 IP 地址或子网</p>
+</li>
+<li><p><strong>配置方式</strong>：根据 IP 地址范围自动分配 VLAN</p>
+</li>
+<li><p><strong>优点</strong>：配置简单，支持动态分配</p>
+</li>
+<li><p><strong>缺点</strong>：依赖 IP 地址，安全性相对较低</p>
+</li>
+</ul>
+<p><strong>4. 基于协议的 VLAN</strong></p>
+<ul>
+<li><p><strong>划分依据</strong>：网络层协议类型</p>
+</li>
+<li><p><strong>配置方式</strong>：根据协议类型分配 VLAN</p>
+</li>
+<li><p><strong>优点</strong>：便于区分不同类型的流量</p>
+</li>
+<li><p><strong>缺点</strong>：应用场景有限</p>
+</li>
+</ul>
+<p><strong>5. 基于策略的 VLAN</strong></p>
+<ul>
+<li><p><strong>划分依据</strong>：多种因素的组合（端口、MAC、IP、协议等）</p>
+</li>
+<li><p><strong>配置方式</strong>：根据预设策略自动分配 VLAN</p>
+</li>
+<li><p><strong>优点</strong>：灵活性最高，适应性强</p>
+</li>
+<li><p><strong>缺点</strong>：配置复杂，对设备要求高</p>
+</li>
+</ul>
+<h2 id="3-8-以太网的发展"><a href="#3-8-以太网的发展" class="headerlink" title="3.8 以太网的发展"></a>3.8 以太网的发展</h2><h3 id="3-8-1-快速以太网（100BASE-T）"><a href="#3-8-1-快速以太网（100BASE-T）" class="headerlink" title="3.8.1 快速以太网（100BASE-T）"></a>3.8.1 快速以太网（100BASE-T）</h3><h4 id="3-8-1-1-技术特点和标准"><a href="#3-8-1-1-技术特点和标准" class="headerlink" title="3.8.1.1 技术特点和标准"></a>3.8.1.1 技术特点和标准</h4><p><strong>快速以太网的技术特点：</strong></p>
+<ul>
+<li><p><strong>数据传输速率</strong>：100Mb&#x2F;s（比传统以太网快 10 倍）</p>
+</li>
+<li><p><strong>帧格式</strong>：与 10BASE-T 完全兼容</p>
+</li>
+<li><p><strong>MAC 层协议</strong>：保留 CSMA&#x2F;CD 协议</p>
+</li>
+<li><p><strong>拓扑结构</strong>：星型拓扑，使用集线器或交换机</p>
+</li>
+<li><p><strong>传输介质</strong>：主要使用双绞线</p>
+</li>
+</ul>
+<p><strong>主要标准类型：</strong></p>
+<p><strong>表 3-2 快速以太网物理层标准</strong></p>
+<table>
+<thead>
+<tr>
+<th>标准名称</th>
+<th>传输介质</th>
+<th>最大传输距离</th>
+<th>线缆类型</th>
+<th>编码方式</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>100BASE-TX</td>
+<td>铜缆</td>
+<td>100m</td>
+<td>2 对 UTP5 类线或 STP</td>
+<td>4B&#x2F;5B + MLT-3</td>
+</tr>
+<tr>
+<td>100BASE-T4</td>
+<td>铜缆</td>
+<td>100m</td>
+<td>4 对 UTP3 类线或 5 类线</td>
+<td>8B&#x2F;6T</td>
+</tr>
+<tr>
+<td>100BASE-FX</td>
+<td>光纤</td>
+<td>2000m</td>
+<td>2 根多模光纤</td>
+<td>4B&#x2F;5B + NRZI</td>
+</tr>
+</tbody></table>
+<p><strong>各标准详细说明：</strong></p>
+<p><strong>1. 100BASE-TX</strong></p>
+<ul>
+<li><p><strong>传输介质</strong>：2 对 UTP5 类线或屏蔽双绞线（STP）</p>
+</li>
+<li><p><strong>线对分配</strong>：1 对用于发送，1 对用于接收</p>
+</li>
+<li><p><strong>编码方式</strong>：</p>
+<ul>
+<li><p>物理层：MLT-3（Multi-Level Transmit 3）</p>
+</li>
+<li><p>数据编码：4B&#x2F;5B 编码</p>
+</li>
+</ul>
+</li>
+<li><p><strong>特点</strong>：</p>
+<ul>
+<li><p>支持全双工和半双工模式</p>
+</li>
+<li><p>最大传输距离 100 米</p>
+</li>
+<li><p>是快速以太网的主流标准</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>2. 100BASE-T4</strong></p>
+<ul>
+<li><p><strong>传输介质</strong>：4 对 UTP3 类线或 5 类线</p>
+</li>
+<li><p><strong>线对分配</strong>：3 对用于数据传输，1 对用于冲突检测</p>
+</li>
+<li><p><strong>编码方式</strong>：8B&#x2F;6T 编码</p>
+</li>
+<li><p><strong>特点</strong>：</p>
+<ul>
+<li><p>只支持半双工模式</p>
+</li>
+<li><p>最大传输距离 100 米</p>
+</li>
+<li><p>主要用于升级现有 3 类线网络</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>3. 100BASE-FX</strong></p>
+<ul>
+<li><p><strong>传输介质</strong>：2 根多模光纤</p>
+</li>
+<li><p><strong>光纤类型</strong>：62.5&#x2F;125μm 或 50&#x2F;125μm 多模光纤</p>
+</li>
+<li><p><strong>编码方式</strong>：4B&#x2F;5B + NRZI 编码</p>
+</li>
+<li><p><strong>特点</strong>：</p>
+<ul>
+<li><p>支持全双工和半双工模式</p>
+</li>
+<li><p>最大传输距离 2000 米</p>
+</li>
+<li><p>适用于长距离传输</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-8-1-2-技术改进"><a href="#3-8-1-2-技术改进" class="headerlink" title="3.8.1.2 技术改进"></a>3.8.1.2 技术改进</h4><p><strong>1. 编码技术改进</strong></p>
+<ul>
+<li><p><strong>4B&#x2F;5B 编码</strong>：将 4 比特数据转换为 5 比特编码，确保足够的信号跳变</p>
+</li>
+<li><p><strong>MLT-3 编码</strong>：使用三电平信号，减少电磁干扰</p>
+</li>
+<li><p><strong>优点</strong>：提高了信号质量，支持更高的传输速率</p>
+</li>
+</ul>
+<p><strong>2. 全双工支持</strong></p>
+<ul>
+<li><p><strong>工作模式</strong>：同时发送和接收数据</p>
+</li>
+<li><p><strong>带宽利用率</strong>：理论上可以达到 200Mb&#x2F;s（双向）</p>
+</li>
+<li><p><strong>应用场景</strong>：交换机之间的连接，服务器连接</p>
+</li>
+</ul>
+<p><strong>3. 自动协商功能</strong></p>
+<ul>
+<li><p><strong>功能</strong>：自动检测连接的设备类型和能力</p>
+</li>
+<li><p><strong>协商内容</strong>：传输速率、双工模式、流控制等</p>
+</li>
+<li><p><strong>优点</strong>：简化网络配置，提高兼容性</p>
+</li>
+</ul>
+<h3 id="3-8-2-吉比特以太网（1000BASE-T）"><a href="#3-8-2-吉比特以太网（1000BASE-T）" class="headerlink" title="3.8.2 吉比特以太网（1000BASE-T）"></a>3.8.2 吉比特以太网（1000BASE-T）</h3><h4 id="3-8-2-1-技术特点"><a href="#3-8-2-1-技术特点" class="headerlink" title="3.8.2.1 技术特点"></a>3.8.2.1 技术特点</h4><p><strong>吉比特以太网的主要特点：</strong></p>
+<ul>
+<li><p><strong>数据传输速率</strong>：1000Mb&#x2F;s（1Gb&#x2F;s）</p>
+</li>
+<li><p><strong>兼容性</strong>：与 10BASE-T 和 100BASE-T 完全兼容</p>
+</li>
+<li><p><strong>帧格式</strong>：保留 IEEE 802.3 帧格式</p>
+</li>
+<li><p><strong>MAC 层</strong>：支持全双工和半双工模式</p>
+</li>
+<li><p><strong>传输介质</strong>：支持多种介质类型</p>
+</li>
+</ul>
+<p><strong>物理层标准：</strong></p>
+<p><strong>表 3-3 吉比特以太网物理层标准</strong></p>
+<table>
+<thead>
+<tr>
+<th>标准名称</th>
+<th>传输介质</th>
+<th>最大传输距离</th>
+<th>特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>1000BASE-T</td>
+<td>铜缆</td>
+<td>100m</td>
+<td>4 对 UTP5 类线</td>
+</tr>
+<tr>
+<td>1000BASE-SX</td>
+<td>光纤</td>
+<td>220-550m</td>
+<td>多模光纤</td>
+</tr>
+<tr>
+<td>1000BASE-LX</td>
+<td>光纤</td>
+<td>5000m</td>
+<td>单模或多模光纤</td>
+</tr>
+<tr>
+<td>1000BASE-CX</td>
+<td>铜缆</td>
+<td>25m</td>
+<td>屏蔽双绞线</td>
+</tr>
+</tbody></table>
+<p><strong>1000BASE-T 技术细节：</strong></p>
+<ul>
+<li><p><strong>传输介质</strong>：4 对 UTP5 类线或更高类别</p>
+</li>
+<li><p><strong>编码方式</strong>：PAM-5（5 电平脉冲幅度调制）</p>
+</li>
+<li><p><strong>线对使用</strong>：每对线同时传输和接收数据</p>
+</li>
+<li><p><strong>信号处理</strong>：使用回声抵消和串扰消除技术</p>
+</li>
+<li><p><strong>数据传输</strong>：每对线传输 250Mb&#x2F;s，4 对共 1000Mb&#x2F;s</p>
+</li>
+</ul>
+<h4 id="3-8-2-2-载波延伸和分组突发"><a href="#3-8-2-2-载波延伸和分组突发" class="headerlink" title="3.8.2.2 载波延伸和分组突发"></a>3.8.2.2 载波延伸和分组突发</h4><p><strong>载波延伸（Carrier Extension）：</strong></p>
+<p><strong>问题背景：</strong></p>
+<ul>
+<li><p>吉比特以太网的最小帧长仍然是 64 字节</p>
+</li>
+<li><p>传输 64 字节需要的时间为：64×8 &#x2F; 1000Mb&#x2F;s &#x3D; 0.512μs</p>
+</li>
+<li><p>信号传播延迟相对较大，可能导致碰撞检测失败</p>
+</li>
+</ul>
+<p><strong>解决方案：</strong></p>
+<ul>
+<li><p>当帧长度小于 512 字节时，自动添加载波延伸</p>
+</li>
+<li><p>延伸部分不包含在帧的实际数据中</p>
+</li>
+<li><p>接收方会忽略延伸部分</p>
+</li>
+</ul>
+<p><strong>实现方式：</strong></p>
+<ul>
+<li><p>发送方在帧的末尾继续发送载波信号</p>
+</li>
+<li><p>总传输时间延长到 512 字节的传输时间</p>
+</li>
+<li><p>确保发送方能够检测到碰撞</p>
+</li>
+</ul>
+<p><strong>分组突发（Packet Bursting）：</strong></p>
+<p><strong>问题背景：</strong></p>
+<ul>
+<li><p>载波延伸会增加短帧的传输开销</p>
+</li>
+<li><p>大量短帧会降低网络效率</p>
+</li>
+</ul>
+<p><strong>解决方案：</strong></p>
+<ul>
+<li><p>允许发送方连续发送多个短帧</p>
+</li>
+<li><p>帧之间只需要一个帧间隔</p>
+</li>
+<li><p>减少了载波延伸的开销</p>
+</li>
+</ul>
+<p><strong>实现方式：</strong></p>
+<ul>
+<li><p>发送方在发送第一个短帧后，可以继续发送更多短帧</p>
+</li>
+<li><p>突发传输的总长度限制为 512 字节</p>
+</li>
+<li><p>提高了短帧传输的效率</p>
+</li>
+</ul>
+<h3 id="3-8-3-10-吉比特以太网（10GBASE-T）"><a href="#3-8-3-10-吉比特以太网（10GBASE-T）" class="headerlink" title="3.8.3 10 吉比特以太网（10GBASE-T）"></a>3.8.3 10 吉比特以太网（10GBASE-T）</h3><h4 id="3-8-3-1-技术特点和应用"><a href="#3-8-3-1-技术特点和应用" class="headerlink" title="3.8.3.1 技术特点和应用"></a>3.8.3.1 技术特点和应用</h4><p><strong>10 吉比特以太网的主要特点：</strong></p>
+<ul>
+<li><p><strong>数据传输速率</strong>：10Gb&#x2F;s</p>
+</li>
+<li><p><strong>帧格式</strong>：完全兼容 IEEE 802.3 帧格式</p>
+</li>
+<li><p><strong>MAC 层</strong>：只支持全双工模式，不使用 CSMA&#x2F;CD 协议</p>
+</li>
+<li><p><strong>传输距离</strong>：支持从短距离到长距离的各种应用</p>
+</li>
+<li><p><strong>应用场景</strong>：数据中心、骨干网络、高性能计算</p>
+</li>
+</ul>
+<p><strong>物理层标准：</strong></p>
+<p><strong>表 3-4 10 吉比特以太网物理层标准</strong></p>
+<table>
+<thead>
+<tr>
+<th>标准名称</th>
+<th>传输介质</th>
+<th>最大传输距离</th>
+<th>应用场景</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>10GBASE-T</td>
+<td>铜缆</td>
+<td>100m</td>
+<td>数据中心，短距离连接</td>
+</tr>
+<tr>
+<td>10GBASE-SR</td>
+<td>光纤</td>
+<td>26-82m</td>
+<td>数据中心，多模光纤</td>
+</tr>
+<tr>
+<td>10GBASE-LR</td>
+<td>光纤</td>
+<td>10km</td>
+<td>城域网，单模光纤</td>
+</tr>
+<tr>
+<td>10GBASE-ER</td>
+<td>光纤</td>
+<td>40km</td>
+<td>广域网，单模光纤</td>
+</tr>
+<tr>
+<td>10GBASE-ZR</td>
+<td>光纤</td>
+<td>80km</td>
+<td>长距离传输，单模光纤</td>
+</tr>
+</tbody></table>
+<p><strong>技术优势：</strong></p>
+<ul>
+<li><p><strong>高速率</strong>：10 倍于吉比特以太网</p>
+</li>
+<li><p><strong>低延迟</strong>：适合实时应用</p>
+</li>
+<li><p><strong>高带宽</strong>：满足大数据传输需求</p>
+</li>
+<li><p><strong>兼容性</strong>：与现有以太网完全兼容</p>
+</li>
+</ul>
+<h2 id="3-9-802-11-无线局域网"><a href="#3-9-802-11-无线局域网" class="headerlink" title="3.9 802.11 无线局域网"></a>3.9 802.11 无线局域网</h2><h3 id="3-9-1-802-11-协议体系"><a href="#3-9-1-802-11-协议体系" class="headerlink" title="3.9.1 802.11 协议体系"></a>3.9.1 802.11 协议体系</h3><h4 id="3-9-1-1-协议发展历程"><a href="#3-9-1-1-协议发展历程" class="headerlink" title="3.9.1.1 协议发展历程"></a>3.9.1.1 协议发展历程</h4><p><strong>802.11 协议家族：</strong></p>
+<p><strong>表 3-5 802.11 协议发展历程</strong></p>
+<table>
+<thead>
+<tr>
+<th>协议版本</th>
+<th>发布年份</th>
+<th>工作频段</th>
+<th>最大速率</th>
+<th>调制方式</th>
+<th>主要特点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>802.11</td>
+<td>1997</td>
+<td>2.4GHz</td>
+<td>2Mb&#x2F;s</td>
+<td>DSSS&#x2F;FSK</td>
+<td>第一个无线局域网标准</td>
+</tr>
+<tr>
+<td>802.11b</td>
+<td>1999</td>
+<td>2.4GHz</td>
+<td>11Mb&#x2F;s</td>
+<td>DSSS</td>
+<td>速率提升，兼容性好</td>
+</tr>
+<tr>
+<td>802.11a</td>
+<td>1999</td>
+<td>5GHz</td>
+<td>54Mb&#x2F;s</td>
+<td>OFDM</td>
+<td>高速率，新频段</td>
+</tr>
+<tr>
+<td>802.11g</td>
+<td>2003</td>
+<td>2.4GHz</td>
+<td>54Mb&#x2F;s</td>
+<td>OFDM</td>
+<td>兼容 b，速率提升</td>
+</tr>
+<tr>
+<td>802.11n</td>
+<td>2009</td>
+<td>2.4&#x2F;5GHz</td>
+<td>600Mb&#x2F;s</td>
+<td>MIMO-OFDM</td>
+<td>多天线，速率大幅提升</td>
+</tr>
+<tr>
+<td>802.11ac</td>
+<td>2013</td>
+<td>5GHz</td>
+<td>6.93Gb&#x2F;s</td>
+<td>MIMO-OFDM</td>
+<td>5GHz 专用，更高速率</td>
+</tr>
+<tr>
+<td>802.11ax</td>
+<td>2021</td>
+<td>2.4&#x2F;5GHz</td>
+<td>9.6Gb&#x2F;s</td>
+<td>OFDMA</td>
+<td>支持更多设备，低延迟</td>
+</tr>
+</tbody></table>
+<h4 id="3-9-1-2-网络架构"><a href="#3-9-1-2-网络架构" class="headerlink" title="3.9.1.2 网络架构"></a>3.9.1.2 网络架构</h4><p><strong>基本服务集（BSS）：</strong></p>
+<p><strong>1. 基础架构 BSS（Infrastructure BSS）</strong></p>
+<ul>
+<li><p><strong>组成</strong>：一个 AP（Access Point） + 多个无线站点</p>
+</li>
+<li><p><strong>特点</strong>：</p>
+<ul>
+<li><p>AP 作为中心控制节点</p>
+</li>
+<li><p>站点之间的通信必须通过 AP</p>
+</li>
+<li><p>支持漫游功能</p>
+</li>
+</ul>
+</li>
+<li><p><strong>应用场景</strong>：家庭网络、企业网络、公共场所</p>
+</li>
+</ul>
+<p><strong>2. 独立 BSS（Independent BSS）</strong></p>
+<ul>
+<li><p><strong>组成</strong>：多个无线站点直接连接</p>
+</li>
+<li><p><strong>特点</strong>：</p>
+<ul>
+<li><p>不需要 AP</p>
+</li>
+<li><p>站点之间可以直接通信</p>
+</li>
+<li><p>网络规模有限</p>
+</li>
+</ul>
+</li>
+<li><p><strong>应用场景</strong>：临时组网、小型会议</p>
+</li>
+</ul>
+<p><strong>扩展服务集（ESS）：</strong></p>
+<ul>
+<li><p><strong>组成</strong>：多个 BSS 通过分布式系统（DS）连接</p>
+</li>
+<li><p><strong>特点</strong>：</p>
+<ul>
+<li><p>BSS 之间通过有线网络连接</p>
+</li>
+<li><p>站点可以在 ESS 内漫游</p>
+</li>
+<li><p>提供更大的覆盖范围</p>
+</li>
+</ul>
+</li>
+<li><p><strong>漫游功能</strong>：站点可以在不同 BSS 间切换而不中断连接</p>
+</li>
+</ul>
+<h3 id="3-9-2-CSMA-CA-协议"><a href="#3-9-2-CSMA-CA-协议" class="headerlink" title="3.9.2 CSMA&#x2F;CA 协议"></a>3.9.2 CSMA&#x2F;CA 协议</h3><h4 id="3-9-2-1-与-CSMA-CD-的区别"><a href="#3-9-2-1-与-CSMA-CD-的区别" class="headerlink" title="3.9.2.1 与 CSMA&#x2F;CD 的区别"></a>3.9.2.1 与 CSMA&#x2F;CD 的区别</h4><p><strong>无线信道的特殊性：</strong></p>
+<ul>
+<li><p><strong>隐藏终端问题</strong>：A 和 C 都在 B 的覆盖范围内，但 A 和 C 之间无法直接通信</p>
+</li>
+<li><p><strong>暴露终端问题</strong>：A 在发送数据给 B，C 也想发送数据给 D，但 C 检测到 A 在发送而延迟发送</p>
+</li>
+<li><p><strong>信号衰减</strong>：无线信号强度随距离增加而衰减</p>
+</li>
+<li><p><strong>多径传播</strong>：信号经过不同路径到达接收方，可能产生干扰</p>
+</li>
+</ul>
+<p><strong>CSMA&#x2F;CA 的设计思想：</strong></p>
+<ul>
+<li><p><strong>避免碰撞</strong>：在发送前进行充分的信道监听</p>
+</li>
+<li><p><strong>预约机制</strong>：使用 RTS&#x2F;CTS 机制预约信道</p>
+</li>
+<li><p><strong>确认机制</strong>：所有数据帧都需要确认</p>
+</li>
+</ul>
+<h4 id="3-9-2-2-帧间间隔（IFS）"><a href="#3-9-2-2-帧间间隔（IFS）" class="headerlink" title="3.9.2.2 帧间间隔（IFS）"></a>3.9.2.2 帧间间隔（IFS）</h4><p><strong>IFS 的类型和作用：</strong></p>
+<p><strong>1. 短帧间间隔（SIFS）</strong></p>
+<ul>
+<li><p><strong>长度</strong>：28μs</p>
+</li>
+<li><p><strong>用途</strong>：用于高优先级帧</p>
+</li>
+<li><p><strong>适用帧类型</strong>：</p>
+<ul>
+<li><p>ACK 帧</p>
+</li>
+<li><p>CTS 帧</p>
+</li>
+<li><p>分片后的数据帧</p>
+</li>
+<li><p>PCF 方式下的帧</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>2. DCF 帧间间隔（DIFS）</strong></p>
+<ul>
+<li><p><strong>长度</strong>：128μs</p>
+</li>
+<li><p><strong>用途</strong>：用于普通数据帧和管理帧</p>
+</li>
+<li><p><strong>适用场景</strong>：DCF 方式下的竞争接入</p>
+</li>
+</ul>
+<p><strong>3. PCF 帧间间隔（PIFS）</strong></p>
+<ul>
+<li><p><strong>长度</strong>：78μs</p>
+</li>
+<li><p><strong>用途</strong>：用于点协调功能</p>
+</li>
+<li><p><strong>适用场景</strong>：PCF 方式下的集中控制</p>
+</li>
+</ul>
+<p><strong>4. 扩展帧间间隔（EIFS）</strong></p>
+<ul>
+<li><p><strong>长度</strong>：SIFS + DIFS + 最大帧传输时间</p>
+</li>
+<li><p><strong>用途</strong>：用于错误恢复</p>
+</li>
+<li><p><strong>适用场景</strong>：收到错误帧后的重传</p>
+</li>
+</ul>
+<p><strong>优先级机制：</strong></p>
+<ul>
+<li><p>高优先级帧使用较短的 IFS</p>
+</li>
+<li><p>可以优先获得信道访问权</p>
+</li>
+<li><p>支持 QoS（Quality of Service）</p>
+</li>
+</ul>
+<h4 id="3-9-2-3-虚拟载波监听和网络分配向量（NAV）"><a href="#3-9-2-3-虚拟载波监听和网络分配向量（NAV）" class="headerlink" title="3.9.2.3 虚拟载波监听和网络分配向量（NAV）"></a>3.9.2.3 虚拟载波监听和网络分配向量（NAV）</h4><p><strong>虚拟载波监听机制：</strong></p>
+<p><strong>问题背景：</strong></p>
+<ul>
+<li><p>物理载波监听可能无法检测到所有潜在的冲突</p>
+</li>
+<li><p>隐藏终端问题导致物理监听不可靠</p>
+</li>
+</ul>
+<p><strong>解决方案：</strong></p>
+<ul>
+<li><p><strong>网络分配向量（NAV）</strong>：每个站点维护一个计时器</p>
+</li>
+<li><p><strong>工作原理</strong>：</p>
+</li>
+</ul>
+<ol>
+<li><p>发送方在帧中包含持续期字段</p>
+</li>
+<li><p>接收方根据持续期字段设置自己的 NAV</p>
+</li>
+<li><p>在 NAV 倒计时期间，站点认为信道忙</p>
+</li>
+<li><p>NAV 倒计时结束后，站点才能尝试接入信道</p>
+</li>
+</ol>
+<p><strong>NAV 的计算：</strong></p>
+<ul>
+<li><p><strong>持续期字段</strong>：指示发送方需要占用信道的时间</p>
+</li>
+<li><p><strong>计算内容</strong>：数据帧传输时间 + ACK 帧传输时间 + SIFS</p>
+</li>
+<li><p><strong>单位</strong>：微秒（μs）</p>
+</li>
+</ul>
+<p><strong>优势：</strong></p>
+<ul>
+<li><p>能够解决隐藏终端问题</p>
+</li>
+<li><p>提高了信道利用率</p>
+</li>
+<li><p>减少了碰撞概率</p>
+</li>
+</ul>
+<h4 id="3-9-2-4-RTS-CTS-机制"><a href="#3-9-2-4-RTS-CTS-机制" class="headerlink" title="3.9.2.4 RTS&#x2F;CTS 机制"></a>3.9.2.4 RTS&#x2F;CTS 机制</h4><p><strong>请求发送 &#x2F; 允许发送机制：</strong></p>
+<p><strong>RTS（Request To Send）帧：</strong></p>
+<ul>
+<li><p><strong>作用</strong>：请求占用信道</p>
+</li>
+<li><p><strong>内容</strong>：源地址、目的地址、持续期</p>
+</li>
+<li><p><strong>长度</strong>：20 字节</p>
+</li>
+</ul>
+<p><strong>CTS（Clear To Send）帧：</strong></p>
+<ul>
+<li><p><strong>作用</strong>：响应 RTS 请求，允许发送</p>
+</li>
+<li><p><strong>内容</strong>：源地址、目的地址、持续期</p>
+</li>
+<li><p><strong>长度</strong>：14 字节</p>
+</li>
+</ul>
+<p><strong>工作流程：</strong></p>
+<p><strong>1. RTS 阶段</strong></p>
+<ul>
+<li><p>源站有数据要发送时，先发送 RTS 帧</p>
+</li>
+<li><p>RTS 帧中包含本次通信所需的总时间</p>
+</li>
+<li><p>周围所有站点收到 RTS 后设置 NAV</p>
+</li>
+</ul>
+<p><strong>2. CTS 阶段</strong></p>
+<ul>
+<li><p>目的站收到 RTS 后，等待 SIFS</p>
+</li>
+<li><p>目的站发送 CTS 帧作为响应</p>
+</li>
+<li><p>CTS 帧中包含与 RTS 相同的持续期</p>
+</li>
+<li><p>周围所有站点收到 CTS 后更新 NAV</p>
+</li>
+</ul>
+<p><strong>3. 数据传输阶段</strong></p>
+<ul>
+<li><p>源站收到 CTS 后，等待 SIFS</p>
+</li>
+<li><p>源站发送数据帧</p>
+</li>
+<li><p>其他站点根据 NAV 保持信道忙状态</p>
+</li>
+</ul>
+<p><strong>4. ACK 阶段</strong></p>
+<ul>
+<li><p>目的站收到数据帧后，等待 SIFS</p>
+</li>
+<li><p>目的站发送 ACK 帧确认接收</p>
+</li>
+<li><p>通信完成，其他站点的 NAV 倒计时结束</p>
+</li>
+</ul>
+<p><strong>RTS&#x2F;CTS 的优势：</strong></p>
+<ul>
+<li><p><strong>解决隐藏终端问题</strong>：通过 CTS 帧通知周围站点</p>
+</li>
+<li><p><strong>减少碰撞损失</strong>：短的 RTS&#x2F;CTS 帧碰撞损失小</p>
+</li>
+<li><p><strong>提高效率</strong>：避免了长数据帧的碰撞</p>
+</li>
+</ul>
+<p><strong>RTS&#x2F;CTS 的缺点：</strong></p>
+<ul>
+<li><p><strong>开销增加</strong>：额外的 RTS&#x2F;CTS 帧传输</p>
+</li>
+<li><p><strong>延迟增加</strong>：增加了通信的总延迟</p>
+</li>
+<li><p><strong>不适合短帧</strong>：对于短帧，开销可能超过收益</p>
+</li>
+</ul>
+<h3 id="3-9-3-802-11-帧结构"><a href="#3-9-3-802-11-帧结构" class="headerlink" title="3.9.3 802.11 帧结构"></a>3.9.3 802.11 帧结构</h3><h4 id="3-9-3-1-帧类型和格式"><a href="#3-9-3-1-帧类型和格式" class="headerlink" title="3.9.3.1 帧类型和格式"></a>3.9.3.1 帧类型和格式</h4><p><strong>802.11 帧的基本结构：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">+----------------+---------------+---------------+---------------+---------------+----------------+</span><br><span class="line"></span><br><span class="line">\| 帧控制         | 持续期        | 地址1         | 地址2         | 地址3         | 序号控制       |</span><br><span class="line"></span><br><span class="line">+----------------+---------------+---------------+---------------+---------------+----------------+</span><br><span class="line"></span><br><span class="line">\| 地址4          | 数据          | FCS           |               |               |                |</span><br><span class="line"></span><br><span class="line">+----------------+---------------+---------------+---------------+---------------+----------------+</span><br></pre></td></tr></table></figure>
+
+<p><strong>帧控制字段（2 字节）：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+</span><br><span class="line"></span><br><span class="line">\| 协议版本      | 类型          | 子类型        | 去往DS        | 来自DS        | 更多分片      | 重试          | 电源管理      |</span><br><span class="line"></span><br><span class="line">+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+</span><br><span class="line"></span><br><span class="line">\| 更多数据      | WEP           | RSN           | 预留          | 预留          | 顺序          |               |               |</span><br><span class="line"></span><br><span class="line">+---------------+---------------+---------------+---------------+---------------+---------------+---------------+---------------+</span><br></pre></td></tr></table></figure>
+
+<p><strong>帧类型分类：</strong></p>
+<p><strong>1. 管理帧（Management Frames）</strong></p>
+<ul>
+<li><p><strong>作用</strong>：维护网络连接和管理</p>
+</li>
+<li><p><strong>主要类型</strong>：</p>
+<ul>
+<li><p>信标帧（Beacon）：广播网络信息</p>
+</li>
+<li><p>关联请求 &#x2F; 响应：建立连接</p>
+</li>
+<li><p>认证请求 &#x2F; 响应：身份认证</p>
+</li>
+<li><p>解除关联：终止连接</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>2. 控制帧（Control Frames）</strong></p>
+<ul>
+<li><p><strong>作用</strong>：控制数据传输</p>
+</li>
+<li><p><strong>主要类型</strong>：</p>
+<ul>
+<li><p>RTS：请求发送</p>
+</li>
+<li><p>CTS：允许发送</p>
+</li>
+<li><p>ACK：确认接收</p>
+</li>
+<li><p>PS-Poll：省电轮询</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>3. 数据帧（Data Frames）</strong></p>
+<ul>
+<li><p><strong>作用</strong>：传输用户数据</p>
+</li>
+<li><p><strong>主要类型</strong>：</p>
+<ul>
+<li><p>普通数据帧</p>
+</li>
+<li><p>QoS 数据帧</p>
+</li>
+<li><p>空数据帧</p>
+</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-9-3-2-地址字段的使用"><a href="#3-9-3-2-地址字段的使用" class="headerlink" title="3.9.3.2 地址字段的使用"></a>3.9.3.2 地址字段的使用</h4><p><strong>802.11 帧包含 4 个地址字段：</strong></p>
+<p><strong>地址字段的含义：</strong></p>
+<ul>
+<li><p><strong>地址 1（Addr1）</strong>：接收方地址（RA）</p>
+</li>
+<li><p><strong>地址 2（Addr2）</strong>：发送方地址（TA）</p>
+</li>
+<li><p><strong>地址 3（Addr3）</strong>：BSSID 或 DS 地址</p>
+</li>
+<li><p><strong>地址 4（Addr4）</strong>：仅用于 WDS（Wireless Distribution System）</p>
+</li>
+</ul>
+<p><strong>不同网络模式下的地址使用：</strong></p>
+<p><strong>1. 基础架构模式（Infrastructure Mode）</strong></p>
+<p><strong>站点→AP 方向：</strong></p>
+<ul>
+<li><p><strong>Addr1</strong>：AP 的 MAC 地址（BSSID）</p>
+</li>
+<li><p><strong>Addr2</strong>：站点的 MAC 地址</p>
+</li>
+<li><p><strong>Addr3</strong>：目标站点的 MAC 地址</p>
+</li>
+<li><p><strong>Addr4</strong>：未使用</p>
+</li>
+<li><p><strong>去往 DS</strong>：1，<strong>来自 DS</strong>：0</p>
+</li>
+</ul>
+<p><strong>AP→站点方向：</strong></p>
+<ul>
+<li><p><strong>Addr1</strong>：目标站点的 MAC 地址</p>
+</li>
+<li><p><strong>Addr2</strong>：AP 的 MAC 地址（BSSID）</p>
+</li>
+<li><p><strong>Addr3</strong>：源站点的 MAC 地址</p>
+</li>
+<li><p><strong>Addr4</strong>：未使用</p>
+</li>
+<li><p><strong>去往 DS</strong>：0，<strong>来自 DS</strong>：1</p>
+</li>
+</ul>
+<p><strong>2. 自组织模式（Ad-hoc Mode）</strong></p>
+<ul>
+<li><p><strong>Addr1</strong>：目标站点的 MAC 地址</p>
+</li>
+<li><p><strong>Addr2</strong>：源站点的 MAC 地址</p>
+</li>
+<li><p><strong>Addr3</strong>：BSSID（随机生成）</p>
+</li>
+<li><p><strong>Addr4</strong>：未使用</p>
+</li>
+<li><p><strong>去往 DS</strong>：0，<strong>来自 DS</strong>：0</p>
+</li>
+</ul>
+<p><strong>3. WDS 模式</strong></p>
+<ul>
+<li><p><strong>Addr1</strong>：下一跳接收方地址</p>
+</li>
+<li><p><strong>Addr2</strong>：当前发送方地址</p>
+</li>
+<li><p><strong>Addr3</strong>：最终目标地址</p>
+</li>
+<li><p><strong>Addr4</strong>：最初源地址</p>
+</li>
+<li><p><strong>去往 DS</strong>：1，<strong>来自 DS</strong>：1</p>
+</li>
+</ul>
+<h4 id="3-9-3-3-可靠传输机制"><a href="#3-9-3-3-可靠传输机制" class="headerlink" title="3.9.3.3 可靠传输机制"></a>3.9.3.3 可靠传输机制</h4><p><strong>802.11 的可靠传输：</strong></p>
+<p><strong>停止 - 等待协议：</strong></p>
+<ul>
+<li><p>每发送一个数据帧都需要接收方确认</p>
+</li>
+<li><p>使用序号控制字段实现帧的编号</p>
+</li>
+<li><p>支持帧的重传和重复检测</p>
+</li>
+</ul>
+<p><strong>序号控制字段（2 字节）：</strong></p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">+---------------+---------------+---------------+---------------+</span><br><span class="line"></span><br><span class="line">\| 分段号        | 序号          |               |               |</span><br><span class="line"></span><br><span class="line">+---------------+---------------+---------------+---------------+</span><br></pre></td></tr></table></figure>
+
+
+
+<ul>
+<li><p><strong>序号（Sequence Number）</strong>：12 比特，用于帧的编号</p>
+</li>
+<li><p><strong>分段号（Fragment Number）</strong>：4 比特，用于帧分片</p>
+</li>
+</ul>
+<p><strong>重传机制：</strong></p>
+<ul>
+<li><p><strong>重传计时器</strong>：发送方设置重传超时时间</p>
+</li>
+<li><p><strong>重传次数限制</strong>：通常为 7 次</p>
+</li>
+<li><p><strong>退避算法</strong>：使用二进制指数退避算法</p>
+</li>
+</ul>
+<p><strong>帧分片：</strong></p>
+<ul>
+<li><p><strong>分片原因</strong>：长帧容易出错，分片可以提高传输成功率</p>
+</li>
+<li><p><strong>分片条件</strong>：帧长度超过 MTU 或配置的分片阈值</p>
+</li>
+<li><p><strong>分片重组</strong>：接收方根据序号和分段号重组帧</p>
+</li>
+</ul>
+<h2 id="3-10-本章总结和重要知识点"><a href="#3-10-本章总结和重要知识点" class="headerlink" title="3.10 本章总结和重要知识点"></a>3.10 本章总结和重要知识点</h2><h3 id="3-10-1-核心概念回顾"><a href="#3-10-1-核心概念回顾" class="headerlink" title="3.10.1 核心概念回顾"></a>3.10.1 核心概念回顾</h3><p><strong>数据链路层的基本功能：</strong></p>
+<ul>
+<li><p><strong>帧同步</strong>：确保接收方正确识别帧的边界</p>
+</li>
+<li><p><strong>差错控制</strong>：检测和纠正传输错误</p>
+</li>
+<li><p><strong>流量控制</strong>：控制发送速率，避免接收方溢出</p>
+</li>
+<li><p><strong>介质访问控制</strong>：解决多个节点共享介质的冲突问题</p>
+</li>
+<li><p><strong>链路管理</strong>：建立、维护和释放数据链路</p>
+</li>
+</ul>
+<p><strong>重要协议和标准：</strong></p>
+<ul>
+<li><p><strong>PPP 协议</strong>：点对点通信的标准协议</p>
+</li>
+<li><p><strong>CSMA&#x2F;CD</strong>：共享式以太网的介质访问控制协议</p>
+</li>
+<li><p><strong>CSMA&#x2F;CA</strong>：无线局域网的介质访问控制协议</p>
+</li>
+<li><p><strong>IEEE 802.3</strong>：以太网标准</p>
+</li>
+<li><p><strong>IEEE 802.11</strong>：无线局域网标准</p>
+</li>
+<li><p><strong>IEEE 802.1Q</strong>：VLAN 标准</p>
+</li>
+</ul>
+<p><strong>关键设备：</strong></p>
+<ul>
+<li><p><strong>网络适配器</strong>：实现数据链路层和物理层功能</p>
+</li>
+<li><p><strong>集线器</strong>：多端口中继器，工作在物理层</p>
+</li>
+<li><p><strong>交换机</strong>：多端口网桥，工作在数据链路层</p>
+</li>
+<li><p><strong>接入点（AP）</strong>：无线局域网的中心节点</p>
+</li>
+</ul>
+<h3 id="3-10-2-技术发展趋势"><a href="#3-10-2-技术发展趋势" class="headerlink" title="3.10.2 技术发展趋势"></a>3.10.2 技术发展趋势</h3><p><strong>以太网技术发展：</strong></p>
+<ul>
+<li><p><strong>速率提升</strong>：从 10Mb&#x2F;s 到 100Gb&#x2F;s 甚至更高</p>
+</li>
+<li><p><strong>介质演进</strong>：从同轴电缆到双绞线再到光纤</p>
+</li>
+<li><p><strong>全双工</strong>：从半双工到全双工通信</p>
+</li>
+<li><p><strong>智能化</strong>：支持 VLAN、QoS、安全等高级功能</p>
+</li>
+</ul>
+<p><strong>无线局域网发展：</strong></p>
+<ul>
+<li><p><strong>速率提升</strong>：从 2Mb&#x2F;s 到 10Gb&#x2F;s 以上</p>
+</li>
+<li><p><strong>覆盖扩展</strong>：从单个 BSS 到大规模 WLAN</p>
+</li>
+<li><p><strong>安全性增强</strong>：从 WEP 到 WPA3</p>
+</li>
+<li><p><strong>智能化</strong>：支持自动配置、负载均衡、漫游等</p>
+</li>
+</ul>
+<p><strong>网络技术发展方向：</strong></p>
+<ul>
+<li><p><strong>高速化</strong>：更高的传输速率</p>
+</li>
+<li><p><strong>智能化</strong>：自动配置、自我管理</p>
+</li>
+<li><p><strong>安全化</strong>：更强的安全机制</p>
+</li>
+<li><p><strong>绿色化</strong>：低功耗、节能技术</p>
+</li>
+</ul>
+<h3 id="3-10-3-学习重点和难点"><a href="#3-10-3-学习重点和难点" class="headerlink" title="3.10.3 学习重点和难点"></a>3.10.3 学习重点和难点</h3><p><strong>重点内容：</strong></p>
+<ol>
+<li><p><strong>可靠传输机制</strong>：停止 - 等待、回退 N 帧、选择重传协议</p>
+</li>
+<li><p><strong>介质访问控制</strong>：CSMA&#x2F;CD 和 CSMA&#x2F;CA 协议</p>
+</li>
+<li><p><strong>帧结构分析</strong>：以太网和 802.11 帧格式</p>
+</li>
+<li><p><strong>设备工作原理</strong>：交换机、网桥的工作机制</p>
+</li>
+<li><p><strong>协议状态机</strong>：PPP 协议的状态转换</p>
+</li>
+</ol>
+<p><strong>难点内容：</strong></p>
+<ol>
+<li><p><strong>CRC 计算</strong>：循环冗余检验的数学原理和计算过程</p>
+</li>
+<li><p><strong>滑动窗口机制</strong>：窗口大小的选择和流量控制</p>
+</li>
+<li><p><strong>生成树协议</strong>：STP 的选举过程和状态转换</p>
+</li>
+<li><p><strong>无线信道管理</strong>：CSMA&#x2F;CA 的详细工作流程</p>
+</li>
+<li><p><strong>VLAN 标签处理</strong>：标签的添加、转发和移除过程</p>
+</li>
+</ol>
+<p><strong>实践要点：</strong></p>
+<ul>
+<li><p>理解各种协议的实际应用场景</p>
+</li>
+<li><p>掌握网络设备的配置和管理方法</p>
+</li>
+<li><p>学会分析和排除网络故障</p>
+</li>
+<li><p>关注新技术发展和应用趋势</p>
+</li>
+</ul>
+<p>通过深入学习本章内容，可以全面掌握数据链路层的理论知识和实践技能，为构建和维护计算机网络打下坚实的基础。</p>
+<blockquote>
+<p>（注：文档部分内容可能由 AI 生成）</p>
+</blockquote>
+</article><div class="post-copyright"><div class="post-copyright__author_group"><div class="post-copyright__author_img"><img class="post-copyright__author_img_front" src="/img/logo.png"></div><div class="post-copyright__author_name">woodfish</div><div class="post-copyright__author_desc">HOLA,this is woodfish!</div></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div id="quit-box" onclick="RemoveRewardMask()"></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本文是原创文章，采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh-hans">CC BY-NC-SA 4.0</a>协议，完整转载请注明来自<a href="/">木鱼的鱼窝</a></span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__tag-list"></div></div></div><nav class="needEndHide pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2025/10/26/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%95%B0%E6%8D%AE%E7%9A%84%E8%A1%A8%E7%A4%BA/"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Untitled</div></div></a></div><div class="next-post pull-right"><a href="/2025/10/22/%E6%8C%87%E4%BB%A4%E7%B3%BB%E7%BB%9F/"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">Untitled</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><div class="top-group"><div class="sayhi" id="sayhi" onclick="sco.changeWittyWord()"></div></div></div><div class="avatar"><img alt="头像" src="/img/logo.png"></div><div class="description"></div><div class="bottom-group"><span class="left"><div class="name">woodfish</div><div class="desc">只有迎风，风筝才能飞得更高。</div></span><div class="social-icons is-center"></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="solitude fas fa-bars"></i><span>文章目录</span></div><div class="toc-content" id="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#3-1-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E6%A6%82%E8%BF%B0"><span class="toc-text">3.1 数据链路层概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-1-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">3.1.1 数据链路层的基本概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-2-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E7%9A%84%E4%B8%BB%E8%A6%81%E5%8A%9F%E8%83%BD"><span class="toc-text">3.1.2 数据链路层的主要功能</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-2-%E6%95%B0%E6%8D%AE%E9%93%BE%E8%B7%AF%E5%B1%82%E7%9A%84%E4%B8%89%E4%B8%AA%E9%87%8D%E8%A6%81%E9%97%AE%E9%A2%98"><span class="toc-text">3.2 数据链路层的三个重要问题</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-1-%E5%B0%81%E8%A3%85%E6%88%90%E5%B8%A7%E5%92%8C%E9%80%8F%E6%98%8E%E4%BC%A0%E8%BE%93"><span class="toc-text">3.2.1 封装成帧和透明传输</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-1-1-%E5%B0%81%E8%A3%85%E6%88%90%E5%B8%A7%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6"><span class="toc-text">3.2.1.1 封装成帧的实现机制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-1-2-%E9%80%8F%E6%98%8E%E4%BC%A0%E8%BE%93%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%96%B9%E6%B3%95"><span class="toc-text">3.2.1.2 透明传输的实现方法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-2-%E5%B7%AE%E9%94%99%E6%A3%80%E6%B5%8B"><span class="toc-text">3.2.2 差错检测</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-2-1-%E5%A5%87%E5%81%B6%E6%A0%A1%E9%AA%8C"><span class="toc-text">3.2.2.1 奇偶校验</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-2-2-%E5%BE%AA%E7%8E%AF%E5%86%97%E4%BD%99%E6%A3%80%E9%AA%8C%EF%BC%88CRC%EF%BC%89"><span class="toc-text">3.2.2.2 循环冗余检验（CRC）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-3-%E5%8F%AF%E9%9D%A0%E4%BC%A0%E8%BE%93"><span class="toc-text">3.2.3 可靠传输</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-3-1-%E5%8F%AF%E9%9D%A0%E4%BC%A0%E8%BE%93%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">3.2.3.1 可靠传输的基本概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-3-2-%E5%81%9C%E6%AD%A2-%E7%AD%89%E5%BE%85%E5%8D%8F%E8%AE%AE%EF%BC%88Stop-and-Wait%EF%BC%89"><span class="toc-text">3.2.3.2 停止 - 等待协议（Stop-and-Wait）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-3-3-%E5%9B%9E%E9%80%80-N-%E5%B8%A7%E5%8D%8F%E8%AE%AE%EF%BC%88Go-Back-N-GBN%EF%BC%89"><span class="toc-text">3.2.3.3 回退 N 帧协议（Go-Back-N, GBN）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-3-4-%E9%80%89%E6%8B%A9%E9%87%8D%E4%BC%A0%E5%8D%8F%E8%AE%AE%EF%BC%88Selective-Repeat-SR%EF%BC%89"><span class="toc-text">3.2.3.4 选择重传协议（Selective Repeat, SR）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-3-%E7%82%B9%E5%AF%B9%E7%82%B9%E5%8D%8F%E8%AE%AE%EF%BC%88PPP%EF%BC%89"><span class="toc-text">3.3 点对点协议（PPP）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-1-PPP-%E5%8D%8F%E8%AE%AE%E7%9A%84%E7%BB%84%E6%88%90%E5%92%8C%E5%8A%9F%E8%83%BD"><span class="toc-text">3.3.1 PPP 协议的组成和功能</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-1-1-PPP-%E5%8D%8F%E8%AE%AE%E7%9A%84%E4%B8%89%E5%B1%82%E7%BB%93%E6%9E%84"><span class="toc-text">3.3.1.1 PPP 协议的三层结构</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-2-PPP-%E5%B8%A7%E6%A0%BC%E5%BC%8F%E8%AF%A6%E8%A7%A3"><span class="toc-text">3.3.2 PPP 帧格式详解</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-2-1-PPP-%E5%B8%A7%E7%9A%84%E5%AD%97%E6%AE%B5%E5%AE%9A%E4%B9%89"><span class="toc-text">3.3.2.1 PPP 帧的字段定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-2-2-PPP-%E5%8D%8F%E8%AE%AE%E7%9A%84%E9%80%8F%E6%98%8E%E4%BC%A0%E8%BE%93%E6%9C%BA%E5%88%B6"><span class="toc-text">3.3.2.2 PPP 协议的透明传输机制</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-3-PPP-%E5%8D%8F%E8%AE%AE%E7%9A%84%E7%8A%B6%E6%80%81%E6%9C%BA"><span class="toc-text">3.3.3 PPP 协议的状态机</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-3-1-PPP-%E5%8D%8F%E8%AE%AE%E7%9A%84%E7%8A%B6%E6%80%81%E8%BD%AC%E6%8D%A2"><span class="toc-text">3.3.3.1 PPP 协议的状态转换</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-3-2-PPP-%E8%AE%A4%E8%AF%81%E6%9C%BA%E5%88%B6"><span class="toc-text">3.3.3.2 PPP 认证机制</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-4-%E5%85%B1%E4%BA%AB%E5%BC%8F%E4%BB%A5%E5%A4%AA%E7%BD%91"><span class="toc-text">3.4 共享式以太网</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-1-%E7%BD%91%E7%BB%9C%E9%80%82%E9%85%8D%E5%99%A8%E5%92%8C-MAC-%E5%9C%B0%E5%9D%80"><span class="toc-text">3.4.1 网络适配器和 MAC 地址</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-1-1-%E7%BD%91%E7%BB%9C%E9%80%82%E9%85%8D%E5%99%A8%E7%9A%84%E7%BB%93%E6%9E%84%E5%92%8C%E5%8A%9F%E8%83%BD"><span class="toc-text">3.4.1.1 网络适配器的结构和功能</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-1-2-MAC-%E5%9C%B0%E5%9D%80%E7%9A%84%E7%BB%93%E6%9E%84%E5%92%8C%E5%88%86%E7%B1%BB"><span class="toc-text">3.4.1.2 MAC 地址的结构和分类</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-2-CSMA-CD-%E5%8D%8F%E8%AE%AE"><span class="toc-text">3.4.2 CSMA&#x2F;CD 协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-2-1-CSMA-CD-%E5%8D%8F%E8%AE%AE%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-text">3.4.2.1 CSMA&#x2F;CD 协议的工作原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-2-2-%E7%A2%B0%E6%92%9E%E6%A3%80%E6%B5%8B%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%9C%BA%E5%88%B6"><span class="toc-text">3.4.2.2 碰撞检测的实现机制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-2-3-%E4%BA%8C%E8%BF%9B%E5%88%B6%E6%8C%87%E6%95%B0%E9%80%80%E9%81%BF%E7%AE%97%E6%B3%95"><span class="toc-text">3.4.2.3 二进制指数退避算法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-3-%E5%85%B1%E4%BA%AB%E5%BC%8F%E4%BB%A5%E5%A4%AA%E7%BD%91%E7%9A%84%E6%80%A7%E8%83%BD%E5%88%86%E6%9E%90"><span class="toc-text">3.4.3 共享式以太网的性能分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-3-1-%E4%BF%A1%E9%81%93%E5%88%A9%E7%94%A8%E7%8E%87%E8%AE%A1%E7%AE%97"><span class="toc-text">3.4.3.1 信道利用率计算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-3-2-%E5%BD%B1%E5%93%8D%E6%80%A7%E8%83%BD%E7%9A%84%E5%9B%A0%E7%B4%A0"><span class="toc-text">3.4.3.2 影响性能的因素</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-5-%E4%BA%A4%E6%8D%A2%E5%BC%8F%E4%BB%A5%E5%A4%AA%E7%BD%91"><span class="toc-text">3.5 交换式以太网</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-1-%E7%BD%91%E6%A1%A5%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-text">3.5.1 网桥的工作原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-5-1-1-%E9%80%8F%E6%98%8E%E7%BD%91%E6%A1%A5%E7%9A%84%E8%87%AA%E5%AD%A6%E4%B9%A0%E6%9C%BA%E5%88%B6"><span class="toc-text">3.5.1.1 透明网桥的自学习机制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-5-1-2-%E5%B8%A7%E8%BD%AC%E5%8F%91%E6%9C%BA%E5%88%B6"><span class="toc-text">3.5.1.2 帧转发机制</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-5-1-3-%E7%94%9F%E6%88%90%E6%A0%91%E5%8D%8F%E8%AE%AE%EF%BC%88STP%EF%BC%89"><span class="toc-text">3.5.1.3 生成树协议（STP）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-2-%E4%BB%A5%E5%A4%AA%E7%BD%91%E4%BA%A4%E6%8D%A2%E6%9C%BA"><span class="toc-text">3.5.2 以太网交换机</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-5-2-1-%E4%BA%A4%E6%8D%A2%E6%9C%BA%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-text">3.5.2.1 交换机的工作原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-5-2-2-%E4%BA%A4%E6%8D%A2%E6%9C%BA%E7%9A%84%E8%BD%AC%E5%8F%91%E6%96%B9%E5%BC%8F"><span class="toc-text">3.5.2.2 交换机的转发方式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-6-%E4%BB%A5%E5%A4%AA%E7%BD%91%E7%9A%84-MAC-%E5%B8%A7%E6%A0%BC%E5%BC%8F"><span class="toc-text">3.6 以太网的 MAC 帧格式</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-6-1-DIX-Ethernet-V2-%E6%A0%BC%E5%BC%8F"><span class="toc-text">3.6.1 DIX Ethernet V2 格式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-6-1-1-%E5%B8%A7%E7%BB%93%E6%9E%84%E8%AF%A6%E7%BB%86%E5%AE%9A%E4%B9%89"><span class="toc-text">3.6.1.1 帧结构详细定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-6-1-2-%E5%B8%A7%E5%A4%A7%E5%B0%8F%E9%99%90%E5%88%B6"><span class="toc-text">3.6.1.2 帧大小限制</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-6-2-IEEE-802-3-%E6%A0%BC%E5%BC%8F"><span class="toc-text">3.6.2 IEEE 802.3 格式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-6-2-1-%E4%B8%8E-Ethernet-V2-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">3.6.2.1 与 Ethernet V2 的区别</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-7-%E8%99%9A%E6%8B%9F%E5%B1%80%E5%9F%9F%E7%BD%91%EF%BC%88VLAN%EF%BC%89"><span class="toc-text">3.7 虚拟局域网（VLAN）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-7-1-VLAN-%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E5%92%8C%E4%BD%9C%E7%94%A8"><span class="toc-text">3.7.1 VLAN 的基本概念和作用</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-7-1-1-VLAN-%E7%9A%84%E5%AE%9A%E4%B9%89%E5%92%8C%E7%89%B9%E7%82%B9"><span class="toc-text">3.7.1.1 VLAN 的定义和特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-7-1-2-VLAN-%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="toc-text">3.7.1.2 VLAN 的优势</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-7-2-IEEE-802-1Q-VLAN-%E6%A0%87%E7%AD%BE"><span class="toc-text">3.7.2 IEEE 802.1Q VLAN 标签</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-7-2-1-VLAN-%E6%A0%87%E7%AD%BE%E6%A0%BC%E5%BC%8F"><span class="toc-text">3.7.2.1 VLAN 标签格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-7-2-2-VLAN-%E5%B8%A7%E7%9A%84%E5%A4%84%E7%90%86%E8%BF%87%E7%A8%8B"><span class="toc-text">3.7.2.2 VLAN 帧的处理过程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-7-2-3-VLAN-%E7%9A%84%E5%88%92%E5%88%86%E6%96%B9%E5%BC%8F"><span class="toc-text">3.7.2.3 VLAN 的划分方式</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-8-%E4%BB%A5%E5%A4%AA%E7%BD%91%E7%9A%84%E5%8F%91%E5%B1%95"><span class="toc-text">3.8 以太网的发展</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-8-1-%E5%BF%AB%E9%80%9F%E4%BB%A5%E5%A4%AA%E7%BD%91%EF%BC%88100BASE-T%EF%BC%89"><span class="toc-text">3.8.1 快速以太网（100BASE-T）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-8-1-1-%E6%8A%80%E6%9C%AF%E7%89%B9%E7%82%B9%E5%92%8C%E6%A0%87%E5%87%86"><span class="toc-text">3.8.1.1 技术特点和标准</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-8-1-2-%E6%8A%80%E6%9C%AF%E6%94%B9%E8%BF%9B"><span class="toc-text">3.8.1.2 技术改进</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-8-2-%E5%90%89%E6%AF%94%E7%89%B9%E4%BB%A5%E5%A4%AA%E7%BD%91%EF%BC%881000BASE-T%EF%BC%89"><span class="toc-text">3.8.2 吉比特以太网（1000BASE-T）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-8-2-1-%E6%8A%80%E6%9C%AF%E7%89%B9%E7%82%B9"><span class="toc-text">3.8.2.1 技术特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-8-2-2-%E8%BD%BD%E6%B3%A2%E5%BB%B6%E4%BC%B8%E5%92%8C%E5%88%86%E7%BB%84%E7%AA%81%E5%8F%91"><span class="toc-text">3.8.2.2 载波延伸和分组突发</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-8-3-10-%E5%90%89%E6%AF%94%E7%89%B9%E4%BB%A5%E5%A4%AA%E7%BD%91%EF%BC%8810GBASE-T%EF%BC%89"><span class="toc-text">3.8.3 10 吉比特以太网（10GBASE-T）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-8-3-1-%E6%8A%80%E6%9C%AF%E7%89%B9%E7%82%B9%E5%92%8C%E5%BA%94%E7%94%A8"><span class="toc-text">3.8.3.1 技术特点和应用</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-9-802-11-%E6%97%A0%E7%BA%BF%E5%B1%80%E5%9F%9F%E7%BD%91"><span class="toc-text">3.9 802.11 无线局域网</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-9-1-802-11-%E5%8D%8F%E8%AE%AE%E4%BD%93%E7%B3%BB"><span class="toc-text">3.9.1 802.11 协议体系</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-9-1-1-%E5%8D%8F%E8%AE%AE%E5%8F%91%E5%B1%95%E5%8E%86%E7%A8%8B"><span class="toc-text">3.9.1.1 协议发展历程</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-9-1-2-%E7%BD%91%E7%BB%9C%E6%9E%B6%E6%9E%84"><span class="toc-text">3.9.1.2 网络架构</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-9-2-CSMA-CA-%E5%8D%8F%E8%AE%AE"><span class="toc-text">3.9.2 CSMA&#x2F;CA 协议</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-9-2-1-%E4%B8%8E-CSMA-CD-%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">3.9.2.1 与 CSMA&#x2F;CD 的区别</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-9-2-2-%E5%B8%A7%E9%97%B4%E9%97%B4%E9%9A%94%EF%BC%88IFS%EF%BC%89"><span class="toc-text">3.9.2.2 帧间间隔（IFS）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-9-2-3-%E8%99%9A%E6%8B%9F%E8%BD%BD%E6%B3%A2%E7%9B%91%E5%90%AC%E5%92%8C%E7%BD%91%E7%BB%9C%E5%88%86%E9%85%8D%E5%90%91%E9%87%8F%EF%BC%88NAV%EF%BC%89"><span class="toc-text">3.9.2.3 虚拟载波监听和网络分配向量（NAV）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-9-2-4-RTS-CTS-%E6%9C%BA%E5%88%B6"><span class="toc-text">3.9.2.4 RTS&#x2F;CTS 机制</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-9-3-802-11-%E5%B8%A7%E7%BB%93%E6%9E%84"><span class="toc-text">3.9.3 802.11 帧结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-9-3-1-%E5%B8%A7%E7%B1%BB%E5%9E%8B%E5%92%8C%E6%A0%BC%E5%BC%8F"><span class="toc-text">3.9.3.1 帧类型和格式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-9-3-2-%E5%9C%B0%E5%9D%80%E5%AD%97%E6%AE%B5%E7%9A%84%E4%BD%BF%E7%94%A8"><span class="toc-text">3.9.3.2 地址字段的使用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-9-3-3-%E5%8F%AF%E9%9D%A0%E4%BC%A0%E8%BE%93%E6%9C%BA%E5%88%B6"><span class="toc-text">3.9.3.3 可靠传输机制</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-10-%E6%9C%AC%E7%AB%A0%E6%80%BB%E7%BB%93%E5%92%8C%E9%87%8D%E8%A6%81%E7%9F%A5%E8%AF%86%E7%82%B9"><span class="toc-text">3.10 本章总结和重要知识点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-10-1-%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E5%9B%9E%E9%A1%BE"><span class="toc-text">3.10.1 核心概念回顾</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-10-2-%E6%8A%80%E6%9C%AF%E5%8F%91%E5%B1%95%E8%B6%8B%E5%8A%BF"><span class="toc-text">3.10.2 技术发展趋势</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-10-3-%E5%AD%A6%E4%B9%A0%E9%87%8D%E7%82%B9%E5%92%8C%E9%9A%BE%E7%82%B9"><span class="toc-text">3.10.3 学习重点和难点</span></a></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="solitude fas fa-map"></i><span>最近发布</span></div><div class="aside-list"><a class="aside-list-item" href="/2025/11/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E5%8A%A0%E5%87%8F%E4%B9%98%E9%99%A4/" title="Untitled"><div class="content"><span class="title" href="/2025/11/08/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E5%8A%A0%E5%87%8F%E4%B9%98%E9%99%A4/" title="Untitled">Untitled</span></div></a><a class="aside-list-item" href="/2025/10/29/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%89%A9%E7%90%86%E5%B1%82%E8%AF%A6%E7%BB%86%E7%AC%94%E8%AE%B0/" title="Untitled"><div class="content"><span class="title" href="/2025/10/29/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E7%89%A9%E7%90%86%E5%B1%82%E8%AF%A6%E7%BB%86%E7%AC%94%E8%AE%B0/" title="Untitled">Untitled</span></div></a><a class="aside-list-item" href="/2025/10/29/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%AC%E4%B8%80%E7%AB%A0%EF%BC%9A%E6%A6%82%E8%AE%BA/" title="Untitled"><div class="content"><span class="title" href="/2025/10/29/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%AC%E4%B8%80%E7%AB%A0%EF%BC%9A%E6%A6%82%E8%AE%BA/" title="Untitled">Untitled</span></div></a><a class="aside-list-item" href="/2025/10/28/roadmap/" title="Untitled"><div class="content"><span class="title" href="/2025/10/28/roadmap/" title="Untitled">Untitled</span></div></a><a class="aside-list-item" href="/2025/10/27/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E5%88%92%E5%88%86%E5%AD%90%E7%BD%91/" title="Untitled"><div class="content"><span class="title" href="/2025/10/27/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E5%88%92%E5%88%86%E5%AD%90%E7%BD%91/" title="Untitled">Untitled</span></div></a></div></div></div></div></main><footer id="footer"><div id="st-footer"><div class="footer-group"><div class="footer-title-group"><h3 class="footer-title">友链</h3><button class="random-friends-btn" onclick="randomLinksList()" title="友链"><i class="solitude fas fa-arrows-rotate"></i></button></div><div class="footer-links" id="friend-links-in-footer"></div></div></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div class="copyright">© 2023 - 2025 By<a class="footer-bar-link" href="/" title="woodfish">woodfish</a></div><div class="beian-group"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://hexo.io/" title="框架：Hexo">框架：Hexo</a><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/everfu/hexo-theme-solitude" title="主题：Solitude">主题：Solitude</a></div></div><div class="footer-bar-right"></div></div></div><div class="comment-barrage needEndHide"></div></footer></div><div><!-- Critical scripts loaded synchronously--><script src="/js/utils.js?v=3.0.20"></script><script src="/js/main.js?v=3.0.20"></script><!-- Non-critical scripts loaded asynchronously--><script async src="/js/third_party/waterfall.min.js?v=3.0.20"></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><!-- Feature-specific scripts loaded asynchronously--><script defer src="/js/tw_cn.js?v=3.0.20"></script><!-- UI enhancement scripts--><script defer src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><!-- Music player scripts--><!-- Cover color processing scripts--><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+utils.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+</script><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!-- Search functionality--><!-- Right menu functionality--><div class="js-pjax"></div></div><!-- pjax--><script>let pjax = null;
+
+function initPjax() {
+    if (typeof Pjax === 'undefined') {
+        console.warn('Pjax is not loaded yet, retrying...');
+        setTimeout(initPjax, 100);
+        return;
+    }
+
+    pjax = new Pjax({
+        elements: 'a:not([target="_blank"])',
+        selectors: ["title","#body-wrap","#site-config","meta[name=\"description\"]",".js-pjax","meta[property^=\"og:\"]","#config-diff",".rs_show",".rs_hide"],
+        cacheBust: false,
+        analytics: false,
+        scrollRestoration: false
+    })
+
+    // 将 pjax 实例挂载到全局
+    window.pjax = pjax;
+
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+        const newScript = document.createElement('script')
+        const content = item.text || item.textContent || item.innerHTML || ""
+        Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+        newScript.appendChild(document.createTextNode(content))
+        item.parentNode.replaceChild(newScript, item)
+    })
+
+    document.addEventListener('pjax:complete', () => {
+        window.refreshFn()
+
+        document.querySelectorAll('script[data-pjax]').forEach(item => {
+            const newScript = document.createElement('script')
+            const content = item.text || item.textContent || item.innerHTML || ""
+            Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+            newScript.appendChild(document.createTextNode(content))
+            item.parentNode.replaceChild(newScript, item)
+        })
+
+        GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+    })
+
+    document.addEventListener('pjax:error', (e) => {
+        if (e.request.status === 404) {
+            pjax.loadUrl('/404.html')
+        }
+    })
+}
+
+// 初始化 Pjax
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPjax);
+} else {
+    initPjax();
+}</script><!-- google adsense--><!-- hexo injector body_end start --><script data-pjax>
+  function butterfly_footer_beautify_injector_config(){
+    var parent_div_git = document.getElementById('footer-wrap');
+    var item_html = '<div id="workboard"></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v6.2.0" title=""><img src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&amp;logo=hexo" alt=""/></a><a class="github-badge" target="_blank" href="https://butterfly.js.org/" style="margin-inline:5px" data-title="主题版本Butterfly_v4.3.1" title=""><img src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&amp;logo=bitdefender" alt=""/></a><a class="github-badge" target="_blank" href="https://vercel.com/" style="margin-inline:5px" data-title="本站采用多线部署，主线路托管于Vercel" title=""><img src="https://img.shields.io/badge/Hosted-Vercel-brightgreen?style=flat&amp;logo=Vercel" alt=""/></a><a class="github-badge" target="_blank" href="https://dashboard.4everland.org/" style="margin-inline:5px" data-title="本站采用多线部署，备用线路托管于4EVERLAND" title=""><img src="https://img.shields.io/badge/Hosted-4EVERLAND-22DDDD?style=flat&amp;logo=IPFS" alt=""/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title=""><img src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&amp;logo=GitHub" alt=""/></a><a class="github-badge" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" data-title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可" title=""><img src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&amp;logo=Claris" alt=""/></a></p>';
+    console.log('已挂载butterfly_footer_beautify')
+    parent_div_git.insertAdjacentHTML("beforeend",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_footer_beautify_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_footer_beautify_injector_config();
+  }
+  </script><script async src="/js/runtime.js"></script><!-- hexo injector body_end end --></body></html>
+        <script>
+            const posts = ["2025/11/08/计算机组成原理/加减乘除/","2025/10/29/计算机网络/物理层详细笔记/","2025/10/29/计算机网络/计算机网络第一章：概论/","2025/10/28/roadmap/","2025/10/27/计算机网络/划分子网/","2025/10/27/最长前缀匹配原则/","2025/10/26/题解/E题超详解：帮哈基鱼算标签/","2025/10/26/计算机组成原理/数据的表示/","2025/10/23/计算机网络/计算机网络第三章：链路层/","2025/10/22/指令系统/","2025/10/22/题解/F. Beautiful Intervals/","2025/10/21/计算机网络/计算机网络第四章：网络层/","2025/10/21/计算机网络/计算机网络第四章：网络层（edit）/","2025/10/04/题解/Day5题解/","2025/09/26/计算机组成原理/计算机组成原理/","2025/09/12/前端/AJAX基础入门教程/","2025/09/11/前端/Day04_AJAX进阶/","2025/09/10/前端/Day03_AJAX原理/","2025/09/09/前端/Day02_AJAX综合案例/","2025/09/08/前端/Day01_AJAX入门/","2025/08/25/Linux课程笔记/","2025/08/13/前端/js易错点/","2025/08/11/前端/JavaScript 学习笔记（9）：深浅拷贝、异常处理、this 指向与防抖节流/","2025/08/03/前端/JavaScript 学习笔记（8）：面向对象编程与原型机制详解/","2025/08/02/前端/JavaScript 学习笔记（7）：面向对象与内置构造函数/","2025/07/31/前端/JavaScript 学习笔记（6）：作用域、闭包与函数进阶/","2025/07/28/前端/Web API 学习笔记（6）：正则表达式与表单验证/","2025/07/27/前端/Web API 学习笔记（5）：BOM 操作与本地存储/","2025/07/26/前端/Web API 学习笔记（4）：Date 对象与 DOM-节点操作要点/","2025/07/23/前端/Web API 学习笔记（3）：事件流与事件委托/","2025/07/22/前端/Web API 学习笔记（2）：事件处理与-this-指向/","2025/07/21/前端/Web API 学习笔记（1）：DOM 基础操作/","2025/07/20/前端/JavaScript 学习笔记（5）：对象数据类型与内置数学对象/","2025/07/19/前端/JavaScript 学习笔记（4）：函数封装与对象基础/","2025/07/18/前端/JavaScript 学习笔记（3）：数组的增删操作方法详解/","2025/07/17/前端/JavaScript 学习笔记（2）：运算符、语句与综合案例/","2025/07/17/前端/JavaScript 学习笔记（1）：基础语法与数据类型/","2025/07/15/前端/CSS 学习笔记（12）：响应式布局与 Bootstrap 框架应用/","2025/07/14/前端/CSS 学习笔记（11）：移动 Web 开发之 vw 适配与酷我音乐案例实践/","2025/07/13/前端/CSS 学习笔记（10）：移动 Web 开发基础与 rem 布局、Less 预处理器/","2025/07/12/前端/CSS 学习笔记（9）：移动 Web 开发之空间转换与动画效果/","2025/07/11/前端/CSS 学习笔记（8）：移动 Web 开发之平面转换与渐变效果/","2025/07/10/前端/小兔仙/","2025/07/08/前端/学成在线/","2025/07/08/前端/CSS 学习笔记（6）：小兔鲜儿项目搭建及基础配置（目录结构、SEO 标签、版心设置）/","2025/07/04/前端/CSS我的易错点/","2025/07/03/前端/CSS 学习笔记（7）：CSS 优先级叠加计算规则详解/","2025/07/02/前端/CSS 学习笔记（5）：定位模式、CSS 精灵、字体图标及过渡效果应用/","2025/06/30/前端/CSS 学习笔记（4）：浮动布局与 Flex 弹性布局详解及应用案例/","2025/06/27/前端/CSS 学习笔记（3）：伪类与伪元素选择器、盒子模型及相关特性详解/","2025/06/24/前端/CSS 学习笔记（2）：复合选择器、CSS 特性及背景与显示模式设置/","2025/06/23/前端/CSS 学习笔记（1）：引入方式、选择器及文字样式控制/","2025/06/23/前端/HTML 学习笔记（2）：列表、表格、表单及布局标签详解/","2025/06/22/前端/HTML 学习笔记（1）：核心标签、文档结构及多媒体应用/","2025/06/19/JAVA/Java期末复习重点易错点/","2025/06/18/杂项/中国近代史复习重点/","2025/06/03/JAVA/Java的final/","2025/06/03/JAVA/Java的继承/","2025/06/03/JAVA/Java的多态/","2025/05/27/JAVA/Java的List集合/","2025/05/27/JAVA/Java的Collection集合/","2025/05/27/JAVA/Java的包装类/","2025/05/15/JAVA/Java的内部类/","2025/05/15/JAVA/Java的抽象与接口类/"];
+            function toRandomPost() {
+                const randomPost = posts[Math.floor(Math.random() * posts.length)];
+                pjax.loadUrl(GLOBAL_CONFIG.root + randomPost);
+            }
+        </script>
