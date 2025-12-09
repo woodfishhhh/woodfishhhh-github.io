@@ -1,0 +1,791 @@
+<!DOCTYPE html><html lang="zh-Hans" data-theme="dark"><head><meta charset="UTF-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no"><title>CSS 学习笔记（4）：浮动布局与 Flex 弹性布局详解及应用案例 | 木鱼的鱼窝</title><meta name="keywords" content="CSS,HTML"><meta name="author" content="woodfish"><meta name="copyright" content="woodfish"><meta name="format-detection" content="telephone=no"><meta name="theme-color" content="#18171d"><meta name="mobile-web-app-capable" content="yes"><meta name="apple-touch-fullscreen" content="yes"><meta name="apple-mobile-web-app-title" content="CSS 学习笔记（4）：浮动布局与 Flex 弹性布局详解及应用案例"><meta name="application-name" content="CSS 学习笔记（4）：浮动布局与 Flex 弹性布局详解及应用案例"><meta name="apple-mobile-web-app-capable" content="yes"><meta name="apple-mobile-web-app-status-bar-style" content="#18171d"><meta property="og:type" content="article"><meta property="og:title" content="CSS 学习笔记（4）：浮动布局与 Flex 弹性布局详解及应用案例"><meta property="og:url" content="https://www.woodfishhhh.xyz/2025/06/30/%E5%89%8D%E7%AB%AF/CSS%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%884%EF%BC%89%EF%BC%9A%E6%B5%AE%E5%8A%A8%E5%B8%83%E5%B1%80%E4%B8%8E%20Flex%20%E5%BC%B9%E6%80%A7%E5%B8%83%E5%B1%80%E8%AF%A6%E8%A7%A3%E5%8F%8A%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/index.html"><meta property="og:site_name" content="木鱼的鱼窝"><meta property="og:description" content="标准流标准流也叫文档流，指的是标签在页面中默认的排布规则，例如块元素独占一行，行内元素可以一行显示多个。 浮动（了解，看懂就行）一、浮动属性的基本概念1. 浮动的作用 让块级标签在一行显示，实现灵活的页面布局 常见应用场景：横向导航栏、多列布局、图文混排  2. 浮动属性的语法123selector"><meta property="og:locale" content="zh-Hans"><meta property="og:image" content="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg"><meta property="article:author" content="woodfish"><meta property="article:tag" content="woodfish的keyword"><meta name="twitter:card" content="summary"><meta name="twitter:image" content="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg"><meta name="description" content="标准流标准流也叫文档流，指的是标签在页面中默认的排布规则，例如块元素独占一行，行内元素可以一行显示多个。 浮动（了解，看懂就行）一、浮动属性的基本概念1. 浮动的作用 让块级标签在一行显示，实现灵活的页面布局 常见应用场景：横向导航栏、多列布局、图文混排  2. 浮动属性的语法123selector"><link rel="shortcut icon" href="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg"><link rel="canonical" href="https://www.woodfishhhh.xyz/2025/06/30/%E5%89%8D%E7%AB%AF/CSS%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%884%EF%BC%89%EF%BC%9A%E6%B5%AE%E5%8A%A8%E5%B8%83%E5%B1%80%E4%B8%8E%20Flex%20%E5%BC%B9%E6%80%A7%E5%B8%83%E5%B1%80%E8%AF%A6%E8%A7%A3%E5%8F%8A%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/"><link rel="preconnect" href="//cdn.cbd.int"/><link rel="preconnect" href="//busuanzi.ibruce.info"/><meta name="google-site-verification" content="xxx"/><meta name="baidu-site-verification" content="code-xxx"/><meta name="msvalidate.01" content="xxx"/><link rel="stylesheet" href="/css/index.css"><link rel="stylesheet" href="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.css" media="print" onload="this.media='all'"><link rel="stylesheet" href="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.css" media="print" onload="this.media='all'"><script defer="defer" src="https://va.vercel-scripts.com/v1/script.js" data-website-id="prj_woodfishhhh-github-io"></script><script>const GLOBAL_CONFIG = {
+  linkPageTop: {"enable":true,"title":"交换友链！芜湖！","addFriendPlaceholder":"昵称（请勿包含博客等字样）：\n网站地址（要求博客地址，请勿提交个人主页）：\n头像图片url（请提供尽可能清晰的图片，我会上传到我自己的图床）：\n描述：\n站点截图（可选）：\n"},
+  peoplecanvas: undefined,
+  postHeadAiDescription: undefined,
+  diytitle: {"enable":true,"leaveTitle":"不要忘记我----------------------------------------","backTitle":"我喜欢你-------------------------------------------"},
+  LA51: undefined,
+  greetingBox: undefined,
+  twikooEnvId: '',
+  commentBarrageConfig:undefined,
+  music_page_default: "nav_music",
+  root: '/',
+  preloader: {"source":3},
+  friends_vue_info: undefined,
+  navMusic: false,
+  mainTone: undefined,
+  authorStatus: {"skills":[null,null,null,null,null,null,null,null,null,null,null]},
+  algolia: undefined,
+  localSearch: undefined,
+  translate: {"defaultEncoding":2,"translateDelay":0,"msgToTraditionalChinese":"繁","msgToSimplifiedChinese":"简","rightMenuMsgToTraditionalChinese":"转为繁体","rightMenuMsgToSimplifiedChinese":"转为简体"},
+  noticeOutdate: undefined,
+  highlight: {"plugin":"highlight.js","highlightCopy":true,"highlightLang":true,"highlightHeightLimit":330},
+  copy: {
+    success: '复制成功',
+    error: '复制错误',
+    noSupport: '浏览器不支持'
+  },
+  relativeDate: {
+    homepage: false,
+    simplehomepage: true,
+    post: false
+  },
+  runtime: '天',
+  date_suffix: {
+    just: '刚刚',
+    min: '分钟前',
+    hour: '小时前',
+    day: '天前',
+    month: '个月前'
+  },
+  copyright: {"copy":true,"copyrightEbable":true,"limitCount":50,"languages":{"author":"作者: woodfish","link":"链接: ","source":"来源: 木鱼的鱼窝","info":"著作权归作者所有。商业转载请联系作者获得授权，非商业转载请注明出处。","copySuccess":"复制成功，复制和转载请标注本文地址"}},
+  lightbox: 'fancybox',
+  Snackbar: {"chs_to_cht":"你已切换为繁体","cht_to_chs":"你已切换为简体","day_to_night":"你已切换为深色模式","night_to_day":"你已切换为浅色模式","bgLight":"#425AEF","bgDark":"#1f1f1f","position":"top-center"},
+  source: {
+    justifiedGallery: {
+      js: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.min.js',
+      css: 'https://cdn.cbd.int/flickr-justified-gallery@2.1.2/dist/fjGallery.css'
+    }
+  },
+  isPhotoFigcaption: false,
+  islazyload: true,
+  isAnchor: false,
+  shortcutKey: undefined,
+  autoDarkmode: false
+}</script><script id="config-diff">var GLOBAL_CONFIG_SITE = {
+  configTitle: '木鱼的鱼窝',
+  title: 'CSS 学习笔记（4）：浮动布局与 Flex 弹性布局详解及应用案例',
+  postAI: '',
+  pageFillDescription: '标准流, 浮动（了解看懂就行）, 一、浮动属性的基本概念, 1. 浮动的作用, 2. 浮动属性的语法, 二、浮动属性测试演示, 1. 案例 1：两个 div 左浮动, 2. 案例 2：左右浮动混合, 三、浮动盒子的三大特点, 四、浮动布局应用案例：小米产品区布局, 1. 实现步骤, 2. 关键代码示例, 五、浮动布局注意事项, 六、浮动产生的影响及清除方法, 1. 浮动导致的核心问题, 2. 四种清除浮动的方法, （1）额外标签法（不推荐）, （2）单伪元素法（推荐）, （3）双伪元素法（完整方案）, （4）overflow 法（简洁方案）, 七、浮动属性的起源与发展, 八、核心知识点总结, FLEX布局, Flex组成, Flex布局, 主轴对齐方式, 侧轴对齐方式, 属性名, 修改主轴方向, 属性名：flex-direction, 弹性伸缩比, 弹性盒子换行, 属性名：flex-wrap, 属性值, 行对齐方式 ( 类似主轴对齐方式的模式 ), 案例-抖音解决方案标准流标准流也叫文档流指的是标签在页面中默认的排布规则例如块元素独占一行行内元素可以一行显示多个浮动了解看懂就行一浮动属性的基本概念浮动的作用让块级标签在一行显示实现灵活的页面布局常见应用场景横向导航栏多列布局图文混排浮动属性的语法元素向左浮动出现在父级左侧元素向右浮动出现在父级右侧默认值元素不浮动二浮动属性测试演示案例两个左浮动显示效果两个在一行从左向右排列高度不同但顶对齐案例左右浮动混合左右显示效果两个分别位于父级左右两侧仍在一行显示三浮动盒子的三大特点顶对齐特性无论盒子高度是否一致垂直方向始终顶部对齐高盒子矮盒子显示效果两个盒子顶部对齐行内块显示模式具备行内块元素特点可在一行显示宽高属性生效保留空格和换行符间距脱标特性脱离标准流浮动元素不再占用标准流位置导致问题父级无法被撑开高度后续标准流元素会覆盖浮动元素位置最佳实践同一容器内元素要么全浮动要么全不浮动四浮动布局应用案例小米产品区布局实现步骤清除浏览器默认样式创建版心容器并居中左右结构布局左侧右侧产品区产品列表处理给标签添加解决间距溢出去掉第个产品右间距关键代码示例左侧栏产品省略其他产品五浮动布局注意事项父级宽度不足问题现象子元素浮动后超出父级宽度时部分元素会掉到下一行解决方案检查父级宽度是否足够容纳所有子元素调整子元素宽度或间距使用响应式布局适配不同屏幕六浮动产生的影响及清除方法浮动导致的核心问题父级高度塌陷浮动子元素无法撑开父级高度布局错乱后续元素占据浮动元素位置四种清除浮动的方法额外标签法不推荐浮动元素额外添加的清除标签缺点增加无意义标签破坏页面结构单伪元素法推荐浮动元素原理通过伪元素模拟额外标签双伪元素法完整方案优势同时解决浮动塌陷和塌陷问题法简洁方案原理修剪超出父级的内容触发机制注意会隐藏超出内容慎用在有滚动需求的容器七浮动属性的起源与发展最初用途实现图文混排效果文字会围绕图片排列现代布局趋势浮动布局逐渐被和布局取代企业项目中布局更常用学习浮动是理解传统布局的基础八核心知识点总结知识点关键点浮动作用使块级元素一行显示实现多列布局浮动特点顶对齐行内块特性脱离标准流清除浮动推荐双伪元素法或常见问题父级宽度不足高度塌陷提示实际开发中建议优先使用布局但浮动仍是前端必学的基础技能布局布局也叫弹性布局是浏览器提倡的布局模型非常适合结构化布局提供了强大的空间分布和对齐能力模型不会产生浮动布局中脱标现象布局网页更简单更灵活组成设置方式给父元素设置子元素可以自动挤压或压缩组成部分弹性容器弹性盒子主轴默认在水平方向侧轴交叉轴默认在垂直方向布局描述属性使用说明创建容器在父元素上设置使其子元素成为弹性项目主轴对齐方式取值如默认等控制主轴排列方式侧轴对齐方式取值如默认等控制侧轴排列方式某个弹性盒子侧轴对齐方式用于单独设置某个子元素的侧轴对齐方式覆盖的设置修改主轴方向取值如默认等改变主轴方向弹性伸缩比如表示平均分配空间占双倍空间用于子元素设置弹性盒子换行取值如默认控制子元素超出容器时是否换行行对齐方式取值如默认等控制多行之间的对齐方式主轴对齐方式属性值属性值效果默认值弹性盒子从起点开始依次排列弹性盒子从终点开始依次排列弹性盒子沿主轴居中排列弹性盒子沿主轴均匀排列空白间距均分在弹性盒子之间弹性盒子沿主轴均匀排列空白间距均分在弹性盒子两侧弹性盒子沿主轴均匀排列弹性盒子与容器之间间距相等侧轴对齐方式属性名当前弹性容器内所有弹性盒子的侧轴对齐方式给弹性容器设置单独控制某个弹性盒子的侧轴对齐方式给弹性盒子设置属性值效果弹性盒子沿着侧轴线被拉伸至铺满容器弹性盒子没有设置侧轴方向尺寸则默认拉伸弹性盒子沿侧轴居中排列弹性盒子从起点开始依次排列弹性盒子从终点开始依次排列修改主轴方向主轴默认在水平方向侧轴默认在垂直方向改变了主轴方向后侧轴就会变成对应的垂直方向属性名属性值效果水平方向从左向右默认垂直方向从上向下水平方向从右向左垂直方向从下向上弹性伸缩比作用控制弹性盒子的主轴方向的尺寸属性名属性值整数数字表示占用父级剩余尺寸的份数默认情况主轴方向尺寸靠内容撑开侧轴默认拉伸就是占比权重弹性盒子换行弹性盒子可以自动挤压或拉伸默认情况下所有弹性盒子都在一行显示属性名属性值换行不换行默认行对齐方式类似主轴对齐方式的模式属性名属性值效果默认值弹性盒子从起点开始依次排列弹性盒子从终点开始依次排列弹性盒子沿主轴居中排列弹性盒子沿主轴均匀排列空白间距均分在弹性盒子之间弹性盒子沿主轴均匀排列空白间距均分在弹性盒子两侧弹性盒子沿主轴均匀排列弹性盒子与容器之间间距相等此属性对单行盒子无效前置条件有案例抖音解决方案图片和文字整体横向排列左对齐垂直居中为和包裹一个容器便于控制布局让在上方文字与图片之间留出间距一键发布多端发布视频到抖音短视频西瓜视频及今日头条管理视频内容实时查询视频审核状态支持修改已发布稿件状态发布携带组件支持分享内容携带小程序地理位置信息等组件扩展内容及实现互动数据评估分析获取视频在对应产品内的数据表现获取抖音热点及时进行表现评估出地域性',
+  isPost: true,
+  isHome: false,
+  isHighlightShrink: false,
+  isToc: true,
+  postUpdate: '2025-07-27 14:23:02',
+  postMainColor: '',
+}</script><noscript><style type="text/css">
+  #nav {
+    opacity: 1
+  }
+  .justified-gallery img {
+    opacity: 1
+  }
+
+  #recent-posts time,
+  #post-meta time {
+    display: inline !important
+  }
+</style></noscript><script>(win=>{
+      win.saveToLocal = {
+        set: (key, value, ttl) => {
+          if (ttl === 0) return
+          const now = Date.now()
+          const expiry = now + ttl * 86400000
+          const item = {
+            value,
+            expiry
+          }
+          localStorage.setItem(key, JSON.stringify(item))
+        },
+      
+        get: key => {
+          const itemStr = localStorage.getItem(key)
+      
+          if (!itemStr) {
+            return undefined
+          }
+          const item = JSON.parse(itemStr)
+          const now = Date.now()
+      
+          if (now > item.expiry) {
+            localStorage.removeItem(key)
+            return undefined
+          }
+          return item.value
+        }
+      }
+    
+      win.getScript = (url, attr = {}) => new Promise((resolve, reject) => {
+        const script = document.createElement('script')
+        script.src = url
+        script.async = true
+        script.onerror = reject
+        script.onload = script.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          script.onload = script.onreadystatechange = null
+          resolve()
+        }
+
+        Object.keys(attr).forEach(key => {
+          script.setAttribute(key, attr[key])
+        })
+
+        document.head.appendChild(script)
+      })
+    
+      win.getCSS = (url, id = false) => new Promise((resolve, reject) => {
+        const link = document.createElement('link')
+        link.rel = 'stylesheet'
+        link.href = url
+        if (id) link.id = id
+        link.onerror = reject
+        link.onload = link.onreadystatechange = function() {
+          const loadState = this.readyState
+          if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+          link.onload = link.onreadystatechange = null
+          resolve()
+        }
+        document.head.appendChild(link)
+      })
+    
+      win.activateDarkMode = () => {
+        document.documentElement.setAttribute('data-theme', 'dark')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#18171d')
+        }
+      }
+      win.activateLightMode = () => {
+        document.documentElement.setAttribute('data-theme', 'light')
+        if (document.querySelector('meta[name="theme-color"]') !== null) {
+          document.querySelector('meta[name="theme-color"]').setAttribute('content', '#f7f9fe')
+        }
+      }
+      const t = saveToLocal.get('theme')
+    
+        if (t === 'dark') activateDarkMode()
+        else if (t === 'light') activateLightMode()
+      
+      const asideStatus = saveToLocal.get('aside-status')
+      if (asideStatus !== undefined) {
+        if (asideStatus === 'hide') {
+          document.documentElement.classList.add('hide-aside')
+        } else {
+          document.documentElement.classList.remove('hide-aside')
+        }
+      }
+    
+      const detectApple = () => {
+        if(/iPad|iPhone|iPod|Macintosh/.test(navigator.userAgent)){
+          document.documentElement.classList.add('apple')
+        }
+      }
+      detectApple()
+    })(window)</script><!-- hexo injector head_end start --><link rel="stylesheet" href="https://www.fomal.cc/static/css/runtime.min.css" media="print" onload="this.media='all'"><!-- hexo injector head_end end --><meta name="generator" content="Hexo 7.3.0"></head><body data-type="anzhiyu"><div id="web_bg"></div><div id="an_music_bg"></div><div id="loading-box" onclick="document.getElementById(&quot;loading-box&quot;).classList.add(&quot;loaded&quot;)"><div class="loading-bg"><img class="loading-img nolazyload" alt="加载头像" src="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg"/><div class="loading-image-dot"></div></div></div><script>const preloader = {
+  endLoading: () => {
+    document.getElementById('loading-box').classList.add("loaded");
+  },
+  initLoading: () => {
+    document.getElementById('loading-box').classList.remove("loaded")
+  }
+}
+window.addEventListener('load',()=> { preloader.endLoading() })
+setTimeout(function(){preloader.endLoading();},10000)
+
+if (true) {
+  document.addEventListener('pjax:send', () => { preloader.initLoading() })
+  document.addEventListener('pjax:complete', () => { preloader.endLoading() })
+}</script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.10/progress_bar/progress_bar.css"/><script async="async" src="https://cdn.cbd.int/pace-js@1.2.4/pace.min.js" data-pace-options="{ &quot;restartOnRequestAfter&quot;:false,&quot;eventLag&quot;:false}"></script><div class="post" id="body-wrap"><header class="post-bg" id="page-header"><nav id="nav"><div id="nav-group"><span id="blog_name"><div class="back-home-button"><i class="anzhiyufont anzhiyu-icon-grip-vertical"></i><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://www.woodfishhhh.xyz/" title="woodfishhhh博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png&quot;" data-lazy-src="/img/favicon.ico" alt="woodfishhhh博客"/><span class="back-menu-item-text">woodfishhhh博客</span></a></div></div></div></div><a id="site-name" href="/" accesskey="h"><div class="title">木鱼的鱼窝</div><i class="anzhiyufont anzhiyu-icon-house-chimney"></i></a><div id="he-plugin-simple"></div><script>var WIDGET = {
+  "CONFIG": {
+    "modules": "0124",
+    "background": "2",
+    "tmpColor": "FFFFFF",
+    "tmpSize": "16",
+    "cityColor": "FFFFFF",
+    "citySize": "16",
+    "aqiColor": "E8D87B",
+    "aqiSize": "16",
+    "weatherIconSize": "24",
+    "alertIconSize": "18",
+    "padding": "10px 10px 10px 10px",
+    "shadow": "0",
+    "language": "auto",
+    "borderRadius": "20",
+    "fixed": "true",
+    "vertical": "top",
+    "horizontal": "left",
+    "left": "20",
+    "top": "7.1",
+    "key": "df245676fb434a0691ead1c63341cd94"
+  }
+}
+</script><link rel="stylesheet" href="https://widget.qweather.net/simple/static/css/he-simple.css?v=1.4.0"/><script src="https://widget.qweather.net/simple/static/js/he-simple.js?v=1.4.0"></script></span><div class="mask-name-container"><div id="name-container"><a id="page-name" href="javascript:anzhiyu.scrollToDest(0, 500)">PAGE_NAME</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/"><i class="fas fa-home faa-tada"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/tags/"><i class="fas fa-tags faa-tada"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/categories/"><i class="fas fa-th faa-tada"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/link/"><i class="fas fa-link faa-tada"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/about/"><i class="fas fa-user faa-tada"></i><span> 关于我</span></a></div></div></div><div id="nav-right"><div class="nav-button only-home" id="travellings_button" title="随机前往一个开往项目网站"><a class="site-page" onclick="anzhiyu.totraveling()" title="随机前往一个开往项目网站" href="javascript:void(0);" rel="external nofollow" data-pjax-state="external"><i class="anzhiyufont anzhiyu-icon-train"></i></a></div><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机前往一个文章" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-dice"></i></a></div><input id="center-console" type="checkbox"/><label class="widget" for="center-console" title="中控台" onclick="anzhiyu.switchConsole();"><i class="left"></i><i class="widget center"></i><i class="widget right"></i></label><div id="console"><div class="console-card-group-reward"><ul class="reward-all console-card"><li class="reward-item"><a href="https://www.woodfishhhh.xyz/images/e926e309585e5a5826ab0c3b485f8b6.png?_t=1751445131356" target="_blank"><img class="post-qr-code-img" alt="微信" src="https://www.woodfishhhh.xyz/images/e926e309585e5a5826ab0c3b485f8b6.png?_t=1751445131356"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://www.woodfishhhh.xyz/images/8147e2d92fa8287fac8774305c99661.jpg.jpeg?_t=1751445131356" target="_blank"><img class="post-qr-code-img" alt="支付宝" src="https://www.woodfishhhh.xyz/images/8147e2d92fa8287fac8774305c99661.jpg.jpeg?_t=1751445131356"/></a><div class="post-qr-code-desc">支付宝</div></li></ul></div><div class="console-card-group"><div class="console-card-group-left"><div class="console-card" id="card-newest-comments"><div class="card-content"><div class="author-content-item-tips">互动</div><span class="author-content-item-title"> 最新评论</span></div><div class="aside-list"><span>正在加载中...</span></div></div></div><div class="console-card-group-right"><div class="console-card tags"><div class="card-content"><div class="author-content-item-tips">兴趣点</div><span class="author-content-item-title">寻找你感兴趣的领域</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Ajax/" style="font-size: 1.05rem;">Ajax<sup>4</sup></a><a href="/tags/CSS/" style="font-size: 1.05rem;">CSS<sup>15</sup></a><a href="/tags/HTML/" style="font-size: 1.05rem;">HTML<sup>17</sup></a><a href="/tags/JUFE/" style="font-size: 1.05rem;">JUFE<sup>1</sup></a><a href="/tags/Java/" style="font-size: 1.05rem;">Java<sup>9</sup></a><a href="/tags/JavaScript/" style="font-size: 1.05rem;">JavaScript<sup>16</sup></a><a href="/tags/web/" style="font-size: 1.05rem;">web<sup>11</sup></a><a href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/" style="font-size: 1.05rem;">期末复习<sup>2</sup></a><a href="/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 1.05rem;">编程<sup>1</sup></a></div></div><hr/></div></div><div class="console-card history"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-box-archiv"></i><span>文章</span></div><div class="card-archives"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-archive"></i><span>归档</span></div><ul class="card-archive-list"><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/10/"><span class="card-archive-list-date">October 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/09/"><span class="card-archive-list-date">September 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">5</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/08/"><span class="card-archive-list-date">August 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">4</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/07/"><span class="card-archive-list-date">July 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">23</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/06/"><span class="card-archive-list-date">June 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">12</span><span>篇</span></div></a></li><li class="card-archive-list-item"><a class="card-archive-list-link" href="/archives/2025/05/"><span class="card-archive-list-date">May 2025</span><div class="card-archive-list-count-group"><span class="card-archive-list-count">5</span><span>篇</span></div></a></li></ul></div><hr/></div></div></div><div class="button-group"><div class="console-btn-item"><a class="darkmode_switchbutton" title="显示模式切换" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-moon"></i></a></div><div class="console-btn-item" id="consoleHideAside" onclick="anzhiyu.hideAsideBtn()" title="边栏显示控制"><a class="asideSwitch"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></a></div></div><div class="console-mask" onclick="anzhiyu.hideConsole()" href="javascript:void(0);"></div></div><div class="nav-button" id="nav-totop"><a class="totopbtn" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i><span id="percent" onclick="anzhiyu.scrollToDest(0,500)">0</span></a></div><div id="toggle-menu"><a class="site-page" href="javascript:void(0);" title="切换"><i class="anzhiyufont anzhiyu-icon-bars"></i></a></div></div></div></nav><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original">原创</a><span class="post-meta-categories"><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-inbox post-meta-icon"></i><a class="post-meta-categories" href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url">前端</a></span><span class="article-meta tags"><a class="article-meta__tags" href="/tags/CSS/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>CSS</span></a><a class="article-meta__tags" href="/tags/HTML/" tabindex="-1" itemprop="url"> <span> <i class="anzhiyufont anzhiyu-icon-hashtag"></i>HTML</span></a></span></div></div><h1 class="post-title" itemprop="name headline">CSS 学习笔记（4）：浮动布局与 Flex 弹性布局详解及应用案例</h1><div id="post-meta"><div class="meta-firstline"><span class="post-meta-date"><i class="anzhiyufont anzhiyu-icon-calendar-days post-meta-icon"></i><span class="post-meta-label">发表于</span><time class="post-meta-date-created" itemprop="dateCreated datePublished" datetime="2025-06-30T04:00:00.000Z" title="发表于 2025-06-30 12:00:00">2025-06-30</time><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-history post-meta-icon"></i><span class="post-meta-label">更新于</span><time class="post-meta-date-updated" itemprop="dateCreated datePublished" datetime="2025-07-27T06:23:02.000Z" title="更新于 2025-07-27 14:23:02">2025-07-27</time></span></div><div class="meta-secondline"><span class="post-meta-separator"></span><span class="post-meta-wordcount"><i class="anzhiyufont anzhiyu-icon-file-word post-meta-icon" title="文章字数"></i><span class="post-meta-label" title="文章字数">字数总计:</span><span class="word-count" title="文章字数">3k</span><span class="post-meta-separator"></span><i class="anzhiyufont anzhiyu-icon-clock post-meta-icon" title="阅读时长"></i><span class="post-meta-label" title="阅读时长">阅读时长:</span><span>11分钟</span></span><span class="post-meta-separator"></span><span class="post-meta-pv-cv" id="" data-flag-title="CSS 学习笔记（4）：浮动布局与 Flex 弹性布局详解及应用案例"><i class="anzhiyufont anzhiyu-icon-fw-eye post-meta-icon"></i><span class="post-meta-label" title="阅读量">阅读量:</span><span id="busuanzi_value_page_pv"><i class="anzhiyufont anzhiyu-icon-spinner anzhiyu-spin"></i></span></span><span class="post-meta-separator">       </span><span class="post-meta-position" title="作者IP属地为南昌"><i class="anzhiyufont anzhiyu-icon-location-dot"></i>南昌</span></div></div></div><section class="main-hero-waves-area waves-area"><svg class="waves-svg" xmlns="http://www.w3.org/2000/svg" xlink="http://www.w3.org/1999/xlink" viewBox="0 24 150 28" preserveAspectRatio="none" shape-rendering="auto"><defs><path id="gentle-wave" d="M -160 44 c 30 0 58 -18 88 -18 s 58 18 88 18 s 58 -18 88 -18 s 58 18 88 18 v 44 h -352 Z"></path></defs><g class="parallax"><use href="#gentle-wave" x="48" y="0"></use><use href="#gentle-wave" x="48" y="3"></use><use href="#gentle-wave" x="48" y="5"></use><use href="#gentle-wave" x="48" y="7"></use></g></svg></section><div id="post-top-cover"><img class="nolazyload" id="post-top-bg" src=""></div></header><main id="blog-container"><div class="layout" id="content-inner"><div id="post"><article class="post-content" id="article-container" itemscope itemtype="https://www.woodfishhhh.xyz/2025/06/30/%E5%89%8D%E7%AB%AF/CSS%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%884%EF%BC%89%EF%BC%9A%E6%B5%AE%E5%8A%A8%E5%B8%83%E5%B1%80%E4%B8%8E%20Flex%20%E5%BC%B9%E6%80%A7%E5%B8%83%E5%B1%80%E8%AF%A6%E8%A7%A3%E5%8F%8A%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/"><header><a class="post-meta-categories" href="/categories/%E5%89%8D%E7%AB%AF/" itemprop="url">前端</a><a href="/tags/CSS/" tabindex="-1" itemprop="url">CSS</a><a href="/tags/HTML/" tabindex="-1" itemprop="url">HTML</a><h1 id="CrawlerTitle" itemprop="name headline">CSS 学习笔记（4）：浮动布局与 Flex 弹性布局详解及应用案例</h1><span itemprop="author" itemscope itemtype="http://schema.org/Person">woodfish</span><time itemprop="dateCreated datePublished" datetime="2025-06-30T04:00:00.000Z" title="发表于 2025-06-30 12:00:00">2025-06-30</time><time itemprop="dateCreated datePublished" datetime="2025-07-27T06:23:02.000Z" title="更新于 2025-07-27 14:23:02">2025-07-27</time></header><h2 id="标准流"><a href="#标准流" class="headerlink" title="标准流"></a>标准流</h2><p>标准流也叫文档流，指的是标签在页面中默认的排布规则，例如块元素独占一行，行内元素可以一行显示多个。</p>
+<h2 id="浮动（了解，看懂就行）"><a href="#浮动（了解，看懂就行）" class="headerlink" title="浮动（了解，看懂就行）"></a>浮动（了解，看懂就行）</h2><h3 id="一、浮动属性的基本概念"><a href="#一、浮动属性的基本概念" class="headerlink" title="一、浮动属性的基本概念"></a>一、浮动属性的基本概念</h3><h4 id="1-浮动的作用"><a href="#1-浮动的作用" class="headerlink" title="1. 浮动的作用"></a>1. 浮动的作用</h4><ul>
+<li>让块级标签在一行显示，实现灵活的页面布局</li>
+<li>常见应用场景：横向导航栏、多列布局、图文混排</li>
+</ul>
+<h4 id="2-浮动属性的语法"><a href="#2-浮动属性的语法" class="headerlink" title="2. 浮动属性的语法"></a>2. 浮动属性的语法</h4><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">selector &#123;</span><br><span class="line">  <span class="attribute">float</span>: left | right | none;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li><strong>left</strong>：元素向左浮动，出现在父级左侧</li>
+<li><strong>right</strong>：元素向右浮动，出现在父级右侧</li>
+<li><strong>none</strong>：默认值，元素不浮动</li>
+</ul>
+<h3 id="二、浮动属性测试演示"><a href="#二、浮动属性测试演示" class="headerlink" title="二、浮动属性测试演示"></a>二、浮动属性测试演示</h3><h4 id="1-案例-1：两个-div-左浮动"><a href="#1-案例-1：两个-div-左浮动" class="headerlink" title="1. 案例 1：两个 div 左浮动"></a>1. 案例 1：两个 div 左浮动</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&quot;float: left; width: 100px; height: 50px; background: red;&quot;</span>&gt;</span>1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&quot;float: left; width: 100px; height: 80px; background: blue;&quot;</span>&gt;</span>2<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>显示效果：两个 div 在一行从左向右排列，高度不同但顶对齐</li>
+</ul>
+<h4 id="2-案例-2：左右浮动混合"><a href="#2-案例-2：左右浮动混合" class="headerlink" title="2. 案例 2：左右浮动混合"></a>2. 案例 2：左右浮动混合</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&quot;float: left; width: 100px; height: 50px; background: red;&quot;</span>&gt;</span>左<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&quot;float: right; width: 100px; height: 50px; background: blue;&quot;</span>&gt;</span>右<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>显示效果：两个 div 分别位于父级左右两侧，仍在一行显示</li>
+</ul>
+<h3 id="三、浮动盒子的三大特点"><a href="#三、浮动盒子的三大特点" class="headerlink" title="三、浮动盒子的三大特点"></a>三、浮动盒子的三大特点</h3><ol>
+<li><p><strong>顶对齐特性</strong></p>
+<ul>
+<li><p>无论盒子高度是否一致，垂直方向始终顶部对齐</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&quot;float: left; height: 100px;&quot;</span>&gt;</span>高盒子<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&quot;float: left; height: 50px;&quot;</span>&gt;</span>矮盒子<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<p>（显示效果：两个盒子顶部对齐）</p>
+</li>
+</ul>
+</li>
+<li><p><strong>行内块显示模式</strong></p>
+<ul>
+<li>具备行内块元素特点：<ul>
+<li>可在一行显示</li>
+<li>宽高属性生效</li>
+<li>保留空格和换行符间距</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><strong>脱标特性（脱离标准流）</strong></p>
+<ul>
+<li>浮动元素不再占用标准流位置</li>
+<li>导致问题：<ul>
+<li>父级无法被撑开高度</li>
+<li>后续标准流元素会覆盖浮动元素位置</li>
+</ul>
+</li>
+<li>最佳实践：同一容器内元素要么全浮动，要么全不浮动</li>
+</ul>
+</li>
+</ol>
+<h3 id="四、浮动布局应用案例：小米产品区布局"><a href="#四、浮动布局应用案例：小米产品区布局" class="headerlink" title="四、浮动布局应用案例：小米产品区布局"></a>四、浮动布局应用案例：小米产品区布局</h3><h4 id="1-实现步骤"><a href="#1-实现步骤" class="headerlink" title="1. 实现步骤"></a>1. 实现步骤</h4><ol>
+<li><p>清除浏览器默认样式</p>
+</li>
+<li><p>创建版心容器并居中</p>
+</li>
+<li><p>左右结构布局：</p>
+<ul>
+<li>左侧 div：float:left</li>
+<li>右侧产品区：float:right</li>
+</ul>
+</li>
+<li><p>产品列表处理：</p>
+<ul>
+<li><p>给 li 标签添加 float:left</p>
+</li>
+<li><p>解决间距溢出：</p>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.product</span> <span class="selector-tag">li</span><span class="selector-pseudo">:nth-child</span>(<span class="number">4</span>), </span><br><span class="line"><span class="selector-class">.product</span> <span class="selector-tag">li</span><span class="selector-pseudo">:nth-child</span>(<span class="number">8</span>) &#123;</span><br><span class="line">  <span class="attribute">margin-right</span>: <span class="number">0</span>; <span class="comment">/* 去掉第4、8个产品右间距 */</span></span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure></li>
+</ul>
+</li>
+</ol>
+<h4 id="2-关键代码示例"><a href="#2-关键代码示例" class="headerlink" title="2. 关键代码示例"></a>2. 关键代码示例</h4><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;container&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;left&quot;</span> <span class="attr">style</span>=<span class="string">&quot;float: left; width: 200px; height: 300px;&quot;</span>&gt;</span>左侧栏<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;right&quot;</span> <span class="attr">style</span>=<span class="string">&quot;float: right; width: 800px;&quot;</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">ul</span> <span class="attr">class</span>=<span class="string">&quot;product&quot;</span>&gt;</span></span><br><span class="line">      <span class="tag">&lt;<span class="name">li</span> <span class="attr">style</span>=<span class="string">&quot;float: left; width: 180px; margin-right: 10px;&quot;</span>&gt;</span>产品1<span class="tag">&lt;/<span class="name">li</span>&gt;</span></span><br><span class="line">      <span class="comment">&lt;!-- 省略其他产品 --&gt;</span></span><br><span class="line">    <span class="tag">&lt;/<span class="name">ul</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<h3 id="五、浮动布局注意事项"><a href="#五、浮动布局注意事项" class="headerlink" title="五、浮动布局注意事项"></a>五、浮动布局注意事项</h3><ul>
+<li>父级宽度不足问题<ul>
+<li>现象：子元素浮动后超出父级宽度时，部分元素会 “掉” 到下一行</li>
+<li>解决方案：<ol>
+<li>检查父级宽度是否足够容纳所有子元素</li>
+<li>调整子元素宽度或间距</li>
+<li>使用响应式布局适配不同屏幕</li>
+</ol>
+</li>
+</ul>
+</li>
+</ul>
+<h3 id="六、浮动产生的影响及清除方法"><a href="#六、浮动产生的影响及清除方法" class="headerlink" title="六、浮动产生的影响及清除方法"></a>六、浮动产生的影响及清除方法</h3><h4 id="1-浮动导致的核心问题"><a href="#1-浮动导致的核心问题" class="headerlink" title="1. 浮动导致的核心问题"></a>1. 浮动导致的核心问题</h4><ul>
+<li>父级高度塌陷：浮动子元素无法撑开父级高度</li>
+<li>布局错乱：后续元素占据浮动元素位置</li>
+</ul>
+<h4 id="2-四种清除浮动的方法"><a href="#2-四种清除浮动的方法" class="headerlink" title="2. 四种清除浮动的方法"></a>2. 四种清除浮动的方法</h4><h5 id="（1）额外标签法（不推荐）"><a href="#（1）额外标签法（不推荐）" class="headerlink" title="（1）额外标签法（不推荐）"></a>（1）额外标签法（不推荐）</h5><figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;parent&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&quot;float: left;&quot;</span>&gt;</span>浮动元素<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&quot;clear: both;&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span> <span class="comment">&lt;!-- 额外添加的清除标签 --&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>缺点：增加无意义标签，破坏页面结构</li>
+</ul>
+<h5 id="（2）单伪元素法（推荐）"><a href="#（2）单伪元素法（推荐）" class="headerlink" title="（2）单伪元素法（推荐）"></a>（2）单伪元素法（推荐）</h5><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.clearfix</span><span class="selector-pseudo">:after</span> &#123;</span><br><span class="line">  <span class="attribute">content</span>: <span class="string">&quot;&quot;</span>;</span><br><span class="line">  <span class="attribute">display</span>: block;</span><br><span class="line">  <span class="attribute">clear</span>: both;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;parent clearfix&quot;</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">div</span> <span class="attr">style</span>=<span class="string">&quot;float: left;&quot;</span>&gt;</span>浮动元素<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>原理：通过:after 伪元素模拟额外标签</li>
+</ul>
+<h5 id="（3）双伪元素法（完整方案）"><a href="#（3）双伪元素法（完整方案）" class="headerlink" title="（3）双伪元素法（完整方案）"></a>（3）双伪元素法（完整方案）</h5><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.clearfix</span><span class="selector-pseudo">:before</span>,</span><br><span class="line"><span class="selector-class">.clearfix</span><span class="selector-pseudo">:after</span> &#123;</span><br><span class="line">  <span class="attribute">content</span>: <span class="string">&quot;&quot;</span>;</span><br><span class="line">  <span class="attribute">display</span>: table;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-class">.clearfix</span><span class="selector-pseudo">:after</span> &#123;</span><br><span class="line">  <span class="attribute">clear</span>: both;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>优势：<strong>同时解决浮动塌陷和 margin 塌陷问题</strong></li>
+</ul>
+<h5 id="（4）overflow-法（简洁方案）"><a href="#（4）overflow-法（简洁方案）" class="headerlink" title="（4）overflow 法（简洁方案）"></a>（4）overflow 法（简洁方案）</h5><figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="selector-class">.parent</span> &#123;</span><br><span class="line">  <span class="attribute">overflow</span>: hidden;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+<ul>
+<li>原理：修剪超出父级的内容，触发 BFC 机制</li>
+<li>注意：会隐藏超出内容，慎用在有滚动需求的容器</li>
+</ul>
+<h3 id="七、浮动属性的起源与发展"><a href="#七、浮动属性的起源与发展" class="headerlink" title="七、浮动属性的起源与发展"></a>七、浮动属性的起源与发展</h3><ol>
+<li><p>最初用途，实现图文混排效果</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;img.jpg&quot;</span> <span class="attr">style</span>=<span class="string">&quot;float: left;&quot;</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">p</span>&gt;</span>文字会围绕图片排列...<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><p>现代布局趋势</p>
+<ul>
+<li>浮动布局逐渐被 Flexbox 和 Grid 布局取代</li>
+<li>企业项目中 Flex 布局更常用</li>
+<li>学习浮动是理解传统布局的基础</li>
+</ul>
+</li>
+</ol>
+<h3 id="八、核心知识点总结"><a href="#八、核心知识点总结" class="headerlink" title="八、核心知识点总结"></a>八、核心知识点总结</h3><table>
+<thead>
+<tr>
+<th>知识点</th>
+<th>关键点</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>浮动作用</td>
+<td>使块级元素一行显示，实现多列布局</td>
+</tr>
+<tr>
+<td>浮动特点</td>
+<td>顶对齐、行内块特性、脱离标准流</td>
+</tr>
+<tr>
+<td>清除浮动</td>
+<td>推荐双伪元素法或 overflow:hidden</td>
+</tr>
+<tr>
+<td>常见问题</td>
+<td>父级宽度不足、高度塌陷</td>
+</tr>
+</tbody></table>
+<blockquote>
+<p>提示：实际开发中建议优先使用 Flex 布局，但浮动仍是前端必学的基础技能</p>
+</blockquote>
+<h2 id="FLEX布局"><a href="#FLEX布局" class="headerlink" title="FLEX布局"></a>FLEX布局</h2><p>Flex布局也叫弹性布局，是浏览器提倡的布局模型，非常适合结构化布局，提供了强大的空间分布和对齐能力<br>Flex模型不会产生浮动布局中脱标现象，布局网页更简单、更灵活</p>
+<h3 id="Flex组成"><a href="#Flex组成" class="headerlink" title="Flex组成"></a>Flex组成</h3><p>设置方式：给<strong>父</strong>元素设置 <code>display : flex</code> ，子元素可以<strong>自动挤压或压缩</strong><br>组成部分：</p>
+<ul>
+<li>弹性容器</li>
+<li>弹性盒子</li>
+<li>主轴：默认在水平方向</li>
+<li>侧轴 &#x2F; 交叉轴：默认在垂直方向</li>
+</ul>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png&quot;" data-lazy-src="https://www.woodfishhhh.xyz/images/1680335870554.png?_t=1751211068630"></p>
+<h3 id="Flex布局"><a href="#Flex布局" class="headerlink" title="Flex布局"></a>Flex布局</h3><table>
+<thead>
+<tr>
+<th>描述</th>
+<th>属性</th>
+<th>使用说明</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>创建 flex 容器</td>
+<td>display: flex</td>
+<td>在父元素上设置，使其子元素成为弹性项目</td>
+</tr>
+<tr>
+<td>主轴对齐方式</td>
+<td>justify-content</td>
+<td>取值如 flex-start（默认）、center、space-between 等，控制主轴排列方式</td>
+</tr>
+<tr>
+<td>侧轴对齐方式</td>
+<td>align-items</td>
+<td>取值如 stretch（默认）、center、flex-start 等，控制侧轴排列方式</td>
+</tr>
+<tr>
+<td>某个弹性盒子侧轴对齐方式</td>
+<td>align-self</td>
+<td>用于单独设置某个子元素的侧轴对齐方式，覆盖 align-items 的设置</td>
+</tr>
+<tr>
+<td>修改主轴方向</td>
+<td>flex-direction</td>
+<td>取值如 row（默认）、column、row-reverse 等，改变主轴方向</td>
+</tr>
+<tr>
+<td>弹性伸缩比</td>
+<td>flex</td>
+<td>如 flex: 1 表示平均分配空间，flex: 2 占双倍空间，用于子元素设置</td>
+</tr>
+<tr>
+<td>弹性盒子换行</td>
+<td>flex-wrap</td>
+<td>取值如 nowrap（默认）、wrap，控制子元素超出容器时是否换行</td>
+</tr>
+<tr>
+<td>行对齐方式</td>
+<td>align-content</td>
+<td>取值如 stretch（默认）、center、space-between 等，控制多行之间的对齐方式</td>
+</tr>
+</tbody></table>
+<h3 id="主轴对齐方式"><a href="#主轴对齐方式" class="headerlink" title="主轴对齐方式"></a>主轴对齐方式</h3><p>属性值：<code>justify-content</code></p>
+<table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>flex-start</td>
+<td><strong>默认值</strong>，弹性盒子从<strong>起点</strong>开始依次排列</td>
+</tr>
+<tr>
+<td>flex-end</td>
+<td>弹性盒子从<strong>终点</strong>开始依次排列</td>
+</tr>
+<tr>
+<td><strong>center</strong></td>
+<td>弹性盒子沿主轴<strong>居中</strong>排列</td>
+</tr>
+<tr>
+<td><strong>space-between</strong></td>
+<td>弹性盒子沿主轴均匀排列，空白间距均分在<strong>弹性盒子之间</strong></td>
+</tr>
+<tr>
+<td><strong>space-around</strong></td>
+<td>弹性盒子沿主轴均匀排列，空白间距均分在<strong>弹性盒子两侧</strong></td>
+</tr>
+<tr>
+<td><strong>space-evenly</strong></td>
+<td>弹性盒子沿主轴均匀排列，弹性盒子与容器之间<strong>间距相等</strong></td>
+</tr>
+</tbody></table>
+<h3 id="侧轴对齐方式"><a href="#侧轴对齐方式" class="headerlink" title="侧轴对齐方式"></a>侧轴对齐方式</h3><h4 id="属性名"><a href="#属性名" class="headerlink" title="属性名"></a>属性名</h4><ul>
+<li><code>align-items</code>：当前弹性容器内<strong>所有</strong>弹性盒子的侧轴对齐方式（给弹性<strong>容器</strong>设置 ）</li>
+<li><code>align-self</code>：单独控制<strong>某个</strong>弹性盒子的侧轴对齐方式（给弹性<strong>盒子</strong>设置 ）</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><strong>stretch</strong></td>
+<td>弹性盒子沿着侧轴线被<strong>拉伸至铺满容器</strong>（弹性盒子没有设置侧轴方向尺寸则默认拉伸）</td>
+</tr>
+<tr>
+<td><strong>center</strong></td>
+<td>弹性盒子沿侧轴<strong>居中</strong>排列</td>
+</tr>
+<tr>
+<td>flex-start</td>
+<td>弹性盒子从起点开始依次排列</td>
+</tr>
+<tr>
+<td>flex-end</td>
+<td>弹性盒子从终点开始依次排列</td>
+</tr>
+</tbody></table>
+<h3 id="修改主轴方向"><a href="#修改主轴方向" class="headerlink" title="修改主轴方向"></a>修改主轴方向</h3><p>主轴默认在水平方向，侧轴默认在垂直方向</p>
+<p>改变了主轴方向后，侧轴就会变成对应的垂直方向</p>
+<h4 id="属性名：flex-direction"><a href="#属性名：flex-direction" class="headerlink" title="属性名：flex-direction"></a>属性名：<code>flex-direction</code></h4><table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td><code>row</code></td>
+<td>水平方向，从左向右（默认）</td>
+</tr>
+<tr>
+<td><strong><code>column</code></strong></td>
+<td>垂直方向，从上向下</td>
+</tr>
+<tr>
+<td><code>row-reverse</code></td>
+<td>水平方向，从右向左</td>
+</tr>
+<tr>
+<td><code>column-reverse</code></td>
+<td>垂直方向，从下向上</td>
+</tr>
+</tbody></table>
+<h3 id="弹性伸缩比"><a href="#弹性伸缩比" class="headerlink" title="弹性伸缩比"></a>弹性伸缩比</h3><p><strong>作用</strong>：控制弹性盒子的主轴方向的尺寸。  </p>
+<p><strong>属性名</strong>：<code>flex</code>  </p>
+<p><strong>属性值</strong>：整数数字，表示占用父级剩余尺寸的份数。  </p>
+<p>默认情况，主轴方向尺寸靠内容撑开，侧轴默认拉伸</p>
+<p><em><strong>Flex就是占比权重</strong></em></p>
+<p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png&quot;" data-lazy-src="https://www.woodfishhhh.xyz/images/66df46ea9933c303904e7dec72f66d7.png?_t=1751249910249" alt="占比1234"></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br></pre></td><td class="code"><pre><span class="line">	<span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">		<span class="selector-class">.box</span> &#123;</span></span><br><span class="line"><span class="language-css">			<span class="attribute">display</span>: flex;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">			<span class="attribute">height</span>: <span class="number">300px</span>;</span></span><br><span class="line"><span class="language-css">			<span class="attribute">border</span>: <span class="number">1px</span> solid <span class="number">#000</span>;</span></span><br><span class="line"><span class="language-css">		&#125;</span></span><br><span class="line"><span class="language-css">		<span class="selector-class">.item</span><span class="selector-pseudo">:nth-child</span>(<span class="number">1</span>) &#123;</span></span><br><span class="line"><span class="language-css">			<span class="attribute">flex</span>: <span class="number">1</span>;</span></span><br><span class="line"><span class="language-css">			<span class="attribute">background-color</span>: skyblue;</span></span><br><span class="line"><span class="language-css">		&#125;</span></span><br><span class="line"><span class="language-css">		<span class="selector-class">.item</span><span class="selector-pseudo">:nth-child</span>(<span class="number">2</span>) &#123;</span></span><br><span class="line"><span class="language-css">			<span class="attribute">flex</span>: <span class="number">2</span>;</span></span><br><span class="line"><span class="language-css">			<span class="attribute">background-color</span>: pink;</span></span><br><span class="line"><span class="language-css">		&#125;</span></span><br><span class="line"><span class="language-css">		<span class="selector-class">.item</span><span class="selector-pseudo">:nth-child</span>(<span class="number">3</span>) &#123;</span></span><br><span class="line"><span class="language-css">			<span class="attribute">flex</span>: <span class="number">3</span>;</span></span><br><span class="line"><span class="language-css">			<span class="attribute">background-color</span>: yellow;</span></span><br><span class="line"><span class="language-css">		&#125;</span></span><br><span class="line"><span class="language-css">		<span class="selector-class">.item</span><span class="selector-pseudo">:nth-child</span>(<span class="number">4</span>) &#123;</span></span><br><span class="line"><span class="language-css">			<span class="attribute">flex</span>: <span class="number">4</span>;</span></span><br><span class="line"><span class="language-css">			<span class="attribute">background-color</span>: orange;</span></span><br><span class="line"><span class="language-css">		&#125;</span></span><br><span class="line"><span class="language-css">	</span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box&quot;</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;item&quot;</span>&gt;</span>1<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;item&quot;</span>&gt;</span>2<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;item&quot;</span>&gt;</span>3<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;item&quot;</span>&gt;</span>4<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+
+
+<h3 id="弹性盒子换行"><a href="#弹性盒子换行" class="headerlink" title="弹性盒子换行"></a>弹性盒子换行</h3><p>弹性盒子可以<strong>自动挤压或拉伸</strong>，默认情况下，所有弹性盒子<strong>都在一行显示</strong>。</p>
+<h4 id="属性名：flex-wrap"><a href="#属性名：flex-wrap" class="headerlink" title="属性名：flex-wrap"></a>属性名：flex-wrap</h4><h4 id="属性值"><a href="#属性值" class="headerlink" title="属性值"></a>属性值</h4><ul>
+<li><code>wrap</code>：换行</li>
+<li><code>nowrap</code>：不换行（默认）</li>
+</ul>
+<h3 id="行对齐方式-类似主轴对齐方式的模式"><a href="#行对齐方式-类似主轴对齐方式的模式" class="headerlink" title="行对齐方式 ( 类似主轴对齐方式的模式 )"></a>行对齐方式 ( 类似主轴对齐方式的模式 )</h3><p>属性名：<code>align-content</code></p>
+<table>
+<thead>
+<tr>
+<th>属性值</th>
+<th>效果</th>
+</tr>
+</thead>
+<tbody><tr>
+<td>flex-start</td>
+<td>默认值，弹性盒子从起点开始依次排列</td>
+</tr>
+<tr>
+<td>flex-end</td>
+<td>弹性盒子从终点开始依次排列</td>
+</tr>
+<tr>
+<td>center</td>
+<td>弹性盒子沿主轴居中排列</td>
+</tr>
+<tr>
+<td>space-between</td>
+<td>弹性盒子沿主轴均匀排列，空白间距均分在弹性盒子之间</td>
+</tr>
+<tr>
+<td>space-around</td>
+<td>弹性盒子沿主轴均匀排列，空白间距均分在弹性盒子两侧</td>
+</tr>
+<tr>
+<td>space-evenly</td>
+<td>弹性盒子沿主轴均匀排列，弹性盒子与容器之间间距相等</td>
+</tr>
+</tbody></table>
+<p>此属性对单行盒子无效（前置条件：有flex-wrap:wrap）</p>
+<h2 id="案例-抖音解决方案"><a href="#案例-抖音解决方案" class="headerlink" title="案例-抖音解决方案"></a>案例-抖音解决方案</h2><p><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png&quot;" data-lazy-src="https://www.woodfishhhh.xyz/images/b2d150994d81a1a20fafc9365c81745.png?_t=1751263372777" alt="案例"></p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br></pre></td><td class="code"><pre><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span> <span class="attr">lang</span>=<span class="string">&quot;en&quot;</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">meta</span> <span class="attr">charset</span>=<span class="string">&quot;UTF-8&quot;</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">meta</span></span></span><br><span class="line"><span class="tag">			<span class="attr">name</span>=<span class="string">&quot;viewport&quot;</span></span></span><br><span class="line"><span class="tag">			<span class="attr">content</span>=<span class="string">&quot;width=device-width, initial-scale=1.0&quot;</span> /&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">title</span>&gt;</span>Document<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">style</span>&gt;</span><span class="language-css"></span></span><br><span class="line"><span class="language-css">			* &#123;</span></span><br><span class="line"><span class="language-css">				<span class="attribute">margin</span>: <span class="number">0</span>;</span></span><br><span class="line"><span class="language-css">				<span class="attribute">padding</span>: <span class="number">0</span>;</span></span><br><span class="line"><span class="language-css">				<span class="attribute">box-sizing</span>: border-box;</span></span><br><span class="line"><span class="language-css">			&#125;</span></span><br><span class="line"><span class="language-css">			<span class="selector-class">.box</span> &#123;</span></span><br><span class="line"><span class="language-css">				<span class="attribute">width</span>: <span class="number">1200px</span>;</span></span><br><span class="line"><span class="language-css">				<span class="attribute">height</span>: <span class="number">420px</span>;</span></span><br><span class="line"><span class="language-css">				<span class="attribute">background-color</span>: white;</span></span><br><span class="line"><span class="language-css">				<span class="attribute">margin</span>: <span class="number">100px</span> auto;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">				<span class="attribute">border-radius</span>: <span class="number">40px</span>;</span></span><br><span class="line"><span class="language-css">				<span class="attribute">border</span>: <span class="number">1px</span> solid black;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">				<span class="attribute">display</span>: flex;</span></span><br><span class="line"><span class="language-css">				<span class="attribute">justify-content</span>: space-around;</span></span><br><span class="line"><span class="language-css">				<span class="attribute">align-content</span>: space-around;</span></span><br><span class="line"><span class="language-css">				<span class="attribute">flex-wrap</span>: wrap;</span></span><br><span class="line"><span class="language-css">			&#125;</span></span><br><span class="line"><span class="language-css">			<span class="selector-class">.box</span> <span class="selector-class">.car</span> &#123;</span></span><br><span class="line"><span class="language-css">				<span class="attribute">width</span>: <span class="number">500px</span>;</span></span><br><span class="line"><span class="language-css">				<span class="attribute">height</span>: <span class="number">200px</span>;</span></span><br><span class="line"><span class="language-css">				<span class="attribute">background-color</span>: white;</span></span><br><span class="line"><span class="language-css">				<span class="attribute">border-radius</span>: <span class="number">40px</span>;</span></span><br><span class="line"><span class="language-css"></span></span><br><span class="line"><span class="language-css">				<span class="attribute">display</span>: flex;</span></span><br><span class="line"><span class="language-css">				<span class="attribute">flex-direction</span>: row; <span class="comment">/* 图片和文字整体横向排列 */</span></span></span><br><span class="line"><span class="language-css">				<span class="attribute">justify-content</span>: flex-start; <span class="comment">/* 左对齐 */</span></span></span><br><span class="line"><span class="language-css">				<span class="attribute">align-items</span>: center; <span class="comment">/* 垂直居中 */</span></span></span><br><span class="line"><span class="language-css">			&#125;</span></span><br><span class="line"><span class="language-css">			<span class="selector-class">.box</span> <span class="selector-class">.car</span> <span class="selector-tag">img</span> &#123;</span></span><br><span class="line"><span class="language-css">				<span class="attribute">width</span>: <span class="number">88px</span>;</span></span><br><span class="line"><span class="language-css">				<span class="attribute">height</span>: <span class="number">88px</span>;</span></span><br><span class="line"><span class="language-css">				<span class="attribute">margin</span>: <span class="number">40px</span>;</span></span><br><span class="line"><span class="language-css">			&#125;</span></span><br><span class="line"><span class="language-css">			<span class="comment">/* 为 h3 和 p 包裹一个容器，便于控制布局 */</span></span></span><br><span class="line"><span class="language-css">			<span class="selector-class">.box</span> <span class="selector-class">.car</span> <span class="selector-class">.text-container</span> &#123;</span></span><br><span class="line"><span class="language-css">				<span class="attribute">display</span>: flex;</span></span><br><span class="line"><span class="language-css">				<span class="attribute">flex-direction</span>: column; <span class="comment">/* 让 h3 在 p 上方 */</span></span></span><br><span class="line"><span class="language-css">				<span class="attribute">justify-content</span>: center;</span></span><br><span class="line"><span class="language-css">				<span class="attribute">margin-left</span>: <span class="number">20px</span>; <span class="comment">/* 文字与图片之间留出间距 */</span></span></span><br><span class="line"><span class="language-css">			&#125;</span></span><br><span class="line"><span class="language-css">			<span class="selector-class">.box</span> <span class="selector-class">.car</span> <span class="selector-class">.text</span> <span class="selector-tag">h3</span> &#123;</span></span><br><span class="line"><span class="language-css">				<span class="attribute">margin-bottom</span>: <span class="number">10px</span>;</span></span><br><span class="line"><span class="language-css">				<span class="attribute">font-size</span>: <span class="number">20px</span>;</span></span><br><span class="line"><span class="language-css">			&#125;</span></span><br><span class="line"><span class="language-css">			<span class="selector-class">.box</span> <span class="selector-class">.car</span> <span class="selector-class">.text</span> <span class="selector-tag">p</span> &#123;</span></span><br><span class="line"><span class="language-css">				<span class="attribute">font-size</span>: <span class="number">14px</span>;</span></span><br><span class="line"><span class="language-css">			&#125;</span></span><br><span class="line"><span class="language-css">		</span><span class="tag">&lt;/<span class="name">style</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;box&quot;</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;car&quot;</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;./pic/1.svg&quot;</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;text&quot;</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">h3</span>&gt;</span>一键发布多端<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">p</span>&gt;</span>发布视频到抖音短视频、西瓜视频及今日头条<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;car&quot;</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;./pic/2.svg&quot;</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;text&quot;</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">h3</span>&gt;</span>管理视频内容<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">p</span>&gt;</span>实时查询视频审核状态，支持修改已发布稿件状态<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;car&quot;</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;./pic/3.svg&quot;</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;text&quot;</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">h3</span>&gt;</span>发布携带组件<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">p</span>&gt;</span>支持分享内容携带小程序、地理位置信息等组件，扩展内容及实现互动<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;car&quot;</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;./pic/4.svg&quot;</span> /&gt;</span></span><br><span class="line">				<span class="tag">&lt;<span class="name">div</span> <span class="attr">class</span>=<span class="string">&quot;text&quot;</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">h3</span>&gt;</span>数据评估分析<span class="tag">&lt;/<span class="name">h3</span>&gt;</span></span><br><span class="line">					<span class="tag">&lt;<span class="name">p</span>&gt;</span>获取视频在对应产品内的数据表现、获取抖音热点，及时进行表现评估出地域性<span class="tag">&lt;/<span class="name">p</span>&gt;</span></span><br><span class="line">				<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">			<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">		<span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">	<span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+
+</article><div class="post-copyright"><div class="copyright-cc-box"><i class="anzhiyufont anzhiyu-icon-copyright"></i></div><div class="post-copyright__author_box"><a class="post-copyright__author_img" href="/" title="头像"><img class="post-copyright__author_img_back" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png&quot;" data-lazy-src="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg" title="头像" alt="头像"><img class="post-copyright__author_img_front" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png&quot;" data-lazy-src="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg" title="头像" alt="头像"></a><div class="post-copyright__author_name">woodfish</div><div class="post-copyright__author_desc">HOLA,this is woodfish!</div></div><div class="post-copyright__post__info"><a class="post-copyright__original" title="该文章为原创文章，注意版权协议" href="https://www.woodfishhhh.xyz/2025/06/30/%E5%89%8D%E7%AB%AF/CSS%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%884%EF%BC%89%EF%BC%9A%E6%B5%AE%E5%8A%A8%E5%B8%83%E5%B1%80%E4%B8%8E%20Flex%20%E5%BC%B9%E6%80%A7%E5%B8%83%E5%B1%80%E8%AF%A6%E8%A7%A3%E5%8F%8A%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/">原创</a><a class="post-copyright-title"><span onclick="rm.copyPageUrl('https://www.woodfishhhh.xyz/2025/06/30/%E5%89%8D%E7%AB%AF/CSS%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%884%EF%BC%89%EF%BC%9A%E6%B5%AE%E5%8A%A8%E5%B8%83%E5%B1%80%E4%B8%8E%20Flex%20%E5%BC%B9%E6%80%A7%E5%B8%83%E5%B1%80%E8%AF%A6%E8%A7%A3%E5%8F%8A%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/')">CSS 学习笔记（4）：浮动布局与 Flex 弹性布局详解及应用案例</span></a></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div class="rewardLeftButton"><div class="post-reward" onclick="anzhiyu.addRewardMask()"><div class="reward-button button--animated" title="赞赏作者"><i class="anzhiyufont anzhiyu-icon-hand-heart-fill"></i>打赏作者</div><div class="reward-main"><div class="reward-all"><span class="reward-title">感谢你赐予我前进的力量</span><ul class="reward-group"><li class="reward-item"><a href="https://www.woodfishhhh.xyz/images/e926e309585e5a5826ab0c3b485f8b6.png?_t=1751445131356" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png&quot;" data-lazy-src="https://www.woodfishhhh.xyz/images/e926e309585e5a5826ab0c3b485f8b6.png?_t=1751445131356" alt="微信"/></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="https://www.woodfishhhh.xyz/images/8147e2d92fa8287fac8774305c99661.jpg.jpeg?_t=1751445131356" target="_blank"><img class="post-qr-code-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png&quot;" data-lazy-src="https://www.woodfishhhh.xyz/images/8147e2d92fa8287fac8774305c99661.jpg.jpeg?_t=1751445131356" alt="支付宝"/></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/#about-reward" target="_blank"><div class="reward-text">赞赏者名单</div><div class="reward-dec">因为你们的支持让我意识到写文章的价值🙏</div></a></div></div></div><div id="quit-box" onclick="anzhiyu.removeRewardMask()" style="display: none"></div></div><div class="shareRight"><div class="share-link mobile"><div class="share-qrcode"><div class="share-button" title="使用手机访问这篇文章"><i class="anzhiyufont anzhiyu-icon-qrcode"></i></div><div class="share-main"><div class="share-main-all"><div id="qrcode" title="https://www.woodfishhhh.xyz/2025/06/30/%E5%89%8D%E7%AB%AF/CSS%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%884%EF%BC%89%EF%BC%9A%E6%B5%AE%E5%8A%A8%E5%B8%83%E5%B1%80%E4%B8%8E%20Flex%20%E5%BC%B9%E6%80%A7%E5%B8%83%E5%B1%80%E8%AF%A6%E8%A7%A3%E5%8F%8A%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/"></div><div class="reward-dec">使用手机访问这篇文章</div></div></div></div></div><div class="share-link weibo"><a class="share-button" target="_blank" href="https://service.weibo.com/share/share.php?title=CSS 学习笔记（4）：浮动布局与 Flex 弹性布局详解及应用案例&amp;url=https://www.woodfishhhh.xyz/2025/06/30/%E5%89%8D%E7%AB%AF/CSS%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%884%EF%BC%89%EF%BC%9A%E6%B5%AE%E5%8A%A8%E5%B8%83%E5%B1%80%E4%B8%8E%20Flex%20%E5%BC%B9%E6%80%A7%E5%B8%83%E5%B1%80%E8%AF%A6%E8%A7%A3%E5%8F%8A%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B/&amp;pic=" rel="external nofollow noreferrer noopener"><i class="anzhiyufont anzhiyu-icon-weibo"></i></a></div><script>function copyCurrentPageUrl() {
+  var currentPageUrl = window.location.href;
+  var input = document.createElement("input");
+  input.setAttribute("value", currentPageUrl);
+  document.body.appendChild(input);
+  input.select();
+  input.setSelectionRange(0, 99999);
+  document.execCommand("copy");
+  document.body.removeChild(input);
+}</script><div class="share-link copyurl"><div class="share-button" id="post-share-url" title="复制链接" onclick="copyCurrentPageUrl()"><i class="anzhiyufont anzhiyu-icon-link"></i></div></div></div></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明来自 <a href="https://www.woodfishhhh.xyz" target="_blank">木鱼的鱼窝</a>！</span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__box"><div class="post-meta__box__tag-list"><a class="post-meta__box__tags" href="/tags/CSS/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>CSS<span class="tagsPageCount">15</span></a><a class="post-meta__box__tags" href="/tags/HTML/"><span class="tags-punctuation"> <i class="anzhiyufont anzhiyu-icon-tag"></i></span>HTML<span class="tagsPageCount">17</span></a></div></div></div><div class="post_share"><div class="social-share" data-image="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg" data-sites="facebook,twitter,wechat,weibo,qq"></div><link rel="stylesheet" href="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/css/share.min.css" media="print" onload="this.media='all'"/><script src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/sharejs/dist/js/social-share.min.js" defer="defer"></script></div></div><nav class="pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2025/06/27/%E5%89%8D%E7%AB%AF/CSS%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%883%EF%BC%89%EF%BC%9A%E4%BC%AA%E7%B1%BB%E4%B8%8E%E4%BC%AA%E5%85%83%E7%B4%A0%E9%80%89%E6%8B%A9%E5%99%A8%E3%80%81%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B%E5%8F%8A%E7%9B%B8%E5%85%B3%E7%89%B9%E6%80%A7%E8%AF%A6%E8%A7%A3/"><img class="prev-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png&quot;" data-lazy-src="/" onerror="onerror=null;src='https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png'" alt="cover of previous post"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">CSS 学习笔记（3）：伪类与伪元素选择器、盒子模型及相关特性详解</div></div></a></div><div class="next-post pull-right"><a href="/2025/07/02/%E5%89%8D%E7%AB%AF/CSS%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%885%EF%BC%89%EF%BC%9A%E5%AE%9A%E4%BD%8D%E6%A8%A1%E5%BC%8F%E3%80%81CSS%20%E7%B2%BE%E7%81%B5%E3%80%81%E5%AD%97%E4%BD%93%E5%9B%BE%E6%A0%87%E5%8F%8A%E8%BF%87%E6%B8%A1%E6%95%88%E6%9E%9C%E5%BA%94%E7%94%A8/"><img class="next-cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png&quot;" data-lazy-src="/" onerror="onerror=null;src='https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png'" alt="cover of next post"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">CSS 学习笔记（5）：定位模式、CSS 精灵、字体图标及过渡效果应用</div></div></a></div></nav><div class="relatedPosts"><div class="headline"><i class="anzhiyufont anzhiyu-icon-thumbs-up fa-fw" style="font-size: 1.5rem; margin-right: 4px"></i><span>喜欢这篇文章的人也看了</span></div><div class="relatedPosts-list"><div><a href="/2025/07/13/%E5%89%8D%E7%AB%AF/CSS%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%8810%EF%BC%89%EF%BC%9A%E7%A7%BB%E5%8A%A8%20Web%20%E5%BC%80%E5%8F%91%E5%9F%BA%E7%A1%80%E4%B8%8E%20rem%20%E5%B8%83%E5%B1%80%E3%80%81Less%20%E9%A2%84%E5%A4%84%E7%90%86%E5%99%A8/" title="CSS 学习笔记（10）：移动 Web 开发基础与 rem 布局、Less 预处理器"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-07-13</div><div class="title">CSS 学习笔记（10）：移动 Web 开发基础与 rem 布局、Less 预处理器</div></div></a></div><div><a href="/2025/07/14/%E5%89%8D%E7%AB%AF/CSS%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%8811%EF%BC%89%EF%BC%9A%E7%A7%BB%E5%8A%A8%20Web%20%E5%BC%80%E5%8F%91%E4%B9%8B%20vw%20%E9%80%82%E9%85%8D%E4%B8%8E%E9%85%B7%E6%88%91%E9%9F%B3%E4%B9%90%E6%A1%88%E4%BE%8B%E5%AE%9E%E8%B7%B5/" title="CSS 学习笔记（11）：移动 Web 开发之 vw 适配与酷我音乐案例实践"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-07-14</div><div class="title">CSS 学习笔记（11）：移动 Web 开发之 vw 适配与酷我音乐案例实践</div></div></a></div><div><a href="/2025/07/15/%E5%89%8D%E7%AB%AF/CSS%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%8812%EF%BC%89%EF%BC%9A%E5%93%8D%E5%BA%94%E5%BC%8F%E5%B8%83%E5%B1%80%E4%B8%8E%20Bootstrap%20%E6%A1%86%E6%9E%B6%E5%BA%94%E7%94%A8/" title="CSS 学习笔记（12）：响应式布局与 Bootstrap 框架应用"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-07-15</div><div class="title">CSS 学习笔记（12）：响应式布局与 Bootstrap 框架应用</div></div></a></div><div><a href="/2025/06/23/%E5%89%8D%E7%AB%AF/CSS%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%881%EF%BC%89%EF%BC%9A%E5%BC%95%E5%85%A5%E6%96%B9%E5%BC%8F%E3%80%81%E9%80%89%E6%8B%A9%E5%99%A8%E5%8F%8A%E6%96%87%E5%AD%97%E6%A0%B7%E5%BC%8F%E6%8E%A7%E5%88%B6/" title="CSS 学习笔记（1）：引入方式、选择器及文字样式控制"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-06-23</div><div class="title">CSS 学习笔记（1）：引入方式、选择器及文字样式控制</div></div></a></div><div><a href="/2025/06/24/%E5%89%8D%E7%AB%AF/CSS%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%882%EF%BC%89%EF%BC%9A%E5%A4%8D%E5%90%88%E9%80%89%E6%8B%A9%E5%99%A8%E3%80%81CSS%20%E7%89%B9%E6%80%A7%E5%8F%8A%E8%83%8C%E6%99%AF%E4%B8%8E%E6%98%BE%E7%A4%BA%E6%A8%A1%E5%BC%8F%E8%AE%BE%E7%BD%AE/" title="CSS 学习笔记（2）：复合选择器、CSS 特性及背景与显示模式设置"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-06-24</div><div class="title">CSS 学习笔记（2）：复合选择器、CSS 特性及背景与显示模式设置</div></div></a></div><div><a href="/2025/06/27/%E5%89%8D%E7%AB%AF/CSS%20%E5%AD%A6%E4%B9%A0%E7%AC%94%E8%AE%B0%EF%BC%883%EF%BC%89%EF%BC%9A%E4%BC%AA%E7%B1%BB%E4%B8%8E%E4%BC%AA%E5%85%83%E7%B4%A0%E9%80%89%E6%8B%A9%E5%99%A8%E3%80%81%E7%9B%92%E5%AD%90%E6%A8%A1%E5%9E%8B%E5%8F%8A%E7%9B%B8%E5%85%B3%E7%89%B9%E6%80%A7%E8%AF%A6%E8%A7%A3/" title="CSS 学习笔记（3）：伪类与伪元素选择器、盒子模型及相关特性详解"><img class="cover" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png&quot;" data-lazy-src="/" alt="cover"><div class="content is-center"><div class="date"><i class="anzhiyufont anzhiyu-icon-calendar-days fa-fw"></i> 2025-06-27</div><div class="title">CSS 学习笔记（3）：伪类与伪元素选择器、盒子模型及相关特性详解</div></div></a></div></div></div></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi" id="author-info__sayhi" onclick="anzhiyu.changeSayHelloText()"></div><div class="author-info-avatar"><img class="avatar-img" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png&quot;" data-lazy-src="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg" onerror="this.onerror=null;this.src='/img/friend_404.gif'" alt="avatar"/><div class="author-status"><img class="g-status" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png&quot;" data-lazy-src="https://bu.dusays.com/2023/08/24/64e6ce9c507bb.png" alt="status"/></div></div><div class="author-info__description">河汉微明星乍稀，碧莲香湿袭人衣。夜凉如水琉璃滑，自起开窗放月归。</div><div class="author-info__bottom-group"><a class="author-info__bottom-group-left" href="/"><h1 class="author-info__name">woodfish</h1><div class="author-info__desc">HOLA,this is woodfish!</div></a><div class="card-info-social-icons is-center"><a class="social-icon faa-parent animated-hover" href="https://github.com/woodfishhhh" target="_blank" title="Github"><i class="anzhiyufont anzhiyu-icon-github"></i></a><a class="social-icon faa-parent animated-hover" href="https://space.bilibili.com/359728114" target="_blank" title="BiliBili"><i class="anzhiyufont anzhiyu-icon-bilibili"></i></a><a class="social-icon faa-parent animated-hover" href="https://www.woodfishhhh.xyz/images/af1a055d14e4f7f6eae2886f2865d13.jpg.jpeg?_t=1750312382930" target="_blank" title="QQ"><i class="anzhiyufont anzhiyu-icon-qq"></i></a><a class="social-icon faa-parent animated-hover" href="https://www.woodfishhhh.xyz/images/f59723db9159310b6056abe8341f5d7.jpg.jpeg?_t=1750312263368" target="_blank" title="WeChat"><i class="anzhiyufont anzhiyu-icon-comments"></i></a><a class="social-icon faa-parent animated-hover" href="https://www.woodfishhhh.xyz/images/d8d58d2f2c7ac5790fd37f388da41db4.png?_t=1759286665402" target="_blank" title="Email"><i class="anzhiyufont anzhiyu-icon-envelope"></i></a><a class="social-icon faa-parent animated-hover" href="https://www.douyin.com/user/MS4wLjABAAAAgbOrIhdi7Rl5RfaQ3fE3i7c2WnyR3zEOyLiK2Cjtcqk?from_tab_name=main" target="_blank" title="Douyin"><i class="anzhiyufont anzhiyu-icon-tiktok"></i></a></div></div></div></div><div class="card-widget card-announcement"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bullhorn anzhiyu-shake"></i><span>公告</span></div><div class="announcement_content">欢迎来到我的鱼窝~</div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-bars"></i><span>文章目录</span><span class="toc-percentage"></span></div><div class="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A0%87%E5%87%86%E6%B5%81"><span class="toc-number">1.</span> <span class="toc-text">标准流</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%B5%AE%E5%8A%A8%EF%BC%88%E4%BA%86%E8%A7%A3%EF%BC%8C%E7%9C%8B%E6%87%82%E5%B0%B1%E8%A1%8C%EF%BC%89"><span class="toc-number">2.</span> <span class="toc-text">浮动（了解，看懂就行）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E6%B5%AE%E5%8A%A8%E5%B1%9E%E6%80%A7%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-number">2.1.</span> <span class="toc-text">一、浮动属性的基本概念</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%B5%AE%E5%8A%A8%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-number">2.1.1.</span> <span class="toc-text">1. 浮动的作用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%B5%AE%E5%8A%A8%E5%B1%9E%E6%80%A7%E7%9A%84%E8%AF%AD%E6%B3%95"><span class="toc-number">2.1.2.</span> <span class="toc-text">2. 浮动属性的语法</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%B5%AE%E5%8A%A8%E5%B1%9E%E6%80%A7%E6%B5%8B%E8%AF%95%E6%BC%94%E7%A4%BA"><span class="toc-number">2.2.</span> <span class="toc-text">二、浮动属性测试演示</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%A1%88%E4%BE%8B-1%EF%BC%9A%E4%B8%A4%E4%B8%AA-div-%E5%B7%A6%E6%B5%AE%E5%8A%A8"><span class="toc-number">2.2.1.</span> <span class="toc-text">1. 案例 1：两个 div 左浮动</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%A1%88%E4%BE%8B-2%EF%BC%9A%E5%B7%A6%E5%8F%B3%E6%B5%AE%E5%8A%A8%E6%B7%B7%E5%90%88"><span class="toc-number">2.2.2.</span> <span class="toc-text">2. 案例 2：左右浮动混合</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E6%B5%AE%E5%8A%A8%E7%9B%92%E5%AD%90%E7%9A%84%E4%B8%89%E5%A4%A7%E7%89%B9%E7%82%B9"><span class="toc-number">2.3.</span> <span class="toc-text">三、浮动盒子的三大特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E6%B5%AE%E5%8A%A8%E5%B8%83%E5%B1%80%E5%BA%94%E7%94%A8%E6%A1%88%E4%BE%8B%EF%BC%9A%E5%B0%8F%E7%B1%B3%E4%BA%A7%E5%93%81%E5%8C%BA%E5%B8%83%E5%B1%80"><span class="toc-number">2.4.</span> <span class="toc-text">四、浮动布局应用案例：小米产品区布局</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%AE%9E%E7%8E%B0%E6%AD%A5%E9%AA%A4"><span class="toc-number">2.4.1.</span> <span class="toc-text">1. 实现步骤</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%85%B3%E9%94%AE%E4%BB%A3%E7%A0%81%E7%A4%BA%E4%BE%8B"><span class="toc-number">2.4.2.</span> <span class="toc-text">2. 关键代码示例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E6%B5%AE%E5%8A%A8%E5%B8%83%E5%B1%80%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-number">2.5.</span> <span class="toc-text">五、浮动布局注意事项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E6%B5%AE%E5%8A%A8%E4%BA%A7%E7%94%9F%E7%9A%84%E5%BD%B1%E5%93%8D%E5%8F%8A%E6%B8%85%E9%99%A4%E6%96%B9%E6%B3%95"><span class="toc-number">2.6.</span> <span class="toc-text">六、浮动产生的影响及清除方法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%B5%AE%E5%8A%A8%E5%AF%BC%E8%87%B4%E7%9A%84%E6%A0%B8%E5%BF%83%E9%97%AE%E9%A2%98"><span class="toc-number">2.6.1.</span> <span class="toc-text">1. 浮动导致的核心问题</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%9B%9B%E7%A7%8D%E6%B8%85%E9%99%A4%E6%B5%AE%E5%8A%A8%E7%9A%84%E6%96%B9%E6%B3%95"><span class="toc-number">2.6.2.</span> <span class="toc-text">2. 四种清除浮动的方法</span></a><ol class="toc-child"><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%881%EF%BC%89%E9%A2%9D%E5%A4%96%E6%A0%87%E7%AD%BE%E6%B3%95%EF%BC%88%E4%B8%8D%E6%8E%A8%E8%8D%90%EF%BC%89"><span class="toc-number">2.6.2.1.</span> <span class="toc-text">（1）额外标签法（不推荐）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%882%EF%BC%89%E5%8D%95%E4%BC%AA%E5%85%83%E7%B4%A0%E6%B3%95%EF%BC%88%E6%8E%A8%E8%8D%90%EF%BC%89"><span class="toc-number">2.6.2.2.</span> <span class="toc-text">（2）单伪元素法（推荐）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%883%EF%BC%89%E5%8F%8C%E4%BC%AA%E5%85%83%E7%B4%A0%E6%B3%95%EF%BC%88%E5%AE%8C%E6%95%B4%E6%96%B9%E6%A1%88%EF%BC%89"><span class="toc-number">2.6.2.3.</span> <span class="toc-text">（3）双伪元素法（完整方案）</span></a></li><li class="toc-item toc-level-5"><a class="toc-link" href="#%EF%BC%884%EF%BC%89overflow-%E6%B3%95%EF%BC%88%E7%AE%80%E6%B4%81%E6%96%B9%E6%A1%88%EF%BC%89"><span class="toc-number">2.6.2.4.</span> <span class="toc-text">（4）overflow 法（简洁方案）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E6%B5%AE%E5%8A%A8%E5%B1%9E%E6%80%A7%E7%9A%84%E8%B5%B7%E6%BA%90%E4%B8%8E%E5%8F%91%E5%B1%95"><span class="toc-number">2.7.</span> <span class="toc-text">七、浮动属性的起源与发展</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%85%AB%E3%80%81%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93"><span class="toc-number">2.8.</span> <span class="toc-text">八、核心知识点总结</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#FLEX%E5%B8%83%E5%B1%80"><span class="toc-number">3.</span> <span class="toc-text">FLEX布局</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Flex%E7%BB%84%E6%88%90"><span class="toc-number">3.1.</span> <span class="toc-text">Flex组成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Flex%E5%B8%83%E5%B1%80"><span class="toc-number">3.2.</span> <span class="toc-text">Flex布局</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%BB%E8%BD%B4%E5%AF%B9%E9%BD%90%E6%96%B9%E5%BC%8F"><span class="toc-number">3.3.</span> <span class="toc-text">主轴对齐方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%A7%E8%BD%B4%E5%AF%B9%E9%BD%90%E6%96%B9%E5%BC%8F"><span class="toc-number">3.4.</span> <span class="toc-text">侧轴对齐方式</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7%E5%90%8D"><span class="toc-number">3.4.1.</span> <span class="toc-text">属性名</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BF%AE%E6%94%B9%E4%B8%BB%E8%BD%B4%E6%96%B9%E5%90%91"><span class="toc-number">3.5.</span> <span class="toc-text">修改主轴方向</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7%E5%90%8D%EF%BC%9Aflex-direction"><span class="toc-number">3.5.1.</span> <span class="toc-text">属性名：flex-direction</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%B9%E6%80%A7%E4%BC%B8%E7%BC%A9%E6%AF%94"><span class="toc-number">3.6.</span> <span class="toc-text">弹性伸缩比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%BC%B9%E6%80%A7%E7%9B%92%E5%AD%90%E6%8D%A2%E8%A1%8C"><span class="toc-number">3.7.</span> <span class="toc-text">弹性盒子换行</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7%E5%90%8D%EF%BC%9Aflex-wrap"><span class="toc-number">3.7.1.</span> <span class="toc-text">属性名：flex-wrap</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%B1%9E%E6%80%A7%E5%80%BC"><span class="toc-number">3.7.2.</span> <span class="toc-text">属性值</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%A1%8C%E5%AF%B9%E9%BD%90%E6%96%B9%E5%BC%8F-%E7%B1%BB%E4%BC%BC%E4%B8%BB%E8%BD%B4%E5%AF%B9%E9%BD%90%E6%96%B9%E5%BC%8F%E7%9A%84%E6%A8%A1%E5%BC%8F"><span class="toc-number">3.8.</span> <span class="toc-text">行对齐方式 ( 类似主轴对齐方式的模式 )</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%A1%88%E4%BE%8B-%E6%8A%96%E9%9F%B3%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-number">4.</span> <span class="toc-text">案例-抖音解决方案</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="anzhiyufont anzhiyu-icon-history"></i><span>最近发布</span></div><div class="aside-list"><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/28/roadmap/" title="无题">无题</a><time datetime="2025-10-28T13:21:51.776Z" title="发表于 2025-10-28 21:21:51">2025-10-28</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/26/%E9%A2%98%E8%A7%A3/E%E9%A2%98%E8%B6%85%E8%AF%A6%E8%A7%A3%EF%BC%9A%E5%B8%AE%E5%93%88%E5%9F%BA%E9%B1%BC%E7%AE%97%E6%A0%87%E7%AD%BE/" title="无题">无题</a><time datetime="2025-10-26T15:25:42.750Z" title="发表于 2025-10-26 23:25:42">2025-10-26</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/22/%E9%A2%98%E8%A7%A3/F.%20Beautiful%20Intervals/" title="无题">无题</a><time datetime="2025-10-22T05:15:36.228Z" title="发表于 2025-10-22 13:15:36">2025-10-22</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/10/04/%E9%A2%98%E8%A7%A3/Day5%E9%A2%98%E8%A7%A3/" title="无题">无题</a><time datetime="2025-10-04T12:08:29.239Z" title="发表于 2025-10-04 20:08:29">2025-10-04</time></div></div><div class="aside-list-item no-cover"><div class="content"><a class="title" href="/2025/09/12/%E5%89%8D%E7%AB%AF/AJAX%E5%9F%BA%E7%A1%80%E5%85%A5%E9%97%A8%E6%95%99%E7%A8%8B/" title="无题">无题</a><time datetime="2025-09-12T05:07:55.999Z" title="发表于 2025-09-12 13:07:55">2025-09-12</time></div></div></div></div></div></div></div></main><footer id="footer"><div id="footer-wrap"><div id="workboard"><div id="runtimeTextTip"></div></div></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div id="footer-bar-tips"><div class="copyright">&copy;2025 By <a class="footer-bar-link" href="/" title="woodfish" target="_blank">woodfish</a></div></div><div id="footer-type-tips"></div></div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/anzhiyu-c/hexo-theme-anzhiyu" title="主题">主题</a></div></div></div></footer></div><div id="sidebar"><div id="menu-mask"></div><div id="sidebar-menus"><div class="sidebar-site-data site-data is-center"><a href="/archives/" title="archive"><div class="headline">文章</div><div class="length-num">53</div></a><a href="/tags/" title="tag"><div class="headline">标签</div><div class="length-num">9</div></a><a href="/categories/" title="category"><div class="headline">分类</div><div class="length-num">3</div></a></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><a class="darkmode_switchbutton menu-child" href="javascript:void(0);" title="显示模式"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span>显示模式</span></a></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://www.woodfishhhh.xyz/" title="woodfishhhh博客"><img class="back-menu-item-icon" src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png&quot;" data-lazy-src="/img/favicon.ico" alt="woodfishhhh博客"/><span class="back-menu-item-text">woodfishhhh博客</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/"><i class="fas fa-home faa-tada"></i><span> 主页</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/tags/"><i class="fas fa-tags faa-tada"></i><span> 标签</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/categories/"><i class="fas fa-th faa-tada"></i><span> 分类</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/link/"><i class="fas fa-link faa-tada"></i><span> 友链</span></a></div><div class="menus_item"><a class="site-page faa-parent animated-hover" href="/about/"><i class="fas fa-user faa-tada"></i><span> 关于我</span></a></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="item-headline"></div><div class="card-tag-cloud"><a href="/tags/Ajax/" style="font-size: 0.88rem;">Ajax<sup>4</sup></a><a href="/tags/CSS/" style="font-size: 0.88rem;">CSS<sup>15</sup></a><a href="/tags/HTML/" style="font-size: 0.88rem;">HTML<sup>17</sup></a><a href="/tags/JUFE/" style="font-size: 0.88rem;">JUFE<sup>1</sup></a><a href="/tags/Java/" style="font-size: 0.88rem;">Java<sup>9</sup></a><a href="/tags/JavaScript/" style="font-size: 0.88rem;">JavaScript<sup>16</sup></a><a href="/tags/web/" style="font-size: 0.88rem;">web<sup>11</sup></a><a href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/" style="font-size: 0.88rem;">期末复习<sup>2</sup></a><a href="/tags/%E7%BC%96%E7%A8%8B/" style="font-size: 0.88rem;">编程<sup>1</sup></a></div></div><hr/></div></div><div id="rightside"><div id="rightside-config-hide"><button id="readmode" type="button" title="阅读模式"><i class="anzhiyufont anzhiyu-icon-book-open"></i></button><button id="translateLink" type="button" title="简繁转换">繁</button><button id="darkmode" type="button" title="浅色和深色模式转换"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i></button><button id="hide-aside-btn" type="button" title="单栏和双栏切换"><i class="anzhiyufont anzhiyu-icon-arrows-left-right"></i></button></div><div id="rightside-config-show"><button id="rightside-config" type="button" title="设置"><i class="anzhiyufont anzhiyu-icon-gear"></i></button><button class="close" id="mobile-toc-button" type="button" title="目录"><i class="anzhiyufont anzhiyu-icon-list-ul"></i></button><button id="go-up" type="button" title="回到顶部"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></button></div></div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="anzhiyufont anzhiyu-icon-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="anzhiyufont anzhiyu-icon-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="anzhiyufont anzhiyu-icon-arrow-rotate-right" style="font-size: 1rem;"></i></div><div class="rightMenu-item" id="menu-top"><i class="anzhiyufont anzhiyu-icon-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="anzhiyufont anzhiyu-icon-paste"></i><span>粘贴文本</span></div><a class="rightMenu-item" id="menu-commenttext"><i class="anzhiyufont anzhiyu-icon-comment-medical"></i><span>引用到评论</span></a><div class="rightMenu-item" id="menu-newwindow"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="anzhiyufont anzhiyu-icon-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="anzhiyufont anzhiyu-icon-images"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="anzhiyufont anzhiyu-icon-download"></i><span>下载此图片</span></div><div class="rightMenu-item" id="menu-newwindowimg"><i class="anzhiyufont anzhiyu-icon-window-restore"></i><span>新窗口打开图片</span></div><div class="rightMenu-item" id="menu-search"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>站内搜索</span></div><div class="rightMenu-item" id="menu-searchBaidu"><i class="anzhiyufont anzhiyu-icon-magnifying-glass"></i><span>百度搜索</span></div><div class="rightMenu-item" id="menu-music-toggle"><i class="anzhiyufont anzhiyu-icon-play"></i><span>播放音乐</span></div><div class="rightMenu-item" id="menu-music-back"><i class="anzhiyufont anzhiyu-icon-backward"></i><span>切换到上一首</span></div><div class="rightMenu-item" id="menu-music-forward"><i class="anzhiyufont anzhiyu-icon-forward"></i><span>切换到下一首</span></div><div class="rightMenu-item" id="menu-music-playlist" onclick="window.open(&quot;https://y.qq.com/n/ryqq/playlist/8802438608&quot;, &quot;_blank&quot;);" style="display: none;"><i class="anzhiyufont anzhiyu-icon-radio"></i><span>查看所有歌曲</span></div><div class="rightMenu-item" id="menu-music-copyMusicName"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制歌名</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item menu-link" id="menu-randomPost"><i class="anzhiyufont anzhiyu-icon-shuffle"></i><span>随便逛逛</span></a><a class="rightMenu-item menu-link" href="/categories/"><i class="anzhiyufont anzhiyu-icon-cube"></i><span>博客分类</span></a><a class="rightMenu-item menu-link" href="/tags/"><i class="anzhiyufont anzhiyu-icon-tags"></i><span>文章标签</span></a></div><div class="rightMenu-group rightMenu-line rightMenuOther"><a class="rightMenu-item" id="menu-copy" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-copy"></i><span>复制地址</span></a><a class="rightMenu-item" id="menu-commentBarrage" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-message"></i><span class="menu-commentBarrage-text">关闭热评</span></a><a class="rightMenu-item" id="menu-darkmode" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-circle-half-stroke"></i><span class="menu-darkmode-text">深色模式</span></a><a class="rightMenu-item" id="menu-translate" href="javascript:void(0);"><i class="anzhiyufont anzhiyu-icon-language"></i><span>轉為繁體</span></a></div></div><div id="rightmenu-mask"></div><div><script src="/js/utils.js"></script><script src="/js/main.js"></script><script src="/js/tw_cn.js"></script><script src="https://cdn.cbd.int/@fancyapps/ui@5.0.28/dist/fancybox/fancybox.umd.js"></script><script src="https://cdn.cbd.int/instant.page@5.2.0/instantpage.js" type="module"></script><script src="https://cdn.cbd.int/vanilla-lazyload@17.8.5/dist/lazyload.iife.min.js"></script><script src="https://cdn.cbd.int/node-snackbar@0.1.16/dist/snackbar.min.js"></script><canvas id="universe"></canvas><script async src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.0/dark/dark.js"></script><script>// 消除控制台打印
+var HoldLog = console.log;
+console.log = function () {};
+let now1 = new Date();
+queueMicrotask(() => {
+  const Log = function () {
+    HoldLog.apply(console, arguments);
+  }; //在恢复前输出日志
+  const grt = new Date("06/02/2025 00:00:00"); //此处修改你的建站时间或者网站上线时间
+  now1.setTime(now1.getTime() + 250);
+  const days = (now1 - grt) / 1000 / 60 / 60 / 24;
+  const dnum = Math.floor(days);
+  const ascll = [
+    `欢迎使用安知鱼!`,
+    `生活明朗, 万物可爱`,
+    `
+        
+       █████╗ ███╗   ██╗███████╗██╗  ██╗██╗██╗   ██╗██╗   ██╗
+      ██╔══██╗████╗  ██║╚══███╔╝██║  ██║██║╚██╗ ██╔╝██║   ██║
+      ███████║██╔██╗ ██║  ███╔╝ ███████║██║ ╚████╔╝ ██║   ██║
+      ██╔══██║██║╚██╗██║ ███╔╝  ██╔══██║██║  ╚██╔╝  ██║   ██║
+      ██║  ██║██║ ╚████║███████╗██║  ██║██║   ██║   ╚██████╔╝
+      ╚═╝  ╚═╝╚═╝  ╚═══╝╚══════╝╚═╝  ╚═╝╚═╝   ╚═╝    ╚═════╝
+        
+        `,
+    "已上线",
+    dnum,
+    "天",
+    "©2025 By 安知鱼 V1.6.14",
+  ];
+  const ascll2 = [`NCC2-036`, `调用前置摄像头拍照成功，识别为【小笨蛋】.`, `Photo captured: `, `🤪`];
+
+  setTimeout(
+    Log.bind(
+      console,
+      `\n%c${ascll[0]} %c ${ascll[1]} %c ${ascll[2]} %c${ascll[3]}%c ${ascll[4]}%c ${ascll[5]}\n\n%c ${ascll[6]}\n`,
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      "color:#425AEF",
+      "",
+      "color:#425AEF",
+      ""
+    )
+  );
+  setTimeout(
+    Log.bind(
+      console,
+      `%c ${ascll2[0]} %c ${ascll2[1]} %c \n${ascll2[2]} %c\n${ascll2[3]}\n`,
+      "color:white; background-color:#4fd953",
+      "",
+      "",
+      'background:url("https://npm.elemecdn.com/anzhiyu-blog@1.1.6/img/post/common/tinggge.gif") no-repeat;font-size:450%'
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c WELCOME %c 你好，小笨蛋.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(
+      console,
+      "%c ⚡ Powered by 安知鱼 %c 你正在访问 woodfish 的博客.",
+      "color:white; background-color:#f0ad4e",
+      ""
+    )
+  );
+
+  setTimeout(Log.bind(console, "%c W23-12 %c 你已打开控制台.", "color:white; background-color:#4f90d9", ""));
+
+  setTimeout(
+    console.warn.bind(console, "%c S013-782 %c 你现在正处于监控中.", "color:white; background-color:#d9534f", "")
+  );
+});</script><script async src="/anzhiyu/random.js"></script><script async="async">(function () {
+  var grt = new Date("06/02/2025 00:00:00"); //设置网站上线时间
+  var now = new Date();
+  var dnum;
+  var hnum;
+  var mnum;
+  var snum;
+  var nowHour;
+
+  // 计算并更新天数、小时数、分钟数和秒数
+  function updateTime() {
+    now = new Date(); // 更新 now 的值
+    nowHour = now.getHours(); // 更新 nowHour 的值
+    var days = (now - grt) / 1000 / 60 / 60 / 24;
+    dnum = Math.floor(days);
+    var hours = (now - grt) / 1000 / 60 / 60 - 24 * dnum;
+    hnum = Math.floor(hours);
+    if (String(hnum).length == 1) {
+      hnum = "0" + hnum;
+    }
+    var minutes = (now - grt) / 1000 / 60 - 24 * 60 * dnum - 60 * hnum;
+    mnum = Math.floor(minutes);
+    if (String(mnum).length == 1) {
+      mnum = "0" + mnum;
+    }
+    var seconds = (now - grt) / 1000 - 24 * 60 * 60 * dnum - 60 * 60 * hnum - 60 * mnum;
+    snum = Math.round(seconds);
+    if (String(snum).length == 1) {
+      snum = "0" + snum;
+    }
+  }
+
+  // 更新网页中显示的网站运行时间
+  function updateHtml() {
+    const footer = document.getElementById("footer");
+    if (!footer) return
+    let currentTimeHtml = "";
+    if (nowHour < 18 && nowHour >= 9) {
+      // 如果是上班时间，默认就是"安知鱼-上班摸鱼中.svg"图片，不需要更改
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    } else {
+      // 如果是下班时间，插入"安知鱼-下班啦.svg"图片
+      let img = document.querySelector("#workboard .workSituationImg");
+      if (img != null) {
+        img.src = "";
+        img.title = "";
+        img.alt = "";
+      }
+
+      currentTimeHtml = `本站居然运行了 ${dnum} 天<span id='runtime'> ${hnum} 小时 ${mnum} 分 ${snum} 秒 </span><i class='anzhiyufont anzhiyu-icon-heartbeat' style='color:red'></i>`;
+    }
+
+    if (document.getElementById("runtimeTextTip")) {
+      document.getElementById("runtimeTextTip").innerHTML = currentTimeHtml;
+    }
+  }
+
+  setInterval(() => {
+    updateTime();
+    updateHtml();
+  }, 1000);
+})();</script><div class="js-pjax"><input type="hidden" name="page-type" id="page-type" value="post"></div><script async data-pjax src="https://npm.elemecdn.com/anzhiyu-theme-static@1.0.1/bubble/bubble.js"></script><script>var visitorMail = "";
+</script><script async data-pjax src="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/waterfall/waterfall.js"></script><script src="https://lf3-cdn-tos.bytecdntp.com/cdn/expire-1-M/qrcodejs/1.0.0/qrcode.min.js"></script><script src="/js/anzhiyu/right_click_menu.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.1.9/icon/ali_iconfont_css.css"><script defer="defer" id="fluttering_ribbon" mobile="true" src="https://cdn.cbd.int/butterfly-extsrc@1.1.3/dist/canvas-fluttering-ribbon.min.js"></script><link rel="stylesheet" href="https://cdn.cbd.int/anzhiyu-theme-static@1.0.0/aplayer/APlayer.min.css" media="print" onload="this.media='all'"><script src="https://cdn.cbd.int/anzhiyu-blog-static@1.0.1/js/APlayer.min.js"></script><script src="https://cdn.cbd.int/hexo-anzhiyu-music@1.0.1/assets/js/Meting2.min.js"></script><script src="https://cdn.cbd.int/pjax@0.2.8/pjax.min.js"></script><script>let pjaxSelectors = ["head > title","#config-diff","#body-wrap","#rightside-config-hide","#rightside-config-show",".js-pjax"]
+var pjax = new Pjax({
+  elements: 'a:not([target="_blank"])',
+  selectors: pjaxSelectors,
+  cacheBust: false,
+  analytics: false,
+  scrollRestoration: false
+})
+
+document.addEventListener('pjax:send', function () {
+  // removeEventListener scroll 
+  anzhiyu.removeGlobalFnEvent('pjax')
+  anzhiyu.removeGlobalFnEvent('themeChange')
+
+  document.getElementById('rightside').classList.remove('rightside-show')
+  
+  if (window.aplayers) {
+    for (let i = 0; i < window.aplayers.length; i++) {
+      if (!window.aplayers[i].options.fixed) {
+        window.aplayers[i].destroy()
+      }
+    }
+  }
+
+  typeof typed === 'object' && typed.destroy()
+
+  //reset readmode
+  const $bodyClassList = document.body.classList
+  $bodyClassList.contains('read-mode') && $bodyClassList.remove('read-mode')
+})
+
+document.addEventListener('pjax:complete', function () {
+  window.refreshFn()
+
+  document.querySelectorAll('script[data-pjax]').forEach(item => {
+    const newScript = document.createElement('script')
+    const content = item.text || item.textContent || item.innerHTML || ""
+    Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+    newScript.appendChild(document.createTextNode(content))
+    item.parentNode.replaceChild(newScript, item)
+  })
+
+  GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+  typeof panguInit === 'function' && panguInit()
+
+  // google analytics
+  typeof gtag === 'function' && gtag('config', '', {'page_path': window.location.pathname});
+
+  // baidu analytics
+  typeof _hmt === 'object' && _hmt.push(['_trackPageview',window.location.pathname]);
+
+  typeof loadMeting === 'function' && document.getElementsByClassName('aplayer').length && loadMeting()
+
+  // prismjs
+  typeof Prism === 'object' && Prism.highlightAll()
+})
+
+document.addEventListener('pjax:error', e => {
+  if (e.request.status === 404) {
+    pjax.loadUrl('/404.html')
+  }
+})</script><script async data-pjax src="//busuanzi.ibruce.info/busuanzi/2.3/busuanzi.pure.mini.js"></script><script charset="UTF-8" src="https://cdn.cbd.int/anzhiyu-theme-static@1.1.5/accesskey/accesskey.js"></script></div><div id="popup-window"><div class="popup-window-title">通知</div><div class="popup-window-divider"></div><div class="popup-window-content"><div class="popup-tip">你好呀</div><div class="popup-link"><i class="anzhiyufont anzhiyu-icon-arrow-circle-right"></i></div></div></div><!-- hexo injector body_end start --><script data-pjax>
+  function butterfly_footer_beautify_injector_config(){
+    var parent_div_git = document.getElementById('footer-wrap');
+    var item_html = '<div id="workboard"></div><p id="ghbdages"><a class="github-badge" target="_blank" href="https://hexo.io/" style="margin-inline:5px" data-title="博客框架为Hexo_v6.2.0" title=""><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png&quot;" data-lazy-src="https://img.shields.io/badge/Frame-Hexo-blue?style=flat&amp;logo=hexo" alt=""/></a><a class="github-badge" target="_blank" href="https://butterfly.js.org/" style="margin-inline:5px" data-title="主题版本Butterfly_v4.3.1" title=""><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png&quot;" data-lazy-src="https://img.shields.io/badge/Theme-Butterfly-6513df?style=flat&amp;logo=bitdefender" alt=""/></a><a class="github-badge" target="_blank" href="https://vercel.com/" style="margin-inline:5px" data-title="本站采用多线部署，主线路托管于Vercel" title=""><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png&quot;" data-lazy-src="https://img.shields.io/badge/Hosted-Vercel-brightgreen?style=flat&amp;logo=Vercel" alt=""/></a><a class="github-badge" target="_blank" href="https://dashboard.4everland.org/" style="margin-inline:5px" data-title="本站采用多线部署，备用线路托管于4EVERLAND" title=""><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png&quot;" data-lazy-src="https://img.shields.io/badge/Hosted-4EVERLAND-22DDDD?style=flat&amp;logo=IPFS" alt=""/></a><a class="github-badge" target="_blank" href="https://github.com/" style="margin-inline:5px" data-title="本站项目由Github托管" title=""><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png&quot;" data-lazy-src="https://img.shields.io/badge/Source-Github-d021d6?style=flat&amp;logo=GitHub" alt=""/></a><a class="github-badge" target="_blank" href="http://creativecommons.org/licenses/by-nc-sa/4.0/" style="margin-inline:5px" data-title="本站采用知识共享署名-非商业性使用-相同方式共享4.0国际许可协议进行许可" title=""><img src= "data:image/gif;base64,R0lGODlhAQABAIAAAAAAAP///yH5BAEAAAAALAAAAAABAAEAAAIBRAA7" onerror="this.onerror=null,this.src=&quot;https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png&quot;" data-lazy-src="https://img.shields.io/badge/Copyright-BY--NC--SA%204.0-d42328?style=flat&amp;logo=Claris" alt=""/></a></p>';
+    console.log('已挂载butterfly_footer_beautify')
+    parent_div_git.insertAdjacentHTML("beforeend",item_html)
+    }
+  var elist = 'null'.split(',');
+  var cpage = location.pathname;
+  var epage = 'all';
+  var flag = 0;
+
+  for (var i=0;i<elist.length;i++){
+    if (cpage.includes(elist[i])){
+      flag++;
+    }
+  }
+
+  if ((epage ==='all')&&(flag == 0)){
+    butterfly_footer_beautify_injector_config();
+  }
+  else if (epage === cpage){
+    butterfly_footer_beautify_injector_config();
+  }
+  </script><script async src="/js/runtime.js"></script><!-- hexo injector body_end end --></body></html>
