@@ -1,0 +1,507 @@
+<!DOCTYPE html><html lang="zh-Hans" data-theme="light"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>可选链 | 木鱼的鱼窝</title><noscript>开启JavaScript才能访问本站哦~</noscript><link rel="icon" href="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg"><link rel="stylesheet" href="/css/index.css?v=3.0.20"><link rel="canonical" href="https://www.woodfishhhh.xyz/2026/01/06/Udemy%20JS/113%20%E5%8F%AF%E9%80%89%E9%93%BE%EF%BC%88Optional%20Chaining%EF%BC%89%E7%AC%94%E8%AE%B0/index.html"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css"><!-- Feature-specific CSS--><!-- aplayer--><!-- swiper--><!-- fancybox ui--><!-- katex--><!-- Open Graph--><meta name="description" content="JavaScript 可选链（Optional Chaining）笔记 一、可选链的引入背景与核心问题（对应视频 00:00-03:15） 1.1 传统属性访问的痛点 当访问嵌套对象的属性时，若中间某一层属性不存在（值为undefined或null），直接访问会触发类型错误。   示例场景：获取餐厅（ restaurant ）周一（ 1mon ）的营业时间（ 1open ），对象结构如下： jav">
+<meta property="og:type" content="article">
+<meta property="og:title" content="可选链">
+<meta property="og:url" content="https://www.woodfishhhh.xyz/2026/01/06/Udemy%20JS/113%20%E5%8F%AF%E9%80%89%E9%93%BE%EF%BC%88Optional%20Chaining%EF%BC%89%E7%AC%94%E8%AE%B0/index.html">
+<meta property="og:site_name" content="木鱼的鱼窝">
+<meta property="og:description" content="JavaScript 可选链（Optional Chaining）笔记 一、可选链的引入背景与核心问题（对应视频 00:00-03:15） 1.1 传统属性访问的痛点 当访问嵌套对象的属性时，若中间某一层属性不存在（值为undefined或null），直接访问会触发类型错误。   示例场景：获取餐厅（ restaurant ）周一（ 1mon ）的营业时间（ 1open ），对象结构如下： jav">
+<meta property="og:locale">
+<meta property="og:image" content="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg">
+<meta property="article:published_time" content="2026-01-06T15:39:48.000Z">
+<meta property="article:modified_time" content="2026-01-22T07:17:45.340Z">
+<meta property="article:author" content="woodfish">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="ES2020">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg"><!-- pwa--><meta name="apple-mobile-web-app-capable" content="木鱼的鱼窝"><meta name="theme-color" content="var(--efu-main)"><meta name="apple-mobile-web-app-status-bar-style" content="var(--efu-main)"><link rel="bookmark" href="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg"><link rel="apple-touch-icon" href="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg" sizes="180x180"><script>console.log(' %c Solitude %c ' + '3.0.20' + ' %c https://github.com/everfu/hexo-theme-solitude',
+    'background:#35495e ; padding: 1px; border-radius: 3px 0 0 3px;  color: #fff',
+    'background:#ff9a9a ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff',
+    'background:unset ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff')
+</script><script>(()=>{
+        const saveToLocal = {
+            set: function setWithExpiry(key, value, ttl) {
+                if (ttl === 0)
+                    return
+                const now = new Date()
+                const expiryDay = ttl * 86400000
+                const item = {
+                    value: value,
+                    expiry: now.getTime() + expiryDay
+                }
+                localStorage.setItem(key, JSON.stringify(item))
+            },
+            get: function getWithExpiry(key) {
+                const itemStr = localStorage.getItem(key)
+
+                if (!itemStr) {
+                    return undefined
+                }
+                const item = JSON.parse(itemStr)
+                const now = new Date()
+
+                if (now.getTime() > item.expiry) {
+                    localStorage.removeItem(key)
+                    return undefined
+                }
+                return item.value
+            }
+        };
+        window.utils = {
+            saveToLocal: saveToLocal,
+            getCSS: (url, id = false) => new Promise((resolve, reject) => {
+              const link = document.createElement('link')
+              link.rel = 'stylesheet'
+              link.href = url
+              if (id) link.id = id
+              link.onerror = reject
+              link.onload = link.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                link.onload = link.onreadystatechange = null
+                resolve()
+              }
+              document.head.appendChild(link)
+            }),
+            getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+              const script = document.createElement('script')
+              script.src = url
+              script.async = true
+              script.onerror = reject
+              script.onload = script.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                script.onload = script.onreadystatechange = null
+                resolve()
+              }
+
+              Object.keys(attr).forEach(key => {
+                script.setAttribute(key, attr[key])
+              })
+
+              document.head.appendChild(script)
+            }),
+            addGlobalFn: (key, fn, name = false, parent = window) => {
+                const globalFn = parent.globalFn || {}
+                const keyObj = globalFn[key] || {}
+
+                if (name && keyObj[name]) return
+
+                name = name || Object.keys(keyObj).length
+                keyObj[name] = fn
+                globalFn[key] = keyObj
+                parent.globalFn = globalFn
+            },
+            addEventListenerPjax: (ele, event, fn, option = false) => {
+              ele.addEventListener(event, fn, option)
+              utils.addGlobalFn('pjax', () => {
+                  ele.removeEventListener(event, fn, option)
+              })
+            },
+            diffDateFormat: (selector) => {
+                selector.forEach(item => {
+                    const date = new Date(item.getAttribute('datetime') || item.textContent);
+                    item.textContent = (date.getMonth() + 1).toString()+'/'+date.getDate().toString();
+                });
+            },
+        }
+    })()</script><!-- theme--><script>initTheme = () => {
+    const cachedMode = utils.saveToLocal.get('theme');
+    if (cachedMode === undefined)
+        document.documentElement.setAttribute('data-theme', 'dark');
+    else
+        document.documentElement.setAttribute('data-theme', cachedMode);
+    typeof rm === 'object' && rm.mode(cachedMode === undefined || cachedMode === 'dark')
+}
+initTheme()</script><script>const GLOBAL_CONFIG = {
+    root: '/',
+    algolia: undefined,
+    localsearch: undefined,
+    runtime: '2025-06-02 00:00:00',
+    lazyload: {
+        enable: true,
+        error: 'https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png'
+    },
+    copyright: {"limit":50,"author":"作者: woodfish","link":"链接: ","source":"来源: 木鱼的鱼窝","info":"著作权归作者所有。 商业转载请联系作者获得授权，非商业转载请注明出处。"},
+    highlight: {"limit":200,"expand":true,"copy":true,"syntax":"highlight.js"},
+    randomlink: false,
+    lang: {"theme":{"dark":"已切换至深色模式","light":"已切换至浅色模式"},"copy":{"success":"复制成功","error":"复制失败"},"backtop":"返回顶部","time":{"day":"天前","hour":"小时前","just":"刚刚","min":"分钟前","month":"个月前"},"day":" 天","f12":"开发者模式已打开，请遵循GPL协议。","totalk":"无需删除空行，直接输入评论即可"},
+    aside: {
+        state: {
+            morning: "✨ 早上好，新的一天开始了",
+            noon: "🍲 午餐时间",
+            afternoon: "🌞 下午好",
+            night: "早点休息",
+            goodnight: "晚安 😴",
+        },
+        witty_words: [],
+        witty_comment: {
+            prefix: '好久不见，',
+            back: '欢迎再次回来，',
+        },
+    },
+    covercolor: {
+        enable: false
+    },
+    comment: false,
+    lightbox: 'fancybox',
+    right_menu: {"mode":{"dark":"深色模式","light":"浅色模式"},"img_error":"此图片无法复制与下载","translate":true},
+    translate: {"translateDelay":0,"defaultEncoding":2},
+    lure: false,
+    expire: false,
+};</script><script id="config-diff">var PAGE_CONFIG = {
+    is_post: true,
+    is_page: false,
+    is_home: false,
+    page: '',
+    toc: true,
+    comment: false,
+    ai_text: false,
+    color: false,
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body id="body"><div><canvas id="universe"></canvas></div><div><div id="loading-box" onclick="preloader.endLoading();" style="zoom:1"><div class="loading-bg"><img class="loading-img nolazyload" src="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg" alt="loading image"></div></div><script>const preloader = {
+    isLoaded: false,
+    endLoading: () => {
+        if (!preloader.isLoaded) {
+            document.getElementById('loading-box').classList.add('loaded');
+            preloader.isLoaded = true;
+            preloader.togglePaceDone();
+        }
+    },
+    initLoading: () => {
+        document.getElementById('loading-box').classList.remove('loaded');
+        preloader.isLoaded = false;
+        preloader.togglePaceDone();
+    },
+    togglePaceDone: () => {
+        document.getElementById('body').className = preloader.isLoaded ? 'pace-done' : '';
+    }
+}
+
+window.addEventListener('load', () => {
+    preloader.endLoading();
+});
+
+window.addEventListener('pjax:send', () => {
+    preloader.initLoading();
+});
+
+document.addEventListener('pjax:complete', () => {
+    preloader.endLoading();
+});
+
+setTimeout(() => {
+    preloader.endLoading();
+}, 5000);</script></div><div><div id="console"><div class="close-btn" onclick="sco.hideConsole()"><i class="solitude fas fa-xmark"></i></div><div class="console-card-group"><div class="console-card-group-right"><div class="console-card tags" onclick="sco.hideConsole()"><div class="card-content"><div class="author-content-item-tips">标签</div><div class="author-content-item-title">寻找感兴趣的领域</div></div><div class="card-tag-cloud"><a href="/tags/Java/">Java<sup>9</sup></a><a href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/">期末复习<sup>2</sup></a><a href="/tags/Linux/">Linux<sup>1</sup></a><a href="/tags/TypeScript/">TypeScript<sup>1</sup></a><a href="/tags/JavaScript/">JavaScript<sup>37</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF/">前端<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">数据类型<sup>1</sup></a><a href="/tags/ES6/">ES6<sup>5</sup></a><a href="/tags/%E5%87%BD%E6%95%B0/">函数<sup>1</sup></a><a href="/tags/ES2020/">ES2020<sup>2</sup></a><a href="/tags/ES2021/">ES2021<sup>1</sup></a><a href="/tags/%E5%BE%AA%E7%8E%AF/">循环<sup>1</sup></a><a href="/tags/%E6%95%B0%E7%BB%84/">数组<sup>1</sup></a><a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/">项目管理<sup>1</sup></a><a href="/tags/Web%E5%BC%80%E5%8F%91/">Web开发<sup>1</sup></a><a href="/tags/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/">异步编程<sup>1</sup></a><a href="/tags/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/">事件循环<sup>1</sup></a><a href="/tags/%E5%BC%82%E6%AD%A5/">异步<sup>2</sup></a><a href="/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理<sup>1</sup></a><a href="/tags/%E7%8E%B0%E4%BB%A3%E5%BC%80%E5%8F%91/">现代开发<sup>1</sup></a><a href="/tags/Vue/">Vue<sup>1</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/">前端框架<sup>1</sup></a><a href="/tags/C/">C++<sup>1</sup></a><a href="/tags/%E7%AE%97%E6%B3%95/">算法<sup>5</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构<sup>1</sup></a><a href="/tags/%E7%AE%A1%E7%90%86%E5%AD%A6/">管理学<sup>1</sup></a><a href="/tags/%E6%A8%A1%E6%8B%9F%E5%8D%B7/">模拟卷<sup>2</sup></a><a href="/tags/%E9%A9%AC%E5%85%8B%E6%80%9D%E4%B8%BB%E4%B9%89/">马克思主义<sup>1</sup></a><a href="/tags/AJAX/">AJAX<sup>1</sup></a><a href="/tags/HTTP/">HTTP<sup>1</sup></a><a href="/tags/CSS/">CSS<sup>15</sup></a><a href="/tags/HTML/">HTML<sup>17</sup></a><a href="/tags/web/">web<sup>11</sup></a><a href="/tags/Ajax/">Ajax<sup>4</sup></a><a href="/tags/%E9%A2%98%E8%A7%A3/">题解<sup>3</sup></a><a href="/tags/%E7%BC%96%E7%A8%8B/">编程<sup>1</sup></a><a href="/tags/%E5%9F%B9%E8%AE%AD/">培训<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络<sup>7</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/">网络层<sup>1</sup></a><a href="/tags/%E8%B7%AF%E7%94%B1/">路由<sup>1</sup></a><a href="/tags/%E6%A6%82%E8%AE%BA/">概论<sup>1</sup></a><a href="/tags/%E7%89%A9%E7%90%86%E5%B1%82/">物理层<sup>1</sup></a><a href="/tags/%E9%93%BE%E8%B7%AF%E5%B1%82/">链路层<sup>1</sup></a><a href="/tags/%E8%BF%90%E8%BE%93%E5%B1%82/">运输层<sup>1</sup></a><a href="/tags/%E5%BA%94%E7%94%A8%E5%B1%82/">应用层<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">计算机组成原理<sup>6</sup></a><a href="/tags/%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97/">算术运算<sup>1</sup></a><a href="/tags/%E7%BC%93%E5%AD%98/">缓存<sup>1</sup></a><a href="/tags/%E5%AD%98%E5%82%A8%E5%99%A8/">存储器<sup>2</sup></a><a href="/tags/%E6%8C%87%E4%BB%A4%E7%B3%BB%E7%BB%9F/">指令系统<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A4%BA/">数据表示<sup>1</sup></a></div></div><div class="console-card history" onclick="sco.hideConsole()"><ul class="card-archive-list"><li class="item"><a href="/archives/2026/01/"><span class="date">2026/01</span><div class="count-group"><span class="count">43</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/10/"><span class="date">2025/10</span><div class="count-group"><span class="count">2</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/09/"><span class="date">2025/09</span><div class="count-group"><span class="count">4</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/08/"><span class="date">2025/08</span><div class="count-group"><span class="count">5</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/07/"><span class="date">2025/07</span><div class="count-group"><span class="count">23</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/06/"><span class="date">2025/06</span><div class="count-group"><span class="count">11</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/05/"><span class="date">2025/05</span><div class="count-group"><span class="count">5</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/"><span class="date">全部文章</span><div class="count-group"><span class="count">93</span><span class="unit">篇</span></div></a></li></ul></div></div></div><div class="button-group"><div class="console-btn-item"><span class="darkmode_switchbutton" onclick="sco.switchDarkMode()" title="昼夜切换"><i class="solitude fas fa-circle-half-stroke"></i></span></div><div class="console-btn-item" id="consoleHideAside"><span class="asideSwitch" onclick="sco.switchHideAside()" title="边栏显示控制"><i class="solitude fas fa-arrows-left-right-to-line"></i></span></div></div><div class="console-mask" onclick="sco.hideConsole()"></div></div></div><div id="sidebar" style="zoom: 1;"><div id="menu-mask" style="display: none;"></div><div id="sidebar-menus"><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">93</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">51</div></a></div></div></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><span class="darkmode_switchbutton menu-child" onclick="sco.switchDarkMode()"><i class="solitude fas fa-circle-half-stroke"></i><span>显示模式</span></span></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://www.woodfishhhh.xyz/" title="woodfishhhh博客"><img class="nolazyload back-menu-item-icon" src="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg" alt="woodfishhhh博客"><span class="back-menu-item-text">woodfishhhh博客</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/%20%7C%7C%20fas%20fa-home"><span>主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%20%7C%7C%20fas%20fa-tags"><span>标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%20%7C%7C%20fas%20fa-th"><span>分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/%20%7C%7C%20fas%20fa-link"><span>友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/%20%7C%7C%20fas%20fa-user"><span>关于我</span></a></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="card-tag-cloud"><a href="/tags/Java/">Java<sup>9</sup></a><a href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/">期末复习<sup>2</sup></a><a href="/tags/Linux/">Linux<sup>1</sup></a><a href="/tags/TypeScript/">TypeScript<sup>1</sup></a><a href="/tags/JavaScript/">JavaScript<sup>37</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF/">前端<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">数据类型<sup>1</sup></a><a href="/tags/ES6/">ES6<sup>5</sup></a><a href="/tags/%E5%87%BD%E6%95%B0/">函数<sup>1</sup></a><a href="/tags/ES2020/">ES2020<sup>2</sup></a><a href="/tags/ES2021/">ES2021<sup>1</sup></a><a href="/tags/%E5%BE%AA%E7%8E%AF/">循环<sup>1</sup></a><a href="/tags/%E6%95%B0%E7%BB%84/">数组<sup>1</sup></a><a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/">项目管理<sup>1</sup></a><a href="/tags/Web%E5%BC%80%E5%8F%91/">Web开发<sup>1</sup></a><a href="/tags/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/">异步编程<sup>1</sup></a><a href="/tags/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/">事件循环<sup>1</sup></a><a href="/tags/%E5%BC%82%E6%AD%A5/">异步<sup>2</sup></a><a href="/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理<sup>1</sup></a><a href="/tags/%E7%8E%B0%E4%BB%A3%E5%BC%80%E5%8F%91/">现代开发<sup>1</sup></a><a href="/tags/Vue/">Vue<sup>1</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/">前端框架<sup>1</sup></a><a href="/tags/C/">C++<sup>1</sup></a><a href="/tags/%E7%AE%97%E6%B3%95/">算法<sup>5</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构<sup>1</sup></a><a href="/tags/%E7%AE%A1%E7%90%86%E5%AD%A6/">管理学<sup>1</sup></a><a href="/tags/%E6%A8%A1%E6%8B%9F%E5%8D%B7/">模拟卷<sup>2</sup></a><a href="/tags/%E9%A9%AC%E5%85%8B%E6%80%9D%E4%B8%BB%E4%B9%89/">马克思主义<sup>1</sup></a><a href="/tags/AJAX/">AJAX<sup>1</sup></a><a href="/tags/HTTP/">HTTP<sup>1</sup></a><a href="/tags/CSS/">CSS<sup>15</sup></a><a href="/tags/HTML/">HTML<sup>17</sup></a><a href="/tags/web/">web<sup>11</sup></a><a href="/tags/Ajax/">Ajax<sup>4</sup></a><a href="/tags/%E9%A2%98%E8%A7%A3/">题解<sup>3</sup></a><a href="/tags/%E7%BC%96%E7%A8%8B/">编程<sup>1</sup></a><a href="/tags/%E5%9F%B9%E8%AE%AD/">培训<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络<sup>7</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/">网络层<sup>1</sup></a><a href="/tags/%E8%B7%AF%E7%94%B1/">路由<sup>1</sup></a><a href="/tags/%E6%A6%82%E8%AE%BA/">概论<sup>1</sup></a><a href="/tags/%E7%89%A9%E7%90%86%E5%B1%82/">物理层<sup>1</sup></a><a href="/tags/%E9%93%BE%E8%B7%AF%E5%B1%82/">链路层<sup>1</sup></a><a href="/tags/%E8%BF%90%E8%BE%93%E5%B1%82/">运输层<sup>1</sup></a><a href="/tags/%E5%BA%94%E7%94%A8%E5%B1%82/">应用层<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">计算机组成原理<sup>6</sup></a><a href="/tags/%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97/">算术运算<sup>1</sup></a><a href="/tags/%E7%BC%93%E5%AD%98/">缓存<sup>1</sup></a><a href="/tags/%E5%AD%98%E5%82%A8%E5%99%A8/">存储器<sup>2</sup></a><a href="/tags/%E6%8C%87%E4%BB%A4%E7%B3%BB%E7%BB%9F/">指令系统<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A4%BA/">数据表示<sup>1</sup></a></div></div></div></div><div><div class="needEndHide" id="rightside"><div class="rs_hide"><button class="translate" type="button" title="简繁转换">简</button><button class="mode" type="button" title="显示模式切换" onclick="sco.switchDarkMode()"><i class="fas fa-circle-half-stroke"></i></button><button class="aside pc" type="button" title="侧边栏" onclick="sco.switchHideAside()"><i class="fas fa-arrows-alt-h"></i></button></div><div class="rs_show"><button class="config" type="button" title="扩展" onclick="document.querySelector(&quot;.rs_hide&quot;).classList.toggle(&quot;show&quot;)"><i class="fas fa-gear fa-spin"></i></button><button class="mobile toc" type="button" title="目录" onclick="document.querySelector('#card-toc').classList.toggle('open')"><i class="fas fa-list"></i></button><button class="top" type="button" title="返回顶部" onclick="sco.toTop()"><i class="fas fa-arrow-up"></i><span id="percent">0</span></button></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="show" id="nav"><div id="nav-group"><div id="blog_name"><a href="/" title="返回博客主页" id="site-name"><span class="title">木鱼的鱼窝</span><i class="solitude fas fa-home"></i></a></div><div id="page-name-mask"><div id="page-name"><a id="page-name-text" onclick="sco.toTop()">可选链</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/%20%7C%7C%20fas%20fa-home"><span>主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%20%7C%7C%20fas%20fa-tags"><span>标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%20%7C%7C%20fas%20fa-th"><span>分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/%20%7C%7C%20fas%20fa-link"><span>友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/%20%7C%7C%20fas%20fa-user"><span>关于我</span></a></div></div></div><div id="nav-left"></div><div id="nav-right"><div class="nav-button" id="travellings_button"><a class="site-page" target="_blank" rel="noopener" href="https://www.travellings.cn/go.html" onclick="javascript:travelling()" title=""><i class="solitude fas fa-train"></i></a></div><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机一篇文章" href="javascript:void(0);"><i class="solitude fas fa-dice-d6"></i></a></div><div class="nav-button" id="nav-console"><a class="console_switchbutton" onclick="sco.showConsole()" title="中控台" href="javascript:void(0);"><label><i class="left"></i><i class="center"></i><i class="right"></i></label></a></div><div id="toggle-menu"><a class="site-page"><i class="solitude fas fa-bars"></i></a></div></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original" title="该文章为原创文章，注意版权协议">原创</a><span class="post-meta-categories"><a class="post-meta-categories" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a></span><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/JavaScript/"><span class="tags-name tags-punctuation"><i class="solitude fas fa-hashtag"></i>JavaScript</span></a><a class="post-meta__tags" href="/tags/ES2020/"><span class="tags-name tags-punctuation"><i class="solitude fas fa-hashtag"></i>ES2020</span></a></div></div></div></div><h1 class="post-title">可选链</h1><div id="post-meta"><div class="meta-secondline"><span class="post-meta-date" title="发布于 2026-01-06 23:39:48"><i class="post-meta-icon solitude fas fa-calendar-days"></i><time datetime="2026-01-06T15:39:48.000Z">2026-01-06T15:39:48.000Z</time></span><span class="post-meta-date" title="最后更新于 2026-01-22 15:17:45"><i class="post-meta-icon solitude fas fa-arrows-rotate"></i><time datetime="2026-01-22T07:17:45.340Z">2026-01-22T07:17:45.340Z</time></span></div></div></div><div class="post-radius-bottom"></div><article class="post-content article-container"><h1>JavaScript 可选链（Optional Chaining）笔记</h1>
+<h2 id="一、可选链的引入背景与核心问题（对应视频-00-00-03-15）">一、可选链的引入背景与核心问题（对应视频 00:00-03:15）</h2>
+<h3 id="1-1-传统属性访问的痛点">1.1 传统属性访问的痛点</h3>
+<p>当访问嵌套对象的属性时，若中间某一层属性不存在（值为<code>undefined</code>或<code>null</code>），直接访问会触发<strong>类型错误</strong>。</p>
+<ul>
+<li>
+<p>示例场景：获取餐厅（</p>
+<p>restaurant</p>
+<p>）周一（</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mon</span><br></pre></td></tr></table></figure>
+<p>）的营业时间（</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">open</span><br></pre></td></tr></table></figure>
+<p>），对象结构如下：</p>
+<p>javascript</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> restaurant = &#123;</span><br><span class="line">  <span class="attr">openingHours</span>: &#123;</span><br><span class="line">    <span class="attr">thu</span>: &#123; <span class="attr">open</span>: <span class="number">12</span>, <span class="attr">close</span>: <span class="number">22</span> &#125;,</span><br><span class="line">    <span class="attr">fri</span>: &#123; <span class="attr">open</span>: <span class="number">11</span>, <span class="attr">close</span>: <span class="number">23</span> &#125;,</span><br><span class="line">    <span class="attr">sat</span>: &#123; <span class="attr">open</span>: <span class="number">0</span>, <span class="attr">close</span>: <span class="number">24</span> &#125;, <span class="comment">// 0表示24小时营业</span></span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>问题代码：直接访问</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">restaurant.openingHours.mon.open</span><br></pre></td></tr></table></figure>
+<p>由于</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">openingHours</span><br></pre></td></tr></table></figure>
+<p>中没有</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mon</span><br></pre></td></tr></table></figure>
+<p>属性，</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">restaurant.openingHours.mon</span><br></pre></td></tr></table></figure>
+<p>会返回</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">undefined</span><br></pre></td></tr></table></figure>
+<p>，后续访问</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">open</span><br></pre></td></tr></table></figure>
+<p>会报错：</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">Uncaught TypeError: Cannot read properties of undefined (reading &#x27;open&#x27;)</span><br></pre></td></tr></table></figure>
+<p>。</p>
+</li>
+</ul>
+<h3 id="1-2-传统解决方案的局限性">1.2 传统解决方案的局限性</h3>
+<p>为避免报错，需手动逐层检查属性是否存在，代码冗余且可读性差，嵌套层级越多，问题越突出。</p>
+<ul>
+<li>
+<p>传统写法：</p>
+<p>javascript</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 需先检查openingHours存在，再检查mon存在</span></span><br><span class="line"><span class="keyword">if</span> (restaurant.<span class="property">openingHours</span> &amp;&amp; restaurant.<span class="property">openingHours</span>.<span class="property">mon</span>) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(restaurant.<span class="property">openingHours</span>.<span class="property">mon</span>.<span class="property">open</span>);</span><br><span class="line">&#125; <span class="keyword">else</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;Closed&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>缺点：若嵌套层级增加（如<code>restaurant.location.address.city</code>），需叠加更多条件判断，代码臃肿。</p>
+</li>
+</ul>
+<h2 id="二、可选链的基本概念与语法（对应视频-03-16-06-25）">二、可选链的基本概念与语法（对应视频 03:16-06:25）</h2>
+<h3 id="2-1-定义与语法">2.1 定义与语法</h3>
+<ul>
+<li>
+<p><strong>定义</strong>：可选链（<code>?.</code>）是 ES2020 引入的特性，用于安全访问嵌套对象 / 数组的属性或方法。若<code>?.</code>左侧的表达式值为<code>null</code>或<code>undefined</code>（即 “空值”），则立即返回<code>undefined</code>，不再继续访问后续属性，避免报错。</p>
+</li>
+<li>
+<p>语法规则</p>
+<p>：</p>
+<ul>
+<li>访问对象属性：<code>obj?.prop</code>（等价于<code>obj &amp;&amp; obj.prop</code>，但更简洁）</li>
+<li>访问嵌套属性：<code>obj?.prop1?.prop2</code>（支持多层嵌套，任意一层为空则返回<code>undefined</code>）</li>
+<li>动态属性访问：<code>obj?.[dynamicProp]</code>（结合括号表示法，支持变量作为属性名）</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-2-基础使用示例">2.2 基础使用示例</h3>
+<p>基于 1.1 中的<code>restaurant</code>对象，用可选链优化属性访问：</p>
+<p>javascript</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 访问单层可选属性：检查openingHours是否存在，再访问mon</span></span><br><span class="line"><span class="keyword">const</span> monOpen = restaurant.<span class="property">openingHours</span>?.<span class="property">mon</span>?.<span class="property">open</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(monOpen); <span class="comment">// undefined（无报错）</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 访问存在的属性：fri存在，正常返回11</span></span><br><span class="line"><span class="keyword">const</span> friOpen = restaurant.<span class="property">openingHours</span>?.<span class="property">fri</span>?.<span class="property">open</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(friOpen); <span class="comment">// 11</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 处理空值：用空值合并运算符（??）设置默认值（仅空值触发）</span></span><br><span class="line"><span class="keyword">const</span> monStatus = restaurant.<span class="property">openingHours</span>?.<span class="property">mon</span>?.<span class="property">open</span> ?? <span class="string">&quot;Closed&quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(monStatus); <span class="comment">// Closed（因monOpen为undefined）</span></span><br></pre></td></tr></table></figure>
+<h3 id="2-3-关键注意点">2.3 关键注意点</h3>
+<ul>
+<li>可选链仅判断 “空值”（<code>null</code>/<code>undefined</code>），对<code>0</code>、<code>''</code>、<code>false</code>等 “假值” 不生效，仍会继续访问后续属性。</li>
+<li>示例：<code>restaurant.openingHours?.sat?.open</code>返回<code>0</code>（<code>0</code>是有效值，非空值），而非<code>undefined</code>。</li>
+</ul>
+<h2 id="三、可选链在动态场景中的应用（对应视频-06-26-10-59）">三、可选链在动态场景中的应用（对应视频 06:26-10:59）</h2>
+<h3 id="3-1-动态属性访问（结合数组与变量）">3.1 动态属性访问（结合数组与变量）</h3>
+<p>当属性名通过变量动态生成（如从数组中获取）时，需用<code>?.[变量]</code>语法，可选链同样适用。</p>
+<ul>
+<li>
+<p>示例场景：循环数组</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">weekdays</span><br></pre></td></tr></table></figure>
+<p>，获取餐厅每天的营业时间：</p>
+<p>javascript</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> weekdays = [<span class="string">&quot;mon&quot;</span>, <span class="string">&quot;tue&quot;</span>, <span class="string">&quot;wed&quot;</span>, <span class="string">&quot;thu&quot;</span>, <span class="string">&quot;fri&quot;</span>, <span class="string">&quot;sat&quot;</span>, <span class="string">&quot;sun&quot;</span>];</span><br><span class="line"></span><br><span class="line">weekdays.<span class="title function_">forEach</span>(<span class="function">(<span class="params">day</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="comment">// 动态访问：day为变量，用?.[day]检查属性是否存在</span></span><br><span class="line">  <span class="keyword">const</span> open = restaurant.<span class="property">openingHours</span>?.[day]?.<span class="property">open</span> ?? <span class="string">&quot;Closed&quot;</span>;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`<span class="subst">$&#123;day&#125;</span>: <span class="subst">$&#123;open&#125;</span>`</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+</li>
+<li>
+<p>输出结果：</p>
+<p>plaintext</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">mon: Closed</span><br><span class="line">tue: Closed</span><br><span class="line">wed: Closed</span><br><span class="line">thu: 12</span><br><span class="line">fri: 11</span><br><span class="line">sat: 0</span><br><span class="line">sun: Closed</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h3 id="3-2-对比传统写法">3.2 对比传统写法</h3>
+<p>若不用可选链，需手动检查<code>openingHours</code>和<code>[day]</code>是否存在，代码如下：</p>
+<p>javascript</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">weekdays.<span class="title function_">forEach</span>(<span class="function">(<span class="params">day</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="keyword">let</span> open;</span><br><span class="line">  <span class="keyword">if</span> (restaurant.<span class="property">openingHours</span> &amp;&amp; restaurant.<span class="property">openingHours</span>[day]) &#123;</span><br><span class="line">    open = restaurant.<span class="property">openingHours</span>[day].<span class="property">open</span>;</span><br><span class="line">  &#125; <span class="keyword">else</span> &#123;</span><br><span class="line">    open = <span class="string">&quot;Closed&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">`<span class="subst">$&#123;day&#125;</span>: <span class="subst">$&#123;open&#125;</span>`</span>);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>结论：可选链将 3 行判断简化为 1 行，代码更简洁，可读性更高。</li>
+</ul>
+<h2 id="四、可选链与空值合并运算符的配合（对应视频-10-00-11-15）">四、可选链与空值合并运算符的配合（对应视频 10:00-11:15）</h2>
+<h3 id="4-1-为何需要搭配使用">4.1 为何需要搭配使用</h3>
+<ul>
+<li>问题：若用<code>||</code>设置默认值，会误将<code>0</code>、<code>''</code>等 “假值” 当作 “空值” 处理。例如<code>restaurant.openingHours.sat.open</code>为<code>0</code>，用<code>||</code>会返回默认值<code>'Closed'</code>，与实际业务逻辑冲突。</li>
+<li>解决方案：空值合并运算符（<code>??</code>）仅在左侧为<code>null</code>/<code>undefined</code>时返回右侧默认值，与可选链搭配可精准处理默认值场景。</li>
+</ul>
+<h3 id="4-2-实战示例">4.2 实战示例</h3>
+<p>javascript</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 错误写法：用||，sat的open=0会被当作假值，返回&#x27;Closed&#x27;</span></span><br><span class="line"><span class="keyword">const</span> satOpenWrong = restaurant.<span class="property">openingHours</span>?.<span class="property">sat</span>?.<span class="property">open</span> || <span class="string">&quot;Closed&quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(satOpenWrong); <span class="comment">// Closed（错误，实际应返回0）</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 正确写法：用??，仅当值为null/undefined时返回&#x27;Closed&#x27;</span></span><br><span class="line"><span class="keyword">const</span> satOpenRight = restaurant.<span class="property">openingHours</span>?.<span class="property">sat</span>?.<span class="property">open</span> ?? <span class="string">&quot;Closed&quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(satOpenRight); <span class="comment">// 0（正确）</span></span><br></pre></td></tr></table></figure>
+<h3 id="4-3-常见使用场景">4.3 常见使用场景</h3>
+<ul>
+<li>接口数据处理：当接口返回的嵌套字段可能缺失时，用<code>obj?.field1?.field2 ?? '默认值'</code>确保代码不报错且显示合理。</li>
+<li>表单值获取：<code>input?.value ?? ''</code>（避免<code>input</code>元素未渲染时访问<code>value</code>报错，且空输入时返回空字符串）。</li>
+</ul>
+<h2 id="五、可选链在方法调用中的应用（对应视频-11-16-13-20）">五、可选链在方法调用中的应用（对应视频 11:16-13:20）</h2>
+<h3 id="5-1-核心作用">5.1 核心作用</h3>
+<p>检查方法是否存在后再调用，避免因调用 “非函数”（如<code>undefined</code>）而报错。</p>
+<ul>
+<li>语法：<code>obj?.methodName(参数)</code>（若<code>obj.methodName</code>不存在或非函数，返回<code>undefined</code>，不执行调用）</li>
+</ul>
+<h3 id="5-2-示例演示">5.2 示例演示</h3>
+<p>基于<code>restaurant</code>对象，模拟方法存在 / 不存在的场景：</p>
+<p>javascript</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> restaurant = &#123;</span><br><span class="line">  <span class="attr">openingHours</span>: &#123;</span><br><span class="line">    <span class="comment">/* 同前 */</span></span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 存在的方法：点单</span></span><br><span class="line">  <span class="title function_">order</span>(<span class="params">food1, food2</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="string">`您点了<span class="subst">$&#123;food1&#125;</span>和<span class="subst">$&#123;food2&#125;</span>`</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">  <span class="comment">// 不存在的方法：点烩饭（orderRisotto未定义）</span></span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 1. 调用存在的方法：正常执行</span></span><br><span class="line"><span class="keyword">const</span> order1 = restaurant.<span class="property">order</span>?.(<span class="string">&quot;汉堡&quot;</span>, <span class="string">&quot;薯条&quot;</span>) ?? <span class="string">&quot;点单失败&quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(order1); <span class="comment">// 您点了汉堡和薯条</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 调用不存在的方法：返回undefined，再触发默认值</span></span><br><span class="line"><span class="keyword">const</span> order2 = restaurant.<span class="property">orderRisotto</span>?.(<span class="string">&quot;蘑菇烩饭&quot;</span>) ?? <span class="string">&quot;该菜品暂不提供&quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(order2); <span class="comment">// 该菜品暂不提供</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 若不用可选链：直接调用不存在的方法会报错</span></span><br><span class="line"><span class="comment">// restaurant.orderRisotto(&#x27;蘑菇烩饭&#x27;); // Uncaught TypeError: restaurant.orderRisotto is not a function</span></span><br></pre></td></tr></table></figure>
+<h3 id="5-3-注意事项">5.3 注意事项</h3>
+<ul>
+<li>
+<p>可选链仅检查 “方法是否存在”，不检查 “方法是否可调用”（如<code>obj.method</code>是普通变量而非函数时，仍会报错）。</p>
+</li>
+<li>
+<p>示例：</p>
+<p>javascript</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> restaurant = &#123; <span class="attr">order</span>: <span class="string">&quot;这是字符串，不是方法&quot;</span> &#125;;</span><br><span class="line"><span class="comment">// restaurant.order?.() 会报错：Uncaught TypeError: restaurant.order is not a function</span></span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+<h2 id="六、可选链在数组中的应用（对应视频-13-21-16-04）">六、可选链在数组中的应用（对应视频 13:21-16:04）</h2>
+<h3 id="6-1-核心作用">6.1 核心作用</h3>
+<p>检查数组元素是否存在，避免因访问 “越界索引” 或 “空数组” 的元素而报错。</p>
+<ul>
+<li>语法：
+<ul>
+<li>访问指定索引：<code>arr?.[index]</code>（若<code>arr</code>为<code>null</code>/<code>undefined</code>，或<code>index</code>超出数组长度，返回<code>undefined</code>）</li>
+<li>访问嵌套元素：<code>arr?.[index]?.prop</code>（数组元素为对象时，安全访问其属性）</li>
+</ul>
+</li>
+</ul>
+<h3 id="6-2-示例演示">6.2 示例演示</h3>
+<h4 id="场景-1：数组非空且元素存在">场景 1：数组非空且元素存在</h4>
+<p>javascript</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> users = [</span><br><span class="line">  &#123; <span class="attr">name</span>: <span class="string">&quot;Jonas&quot;</span>, <span class="attr">email</span>: <span class="string">&quot;jonas@example.com&quot;</span> &#125;,</span><br><span class="line">  &#123; <span class="attr">name</span>: <span class="string">&quot;Alice&quot;</span>, <span class="attr">email</span>: <span class="string">&quot;alice@example.com&quot;</span> &#125;,</span><br><span class="line">];</span><br><span class="line"></span><br><span class="line"><span class="comment">// 访问索引0的name：存在，返回Jonas</span></span><br><span class="line"><span class="keyword">const</span> userName1 = users?.[<span class="number">0</span>]?.<span class="property">name</span> ?? <span class="string">&quot;用户不存在&quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(userName1); <span class="comment">// Jonas</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 访问索引1的email：存在，返回alice@example.com</span></span><br><span class="line"><span class="keyword">const</span> userEmail1 = users?.[<span class="number">1</span>]?.<span class="property">email</span> ?? <span class="string">&quot;邮箱未设置&quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(userEmail1); <span class="comment">// alice@example.com</span></span><br></pre></td></tr></table></figure>
+<h4 id="场景-2：数组空或索引越界">场景 2：数组空或索引越界</h4>
+<p>javascript</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> emptyUsers = []; <span class="comment">// 空数组</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 1. 访问空数组的索引0：返回undefined，触发默认值</span></span><br><span class="line"><span class="keyword">const</span> userName2 = emptyUsers?.[<span class="number">0</span>]?.<span class="property">name</span> ?? <span class="string">&quot;用户列表为空&quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(userName2); <span class="comment">// 用户列表为空</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 访问非空数组的越界索引（索引2）：返回undefined，触发默认值</span></span><br><span class="line"><span class="keyword">const</span> userName3 = users?.[<span class="number">2</span>]?.<span class="property">name</span> ?? <span class="string">&quot;该用户不存在&quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(userName3); <span class="comment">// 该用户不存在</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 数组本身为undefined：返回undefined，触发默认值</span></span><br><span class="line"><span class="keyword">const</span> undefinedUsers = <span class="literal">undefined</span>;</span><br><span class="line"><span class="keyword">const</span> userName4 = undefinedUsers?.[<span class="number">0</span>]?.<span class="property">name</span> ?? <span class="string">&quot;用户数据未加载&quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(userName4); <span class="comment">// 用户数据未加载</span></span><br></pre></td></tr></table></figure>
+<h3 id="6-3-对比传统写法">6.3 对比传统写法</h3>
+<p>传统方式需先检查数组是否存在且长度大于索引，代码如下：</p>
+<p>javascript</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">const</span> <span class="title function_">getUserName</span> = (<span class="params">arr, index</span>) =&gt; &#123;</span><br><span class="line">  <span class="keyword">if</span> (arr &amp;&amp; arr.<span class="property">length</span> &gt; index) &#123;</span><br><span class="line">    <span class="keyword">return</span> arr[index].<span class="property">name</span> ?? <span class="string">&quot;邮箱未设置&quot;</span>;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">return</span> <span class="string">&quot;用户不存在&quot;</span>;</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">getUserName</span>(users, <span class="number">0</span>)); <span class="comment">// Jonas</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">getUserName</span>(emptyUsers, <span class="number">0</span>)); <span class="comment">// 用户不存在</span></span><br></pre></td></tr></table></figure>
+<ul>
+<li>结论：可选链将条件判断简化为<code>arr?.[index]?.name ?? '默认值'</code>，代码更简洁。</li>
+</ul>
+<h2 id="七、总结与常见误区（对应视频-16-05-16-11）">七、总结与常见误区（对应视频 16:05-16:11）</h2>
+<h3 id="7-1-核心知识点总结">7.1 核心知识点总结</h3>
+<table>
+<thead>
+<tr>
+<th>应用场景</th>
+<th>语法示例</th>
+<th>核心作用</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>对象属性访问</td>
+<td><code>obj?.prop</code>/<code>obj?.prop1?.prop2</code></td>
+<td>安全访问嵌套属性，空值返回<code>undefined</code></td>
+</tr>
+<tr>
+<td>动态属性访问</td>
+<td><code>obj?.[dynamicProp]</code></td>
+<td>变量作为属性名时，避免属性不存在报错</td>
+</tr>
+<tr>
+<td>方法调用</td>
+<td><code>obj?.method(参数)</code></td>
+<td>检查方法存在后调用，避免非函数调用报错</td>
+</tr>
+<tr>
+<td>数组元素访问</td>
+<td><code>arr?.[index]</code>/<code>arr?.[i]?.prop</code></td>
+<td>安全访问数组元素，避免越界或空数组报错</td>
+</tr>
+<tr>
+<td>配合默认值</td>
+<td><code>obj?.prop ?? '默认值'</code></td>
+<td>仅空值触发默认值，不影响<code>0</code>/<code>''</code>等假值</td>
+</tr>
+</tbody>
+</table>
+<h3 id="7-2-常见误区">7.2 常见误区</h3>
+<ol>
+<li><strong>误区 1</strong>：认为可选链可替代所有条件判断
+<ul>
+<li>错误：可选链仅处理 “空值”，若需判断 “值是否符合业务规则”（如<code>age &gt; 18</code>），仍需额外条件。</li>
+<li>示例：<code>const isAdult = user?.age &gt; 18 ?? false</code>（若<code>user.age</code>为<code>17</code>，返回<code>false</code>，正确；若<code>user</code>为空，返回<code>false</code>，正确）。</li>
+</ul>
+</li>
+<li><strong>误区 2</strong>：过度使用可选链
+<ul>
+<li>错误：对确定存在的属性（如自己定义的本地对象）使用<code>?.</code>，增加不必要的语法开销。</li>
+<li>示例：<code>const name = user.name</code>（<code>user</code>是本地定义的对象，确定有<code>name</code>属性，无需<code>user?.name</code>）。</li>
+</ul>
+</li>
+<li><strong>误区 3</strong>：混淆<code>?.</code>与<code>&amp;&amp;</code>
+<ul>
+<li>区别：<code>&amp;&amp;</code>会对所有 “假值” 返回左侧（如<code>obj.prop = 0</code>时，<code>obj &amp;&amp; obj.prop</code>返回<code>0</code>，<code>obj?.prop</code>也返回<code>0</code>，效果一致）；但<code>?.</code>更简洁，且支持多层嵌套（<code>obj?.p1?.p2</code> vs <code>obj &amp;&amp; obj.p1 &amp;&amp; obj.p1.p2</code>）。</li>
+</ul>
+</li>
+</ol>
+<h3 id="7-3-最佳实践">7.3 最佳实践</h3>
+<ul>
+<li>接口数据处理：对后端返回的不确定字段（如<code>res.data?.list?.[0]?.id</code>）必用可选链。</li>
+<li>DOM 操作：访问可能未渲染的元素（如<code>document.querySelector('.modal')?.style.display</code>）必用可选链。</li>
+<li>本地对象：确定存在的属性不用可选链，不确定的属性（如动态生成的对象）用可选链。</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author_group"><div class="post-copyright__author_img"><img class="post-copyright__author_img_front" src="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg"></div><div class="post-copyright__author_name">woodfish</div><div class="post-copyright__author_desc">HOLA,this is woodfish!</div></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div id="quit-box" onclick="RemoveRewardMask()"></div><div class="post-reward"><div class="reward-button" title="赞赏作者" onclick="AddRewardMask()"><i class="solitude fas fa-heart"></i>赞赏作者</div><div class="reward-main"><ul class="reward-all"><span class="reward-title"></span><ul class="reward-group"><li class="reward-item"><a href="/null"><img class="post-qr-code-img nolazyload" src="https://www.woodfishhhh.xyz/images/e926e309585e5a5826ab0c3b485f8b6.png?_t=1751445131356" alt="微信" style="border-color: var(--efu-main)"></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/null"><img class="post-qr-code-img nolazyload" src="https://www.woodfishhhh.xyz/images/8147e2d92fa8287fac8774305c99661.jpg.jpeg?_t=1751445131356" alt="支付宝" style="border-color: var(--efu-main)"></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/"><div class="reward-text">赞赏名单</div><div class="reward-dec"></div></a></ul></div></div><script>function RemoveRewardMask() {
+    let rewardMainElements = document.querySelectorAll(".reward-main");
+    let quitBoxElement = document.querySelector("#quit-box");
+
+    rewardMainElements.forEach(element => {
+        element.style.display = "none";
+    });
+
+    if (quitBoxElement) {
+        quitBoxElement.style.display = "none";
+    }
+}
+
+function AddRewardMask() {
+    let rewardMainElements = document.querySelectorAll(".reward-main");
+    let quitBoxElement = document.querySelector("#quit-box");
+
+    rewardMainElements.forEach(element => {
+        element.style.display = "flex";
+    });
+
+    if (quitBoxElement) {
+        quitBoxElement.style.display = "flex";
+    }
+}</script></div></div><div class="social-share"><a class="social-share-ico icon-qq" target="_blank" rel="noopener" href="https://connect.qq.com/widget/shareqq/index.html?url=https%3A%2F%2Fwww.woodfishhhh.xyz%2F2026%2F01%2F06%2FUdemy%2520JS%2F113%2520%25E5%258F%25AF%25E9%2580%2589%25E9%2593%25BE%25EF%25BC%2588Optional%2520Chaining%25EF%25BC%2589%25E7%25AC%2594%25E8%25AE%25B0%2F&amp;title=%E5%8F%AF%E9%80%89%E9%93%BE&amp;desc=undefined&amp;summary=undefined&amp;site=%E5%8F%AF%E9%80%89%E9%93%BE&amp;pics=https%3A%2F%2Fpic1.imgdb.cn%2Fitem%2F682f3d1658cb8da5c807b704.jpg" title="分享到QQ"><i class="solitude fab fa-qq"></i></a><a class="social-share-ico icon-weibo" target="_blank" rel="noopener" href="http://service.weibo.com/share/share.php?url=https%3A%2F%2Fwww.woodfishhhh.xyz%2F2026%2F01%2F06%2FUdemy%2520JS%2F113%2520%25E5%258F%25AF%25E9%2580%2589%25E9%2593%25BE%25EF%25BC%2588Optional%2520Chaining%25EF%25BC%2589%25E7%25AC%2594%25E8%25AE%25B0%2F&amp;title=%E5%8F%AF%E9%80%89%E9%93%BE&amp;pic=https%3A%2F%2Fpic1.imgdb.cn%2Fitem%2F682f3d1658cb8da5c807b704.jpg" title="分享到微博"><i class="solitude fab fa-weibo"></i></a><a class="social-share-ico icon-twitter" target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.woodfishhhh.xyz%2F2026%2F01%2F06%2FUdemy%2520JS%2F113%2520%25E5%258F%25AF%25E9%2580%2589%25E9%2593%25BE%25EF%25BC%2588Optional%2520Chaining%25EF%25BC%2589%25E7%25AC%2594%25E8%25AE%25B0%2F&amp;text=%E5%8F%AF%E9%80%89%E9%93%BE" title="分享到Twitter"><i class="solitude fab fa-twitter"></i></a><a class="social-share-ico icon-facebook" target="_blank" rel="noopener" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.woodfishhhh.xyz%2F2026%2F01%2F06%2FUdemy%2520JS%2F113%2520%25E5%258F%25AF%25E9%2580%2589%25E9%2593%25BE%25EF%25BC%2588Optional%2520Chaining%25EF%25BC%2589%25E7%25AC%2594%25E8%25AE%25B0%2F" title="分享到Facebook"><i class="solitude fab fa-facebook"></i></a><div class="social-share-ico icon-link" onclick="utils.copy(&quot;https://www.woodfishhhh.xyz/2026/01/06/Udemy%20JS/113%20%E5%8F%AF%E9%80%89%E9%93%BE%EF%BC%88Optional%20Chaining%EF%BC%89%E7%AC%94%E8%AE%B0/&quot;)" title="复制文章链接"><i class="solitude fas fa-link"></i></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本文是原创文章，采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>协议，完整转载请注明来自<a href="/">木鱼的鱼窝</a></span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/JavaScript/"><span class="tags-punctuation"><i class="solitude fas fa-hashtag"></i>JavaScript<span class="tagsPageCount">37</span></span></a><a class="post-meta__tags" href="/tags/ES2020/"><span class="tags-punctuation"><i class="solitude fas fa-hashtag"></i>ES2020<span class="tagsPageCount">2</span></span></a></div></div></div><nav class="needEndHide pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2026/01/06/Udemy%20JS/112%20Enhanced%20Object%20Literals%EF%BC%88ES6%20%E5%A2%9E%E5%BC%BA%E5%AF%B9%E8%B1%A1%E5%AD%97%E9%9D%A2%E9%87%8F%EF%BC%89/"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">增强对象字面量</div></div></a></div><div class="next-post pull-right"><a href="/2026/01/06/Udemy%20JS/112%20JavaScript%E6%95%B0%E7%BB%84%E6%96%B9%E6%B3%95(forEach,%20map,%20filter,%20reduce%E7%AD%89)/"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">JavaScript数组方法</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><div class="top-group"><div class="sayhi" id="sayhi" onclick="sco.changeWittyWord()"></div></div></div><div class="avatar"><img alt="头像" src="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg"></div><div class="description">欢迎来到我的鱼窝~</div><div class="bottom-group"><span class="left"><div class="name">woodfish</div><div class="desc">河汉微明星乍稀，碧莲香湿袭人衣。夜凉如水琉璃滑，自起开窗放月归。</div></span><div class="social-icons is-center"><a class="social-icon" target="_blank" rel="noopener" href="https://github.com/woodfishhhh" title="Github"><i class="solitude  fab fa-github"></i></a><a class="social-icon" target="_blank" rel="noopener" href="https://space.bilibili.com/359728114" title="Bilibili"><i class="solitude  fab fa-bilibili"></i></a><a class="social-icon" href="https://www.woodfishhhh.xyz/images/af1a055d14e4f7f6eae2886f2865d13.jpg.jpeg?_t=1750312382930" title="QQ"><i class="solitude  fab fa-qq"></i></a><a class="social-icon" href="https://www.woodfishhhh.xyz/images/f59723db9159310b6056abe8341f5d7.jpg.jpeg?_t=1750312263368" title="Wechat"><i class="solitude  fab fa-weixin"></i></a><a class="social-icon" href="https://www.woodfishhhh.xyz/images/d8d58d2f2c7ac5790fd37f388da41db4.png?_t=1759286665402" title="Email"><i class="solitude  far fa-envelope"></i></a><a class="social-icon" target="_blank" rel="noopener" href="https://www.douyin.com/user/MS4wLjABAAAAgbOrIhdi7Rl5RfaQ3fE3i7c2WnyR3zEOyLiK2Cjtcqk?from_tab_name=main" title="Douyin"><i class="solitude  fab fa-tiktok"></i></a></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="solitude fas fa-bars"></i><span>文章目录</span></div><div class="toc-content" id="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">JavaScript 可选链（Optional Chaining）笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E5%8F%AF%E9%80%89%E9%93%BE%E7%9A%84%E5%BC%95%E5%85%A5%E8%83%8C%E6%99%AF%E4%B8%8E%E6%A0%B8%E5%BF%83%E9%97%AE%E9%A2%98%EF%BC%88%E5%AF%B9%E5%BA%94%E8%A7%86%E9%A2%91-00-00-03-15%EF%BC%89"><span class="toc-text">一、可选链的引入背景与核心问题（对应视频 00:00-03:15）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E4%BC%A0%E7%BB%9F%E5%B1%9E%E6%80%A7%E8%AE%BF%E9%97%AE%E7%9A%84%E7%97%9B%E7%82%B9"><span class="toc-text">1.1 传统属性访问的痛点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E4%BC%A0%E7%BB%9F%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88%E7%9A%84%E5%B1%80%E9%99%90%E6%80%A7"><span class="toc-text">1.2 传统解决方案的局限性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E5%8F%AF%E9%80%89%E9%93%BE%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5%E4%B8%8E%E8%AF%AD%E6%B3%95%EF%BC%88%E5%AF%B9%E5%BA%94%E8%A7%86%E9%A2%91-03-16-06-25%EF%BC%89"><span class="toc-text">二、可选链的基本概念与语法（对应视频 03:16-06:25）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%AE%9A%E4%B9%89%E4%B8%8E%E8%AF%AD%E6%B3%95"><span class="toc-text">2.1 定义与语法</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%9F%BA%E7%A1%80%E4%BD%BF%E7%94%A8%E7%A4%BA%E4%BE%8B"><span class="toc-text">2.2 基础使用示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E5%85%B3%E9%94%AE%E6%B3%A8%E6%84%8F%E7%82%B9"><span class="toc-text">2.3 关键注意点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%8F%AF%E9%80%89%E9%93%BE%E5%9C%A8%E5%8A%A8%E6%80%81%E5%9C%BA%E6%99%AF%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%EF%BC%88%E5%AF%B9%E5%BA%94%E8%A7%86%E9%A2%91-06-26-10-59%EF%BC%89"><span class="toc-text">三、可选链在动态场景中的应用（对应视频 06:26-10:59）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E5%8A%A8%E6%80%81%E5%B1%9E%E6%80%A7%E8%AE%BF%E9%97%AE%EF%BC%88%E7%BB%93%E5%90%88%E6%95%B0%E7%BB%84%E4%B8%8E%E5%8F%98%E9%87%8F%EF%BC%89"><span class="toc-text">3.1 动态属性访问（结合数组与变量）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E5%AF%B9%E6%AF%94%E4%BC%A0%E7%BB%9F%E5%86%99%E6%B3%95"><span class="toc-text">3.2 对比传统写法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%8F%AF%E9%80%89%E9%93%BE%E4%B8%8E%E7%A9%BA%E5%80%BC%E5%90%88%E5%B9%B6%E8%BF%90%E7%AE%97%E7%AC%A6%E7%9A%84%E9%85%8D%E5%90%88%EF%BC%88%E5%AF%B9%E5%BA%94%E8%A7%86%E9%A2%91-10-00-11-15%EF%BC%89"><span class="toc-text">四、可选链与空值合并运算符的配合（对应视频 10:00-11:15）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E4%B8%BA%E4%BD%95%E9%9C%80%E8%A6%81%E6%90%AD%E9%85%8D%E4%BD%BF%E7%94%A8"><span class="toc-text">4.1 为何需要搭配使用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E5%AE%9E%E6%88%98%E7%A4%BA%E4%BE%8B"><span class="toc-text">4.2 实战示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E5%B8%B8%E8%A7%81%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">4.3 常见使用场景</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%8F%AF%E9%80%89%E9%93%BE%E5%9C%A8%E6%96%B9%E6%B3%95%E8%B0%83%E7%94%A8%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%EF%BC%88%E5%AF%B9%E5%BA%94%E8%A7%86%E9%A2%91-11-16-13-20%EF%BC%89"><span class="toc-text">五、可选链在方法调用中的应用（对应视频 11:16-13:20）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E6%A0%B8%E5%BF%83%E4%BD%9C%E7%94%A8"><span class="toc-text">5.1 核心作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-%E7%A4%BA%E4%BE%8B%E6%BC%94%E7%A4%BA"><span class="toc-text">5.2 示例演示</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-text">5.3 注意事项</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E5%8F%AF%E9%80%89%E9%93%BE%E5%9C%A8%E6%95%B0%E7%BB%84%E4%B8%AD%E7%9A%84%E5%BA%94%E7%94%A8%EF%BC%88%E5%AF%B9%E5%BA%94%E8%A7%86%E9%A2%91-13-21-16-04%EF%BC%89"><span class="toc-text">六、可选链在数组中的应用（对应视频 13:21-16:04）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-%E6%A0%B8%E5%BF%83%E4%BD%9C%E7%94%A8"><span class="toc-text">6.1 核心作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-%E7%A4%BA%E4%BE%8B%E6%BC%94%E7%A4%BA"><span class="toc-text">6.2 示例演示</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF-1%EF%BC%9A%E6%95%B0%E7%BB%84%E9%9D%9E%E7%A9%BA%E4%B8%94%E5%85%83%E7%B4%A0%E5%AD%98%E5%9C%A8"><span class="toc-text">场景 1：数组非空且元素存在</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF-2%EF%BC%9A%E6%95%B0%E7%BB%84%E7%A9%BA%E6%88%96%E7%B4%A2%E5%BC%95%E8%B6%8A%E7%95%8C"><span class="toc-text">场景 2：数组空或索引越界</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-%E5%AF%B9%E6%AF%94%E4%BC%A0%E7%BB%9F%E5%86%99%E6%B3%95"><span class="toc-text">6.3 对比传统写法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%83%E3%80%81%E6%80%BB%E7%BB%93%E4%B8%8E%E5%B8%B8%E8%A7%81%E8%AF%AF%E5%8C%BA%EF%BC%88%E5%AF%B9%E5%BA%94%E8%A7%86%E9%A2%91-16-05-16-11%EF%BC%89"><span class="toc-text">七、总结与常见误区（对应视频 16:05-16:11）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93"><span class="toc-text">7.1 核心知识点总结</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-%E5%B8%B8%E8%A7%81%E8%AF%AF%E5%8C%BA"><span class="toc-text">7.2 常见误区</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-3-%E6%9C%80%E4%BD%B3%E5%AE%9E%E8%B7%B5"><span class="toc-text">7.3 最佳实践</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="solitude fas fa-map"></i><span>最近发布</span></div><div class="aside-list"><a class="aside-list-item" href="/2026/01/06/Udemy%20TS/ts%E7%AC%94%E8%AE%B0/" title="TypeScript笔记"><div class="content"><span class="title" href="/2026/01/06/Udemy%20TS/ts%E7%AC%94%E8%AE%B0/" title="TypeScript笔记">TypeScript笔记</span><span class="categories" href="/2026/01/06/Udemy%20TS/ts%E7%AC%94%E8%AE%B0/">编程</span></div></a><a class="aside-list-item" href="/2026/01/06/Udemy%20JS/099%20Primitives%20vs.%20Objects%20(Primitive%20vs.%20Reference%20Types)%20/" title="基本类型与对象类型"><div class="content"><span class="title" href="/2026/01/06/Udemy%20JS/099%20Primitives%20vs.%20Objects%20(Primitive%20vs.%20Reference%20Types)%20/" title="基本类型与对象类型">基本类型与对象类型</span><span class="categories" href="/2026/01/06/Udemy%20JS/099%20Primitives%20vs.%20Objects%20(Primitive%20vs.%20Reference%20Types)%20/">前端</span></div></a><a class="aside-list-item" href="/2026/01/06/Udemy%20JS/103%20Destructuring%20Arrays%EF%BC%89%E7%AC%94%E8%AE%B0/" title="数组解构"><div class="content"><span class="title" href="/2026/01/06/Udemy%20JS/103%20Destructuring%20Arrays%EF%BC%89%E7%AC%94%E8%AE%B0/" title="数组解构">数组解构</span><span class="categories" href="/2026/01/06/Udemy%20JS/103%20Destructuring%20Arrays%EF%BC%89%E7%AC%94%E8%AE%B0/">前端</span></div></a><a class="aside-list-item" href="/2026/01/06/Udemy%20JS/104%20Destructuring%20Objects%EF%BC%88%E5%AF%B9%E8%B1%A1%E8%A7%A3%E6%9E%84%EF%BC%89/" title="对象解构"><div class="content"><span class="title" href="/2026/01/06/Udemy%20JS/104%20Destructuring%20Objects%EF%BC%88%E5%AF%B9%E8%B1%A1%E8%A7%A3%E6%9E%84%EF%BC%89/" title="对象解构">对象解构</span><span class="categories" href="/2026/01/06/Udemy%20JS/104%20Destructuring%20Objects%EF%BC%88%E5%AF%B9%E8%B1%A1%E8%A7%A3%E6%9E%84%EF%BC%89/">前端</span></div></a><a class="aside-list-item" href="/2026/01/06/Udemy%20JS/098%20Regular%20Functions%20vs.%20Arrow%20Functions%EF%BC%88%E5%B8%B8%E8%A7%84%E5%87%BD%E6%95%B0%E4%B8%8E%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%EF%BC%89/" title="常规函数与箭头函数"><div class="content"><span class="title" href="/2026/01/06/Udemy%20JS/098%20Regular%20Functions%20vs.%20Arrow%20Functions%EF%BC%88%E5%B8%B8%E8%A7%84%E5%87%BD%E6%95%B0%E4%B8%8E%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%EF%BC%89/" title="常规函数与箭头函数">常规函数与箭头函数</span><span class="categories" href="/2026/01/06/Udemy%20JS/098%20Regular%20Functions%20vs.%20Arrow%20Functions%EF%BC%88%E5%B8%B8%E8%A7%84%E5%87%BD%E6%95%B0%E4%B8%8E%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%EF%BC%89/">前端</span></div></a></div></div></div></div></main><footer id="footer"><div id="footer_deal"><a class="deal_link" target="_blank" rel="noopener" href="https://github.com/woodfishhhh" title="Github"><i class="solitude  fab fa-github"></i></a><a class="deal_link" href="https://www.woodfishhhh.xyz/images/d8d58d2f2c7ac5790fd37f388da41db4.png?_t=1759286665402" title="Email"><i class="solitude  far fa-envelope"></i></a><div><div class="nolazyload footer_mini_logo" id="footer_mini_logo" title="返回顶部" onclick="sco.toTop()"><img src= "" data-lazy-src="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg" alt="返回顶部"></div></div><a class="deal_link" target="_blank" rel="noopener" href="https://space.bilibili.com/359728114" title="Bilibili"><i class="solitude  fab fa-bilibili"></i></a><a class="deal_link" target="_blank" rel="noopener" href="https://www.douyin.com/user/MS4wLjABAAAAgbOrIhdi7Rl5RfaQ3fE3i7c2WnyR3zEOyLiK2Cjtcqk?from_tab_name=main" title="Douyin"><i class="solitude  fab fa-tiktok"></i></a></div><div><div id="st-footer"><div class="footer-group"><h3 class="footer-title">导航</h3><div class="footer-links"><a class="footer-item" href="/archives/" title="Archives">Archives</a><a class="footer-item" href="/categories/" title="Categories">Categories</a><a class="footer-item" href="/tags/" title="Tags">Tags</a></div></div><div class="footer-group"><h3 class="footer-title">排列</h3><div class="footer-links"><a class="footer-item" href="/about/" title="About">About</a><a class="footer-item" href="/link/" title="Friends">Friends</a></div></div><div class="footer-group"><div class="footer-title-group"><h3 class="footer-title">友链</h3><button class="random-friends-btn" onclick="randomLinksList()" title="友链"><i class="solitude fas fa-arrows-rotate"></i></button></div><div class="footer-links" id="friend-links-in-footer"></div></div></div></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div class="copyright">© 2025 - 2026 By<a class="footer-bar-link" href="/" title="woodfish">woodfish</a></div><div class="beian-group"><div></div><a class="footer-bar-link" target="_blank" rel="noopener" href="https://hexo.io/" title="框架：Hexo">框架：Hexo</a><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/everfu/hexo-theme-solitude" title="主题：Solitude">主题：Solitude</a></div></div><div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/everfu/hexo-theme-solitude" title="">主题</a><a class="footer-bar-link" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" title="">License</a></div></div></div></div><div class="comment-barrage needEndHide"></div></footer></div><div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="solitude fas fa-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="solitude fas fa-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="solitude fas fa-arrows-rotate"></i></div><div class="rightMenu-item" id="menu-top"><i class="solitude fas fa-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="solitude fas fa-clone"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="solitude fas fa-clipboard"></i><span>粘贴文本</span></div><div class="rightMenu-item" id="menu-newwindow"><i class="solitude far fa-window-maximize"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="solitude fas fa-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="solitude fas fa-clone"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="solitude fas fa-cloud-arrow-down"></i><span>下载此图片</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><div class="rightMenu-item" id="menu-randomPost" onclick="toRandomPost()||rm.hideRightMenu()"><i class="solitude fas fa-tower-broadcast"></i><span>随机文章</span></div><div class="rightMenu-item" onclick="pjax.loadUrl('/categories/')||rm.hideRightMenu()"><i class="solitude fas fa-clone"></i><span>全部分类</span></div><div class="rightMenu-item" onclick="pjax.loadUrl('/tags/')||rm.hideRightMenu()"><i class="solitude fas fa-tags"></i><span>全部标签</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><div class="rightMenu-item" id="menu-darkmode" onclick="sco.switchDarkMode()"><i class="solitude fas fa-circle-half-stroke"></i><span class="menu-darkmode-text">浅色模式</span></div><div class="rightMenu-item" id="menu-translate"><i class="solitude fas fa-language"></i><span>轉為繁體</span></div></div></div><div id="rightmenu-mask"></div></div><div><!-- Critical scripts loaded synchronously--><script src="/js/utils.js?v=3.0.20"></script><script src="/js/main.js?v=3.0.20"></script><!-- Non-critical scripts loaded asynchronously--><script async src="/js/third_party/waterfall.min.js?v=3.0.20"></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><!-- Feature-specific scripts loaded asynchronously--><script defer src="/js/third_party/universe.min.js?v=3.0.20"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  if (typeof dark === 'function') dark();
+});
+</script><script defer src="/js/tw_cn.js?v=3.0.20"></script><!-- UI enhancement scripts--><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.iife.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><!-- Music player scripts--><!-- Cover color processing scripts--><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+utils.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+</script><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!-- Search functionality--><!-- Right menu functionality--><script defer src="/js/right_menu.js?v=3.0.20"></script><div class="js-pjax"><script defer pjax src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.min.js"></script></div></div><!-- pjax--><script>let pjax = null;
+
+function initPjax() {
+    if (typeof Pjax === 'undefined') {
+        console.warn('Pjax is not loaded yet, retrying...');
+        setTimeout(initPjax, 100);
+        return;
+    }
+
+    pjax = new Pjax({
+        elements: 'a:not([target="_blank"])',
+        selectors: ["title","#body-wrap","#site-config","meta[name=\"description\"]",".js-pjax","meta[property^=\"og:\"]","#config-diff",".rs_show",".rs_hide"],
+        cacheBust: false,
+        analytics: false,
+        scrollRestoration: false
+    })
+
+    // 将 pjax 实例挂载到全局
+    window.pjax = pjax;
+
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+        const newScript = document.createElement('script')
+        const content = item.text || item.textContent || item.innerHTML || ""
+        Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+        newScript.appendChild(document.createTextNode(content))
+        item.parentNode.replaceChild(newScript, item)
+    })
+
+    document.addEventListener('pjax:complete', () => {
+        window.refreshFn()
+
+        document.querySelectorAll('script[data-pjax]').forEach(item => {
+            const newScript = document.createElement('script')
+            const content = item.text || item.textContent || item.innerHTML || ""
+            Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+            newScript.appendChild(document.createTextNode(content))
+            item.parentNode.replaceChild(newScript, item)
+        })
+
+        GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+    })
+
+    document.addEventListener('pjax:error', (e) => {
+        if (e.request.status === 404) {
+            pjax.loadUrl('/404.html')
+        }
+    })
+}
+
+// 初始化 Pjax
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPjax);
+} else {
+    initPjax();
+}</script><!-- google adsense--></body></html>
+        <script>
+            const posts = ["2026/01/06/Udemy TS/ts笔记/","2026/01/06/Udemy JS/099 Primitives vs. Objects (Primitive vs. Reference Types) /","2026/01/06/Udemy JS/103 Destructuring Arrays）笔记/","2026/01/06/Udemy JS/104 Destructuring Objects（对象解构）/","2026/01/06/Udemy JS/098 Regular Functions vs. Arrow Functions（常规函数与箭头函数）/","2026/01/06/Udemy JS/105 JavaScript 扩展运算符（...）/","2026/01/06/Udemy JS/106 Rest Pattern and Parameters/","2026/01/06/Udemy JS/108 空值合并运算符（Nullish Coalescing Operator）/","2026/01/06/Udemy JS/109 Logical Assignment Operators）/","2026/01/06/Udemy JS/111 for-of 循环笔记/","2026/01/06/Udemy JS/112 Enhanced Object Literals（ES6 增强对象字面量）/","2026/01/06/Udemy JS/113 可选链（Optional Chaining）笔记/","2026/01/06/Udemy JS/112 JavaScript数组方法(forEach, map, filter, reduce等)/","2026/01/06/Udemy JS/231 How to Plan a Web Project /","2026/01/06/Udemy JS/256 JavaScript 异步编程核心笔记/","2026/01/06/Udemy JS/258 The Event Loop in Practice/","2026/01/06/Udemy JS/262 Consuming Promises with Async_Await/","2026/01/06/Udemy JS/263 Error Handling With try...catch/","2026/01/06/Udemy JS/268-280 现代js开发/","2026/01/06/Udemy JS/264 Returning Values from Async Functions/","2026/01/06/杂项/Udemy Vue/","2026/01/06/杂项/new JS/","2026/01/06/杂项/数据结构期末速通/","2026/01/06/杂项/管理模拟卷/","2026/01/06/杂项/马原模拟卷/","2026/01/06/前端/AJAX基础入门教程/","2026/01/06/题解/Day5题解/","2026/01/06/题解/E题超详解：帮哈基鱼算标签/","2026/01/06/题解/F. Beautiful Intervals/","2026/01/06/题解/JUFE国庆新生编程语法培训/","2026/01/06/计算机网络/划分子网/","2026/01/06/计算机网络/最长前缀匹配原则/","2026/01/06/计算机网络/计算机网络第一章：概论/","2026/01/06/计算机网络/计算机网络第二章：物理层/","2026/01/06/计算机网络/计算机网络第三章：链路层/","2026/01/06/计算机网络/计算机网络第五章：运输层/","2026/01/06/计算机网络/计算机网络第六章：应用层/","2026/01/06/计算机组成原理/加减乘除/","2026/01/06/计算机组成原理/Cache缓存/","2026/01/06/计算机组成原理/存储器，主存扩展/","2026/01/06/计算机组成原理/指令系统/","2026/01/06/计算机组成原理/数据的表示/","2026/01/06/计算机组成原理/计算机存储器/","2025/10/21/计算机网络/计算机网络第四章：网络层/","2025/10/21/计算机网络/计算机网络第四章：网络层（edit）/","2025/09/11/前端/Day04_AJAX进阶/","2025/09/10/前端/Day03_AJAX原理/","2025/09/09/前端/Day02_AJAX综合案例/","2025/09/08/前端/Day01_AJAX入门/","2025/08/25/Linux/Linux课程笔记/","2025/08/13/前端/js易错点/","2025/08/11/前端/JavaScript 学习笔记（9）：深浅拷贝、异常处理、this 指向与防抖节流/","2025/08/03/前端/JavaScript 学习笔记（8）：面向对象编程与原型机制详解/","2025/08/02/前端/JavaScript 学习笔记（7）：面向对象与内置构造函数/","2025/07/31/前端/JavaScript 学习笔记（6）：作用域、闭包与函数进阶/","2025/07/28/前端/Web API 学习笔记（6）：正则表达式与表单验证/","2025/07/27/前端/Web API 学习笔记（5）：BOM 操作与本地存储/","2025/07/26/前端/Web API 学习笔记（4）：Date 对象与 DOM-节点操作要点/","2025/07/23/前端/Web API 学习笔记（3）：事件流与事件委托/","2025/07/22/前端/Web API 学习笔记（2）：事件处理与-this-指向/","2025/07/21/前端/Web API 学习笔记（1）：DOM 基础操作/","2025/07/20/前端/JavaScript 学习笔记（5）：对象数据类型与内置数学对象/","2025/07/19/前端/JavaScript 学习笔记（4）：函数封装与对象基础/","2025/07/18/前端/JavaScript 学习笔记（3）：数组的增删操作方法详解/","2025/07/17/前端/JavaScript 学习笔记（2）：运算符、语句与综合案例/","2025/07/17/前端/JavaScript 学习笔记（1）：基础语法与数据类型/","2025/07/15/前端/CSS 学习笔记（12）：响应式布局与 Bootstrap 框架应用/","2025/07/14/前端/CSS 学习笔记（11）：移动 Web 开发之 vw 适配与酷我音乐案例实践/","2025/07/13/前端/CSS 学习笔记（10）：移动 Web 开发基础与 rem 布局、Less 预处理器/","2025/07/12/前端/CSS 学习笔记（9）：移动 Web 开发之空间转换与动画效果/","2025/07/11/前端/CSS 学习笔记（8）：移动 Web 开发之平面转换与渐变效果/","2025/07/10/前端/小兔仙/","2025/07/08/前端/学成在线/","2025/07/08/前端/CSS 学习笔记（6）：小兔鲜儿项目搭建及基础配置（目录结构、SEO 标签、版心设置）/","2025/07/04/前端/CSS我的易错点/","2025/07/03/前端/CSS 学习笔记（7）：CSS 优先级叠加计算规则详解/","2025/07/02/前端/CSS 学习笔记（5）：定位模式、CSS 精灵、字体图标及过渡效果应用/","2025/06/30/前端/CSS 学习笔记（4）：浮动布局与 Flex 弹性布局详解及应用案例/","2025/06/27/前端/CSS 学习笔记（3）：伪类与伪元素选择器、盒子模型及相关特性详解/","2025/06/24/前端/CSS 学习笔记（2）：复合选择器、CSS 特性及背景与显示模式设置/","2025/06/23/前端/CSS 学习笔记（1）：引入方式、选择器及文字样式控制/","2025/06/23/前端/HTML 学习笔记（2）：列表、表格、表单及布局标签详解/","2025/06/22/前端/HTML 学习笔记（1）：核心标签、文档结构及多媒体应用/","2025/06/19/JAVA/Java期末复习重点易错点/","2025/06/18/杂项/中国近代史复习重点/","2025/06/03/JAVA/Java的final/","2025/06/03/JAVA/Java的继承/","2025/06/03/JAVA/Java的多态/","2025/05/27/JAVA/Java的List集合/","2025/05/27/JAVA/Java的Collection集合/","2025/05/27/JAVA/Java的包装类/","2025/05/15/JAVA/Java的内部类/","2025/05/15/JAVA/Java的抽象与接口类/"];
+            function toRandomPost() {
+                const randomPost = posts[Math.floor(Math.random() * posts.length)];
+                pjax.loadUrl(GLOBAL_CONFIG.root + randomPost);
+            }
+        </script>

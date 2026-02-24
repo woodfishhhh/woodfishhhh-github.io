@@ -1,0 +1,1021 @@
+<!DOCTYPE html><html lang="zh-Hans" data-theme="light"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>现代JavaScript开发 | 木鱼的鱼窝</title><noscript>开启JavaScript才能访问本站哦~</noscript><link rel="icon" href="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg"><link rel="stylesheet" href="/css/index.css?v=3.0.20"><link rel="canonical" href="https://www.woodfishhhh.xyz/2026/01/06/Udemy%20JS/268-280%20%E7%8E%B0%E4%BB%A3js%E5%BC%80%E5%8F%91/index.html"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css"><!-- Feature-specific CSS--><!-- aplayer--><!-- swiper--><!-- fancybox ui--><!-- katex--><!-- Open Graph--><meta name="description" content="268-280 268 Section Intro（章节介绍） 核心目标 本章节聚焦“现代JavaScript开发实践”，衔接前文的异步编程（Promise、Async&#x2F;Await）与ES6模块，后续将系统讲解模块规范、工程化工具（如NPM、Parcel）、代码优化及开发最佳实践，最终帮助学习者从“基础语法掌握”过渡到“企业级项目开发能力”。 270 An Overview of Modern J">
+<meta property="og:type" content="article">
+<meta property="og:title" content="现代JavaScript开发">
+<meta property="og:url" content="https://www.woodfishhhh.xyz/2026/01/06/Udemy%20JS/268-280%20%E7%8E%B0%E4%BB%A3js%E5%BC%80%E5%8F%91/index.html">
+<meta property="og:site_name" content="木鱼的鱼窝">
+<meta property="og:description" content="268-280 268 Section Intro（章节介绍） 核心目标 本章节聚焦“现代JavaScript开发实践”，衔接前文的异步编程（Promise、Async&#x2F;Await）与ES6模块，后续将系统讲解模块规范、工程化工具（如NPM、Parcel）、代码优化及开发最佳实践，最终帮助学习者从“基础语法掌握”过渡到“企业级项目开发能力”。 270 An Overview of Modern J">
+<meta property="og:locale">
+<meta property="og:image" content="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg">
+<meta property="article:published_time" content="2026-01-06T15:39:48.000Z">
+<meta property="article:modified_time" content="2026-01-22T07:17:46.253Z">
+<meta property="article:author" content="woodfish">
+<meta property="article:tag" content="JavaScript">
+<meta property="article:tag" content="现代开发">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg"><!-- pwa--><meta name="apple-mobile-web-app-capable" content="木鱼的鱼窝"><meta name="theme-color" content="var(--efu-main)"><meta name="apple-mobile-web-app-status-bar-style" content="var(--efu-main)"><link rel="bookmark" href="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg"><link rel="apple-touch-icon" href="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg" sizes="180x180"><script>console.log(' %c Solitude %c ' + '3.0.20' + ' %c https://github.com/everfu/hexo-theme-solitude',
+    'background:#35495e ; padding: 1px; border-radius: 3px 0 0 3px;  color: #fff',
+    'background:#ff9a9a ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff',
+    'background:unset ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff')
+</script><script>(()=>{
+        const saveToLocal = {
+            set: function setWithExpiry(key, value, ttl) {
+                if (ttl === 0)
+                    return
+                const now = new Date()
+                const expiryDay = ttl * 86400000
+                const item = {
+                    value: value,
+                    expiry: now.getTime() + expiryDay
+                }
+                localStorage.setItem(key, JSON.stringify(item))
+            },
+            get: function getWithExpiry(key) {
+                const itemStr = localStorage.getItem(key)
+
+                if (!itemStr) {
+                    return undefined
+                }
+                const item = JSON.parse(itemStr)
+                const now = new Date()
+
+                if (now.getTime() > item.expiry) {
+                    localStorage.removeItem(key)
+                    return undefined
+                }
+                return item.value
+            }
+        };
+        window.utils = {
+            saveToLocal: saveToLocal,
+            getCSS: (url, id = false) => new Promise((resolve, reject) => {
+              const link = document.createElement('link')
+              link.rel = 'stylesheet'
+              link.href = url
+              if (id) link.id = id
+              link.onerror = reject
+              link.onload = link.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                link.onload = link.onreadystatechange = null
+                resolve()
+              }
+              document.head.appendChild(link)
+            }),
+            getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+              const script = document.createElement('script')
+              script.src = url
+              script.async = true
+              script.onerror = reject
+              script.onload = script.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                script.onload = script.onreadystatechange = null
+                resolve()
+              }
+
+              Object.keys(attr).forEach(key => {
+                script.setAttribute(key, attr[key])
+              })
+
+              document.head.appendChild(script)
+            }),
+            addGlobalFn: (key, fn, name = false, parent = window) => {
+                const globalFn = parent.globalFn || {}
+                const keyObj = globalFn[key] || {}
+
+                if (name && keyObj[name]) return
+
+                name = name || Object.keys(keyObj).length
+                keyObj[name] = fn
+                globalFn[key] = keyObj
+                parent.globalFn = globalFn
+            },
+            addEventListenerPjax: (ele, event, fn, option = false) => {
+              ele.addEventListener(event, fn, option)
+              utils.addGlobalFn('pjax', () => {
+                  ele.removeEventListener(event, fn, option)
+              })
+            },
+            diffDateFormat: (selector) => {
+                selector.forEach(item => {
+                    const date = new Date(item.getAttribute('datetime') || item.textContent);
+                    item.textContent = (date.getMonth() + 1).toString()+'/'+date.getDate().toString();
+                });
+            },
+        }
+    })()</script><!-- theme--><script>initTheme = () => {
+    const cachedMode = utils.saveToLocal.get('theme');
+    if (cachedMode === undefined)
+        document.documentElement.setAttribute('data-theme', 'dark');
+    else
+        document.documentElement.setAttribute('data-theme', cachedMode);
+    typeof rm === 'object' && rm.mode(cachedMode === undefined || cachedMode === 'dark')
+}
+initTheme()</script><script>const GLOBAL_CONFIG = {
+    root: '/',
+    algolia: undefined,
+    localsearch: undefined,
+    runtime: '2025-06-02 00:00:00',
+    lazyload: {
+        enable: true,
+        error: 'https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png'
+    },
+    copyright: {"limit":50,"author":"作者: woodfish","link":"链接: ","source":"来源: 木鱼的鱼窝","info":"著作权归作者所有。 商业转载请联系作者获得授权，非商业转载请注明出处。"},
+    highlight: {"limit":200,"expand":true,"copy":true,"syntax":"highlight.js"},
+    randomlink: false,
+    lang: {"theme":{"dark":"已切换至深色模式","light":"已切换至浅色模式"},"copy":{"success":"复制成功","error":"复制失败"},"backtop":"返回顶部","time":{"day":"天前","hour":"小时前","just":"刚刚","min":"分钟前","month":"个月前"},"day":" 天","f12":"开发者模式已打开，请遵循GPL协议。","totalk":"无需删除空行，直接输入评论即可"},
+    aside: {
+        state: {
+            morning: "✨ 早上好，新的一天开始了",
+            noon: "🍲 午餐时间",
+            afternoon: "🌞 下午好",
+            night: "早点休息",
+            goodnight: "晚安 😴",
+        },
+        witty_words: [],
+        witty_comment: {
+            prefix: '好久不见，',
+            back: '欢迎再次回来，',
+        },
+    },
+    covercolor: {
+        enable: false
+    },
+    comment: false,
+    lightbox: 'fancybox',
+    right_menu: {"mode":{"dark":"深色模式","light":"浅色模式"},"img_error":"此图片无法复制与下载","translate":true},
+    translate: {"translateDelay":0,"defaultEncoding":2},
+    lure: false,
+    expire: false,
+};</script><script id="config-diff">var PAGE_CONFIG = {
+    is_post: true,
+    is_page: false,
+    is_home: false,
+    page: '',
+    toc: true,
+    comment: false,
+    ai_text: false,
+    color: false,
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body id="body"><div><canvas id="universe"></canvas></div><div><div id="loading-box" onclick="preloader.endLoading();" style="zoom:1"><div class="loading-bg"><img class="loading-img nolazyload" src="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg" alt="loading image"></div></div><script>const preloader = {
+    isLoaded: false,
+    endLoading: () => {
+        if (!preloader.isLoaded) {
+            document.getElementById('loading-box').classList.add('loaded');
+            preloader.isLoaded = true;
+            preloader.togglePaceDone();
+        }
+    },
+    initLoading: () => {
+        document.getElementById('loading-box').classList.remove('loaded');
+        preloader.isLoaded = false;
+        preloader.togglePaceDone();
+    },
+    togglePaceDone: () => {
+        document.getElementById('body').className = preloader.isLoaded ? 'pace-done' : '';
+    }
+}
+
+window.addEventListener('load', () => {
+    preloader.endLoading();
+});
+
+window.addEventListener('pjax:send', () => {
+    preloader.initLoading();
+});
+
+document.addEventListener('pjax:complete', () => {
+    preloader.endLoading();
+});
+
+setTimeout(() => {
+    preloader.endLoading();
+}, 5000);</script></div><div><div id="console"><div class="close-btn" onclick="sco.hideConsole()"><i class="solitude fas fa-xmark"></i></div><div class="console-card-group"><div class="console-card-group-right"><div class="console-card tags" onclick="sco.hideConsole()"><div class="card-content"><div class="author-content-item-tips">标签</div><div class="author-content-item-title">寻找感兴趣的领域</div></div><div class="card-tag-cloud"><a href="/tags/Java/">Java<sup>9</sup></a><a href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/">期末复习<sup>2</sup></a><a href="/tags/Linux/">Linux<sup>1</sup></a><a href="/tags/TypeScript/">TypeScript<sup>1</sup></a><a href="/tags/JavaScript/">JavaScript<sup>37</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF/">前端<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">数据类型<sup>1</sup></a><a href="/tags/ES6/">ES6<sup>5</sup></a><a href="/tags/%E5%87%BD%E6%95%B0/">函数<sup>1</sup></a><a href="/tags/ES2020/">ES2020<sup>2</sup></a><a href="/tags/ES2021/">ES2021<sup>1</sup></a><a href="/tags/%E5%BE%AA%E7%8E%AF/">循环<sup>1</sup></a><a href="/tags/%E6%95%B0%E7%BB%84/">数组<sup>1</sup></a><a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/">项目管理<sup>1</sup></a><a href="/tags/Web%E5%BC%80%E5%8F%91/">Web开发<sup>1</sup></a><a href="/tags/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/">异步编程<sup>1</sup></a><a href="/tags/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/">事件循环<sup>1</sup></a><a href="/tags/%E5%BC%82%E6%AD%A5/">异步<sup>2</sup></a><a href="/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理<sup>1</sup></a><a href="/tags/%E7%8E%B0%E4%BB%A3%E5%BC%80%E5%8F%91/">现代开发<sup>1</sup></a><a href="/tags/Vue/">Vue<sup>1</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/">前端框架<sup>1</sup></a><a href="/tags/C/">C++<sup>1</sup></a><a href="/tags/%E7%AE%97%E6%B3%95/">算法<sup>5</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构<sup>1</sup></a><a href="/tags/%E7%AE%A1%E7%90%86%E5%AD%A6/">管理学<sup>1</sup></a><a href="/tags/%E6%A8%A1%E6%8B%9F%E5%8D%B7/">模拟卷<sup>2</sup></a><a href="/tags/%E9%A9%AC%E5%85%8B%E6%80%9D%E4%B8%BB%E4%B9%89/">马克思主义<sup>1</sup></a><a href="/tags/AJAX/">AJAX<sup>1</sup></a><a href="/tags/HTTP/">HTTP<sup>1</sup></a><a href="/tags/CSS/">CSS<sup>15</sup></a><a href="/tags/HTML/">HTML<sup>17</sup></a><a href="/tags/web/">web<sup>11</sup></a><a href="/tags/Ajax/">Ajax<sup>4</sup></a><a href="/tags/%E9%A2%98%E8%A7%A3/">题解<sup>3</sup></a><a href="/tags/%E7%BC%96%E7%A8%8B/">编程<sup>1</sup></a><a href="/tags/%E5%9F%B9%E8%AE%AD/">培训<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络<sup>7</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/">网络层<sup>1</sup></a><a href="/tags/%E8%B7%AF%E7%94%B1/">路由<sup>1</sup></a><a href="/tags/%E6%A6%82%E8%AE%BA/">概论<sup>1</sup></a><a href="/tags/%E7%89%A9%E7%90%86%E5%B1%82/">物理层<sup>1</sup></a><a href="/tags/%E9%93%BE%E8%B7%AF%E5%B1%82/">链路层<sup>1</sup></a><a href="/tags/%E8%BF%90%E8%BE%93%E5%B1%82/">运输层<sup>1</sup></a><a href="/tags/%E5%BA%94%E7%94%A8%E5%B1%82/">应用层<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">计算机组成原理<sup>6</sup></a><a href="/tags/%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97/">算术运算<sup>1</sup></a><a href="/tags/%E7%BC%93%E5%AD%98/">缓存<sup>1</sup></a><a href="/tags/%E5%AD%98%E5%82%A8%E5%99%A8/">存储器<sup>2</sup></a><a href="/tags/%E6%8C%87%E4%BB%A4%E7%B3%BB%E7%BB%9F/">指令系统<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A4%BA/">数据表示<sup>1</sup></a></div></div><div class="console-card history" onclick="sco.hideConsole()"><ul class="card-archive-list"><li class="item"><a href="/archives/2026/01/"><span class="date">2026/01</span><div class="count-group"><span class="count">43</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/10/"><span class="date">2025/10</span><div class="count-group"><span class="count">2</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/09/"><span class="date">2025/09</span><div class="count-group"><span class="count">4</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/08/"><span class="date">2025/08</span><div class="count-group"><span class="count">5</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/07/"><span class="date">2025/07</span><div class="count-group"><span class="count">23</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/06/"><span class="date">2025/06</span><div class="count-group"><span class="count">11</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/05/"><span class="date">2025/05</span><div class="count-group"><span class="count">5</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/"><span class="date">全部文章</span><div class="count-group"><span class="count">93</span><span class="unit">篇</span></div></a></li></ul></div></div></div><div class="button-group"><div class="console-btn-item"><span class="darkmode_switchbutton" onclick="sco.switchDarkMode()" title="昼夜切换"><i class="solitude fas fa-circle-half-stroke"></i></span></div><div class="console-btn-item" id="consoleHideAside"><span class="asideSwitch" onclick="sco.switchHideAside()" title="边栏显示控制"><i class="solitude fas fa-arrows-left-right-to-line"></i></span></div></div><div class="console-mask" onclick="sco.hideConsole()"></div></div></div><div id="sidebar" style="zoom: 1;"><div id="menu-mask" style="display: none;"></div><div id="sidebar-menus"><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">93</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">51</div></a></div></div></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><span class="darkmode_switchbutton menu-child" onclick="sco.switchDarkMode()"><i class="solitude fas fa-circle-half-stroke"></i><span>显示模式</span></span></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://www.woodfishhhh.xyz/" title="woodfishhhh博客"><img class="nolazyload back-menu-item-icon" src="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg" alt="woodfishhhh博客"><span class="back-menu-item-text">woodfishhhh博客</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/%20%7C%7C%20fas%20fa-home"><span>主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%20%7C%7C%20fas%20fa-tags"><span>标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%20%7C%7C%20fas%20fa-th"><span>分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/%20%7C%7C%20fas%20fa-link"><span>友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/%20%7C%7C%20fas%20fa-user"><span>关于我</span></a></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="card-tag-cloud"><a href="/tags/Java/">Java<sup>9</sup></a><a href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/">期末复习<sup>2</sup></a><a href="/tags/Linux/">Linux<sup>1</sup></a><a href="/tags/TypeScript/">TypeScript<sup>1</sup></a><a href="/tags/JavaScript/">JavaScript<sup>37</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF/">前端<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">数据类型<sup>1</sup></a><a href="/tags/ES6/">ES6<sup>5</sup></a><a href="/tags/%E5%87%BD%E6%95%B0/">函数<sup>1</sup></a><a href="/tags/ES2020/">ES2020<sup>2</sup></a><a href="/tags/ES2021/">ES2021<sup>1</sup></a><a href="/tags/%E5%BE%AA%E7%8E%AF/">循环<sup>1</sup></a><a href="/tags/%E6%95%B0%E7%BB%84/">数组<sup>1</sup></a><a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/">项目管理<sup>1</sup></a><a href="/tags/Web%E5%BC%80%E5%8F%91/">Web开发<sup>1</sup></a><a href="/tags/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/">异步编程<sup>1</sup></a><a href="/tags/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/">事件循环<sup>1</sup></a><a href="/tags/%E5%BC%82%E6%AD%A5/">异步<sup>2</sup></a><a href="/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理<sup>1</sup></a><a href="/tags/%E7%8E%B0%E4%BB%A3%E5%BC%80%E5%8F%91/">现代开发<sup>1</sup></a><a href="/tags/Vue/">Vue<sup>1</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/">前端框架<sup>1</sup></a><a href="/tags/C/">C++<sup>1</sup></a><a href="/tags/%E7%AE%97%E6%B3%95/">算法<sup>5</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构<sup>1</sup></a><a href="/tags/%E7%AE%A1%E7%90%86%E5%AD%A6/">管理学<sup>1</sup></a><a href="/tags/%E6%A8%A1%E6%8B%9F%E5%8D%B7/">模拟卷<sup>2</sup></a><a href="/tags/%E9%A9%AC%E5%85%8B%E6%80%9D%E4%B8%BB%E4%B9%89/">马克思主义<sup>1</sup></a><a href="/tags/AJAX/">AJAX<sup>1</sup></a><a href="/tags/HTTP/">HTTP<sup>1</sup></a><a href="/tags/CSS/">CSS<sup>15</sup></a><a href="/tags/HTML/">HTML<sup>17</sup></a><a href="/tags/web/">web<sup>11</sup></a><a href="/tags/Ajax/">Ajax<sup>4</sup></a><a href="/tags/%E9%A2%98%E8%A7%A3/">题解<sup>3</sup></a><a href="/tags/%E7%BC%96%E7%A8%8B/">编程<sup>1</sup></a><a href="/tags/%E5%9F%B9%E8%AE%AD/">培训<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络<sup>7</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/">网络层<sup>1</sup></a><a href="/tags/%E8%B7%AF%E7%94%B1/">路由<sup>1</sup></a><a href="/tags/%E6%A6%82%E8%AE%BA/">概论<sup>1</sup></a><a href="/tags/%E7%89%A9%E7%90%86%E5%B1%82/">物理层<sup>1</sup></a><a href="/tags/%E9%93%BE%E8%B7%AF%E5%B1%82/">链路层<sup>1</sup></a><a href="/tags/%E8%BF%90%E8%BE%93%E5%B1%82/">运输层<sup>1</sup></a><a href="/tags/%E5%BA%94%E7%94%A8%E5%B1%82/">应用层<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">计算机组成原理<sup>6</sup></a><a href="/tags/%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97/">算术运算<sup>1</sup></a><a href="/tags/%E7%BC%93%E5%AD%98/">缓存<sup>1</sup></a><a href="/tags/%E5%AD%98%E5%82%A8%E5%99%A8/">存储器<sup>2</sup></a><a href="/tags/%E6%8C%87%E4%BB%A4%E7%B3%BB%E7%BB%9F/">指令系统<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A4%BA/">数据表示<sup>1</sup></a></div></div></div></div><div><div class="needEndHide" id="rightside"><div class="rs_hide"><button class="translate" type="button" title="简繁转换">简</button><button class="mode" type="button" title="显示模式切换" onclick="sco.switchDarkMode()"><i class="fas fa-circle-half-stroke"></i></button><button class="aside pc" type="button" title="侧边栏" onclick="sco.switchHideAside()"><i class="fas fa-arrows-alt-h"></i></button></div><div class="rs_show"><button class="config" type="button" title="扩展" onclick="document.querySelector(&quot;.rs_hide&quot;).classList.toggle(&quot;show&quot;)"><i class="fas fa-gear fa-spin"></i></button><button class="mobile toc" type="button" title="目录" onclick="document.querySelector('#card-toc').classList.toggle('open')"><i class="fas fa-list"></i></button><button class="top" type="button" title="返回顶部" onclick="sco.toTop()"><i class="fas fa-arrow-up"></i><span id="percent">0</span></button></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="show" id="nav"><div id="nav-group"><div id="blog_name"><a href="/" title="返回博客主页" id="site-name"><span class="title">木鱼的鱼窝</span><i class="solitude fas fa-home"></i></a></div><div id="page-name-mask"><div id="page-name"><a id="page-name-text" onclick="sco.toTop()">现代JavaScript开发</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/%20%7C%7C%20fas%20fa-home"><span>主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%20%7C%7C%20fas%20fa-tags"><span>标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%20%7C%7C%20fas%20fa-th"><span>分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/%20%7C%7C%20fas%20fa-link"><span>友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/%20%7C%7C%20fas%20fa-user"><span>关于我</span></a></div></div></div><div id="nav-left"></div><div id="nav-right"><div class="nav-button" id="travellings_button"><a class="site-page" target="_blank" rel="noopener" href="https://www.travellings.cn/go.html" onclick="javascript:travelling()" title=""><i class="solitude fas fa-train"></i></a></div><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机一篇文章" href="javascript:void(0);"><i class="solitude fas fa-dice-d6"></i></a></div><div class="nav-button" id="nav-console"><a class="console_switchbutton" onclick="sco.showConsole()" title="中控台" href="javascript:void(0);"><label><i class="left"></i><i class="center"></i><i class="right"></i></label></a></div><div id="toggle-menu"><a class="site-page"><i class="solitude fas fa-bars"></i></a></div></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original" title="该文章为原创文章，注意版权协议">原创</a><span class="post-meta-categories"><a class="post-meta-categories" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a></span><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/JavaScript/"><span class="tags-name tags-punctuation"><i class="solitude fas fa-hashtag"></i>JavaScript</span></a><a class="post-meta__tags" href="/tags/%E7%8E%B0%E4%BB%A3%E5%BC%80%E5%8F%91/"><span class="tags-name tags-punctuation"><i class="solitude fas fa-hashtag"></i>现代开发</span></a></div></div></div></div><h1 class="post-title">现代JavaScript开发</h1><div id="post-meta"><div class="meta-secondline"><span class="post-meta-date" title="发布于 2026-01-06 23:39:48"><i class="post-meta-icon solitude fas fa-calendar-days"></i><time datetime="2026-01-06T15:39:48.000Z">2026-01-06T15:39:48.000Z</time></span><span class="post-meta-date" title="最后更新于 2026-01-22 15:17:46"><i class="post-meta-icon solitude fas fa-arrows-rotate"></i><time datetime="2026-01-22T07:17:46.253Z">2026-01-22T07:17:46.253Z</time></span></div></div></div><div class="post-radius-bottom"></div><article class="post-content article-container"><h1>268-280</h1>
+<h2 id="268-Section-Intro（章节介绍）">268 Section Intro（章节介绍）</h2>
+<h3 id="核心目标">核心目标</h3>
+<p>本章节聚焦“现代JavaScript开发实践”，衔接前文的异步编程（Promise、Async/Await）与ES6模块，后续将系统讲解<strong>模块规范</strong>、<strong>工程化工具</strong>（如NPM、Parcel）、<strong>代码优化</strong>及<strong>开发最佳实践</strong>，最终帮助学习者从“基础语法掌握”过渡到“企业级项目开发能力”。</p>
+<h2 id="270-An-Overview-of-Modern-JavaScript-Development（现代JavaScript开发概述）">270 An Overview of Modern JavaScript Development（现代JavaScript开发概述）</h2>
+<h3 id="270-1-现代JS开发的核心痛点">270.1 现代JS开发的核心痛点</h3>
+<p>传统JS开发（如直接引入多个<code>&lt;script&gt;</code>标签）存在以下问题：</p>
+<ol>
+<li><strong>作用域污染</strong>：全局作用域下变量/函数冲突（如<code>var</code>声明的变量全局共享）；</li>
+<li><strong>依赖管理混乱</strong>：脚本加载顺序依赖<code>&lt;script&gt;</code>标签顺序，大型项目中易出现“依赖缺失”或“重复引入”；</li>
+<li><strong>代码复用性低</strong>：无法高效拆分代码为可复用单元；</li>
+<li><strong>兼容性问题</strong>：新语法（如ES6+）在旧浏览器中无法运行；</li>
+<li><strong>缺乏工程化支持</strong>：无自动化构建、打包、压缩等流程，开发效率低。</li>
+</ol>
+<h3 id="270-2-现代JS开发的解决方案">270.2 现代JS开发的解决方案</h3>
+<table>
+<thead>
+<tr>
+<th>痛点</th>
+<th>解决方案</th>
+<th>核心工具/规范</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>作用域污染/依赖管理</td>
+<td>模块化开发</td>
+<td>ES6 Modules、CommonJS</td>
+</tr>
+<tr>
+<td>兼容性问题</td>
+<td>语法转换（Transpilation）+ 垫片（Polyfill）</td>
+<td>Babel、core-js</td>
+</tr>
+<tr>
+<td>工程化支持</td>
+<td>包管理 + 构建工具</td>
+<td>NPM/Yarn、Parcel/Webpack/Vite</td>
+</tr>
+<tr>
+<td>代码质量</td>
+<td>静态类型检查 + 代码规范</td>
+<td>TypeScript、ESLint</td>
+</tr>
+</tbody>
+</table>
+<h3 id="270-3-现代JS开发流程示例">270.3 现代JS开发流程示例</h3>
+<ol>
+<li>初始化项目：<code>npm init</code> 创建<code>package.json</code>（项目配置文件）；</li>
+<li>安装依赖：<code>npm install react react-dom</code>（安装第三方库）；</li>
+<li>编写代码：使用ES6+语法、ES Modules拆分代码；</li>
+<li>构建打包：通过Parcel自动转换语法、合并代码、压缩体积；</li>
+<li>部署上线：将打包后的<code>dist</code>目录部署到服务器（如Netlify）。</li>
+</ol>
+<h2 id="271-An-Overview-of-Modules-in-JavaScript（JavaScript模块概述）">271 An Overview of Modules in JavaScript（JavaScript模块概述）</h2>
+<h3 id="271-1-模块的核心概念">271.1 模块的核心概念</h3>
+<p>模块是<strong>独立的代码单元</strong>，具有以下特性：</p>
+<ul>
+<li><strong>封装性</strong>：模块内的变量/函数默认私有，仅通过<code>export</code>暴露外部可访问的接口；</li>
+<li><strong>依赖管理</strong>：通过<code>import</code>明确声明依赖的其他模块，解决加载顺序问题；</li>
+<li><strong>可复用性</strong>：一个模块可被多个其他模块导入，避免代码重复。</li>
+</ul>
+<h3 id="271-2-常见模块规范对比">271.2 常见模块规范对比</h3>
+<table>
+<thead>
+<tr>
+<th>规范</th>
+<th>适用场景</th>
+<th>导出语法</th>
+<th>导入语法</th>
+<th>加载时机</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>ES6 Modules</td>
+<td>浏览器环境、现代Node.js</td>
+<td><code>export const a = 1</code>; <code>export default fn</code></td>
+<td><code>import &#123; a &#125; from './mod'</code>; <code>import fn from './mod'</code></td>
+<td>静态加载（编译时确定依赖）</td>
+</tr>
+<tr>
+<td>CommonJS</td>
+<td>Node.js（传统）</td>
+<td><code>module.exports = &#123; a: 1 &#125;</code></td>
+<td><code>const &#123; a &#125; = require('./mod')</code></td>
+<td>动态加载（运行时确定依赖）</td>
+</tr>
+<tr>
+<td>AMD</td>
+<td>浏览器环境（旧）</td>
+<td><code>define(['dep'], (dep) =&gt; (&#123; a: 1 &#125;))</code></td>
+<td><code>require(['./mod'], (mod) =&gt; &#123;&#125;)</code></td>
+<td>异步加载</td>
+</tr>
+</tbody>
+</table>
+<h3 id="271-3-模块与脚本（Script）的区别">271.3 模块与脚本（Script）的区别</h3>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>模块（Module）</th>
+<th>普通脚本（Script）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>作用域</td>
+<td>模块级作用域（私有）</td>
+<td>全局作用域</td>
+</tr>
+<tr>
+<td><code>this</code>指向</td>
+<td><code>undefined</code></td>
+<td>浏览器中指向<code>window</code>，Node.js中指向<code>global</code></td>
+</tr>
+<tr>
+<td>导入/导出</td>
+<td>支持<code>import</code>/<code>export</code></td>
+<td>不支持</td>
+</tr>
+<tr>
+<td>延迟执行（Defer）</td>
+<td>默认延迟执行（同<code>&lt;script defer&gt;</code>）</td>
+<td>默认立即执行（阻塞HTML解析）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="271-4-浏览器中启用ES6-Modules">271.4 浏览器中启用ES6 Modules</h3>
+<p>需在<code>&lt;script&gt;</code>标签中添加<code>type=&quot;module&quot;</code>属性，示例：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- index.html --&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;module&quot;</span> <span class="attr">src</span>=<span class="string">&quot;./main.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.js（模块文件）</span></span><br><span class="line"><span class="keyword">import</span> &#123; sum &#125; <span class="keyword">from</span> <span class="string">&quot;./math.js&quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">sum</span>(<span class="number">1</span>, <span class="number">2</span>)); <span class="comment">// 输出3</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// math.js（被导入的模块）</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">sum</span> = (<span class="params">a, b</span>) =&gt; a + b; <span class="comment">// 命名导出</span></span><br></pre></td></tr></table></figure>
+<h2 id="272-Exporting-and-Importing-in-ES6-Modules（ES6模块的导出与导入）">272 Exporting and Importing in ES6 Modules（ES6模块的导出与导入）</h2>
+<h3 id="272-1-命名导出（Named-Exports）">272.1 命名导出（Named Exports）</h3>
+<p>用于导出<strong>多个独立的变量/函数/类</strong>，导出名称与导入名称必须一致（可通过<code>as</code>重命名）。</p>
+<h4 id="语法1：直接导出（声明时导出）">语法1：直接导出（声明时导出）</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// mod.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="variable constant_">PI</span> = <span class="number">3.14159</span>; <span class="comment">// 导出常量</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">calculateArea</span>(<span class="params">r</span>) &#123;</span><br><span class="line">  <span class="comment">// 导出函数</span></span><br><span class="line">  <span class="keyword">return</span> <span class="variable constant_">PI</span> * r ** <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">class</span> <span class="title class_">Circle</span> &#123;</span><br><span class="line">  <span class="comment">// 导出类</span></span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">r</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">radius</span> = r;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">get</span> <span class="title function_">area</span>() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">calculateArea</span>(<span class="variable language_">this</span>.<span class="property">radius</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="语法2：集中导出（声明后统一导出）">语法2：集中导出（声明后统一导出）</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// mod.js</span></span><br><span class="line"><span class="keyword">const</span> <span class="variable constant_">PI</span> = <span class="number">3.14159</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">calculateArea</span>(<span class="params">r</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="variable constant_">PI</span> * r ** <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">class</span> <span class="title class_">Circle</span> &#123;</span><br><span class="line">  <span class="title function_">constructor</span>(<span class="params">r</span>) &#123;</span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">radius</span> = r;</span><br><span class="line">  &#125;</span><br><span class="line">  <span class="keyword">get</span> <span class="title function_">area</span>() &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title function_">calculateArea</span>(<span class="variable language_">this</span>.<span class="property">radius</span>);</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 集中导出（推荐：清晰展示导出接口）</span></span><br><span class="line"><span class="keyword">export</span> &#123; <span class="variable constant_">PI</span>, calculateArea, <span class="title class_">Circle</span> &#125;;</span><br></pre></td></tr></table></figure>
+<h4 id="语法3：导出时重命名（解决名称冲突）">语法3：导出时重命名（解决名称冲突）</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// mod.js</span></span><br><span class="line"><span class="keyword">const</span> <span class="variable constant_">PI</span> = <span class="number">3.14159</span>;</span><br><span class="line"><span class="keyword">export</span> &#123; <span class="variable constant_">PI</span> <span class="keyword">as</span> <span class="title class_">MathPI</span> &#125;; <span class="comment">// 导出时重命名为MathPI</span></span><br></pre></td></tr></table></figure>
+<h4 id="命名导入示例">命名导入示例</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="comment">// 1. 导入指定名称的成员</span></span><br><span class="line"><span class="keyword">import</span> &#123; <span class="variable constant_">PI</span>, calculateArea, <span class="title class_">Circle</span> &#125; <span class="keyword">from</span> <span class="string">&quot;./mod.js&quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">calculateArea</span>(<span class="number">2</span>)); <span class="comment">// 输出12.56636</span></span><br><span class="line"><span class="keyword">const</span> c = <span class="keyword">new</span> <span class="title class_">Circle</span>(<span class="number">3</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(c.<span class="property">area</span>); <span class="comment">// 输出28.27431</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 导入时重命名（解决名称冲突）</span></span><br><span class="line"><span class="keyword">import</span> &#123; <span class="title class_">MathPI</span> <span class="keyword">as</span> <span class="title class_">Pi</span> &#125; <span class="keyword">from</span> <span class="string">&quot;./mod.js&quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Pi</span>); <span class="comment">// 输出3.14159</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 导入所有成员（命名空间导入）</span></span><br><span class="line"><span class="keyword">import</span> * <span class="keyword">as</span> <span class="title class_">MathModule</span> <span class="keyword">from</span> <span class="string">&quot;./mod.js&quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">MathModule</span>.<span class="property">PI</span>); <span class="comment">// 输出3.14159</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">MathModule</span>.<span class="title function_">calculateArea</span>(<span class="number">2</span>)); <span class="comment">// 输出12.56636</span></span><br></pre></td></tr></table></figure>
+<h3 id="272-2-默认导出（Default-Exports）">272.2 默认导出（Default Exports）</h3>
+<p>用于导出<strong>模块的“主内容”</strong>（每个模块仅允许1个默认导出），导入时可自定义名称（无需加花括号）。</p>
+<h4 id="语法1：直接默认导出">语法1：直接默认导出</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// utils.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> <span class="keyword">function</span> <span class="title function_">formatDate</span>(<span class="params">date</span>) &#123;</span><br><span class="line">  <span class="comment">// 默认导出函数</span></span><br><span class="line">  <span class="keyword">return</span> date.<span class="title function_">toLocaleDateString</span>(<span class="string">&quot;zh-CN&quot;</span>);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="语法2：先声明后默认导出">语法2：先声明后默认导出</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// utils.js</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">formatDate</span>(<span class="params">date</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> date.<span class="title function_">toLocaleDateString</span>(<span class="string">&quot;zh-CN&quot;</span>);</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> formatDate; <span class="comment">// 单独默认导出</span></span><br></pre></td></tr></table></figure>
+<h4 id="语法3：默认导出匿名内容">语法3：默认导出匿名内容</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// utils.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="title function_">default</span> (a, b) =&gt; a + b; <span class="comment">// 默认导出匿名箭头函数</span></span><br></pre></td></tr></table></figure>
+<h4 id="默认导入示例">默认导入示例</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="comment">// 1. 自定义导入名称（无需花括号）</span></span><br><span class="line"><span class="keyword">import</span> format <span class="keyword">from</span> <span class="string">&quot;./utils.js&quot;</span>;</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">format</span>(<span class="keyword">new</span> <span class="title class_">Date</span>())); <span class="comment">// 输出&quot;2024/5/20&quot;（示例日期）</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 与命名导入结合（需用花括号包裹命名成员）</span></span><br><span class="line"><span class="keyword">import</span> formatDate, &#123; <span class="variable constant_">PI</span> &#125; <span class="keyword">from</span> <span class="string">&quot;./utils.js&quot;</span>; <span class="comment">// 假设utils.js同时有默认导出和命名导出</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">formatDate</span>(<span class="keyword">new</span> <span class="title class_">Date</span>()), <span class="variable constant_">PI</span>); <span class="comment">// 输出&quot;2024/5/20&quot; 3.14159</span></span><br></pre></td></tr></table></figure>
+<h3 id="272-3-导出与导入的“生命联系”（Live-Binding）">272.3 导出与导入的“生命联系”（Live Binding）</h3>
+<p>ES6 Modules的<code>import</code>与<code>export</code>并非“值的拷贝”，而是<strong>指向同一内存地址的引用</strong>（生命联系）。当导出模块中的值修改时，导入模块中的值会同步更新。</p>
+<h4 id="示例：生命联系的体现">示例：生命联系的体现</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// mod.js（导出模块）</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">let</span> count = <span class="number">0</span>;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">function</span> <span class="title function_">increment</span>(<span class="params"></span>) &#123;</span><br><span class="line">  count++;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.js（导入模块）</span></span><br><span class="line"><span class="keyword">import</span> &#123; count, increment &#125; <span class="keyword">from</span> <span class="string">&quot;./mod.js&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(count); <span class="comment">// 初始值：0</span></span><br><span class="line"><span class="title function_">increment</span>(); <span class="comment">// 调用导出模块的函数修改count</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(count); <span class="comment">// 同步更新：1（非拷贝，而是引用）</span></span><br></pre></td></tr></table></figure>
+<h3 id="272-4-常见错误与注意事项">272.4 常见错误与注意事项</h3>
+<ol>
+<li><strong>导入路径错误</strong>：相对路径需以<code>./</code>或<code>../</code>开头（如<code>import from 'mod.js'</code>会被当作第三方库，而非本地模块）；</li>
+<li><strong>默认导出与命名导出混淆</strong>：默认导入无需加花括号（如<code>import &#123; fn &#125; from './mod'</code>会报错，若<code>fn</code>是默认导出）；</li>
+<li><strong>重复导出</strong>：同一模块中不可对同一名称重复命名导出（如<code>export const a=1; export const a=2</code>会报错）；</li>
+<li><strong>静态导入限制</strong>：<code>import</code>需在模块顶层（不可在<code>if</code>语句或函数内动态导入，动态导入需用<code>import()</code>函数）。</li>
+</ol>
+<h2 id="273-Top-Level-await-ES2022-（顶层await，ES2022特性）">273 Top-Level await (ES2022)（顶层await，ES2022特性）</h2>
+<h3 id="273-1-顶层await的核心作用">273.1 顶层await的核心作用</h3>
+<p><code>await</code>关键字原本仅能在<code>async</code>函数内部使用，<strong>顶层await</strong>允许在模块顶层直接使用<code>await</code>，用于：</p>
+<ul>
+<li>模块初始化时等待异步操作完成（如加载数据、初始化第三方库）；</li>
+<li>避免在<code>async</code>函数中包裹顶层异步逻辑，简化代码。</li>
+</ul>
+<h3 id="273-2-顶层await的使用场景">273.2 顶层await的使用场景</h3>
+<h4 id="场景1：等待API数据加载">场景1：等待API数据加载</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// data.js（模块顶层等待API请求）</span></span><br><span class="line"><span class="keyword">const</span> res = <span class="keyword">await</span> <span class="title function_">fetch</span>(<span class="string">&quot;https://api.example.com/data&quot;</span>);</span><br><span class="line"><span class="keyword">const</span> data = <span class="keyword">await</span> res.<span class="title function_">json</span>();</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> data; <span class="comment">// 数据加载完成后才导出</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="keyword">import</span> data <span class="keyword">from</span> <span class="string">&quot;./data.js&quot;</span>; <span class="comment">// 等待data.js的异步操作完成后才导入</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(data); <span class="comment">// 直接使用加载后的完整数据</span></span><br></pre></td></tr></table></figure>
+<h4 id="场景2：等待第三方库初始化">场景2：等待第三方库初始化</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// db.js（等待数据库连接初始化）</span></span><br><span class="line"><span class="keyword">import</span> mongoose <span class="keyword">from</span> <span class="string">&quot;mongoose&quot;</span>;</span><br><span class="line"><span class="keyword">await</span> mongoose.<span class="title function_">connect</span>(<span class="string">&quot;mongodb://localhost:27017/myDB&quot;</span>); <span class="comment">// 顶层await等待连接</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title class_">User</span> = mongoose.<span class="title function_">model</span>(<span class="string">&quot;User&quot;</span>, &#123; <span class="attr">name</span>: <span class="title class_">String</span> &#125;); <span class="comment">// 连接成功后导出模型</span></span><br></pre></td></tr></table></figure>
+<h3 id="273-3-顶层await的注意事项">273.3 顶层await的注意事项</h3>
+<ol>
+<li><strong>仅支持模块环境</strong>：顶层await仅能在<code>type=&quot;module&quot;</code>的脚本或ES Modules文件中使用，普通脚本（无<code>type=&quot;module&quot;</code>）会报错；</li>
+<li><strong>模块加载阻塞</strong>：若A模块使用顶层await，导入A模块的B模块会等待A的异步操作完成后才继续执行，需避免在核心模块中使用（防止整体加载变慢）；</li>
+<li><strong>错误处理</strong>：需用<code>try/catch</code>捕获顶层await的错误，否则模块会抛出未捕获的Promise拒绝：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// data.js（错误处理示例）</span></span><br><span class="line"><span class="keyword">let</span> data;</span><br><span class="line"><span class="keyword">try</span> &#123;</span><br><span class="line">  <span class="keyword">const</span> res = <span class="keyword">await</span> <span class="title function_">fetch</span>(<span class="string">&quot;https://api.example.com/data&quot;</span>);</span><br><span class="line">  data = <span class="keyword">await</span> res.<span class="title function_">json</span>();</span><br><span class="line">&#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&quot;数据加载失败：&quot;</span>, err);</span><br><span class="line">  data = &#123; <span class="attr">fallback</span>: <span class="string">&quot;默认数据&quot;</span> &#125;; <span class="comment">// 提供降级数据</span></span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">default</span> data;</span><br></pre></td></tr></table></figure>
+</li>
+</ol>
+<h3 id="273-4-顶层await-vs-异步函数包裹">273.4 顶层await vs 异步函数包裹</h3>
+<table>
+<thead>
+<tr>
+<th>方式</th>
+<th>代码示例</th>
+<th>优缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>顶层await</td>
+<td><code>const res = await fetch(...)</code></td>
+<td>代码简洁，无需额外函数包裹；但阻塞模块加载</td>
+</tr>
+<tr>
+<td>异步函数包裹</td>
+<td><code>async function init() &#123; await fetch(...) &#125; init();</code></td>
+<td>不阻塞模块加载；但需手动调用函数，数据导出需处理Promise</td>
+</tr>
+</tbody>
+</table>
+<h2 id="274-The-Module-Pattern（模块模式）">274 The Module Pattern（模块模式）</h2>
+<h3 id="274-1-模块模式的核心思想">274.1 模块模式的核心思想</h3>
+<p>在ES6 Modules出现前，开发者通过<strong>立即执行函数表达式（IIFE）</strong> 实现模块化，核心是利用<strong>函数作用域</strong>封装私有变量，仅暴露指定的公共接口。</p>
+<h3 id="274-2-模块模式的实现步骤">274.2 模块模式的实现步骤</h3>
+<ol>
+<li>定义IIFE（创建私有作用域）；</li>
+<li>在IIFE内部声明私有变量/函数（仅内部可访问）；</li>
+<li>返回包含公共接口的对象（外部通过该对象访问模块功能）；</li>
+<li>将返回的对象赋值给全局变量（或挂载到<code>window</code>），供外部使用。</li>
+</ol>
+<h3 id="274-3-模块模式示例：计算器模块">274.3 模块模式示例：计算器模块</h3>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 计算器模块（使用模块模式）</span></span><br><span class="line"><span class="keyword">const</span> <span class="title class_">Calculator</span> = (<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// 1. 私有变量（仅模块内部可访问）</span></span><br><span class="line">  <span class="keyword">let</span> currentValue = <span class="number">0</span>;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 2. 私有函数（仅模块内部可调用）</span></span><br><span class="line">  <span class="keyword">function</span> <span class="title function_">validateNumber</span>(<span class="params">n</span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="keyword">typeof</span> n === <span class="string">&quot;number&quot;</span> &amp;&amp; !<span class="built_in">isNaN</span>(n);</span><br><span class="line">  &#125;</span><br><span class="line"></span><br><span class="line">  <span class="comment">// 3. 公共接口（暴露给外部的方法）</span></span><br><span class="line">  <span class="keyword">return</span> &#123;</span><br><span class="line">    <span class="attr">add</span>: <span class="keyword">function</span> (<span class="params">n</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="title function_">validateNumber</span>(n)) currentValue += n;</span><br><span class="line">      <span class="keyword">return</span> currentValue;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">subtract</span>: <span class="keyword">function</span> (<span class="params">n</span>) &#123;</span><br><span class="line">      <span class="keyword">if</span> (<span class="title function_">validateNumber</span>(n)) currentValue -= n;</span><br><span class="line">      <span class="keyword">return</span> currentValue;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">getValue</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">      <span class="keyword">return</span> currentValue;</span><br><span class="line">    &#125;,</span><br><span class="line">    <span class="attr">reset</span>: <span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">      currentValue = <span class="number">0</span>;</span><br><span class="line">      <span class="keyword">return</span> currentValue;</span><br><span class="line">    &#125;,</span><br><span class="line">  &#125;;</span><br><span class="line">&#125;)();</span><br><span class="line"></span><br><span class="line"><span class="comment">// 外部使用模块</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Calculator</span>.<span class="title function_">add</span>(<span class="number">5</span>)); <span class="comment">// 5（调用公共方法，修改私有变量currentValue）</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Calculator</span>.<span class="title function_">subtract</span>(<span class="number">2</span>)); <span class="comment">// 3</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Calculator</span>.<span class="title function_">getValue</span>()); <span class="comment">// 3</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title class_">Calculator</span>.<span class="property">currentValue</span>); <span class="comment">// undefined（私有变量，外部无法访问）</span></span><br><span class="line"><span class="title class_">Calculator</span>.<span class="title function_">validateNumber</span>(<span class="number">3</span>); <span class="comment">// 报错（私有函数，外部无法调用）</span></span><br></pre></td></tr></table></figure>
+<h3 id="274-4-模块模式的优缺点">274.4 模块模式的优缺点</h3>
+<table>
+<thead>
+<tr>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>解决全局作用域污染</td>
+<td>无原生依赖管理，需手动处理模块加载顺序</td>
+</tr>
+<tr>
+<td>实现私有变量/函数</td>
+<td>无法动态导入模块</td>
+</tr>
+<tr>
+<td>兼容性好（支持所有浏览器）</td>
+<td>模块间无法共享私有成员，复用性有限</td>
+</tr>
+</tbody>
+</table>
+<h3 id="274-5-模块模式与ES6-Modules的对比">274.5 模块模式与ES6 Modules的对比</h3>
+<ul>
+<li><strong>模块模式</strong>：基于函数作用域，动态执行，无原生<code>import/export</code>，适合旧环境；</li>
+<li><strong>ES6 Modules</strong>：基于模块作用域，静态加载，原生支持<code>import/export</code>，依赖管理清晰，是现代开发的首选。</li>
+</ul>
+<h2 id="275-CommonJS-Modules（CommonJS模块）">275 CommonJS Modules（CommonJS模块）</h2>
+<h3 id="275-1-CommonJS的核心应用场景">275.1 CommonJS的核心应用场景</h3>
+<p>CommonJS是<strong>Node.js的传统模块规范</strong>，主要用于服务器端开发，也可通过Browserify等工具在浏览器中使用。其设计思路是“同步加载模块”（适合服务器端，文件加载速度快，无需异步）。</p>
+<h3 id="275-2-CommonJS的导出与导入语法">275.2 CommonJS的导出与导入语法</h3>
+<h4 id="1-导出语法（module-exports）">1. 导出语法（<code>module.exports</code>）</h4>
+<ul>
+<li><strong>导出对象</strong>：直接赋值给<code>module.exports</code>（推荐，可导出任意类型）；</li>
+<li><strong>导出属性</strong>：通过<code>exports</code>对象添加属性（<code>exports</code>是<code>module.exports</code>的引用，不可直接赋值为新对象）。</li>
+</ul>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// mod.js（CommonJS导出示例）</span></span><br><span class="line"><span class="comment">// 方式1：导出对象（推荐）</span></span><br><span class="line"><span class="keyword">const</span> <span class="variable constant_">PI</span> = <span class="number">3.14</span>;</span><br><span class="line"><span class="keyword">function</span> <span class="title function_">area</span>(<span class="params">r</span>) &#123;</span><br><span class="line">  <span class="keyword">return</span> <span class="variable constant_">PI</span> * r ** <span class="number">2</span>;</span><br><span class="line">&#125;</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">PI</span>: <span class="variable constant_">PI</span>,</span><br><span class="line">  <span class="attr">calculateArea</span>: area,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 方式2：导出属性（exports是module.exports的引用）</span></span><br><span class="line"><span class="built_in">exports</span>.<span class="property">add</span> = <span class="function">(<span class="params">a, b</span>) =&gt;</span> a + b;</span><br><span class="line"><span class="built_in">exports</span>.<span class="property">subtract</span> = <span class="function">(<span class="params">a, b</span>) =&gt;</span> a - b;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 注意：以下写法错误（会断开exports与module.exports的引用）</span></span><br><span class="line"><span class="comment">// exports = &#123; add: (a,b) =&gt; a+b &#125;; // 外部导入时会获取空对象</span></span><br></pre></td></tr></table></figure>
+<h4 id="2-导入语法（require-）">2. 导入语法（<code>require()</code>）</h4>
+<p>通过<code>require('模块路径')</code>导入模块，返回模块导出的对象，支持解构赋值。</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.js（CommonJS导入示例）</span></span><br><span class="line"><span class="comment">// 方式1：完整导入</span></span><br><span class="line"><span class="keyword">const</span> mod = <span class="built_in">require</span>(<span class="string">&quot;./mod.js&quot;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(mod.<span class="property">PI</span>); <span class="comment">// 3.14</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(mod.<span class="title function_">calculateArea</span>(<span class="number">2</span>)); <span class="comment">// 12.56</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 方式2：解构导入</span></span><br><span class="line"><span class="keyword">const</span> &#123; add, subtract &#125; = <span class="built_in">require</span>(<span class="string">&quot;./mod.js&quot;</span>);</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">add</span>(<span class="number">1</span>, <span class="number">2</span>)); <span class="comment">// 3</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">subtract</span>(<span class="number">5</span>, <span class="number">3</span>)); <span class="comment">// 2</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 方式3：导入第三方库（无需路径，直接写库名）</span></span><br><span class="line"><span class="keyword">const</span> fs = <span class="built_in">require</span>(<span class="string">&quot;fs&quot;</span>); <span class="comment">// 导入Node.js内置模块fs</span></span><br><span class="line">fs.<span class="title function_">readFile</span>(<span class="string">&quot;test.txt&quot;</span>, <span class="string">&quot;utf8&quot;</span>, <span class="function">(<span class="params">err, data</span>) =&gt;</span> &#123;</span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(data);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<h3 id="275-3-CommonJS的加载机制">275.3 CommonJS的加载机制</h3>
+<ol>
+<li><strong>同步加载</strong>：<code>require()</code>执行时会阻塞后续代码，直到模块加载完成；</li>
+<li><strong>缓存机制</strong>：模块第一次被<code>require</code>时会执行并缓存，后续<code>require</code>同一模块会直接返回缓存结果（避免重复执行）；</li>
+<li><strong>模块标识符</strong>：
+<ul>
+<li>内置模块（如<code>fs</code>）：直接写模块名；</li>
+<li>第三方模块（如<code>lodash</code>）：从<code>node_modules</code>目录查找；</li>
+<li>本地模块：以<code>./</code>或<code>../</code>开头的相对路径，或绝对路径。</li>
+</ul>
+</li>
+</ol>
+<h4 id="示例：CommonJS缓存机制">示例：CommonJS缓存机制</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// mod.js</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;模块执行&quot;</span>); <span class="comment">// 仅第一次require时输出</span></span><br><span class="line"><span class="keyword">let</span> count = <span class="number">0</span>;</span><br><span class="line"><span class="variable language_">module</span>.<span class="property">exports</span> = &#123;</span><br><span class="line">  <span class="attr">increment</span>: <span class="function">() =&gt;</span> count++,</span><br><span class="line">  <span class="attr">getCount</span>: <span class="function">() =&gt;</span> count,</span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.js</span></span><br><span class="line"><span class="keyword">const</span> mod1 = <span class="built_in">require</span>(<span class="string">&quot;./mod.js&quot;</span>); <span class="comment">// 输出&quot;模块执行&quot;</span></span><br><span class="line"><span class="keyword">const</span> mod2 = <span class="built_in">require</span>(<span class="string">&quot;./mod.js&quot;</span>); <span class="comment">// 不输出（使用缓存）</span></span><br><span class="line"></span><br><span class="line">mod1.<span class="title function_">increment</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(mod1.<span class="title function_">getCount</span>()); <span class="comment">// 1</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(mod2.<span class="title function_">getCount</span>()); <span class="comment">// 1（mod1和mod2指向同一模块实例）</span></span><br></pre></td></tr></table></figure>
+<h3 id="275-4-CommonJS与ES6-Modules的核心区别">275.4 CommonJS与ES6 Modules的核心区别</h3>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>CommonJS</th>
+<th>ES6 Modules</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>加载时机</td>
+<td>运行时动态加载（执行<code>require</code>时）</td>
+<td>编译时静态加载（解析<code>import</code>时）</td>
+</tr>
+<tr>
+<td><code>this</code>指向</td>
+<td>模块内<code>this</code>指向<code>module.exports</code></td>
+<td>模块内<code>this</code>指向<code>undefined</code></td>
+</tr>
+<tr>
+<td>默认导出</td>
+<td><code>module.exports = value</code></td>
+<td><code>export default value</code></td>
+</tr>
+<tr>
+<td>命名导出</td>
+<td><code>exports.key = value</code></td>
+<td><code>export const key = value</code></td>
+</tr>
+<tr>
+<td>动态导入</td>
+<td>原生支持（<code>require</code>可在条件语句中）</td>
+<td>需用<code>import()</code>函数（返回Promise）</td>
+</tr>
+<tr>
+<td>Node.js支持</td>
+<td>原生支持（默认）</td>
+<td>需设置<code>&quot;type&quot;: &quot;module&quot;</code>（在<code>package.json</code>中）</td>
+</tr>
+</tbody>
+</table>
+<h2 id="276-A-Brief-Introduction-to-the-Command-Line（命令行简介）">276 A Brief Introduction to the Command Line（命令行简介）</h2>
+<h3 id="276-1-命令行的核心作用">276.1 命令行的核心作用</h3>
+<p>命令行（Command Line Interface，CLI）是<strong>与操作系统交互的文本界面</strong>，现代JS开发中用于：</p>
+<ul>
+<li>执行NPM命令（如<code>npm install</code>、<code>npm run build</code>）；</li>
+<li>操作文件/目录（如创建、删除、移动文件）；</li>
+<li>运行Node.js脚本（如<code>node main.js</code>）；</li>
+<li>部署项目（如<code>netlify deploy</code>）。</li>
+</ul>
+<h3 id="276-2-常见命令行工具">276.2 常见命令行工具</h3>
+<table>
+<thead>
+<tr>
+<th>操作系统</th>
+<th>默认命令行工具</th>
+<th>推荐增强工具</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>Windows</td>
+<td>命令提示符（CMD）、PowerShell</td>
+<td>Windows Terminal、Git Bash</td>
+</tr>
+<tr>
+<td>macOS</td>
+<td>Terminal</td>
+<td>iTerm2、Oh My Zsh</td>
+</tr>
+<tr>
+<td>Linux</td>
+<td>Terminal</td>
+<td>Oh My Zsh</td>
+</tr>
+</tbody>
+</table>
+<h3 id="276-3-常用命令（通用）">276.3 常用命令（通用）</h3>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>pwd</code></td>
+<td>显示当前工作目录路径</td>
+<td><code>pwd</code> → <code>/Users/username/project</code></td>
+</tr>
+<tr>
+<td><code>ls</code></td>
+<td>列出当前目录下的文件/目录</td>
+<td><code>ls -l</code> → 详细列表（包含权限、大小）</td>
+</tr>
+<tr>
+<td><code>cd 路径</code></td>
+<td>切换工作目录</td>
+<td><code>cd ../</code> → 回到上级目录；<code>cd src</code> → 进入src目录</td>
+</tr>
+<tr>
+<td><code>mkdir 目录名</code></td>
+<td>创建新目录</td>
+<td><code>mkdir dist</code> → 创建dist目录</td>
+</tr>
+<tr>
+<td><code>touch 文件名</code></td>
+<td>创建新文件（macOS/Linux）；Windows用<code>type nul &gt; 文件名</code></td>
+<td><code>touch index.js</code> → 创建index.js文件</td>
+</tr>
+<tr>
+<td><code>rm 文件名</code></td>
+<td>删除文件</td>
+<td><code>rm test.txt</code> → 删除test.txt</td>
+</tr>
+<tr>
+<td><code>rm -r 目录名</code></td>
+<td>递归删除目录及内容（macOS/Linux）；Windows用<code>rmdir /s 目录名</code></td>
+<td><code>rm -r node_modules</code> → 删除node_modules目录</td>
+</tr>
+<tr>
+<td><code>cp 源文件 目标路径</code></td>
+<td>复制文件</td>
+<td><code>cp index.js src/</code> → 复制index.js到src目录</td>
+</tr>
+<tr>
+<td><code>mv 源文件 目标路径</code></td>
+<td>移动/重命名文件</td>
+<td><code>mv old.js new.js</code> → 重命名为new.js</td>
+</tr>
+</tbody>
+</table>
+<h3 id="276-4-JS开发常用命令示例">276.4 JS开发常用命令示例</h3>
+<ol>
+<li>初始化NPM项目：<code>npm init -y</code>（<code>-y</code>表示默认回答所有问题，快速创建<code>package.json</code>）；</li>
+<li>安装开发依赖：<code>npm install --save-dev parcel</code>（<code>--save-dev</code>缩写<code>-D</code>，依赖仅用于开发环境）；</li>
+<li>安装生产依赖：<code>npm install axios</code>（依赖用于生产环境，会写入<code>dependencies</code>）；</li>
+<li>运行脚本：<code>npm run dev</code>（执行<code>package.json</code>中<code>scripts</code>下的<code>dev</code>命令，如<code>&quot;dev&quot;: &quot;parcel index.html&quot;</code>）；</li>
+<li>查看Node.js版本：<code>node -v</code> → <code>v18.16.0</code>；</li>
+<li>运行JS脚本：<code>node main.js</code> → 执行main.js文件。</li>
+</ol>
+<h2 id="277-Introduction-to-NPM（NPM简介）">277 Introduction to NPM（NPM简介）</h2>
+<h3 id="277-1-NPM的核心概念">277.1 NPM的核心概念</h3>
+<p>NPM（Node Package Manager）是<strong>Node.js的包管理工具</strong>，主要功能：</p>
+<ul>
+<li><strong>包管理</strong>：下载、安装、更新、删除第三方库（如React、Lodash）；</li>
+<li><strong>项目配置</strong>：通过<code>package.json</code>管理项目信息、依赖、脚本；</li>
+<li><strong>脚本执行</strong>：通过<code>npm run 脚本名</code>执行自定义命令（如构建、测试、部署）。</li>
+</ul>
+<h3 id="277-2-NPM的核心文件：package-json">277.2 NPM的核心文件：<code>package.json</code></h3>
+<p><code>package.json</code>是项目的<strong>配置清单</strong>，包含以下核心字段：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;name&quot;</span><span class="punctuation">:</span> <span class="string">&quot;my-js-project&quot;</span><span class="punctuation">,</span> <span class="comment">// 项目名称（小写，无空格）</span></span><br><span class="line">  <span class="attr">&quot;version&quot;</span><span class="punctuation">:</span> <span class="string">&quot;1.0.0&quot;</span><span class="punctuation">,</span> <span class="comment">// 项目版本（遵循语义化版本：MAJOR.MINOR.PATCH）</span></span><br><span class="line">  <span class="attr">&quot;description&quot;</span><span class="punctuation">:</span> <span class="string">&quot;A modern JavaScript project&quot;</span><span class="punctuation">,</span> <span class="comment">// 项目描述</span></span><br><span class="line">  <span class="attr">&quot;main&quot;</span><span class="punctuation">:</span> <span class="string">&quot;index.js&quot;</span><span class="punctuation">,</span> <span class="comment">// 项目入口文件（CommonJS模块）</span></span><br><span class="line">  <span class="attr">&quot;type&quot;</span><span class="punctuation">:</span> <span class="string">&quot;module&quot;</span><span class="punctuation">,</span> <span class="comment">// 启用ES6 Modules（默认CommonJS）</span></span><br><span class="line">  <span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="comment">// 自定义脚本</span></span><br><span class="line">    <span class="attr">&quot;dev&quot;</span><span class="punctuation">:</span> <span class="string">&quot;parcel index.html&quot;</span><span class="punctuation">,</span> <span class="comment">// 开发环境启动命令</span></span><br><span class="line">    <span class="attr">&quot;build&quot;</span><span class="punctuation">:</span> <span class="string">&quot;parcel build index.html&quot;</span><span class="punctuation">,</span> <span class="comment">// 生产环境打包命令</span></span><br><span class="line">    <span class="attr">&quot;test&quot;</span><span class="punctuation">:</span> <span class="string">&quot;jest&quot;</span> <span class="comment">// 测试命令</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;dependencies&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="comment">// 生产依赖（项目运行必需）</span></span><br><span class="line">    <span class="attr">&quot;axios&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^1.4.0&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;devDependencies&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="comment">// 开发依赖（仅开发时使用）</span></span><br><span class="line">    <span class="attr">&quot;parcel&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^2.9.1&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;jest&quot;</span><span class="punctuation">:</span> <span class="string">&quot;^29.5.0&quot;</span></span><br><span class="line">  <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;author&quot;</span><span class="punctuation">:</span> <span class="string">&quot;Your Name&quot;</span><span class="punctuation">,</span> <span class="comment">// 作者</span></span><br><span class="line">  <span class="attr">&quot;license&quot;</span><span class="punctuation">:</span> <span class="string">&quot;MIT&quot;</span> <span class="comment">// 开源协议</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<h3 id="277-3-语义化版本（Semantic-Versioning）">277.3 语义化版本（Semantic Versioning）</h3>
+<p>NPM依赖版本遵循<code>MAJOR.MINOR.PATCH</code>格式，含义：</p>
+<ul>
+<li><strong>MAJOR</strong>（主版本）：不兼容的API变更（如从v1.x到v2.x）；</li>
+<li><strong>MINOR</strong>（次版本）：向后兼容的功能新增（如从v1.2.x到v1.3.x）；</li>
+<li><strong>PATCH</strong>（补丁版本）：向后兼容的问题修复（如从v1.3.0到v1.3.1）。</li>
+</ul>
+<p>版本前缀含义：</p>
+<ul>
+<li><code>^1.4.0</code>：允许次版本和补丁版本更新（如1.4.0 → 1.5.2）；</li>
+<li><code>~1.4.0</code>：仅允许补丁版本更新（如1.4.0 → 1.4.3）；</li>
+<li><code>1.4.0</code>：固定版本（不允许任何更新）。</li>
+</ul>
+<h3 id="277-4-NPM常用命令">277.4 NPM常用命令</h3>
+<table>
+<thead>
+<tr>
+<th>命令</th>
+<th>作用</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>npm init</code></td>
+<td>初始化项目，创建<code>package.json</code></td>
+<td><code>npm init -y</code> → 快速初始化（默认配置）</td>
+</tr>
+<tr>
+<td><code>npm install &lt;包名&gt;</code></td>
+<td>安装生产依赖</td>
+<td><code>npm install axios</code></td>
+</tr>
+<tr>
+<td><code>npm install -D &lt;包名&gt;</code></td>
+<td>安装开发依赖</td>
+<td><code>npm install -D parcel</code></td>
+</tr>
+<tr>
+<td><code>npm install &lt;包名&gt;@&lt;版本&gt;</code></td>
+<td>安装指定版本的包</td>
+<td><code>npm install axios@1.0.0</code></td>
+</tr>
+<tr>
+<td><code>npm update &lt;包名&gt;</code></td>
+<td>更新包到最新兼容版本</td>
+<td><code>npm update axios</code></td>
+</tr>
+<tr>
+<td><code>npm uninstall &lt;包名&gt;</code></td>
+<td>删除包</td>
+<td><code>npm uninstall axios</code></td>
+</tr>
+<tr>
+<td><code>npm run &lt;脚本名&gt;</code></td>
+<td>执行<code>scripts</code>中的自定义脚本</td>
+<td><code>npm run dev</code> → 执行dev脚本</td>
+</tr>
+<tr>
+<td><code>npm list</code></td>
+<td>查看已安装的包及其依赖树</td>
+<td><code>npm list --depth 0</code> → 仅显示顶层依赖</td>
+</tr>
+<tr>
+<td><code>npm outdated</code></td>
+<td>检查过时的包（版本落后于<code>package.json</code>）</td>
+<td><code>npm outdated</code></td>
+</tr>
+</tbody>
+</table>
+<h3 id="277-5-NPM与Yarn的对比">277.5 NPM与Yarn的对比</h3>
+<p>Yarn是Facebook推出的包管理工具，解决早期NPM的性能问题，核心区别：</p>
+<table>
+<thead>
+<tr>
+<th>特性</th>
+<th>NPM</th>
+<th>Yarn</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>安装速度</td>
+<td>较慢（早期），v5+优化后较快</td>
+<td>较快（并行安装、缓存机制）</td>
+</tr>
+<tr>
+<td>锁文件</td>
+<td><code>package-lock.json</code>（v5+）</td>
+<td><code>yarn.lock</code>（默认）</td>
+</tr>
+<tr>
+<td>命令差异</td>
+<td><code>npm install</code></td>
+<td><code>yarn add</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>npm uninstall</code></td>
+<td><code>yarn remove</code></td>
+</tr>
+<tr>
+<td></td>
+<td><code>npm run dev</code></td>
+<td><code>yarn dev</code></td>
+</tr>
+<tr>
+<td>全局安装</td>
+<td><code>npm install -g &lt;包名&gt;</code></td>
+<td><code>yarn global add &lt;包名&gt;</code></td>
+</tr>
+</tbody>
+</table>
+<p><strong>选择建议</strong>：现代项目中NPM（v5+）与Yarn功能差异不大，可根据团队习惯选择；Vite等新工具默认支持两者。</p>
+<h2 id="278-Bundling-With-Parcel-and-NPM-Scripts（使用Parcel和NPM脚本打包）">278 Bundling With Parcel and NPM Scripts（使用Parcel和NPM脚本打包）</h2>
+<h3 id="278-1-打包工具的核心作用">278.1 打包工具的核心作用</h3>
+<p>打包工具（如Parcel、Webpack）是<strong>现代JS开发的核心工具</strong>，主要功能：</p>
+<ol>
+<li><strong>模块合并</strong>：将多个ES Modules/CommonJS模块合并为少数几个文件（减少HTTP请求）；</li>
+<li><strong>语法转换</strong>：将ES6+语法转换为ES5（兼容旧浏览器）；</li>
+<li><strong>资源处理</strong>：处理CSS、图片、字体等非JS资源（如将CSS注入HTML，图片压缩）；</li>
+<li><strong>代码优化</strong>：压缩JS/CSS代码（移除空格、注释，变量重命名），提升加载速度；</li>
+<li><strong>自动化</strong>：监听文件变化，自动重新打包（热更新，Hot Reload）。</li>
+</ol>
+<h3 id="278-2-Parcel的核心优势">278.2 Parcel的核心优势</h3>
+<p>Parcel是<strong>零配置打包工具</strong>，相比Webpack的复杂配置，Parcel无需手动编写配置文件（如<code>webpack.config.js</code>），开箱即用，适合快速开发。</p>
+<h3 id="278-3-使用Parcel打包项目的步骤">278.3 使用Parcel打包项目的步骤</h3>
+<h4 id="步骤1：初始化项目并安装Parcel">步骤1：初始化项目并安装Parcel</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 创建项目目录并进入</span></span><br><span class="line"><span class="built_in">mkdir</span> parcel-demo &amp;&amp; <span class="built_in">cd</span> parcel-demo</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 初始化NPM项目（生成package.json）</span></span><br><span class="line">npm init -y</span><br><span class="line"></span><br><span class="line"><span class="comment"># 3. 安装Parcel作为开发依赖</span></span><br><span class="line">npm install -D parcel</span><br></pre></td></tr></table></figure>
+<h4 id="步骤2：创建项目文件">步骤2：创建项目文件</h4>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">&lt;!-- index.html（入口HTML文件） --&gt;</span></span><br><span class="line"><span class="meta">&lt;!DOCTYPE <span class="keyword">html</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;<span class="name">html</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">head</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">title</span>&gt;</span>Parcel Demo<span class="tag">&lt;/<span class="name">title</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">link</span> <span class="attr">rel</span>=<span class="string">&quot;stylesheet&quot;</span> <span class="attr">href</span>=<span class="string">&quot;./style.css&quot;</span> /&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 引入CSS文件 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">head</span>&gt;</span></span><br><span class="line">  <span class="tag">&lt;<span class="name">body</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">div</span> <span class="attr">id</span>=<span class="string">&quot;app&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">div</span>&gt;</span></span><br><span class="line">    <span class="tag">&lt;<span class="name">script</span> <span class="attr">type</span>=<span class="string">&quot;module&quot;</span> <span class="attr">src</span>=<span class="string">&quot;./main.js&quot;</span>&gt;</span><span class="tag">&lt;/<span class="name">script</span>&gt;</span></span><br><span class="line">    <span class="comment">&lt;!-- 引入JS模块 --&gt;</span></span><br><span class="line">  <span class="tag">&lt;/<span class="name">body</span>&gt;</span></span><br><span class="line"><span class="tag">&lt;/<span class="name">html</span>&gt;</span></span><br></pre></td></tr></table></figure>
+<figure class="highlight css"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* style.css */</span></span><br><span class="line"><span class="selector-tag">body</span> &#123;</span><br><span class="line">  <span class="attribute">background</span>: <span class="number">#f0f0f0</span>;</span><br><span class="line">  <span class="attribute">font-family</span>: Arial, sans-serif;</span><br><span class="line">&#125;</span><br><span class="line"><span class="selector-id">#app</span> &#123;</span><br><span class="line">  <span class="attribute">font-size</span>: <span class="number">24px</span>;</span><br><span class="line">  <span class="attribute">color</span>: <span class="number">#333</span>;</span><br><span class="line">  <span class="attribute">text-align</span>: center;</span><br><span class="line">  <span class="attribute">margin-top</span>: <span class="number">50px</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// math.js（JS模块）</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">sum</span> = (<span class="params">a, b</span>) =&gt; a + b;</span><br></pre></td></tr></table></figure>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// main.js（JS入口文件）</span></span><br><span class="line"><span class="keyword">import</span> &#123; sum &#125; <span class="keyword">from</span> <span class="string">&quot;./math.js&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> app = <span class="variable language_">document</span>.<span class="title function_">getElementById</span>(<span class="string">&quot;app&quot;</span>);</span><br><span class="line">app.<span class="property">textContent</span> = <span class="string">`1 + 2 = <span class="subst">$&#123;sum(<span class="number">1</span>, <span class="number">2</span>)&#125;</span>`</span>; <span class="comment">// 动态插入内容</span></span><br></pre></td></tr></table></figure>
+<h4 id="步骤3：配置NPM脚本">步骤3：配置NPM脚本</h4>
+<p>修改<code>package.json</code>的<code>scripts</code>字段：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;dev&quot;</span><span class="punctuation">:</span> <span class="string">&quot;parcel index.html&quot;</span><span class="punctuation">,</span> <span class="comment">// 开发模式（热更新）</span></span><br><span class="line">    <span class="attr">&quot;build&quot;</span><span class="punctuation">:</span> <span class="string">&quot;parcel build index.html&quot;</span> <span class="comment">// 生产模式（打包优化）</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<h4 id="步骤4：运行开发模式">步骤4：运行开发模式</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run dev</span><br></pre></td></tr></table></figure>
+<p>Parcel会自动：</p>
+<ul>
+<li>启动开发服务器（默认端口1234）；</li>
+<li>打开浏览器访问<code>http://localhost:1234</code>；</li>
+<li>监听文件变化，修改后自动重新打包并刷新页面。</li>
+</ul>
+<h4 id="步骤5：打包生产版本">步骤5：打包生产版本</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run build</span><br></pre></td></tr></table></figure>
+<p>Parcel会生成<code>dist</code>目录，包含：</p>
+<ul>
+<li>合并并压缩后的<code>index.html</code>、<code>main.[hash].js</code>、<code>style.[hash].css</code>；</li>
+<li>自动处理资源路径（如图片URL）；</li>
+<li>移除未使用的代码（Tree Shaking）。</li>
+</ul>
+<h3 id="278-4-Parcel的核心特性示例">278.4 Parcel的核心特性示例</h3>
+<h4 id="1-热更新（Hot-Reload）">1. 热更新（Hot Reload）</h4>
+<p>修改<code>style.css</code>的<code>background</code>为<code>#fff</code>，浏览器会立即更新样式，无需手动刷新。</p>
+<h4 id="2-自动处理CSS">2. 自动处理CSS</h4>
+<p>Parcel会将<code>style.css</code>注入到HTML的<code>&lt;head&gt;</code>中（开发模式），或打包为独立的CSS文件（生产模式）。</p>
+<h4 id="3-图片处理">3. 图片处理</h4>
+<p>在<code>index.html</code>中添加图片：</p>
+<figure class="highlight html"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="tag">&lt;<span class="name">img</span> <span class="attr">src</span>=<span class="string">&quot;./logo.png&quot;</span> <span class="attr">alt</span>=<span class="string">&quot;Logo&quot;</span> /&gt;</span></span><br></pre></td></tr></table></figure>
+<p>Parcel会自动压缩图片，并在生产模式下生成带哈希值的文件名（如<code>logo.abc123.png</code>），避免缓存问题。</p>
+<h4 id="4-Tree-Shaking（移除未使用代码）">4. Tree Shaking（移除未使用代码）</h4>
+<p>若<code>math.js</code>中有未被导入的函数：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// math.js</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">sum</span> = (<span class="params">a, b</span>) =&gt; a + b;</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">multiply</span> = (<span class="params">a, b</span>) =&gt; a * b; <span class="comment">// 未被导入</span></span><br></pre></td></tr></table></figure>
+<p>Parcel在生产模式下会自动移除<code>multiply</code>函数，减小打包体积。</p>
+<h3 id="278-5-常见问题与解决方案">278.5 常见问题与解决方案</h3>
+<ol>
+<li><strong>端口被占用</strong>：修改<code>dev</code>脚本为<code>parcel index.html --port 3000</code>（指定端口3000）；</li>
+<li><strong>打包后路径错误</strong>：若部署到子目录（如<code>https://example.com/my-app</code>），需添加<code>--public-url ./</code>：<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line"><span class="attr">&quot;build&quot;</span><span class="punctuation">:</span> <span class="string">&quot;parcel build index.html --public-url ./&quot;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li><strong>缓存问题</strong>：生产模式下Parcel会为文件名添加哈希值（如<code>main.abc123.js</code>），确保新版本不被浏览器缓存。</li>
+</ol>
+<h2 id="279-Configuring-Babel-and-Polyfilling（配置Babel与垫片）">279 Configuring Babel and Polyfilling（配置Babel与垫片）</h2>
+<h3 id="279-1-Babel的核心作用">279.1 Babel的核心作用</h3>
+<p>Babel是<strong>JS语法转换工具</strong>，用于将ES6+（如箭头函数、<code>let/const</code>、解构赋值）转换为ES5语法，解决旧浏览器（如IE11）的兼容性问题。</p>
+<h3 id="279-2-垫片（Polyfill）的核心作用">279.2 垫片（Polyfill）的核心作用</h3>
+<p>Babel仅转换语法，无法处理ES6+新增的<strong>API</strong>（如<code>Promise</code>、<code>Array.prototype.includes</code>、<code>Object.assign</code>）。垫片（如<code>core-js</code>）会为旧浏览器添加这些API的实现，确保代码正常运行。</p>
+<h3 id="279-3-Babel与Polyfill的配置步骤">279.3 Babel与Polyfill的配置步骤</h3>
+<h4 id="步骤1：安装依赖">步骤1：安装依赖</h4>
+<figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment"># 1. 安装Babel核心依赖和预设</span></span><br><span class="line">npm install -D @babel/core @babel/cli @babel/preset-env</span><br><span class="line"></span><br><span class="line"><span class="comment"># 2. 安装core-js（提供垫片）</span></span><br><span class="line">npm install core-js@3</span><br></pre></td></tr></table></figure>
+<ul>
+<li><code>@babel/core</code>：Babel的核心转换功能；</li>
+<li><code>@babel/cli</code>：Babel的命令行工具；</li>
+<li><code>@babel/preset-env</code>：预设集合，自动根据目标浏览器选择需要转换的语法；</li>
+<li><code>core-js@3</code>：ES6+ API的垫片库。</li>
+</ul>
+<h4 id="步骤2：创建Babel配置文件">步骤2：创建Babel配置文件</h4>
+<p>在项目根目录创建<code>babel.config.json</code>（Babel 7+推荐的配置文件格式）：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;presets&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span></span><br><span class="line">    <span class="punctuation">[</span></span><br><span class="line">      <span class="string">&quot;@babel/preset-env&quot;</span><span class="punctuation">,</span></span><br><span class="line">      <span class="punctuation">&#123;</span></span><br><span class="line">        <span class="attr">&quot;targets&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">          <span class="comment">// 目标浏览器（根据需求调整）</span></span><br><span class="line">          <span class="attr">&quot;ie&quot;</span><span class="punctuation">:</span> <span class="string">&quot;11&quot;</span><span class="punctuation">,</span> <span class="comment">// 支持IE11</span></span><br><span class="line">          <span class="attr">&quot;chrome&quot;</span><span class="punctuation">:</span> <span class="string">&quot;58&quot;</span><span class="punctuation">,</span></span><br><span class="line">          <span class="attr">&quot;firefox&quot;</span><span class="punctuation">:</span> <span class="string">&quot;54&quot;</span></span><br><span class="line">        <span class="punctuation">&#125;</span><span class="punctuation">,</span></span><br><span class="line">        <span class="attr">&quot;useBuiltIns&quot;</span><span class="punctuation">:</span> <span class="string">&quot;usage&quot;</span><span class="punctuation">,</span> <span class="comment">// 自动按需导入垫片（仅导入使用到的API）</span></span><br><span class="line">        <span class="attr">&quot;corejs&quot;</span><span class="punctuation">:</span> <span class="number">3</span> <span class="comment">// 指定core-js版本</span></span><br><span class="line">      <span class="punctuation">&#125;</span></span><br><span class="line">    <span class="punctuation">]</span></span><br><span class="line">  <span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<h4 id="步骤3：配置NPM脚本-2">步骤3：配置NPM脚本</h4>
+<p>修改<code>package.json</code>的<code>scripts</code>字段，添加Babel转换命令：</p>
+<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;scripts&quot;</span><span class="punctuation">:</span> <span class="punctuation">&#123;</span></span><br><span class="line">    <span class="attr">&quot;dev&quot;</span><span class="punctuation">:</span> <span class="string">&quot;parcel index.html&quot;</span><span class="punctuation">,</span> <span class="comment">// Parcel会自动使用Babel</span></span><br><span class="line">    <span class="attr">&quot;build&quot;</span><span class="punctuation">:</span> <span class="string">&quot;parcel build index.html&quot;</span><span class="punctuation">,</span></span><br><span class="line">    <span class="attr">&quot;babel:transpile&quot;</span><span class="punctuation">:</span> <span class="string">&quot;babel src --out-dir dist/src&quot;</span> <span class="comment">// 单独使用Babel转换src目录</span></span><br><span class="line">  <span class="punctuation">&#125;</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+<h4 id="步骤4：测试语法转换与垫片">步骤4：测试语法转换与垫片</h4>
+<p>创建包含ES6+语法和API的文件：</p>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// src/main.js</span></span><br><span class="line"><span class="keyword">const</span> arr = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>];</span><br><span class="line"><span class="keyword">const</span> hasTwo = arr.<span class="title function_">includes</span>(<span class="number">2</span>); <span class="comment">// ES2016 API</span></span><br><span class="line"><span class="keyword">const</span> promise = <span class="keyword">new</span> <span class="title class_">Promise</span>(<span class="function">(<span class="params">resolve</span>) =&gt;</span> <span class="title function_">resolve</span>(<span class="string">&quot;ok&quot;</span>)); <span class="comment">// ES2015 API</span></span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(hasTwo);</span><br><span class="line">promise.<span class="title function_">then</span>(<span class="variable language_">console</span>.<span class="property">log</span>);</span><br></pre></td></tr></table></figure>
+<p>运行<code>npm run babel:transpile</code>，转换后的<code>dist/src/main.js</code>会：</p>
+<ol>
+<li>将<code>const</code>转换为<code>var</code>（兼容IE11）；</li>
+<li>自动导入<code>core-js</code>的<code>Array.prototype.includes</code>和<code>Promise</code>垫片；</li>
+<li>保留代码逻辑不变。</li>
+</ol>
+<h3 id="279-4-Babel预设与插件">279.4 Babel预设与插件</h3>
+<ul>
+<li><strong>预设（Preset）</strong>：是<strong>插件的集合</strong>，用于简化配置（如<code>@babel/preset-env</code>包含所有ES6+语法转换插件）；</li>
+<li><strong>插件（Plugin）</strong>：用于转换特定语法（如<code>@babel/plugin-proposal-class-properties</code>用于转换类的私有属性）。</li>
+</ul>
+<h4 id="示例：添加类私有属性支持">示例：添加类私有属性支持</h4>
+<ol>
+<li>安装插件：<code>npm install -D @babel/plugin-proposal-class-properties</code>；</li>
+<li>修改<code>babel.config.json</code>：<figure class="highlight json"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line"><span class="punctuation">&#123;</span></span><br><span class="line">  <span class="attr">&quot;presets&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;@babel/preset-env&quot;</span><span class="punctuation">]</span><span class="punctuation">,</span></span><br><span class="line">  <span class="attr">&quot;plugins&quot;</span><span class="punctuation">:</span> <span class="punctuation">[</span><span class="string">&quot;@babel/plugin-proposal-class-properties&quot;</span><span class="punctuation">]</span></span><br><span class="line"><span class="punctuation">&#125;</span></span><br></pre></td></tr></table></figure>
+</li>
+<li>测试代码：<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">class</span> <span class="title class_">Person</span> &#123;</span><br><span class="line">  #name = <span class="string">&quot;Alice&quot;</span>; <span class="comment">// 类私有属性（ES2022）</span></span><br><span class="line">  <span class="title function_">getName</span>(<span class="params"></span>) &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.#name;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"><span class="keyword">const</span> p = <span class="keyword">new</span> <span class="title class_">Person</span>();</span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(p.<span class="title function_">getName</span>()); <span class="comment">// 输出&quot;Alice&quot;</span></span><br></pre></td></tr></table></figure>
+转换后会兼容旧浏览器。</li>
+</ol>
+<h3 id="279-5-useBuiltIns的三种模式">279.5 <code>useBuiltIns</code>的三种模式</h3>
+<table>
+<thead>
+<tr>
+<th>模式</th>
+<th>作用</th>
+<th>优点</th>
+<th>缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>&quot;usage&quot;</code></td>
+<td>自动按需导入垫片（仅导入使用的API）</td>
+<td>垫片体积最小</td>
+<td>需指定<code>corejs</code>版本</td>
+</tr>
+<tr>
+<td><code>&quot;entry&quot;</code></td>
+<td>在入口文件手动导入<code>core-js</code>，按需添加</td>
+<td>可控性强</td>
+<td>需手动在入口文件添加<code>import 'core-js'</code></td>
+</tr>
+<tr>
+<td><code>false</code></td>
+<td>不自动添加垫片</td>
+<td>适合仅需要语法转换的场景</td>
+<td>需手动导入所有需要的垫片，易遗漏</td>
+</tr>
+</tbody>
+</table>
+<p><strong>推荐使用<code>&quot;usage&quot;</code></strong>，平衡体积与便利性。</p>
+<h2 id="280-Review-Writing-Clean-and-Modern-JavaScript（复习：编写简洁现代的JavaScript）">280 Review: Writing Clean and Modern JavaScript（复习：编写简洁现代的JavaScript）</h2>
+<h3 id="280-1-变量声明：优先使用const-let，避免var">280.1 变量声明：优先使用<code>const</code>/<code>let</code>，避免<code>var</code></h3>
+<ul>
+<li><code>const</code>：用于<strong>不可变变量</strong>（如常量、函数、对象/数组引用）；</li>
+<li><code>let</code>：用于<strong>可变变量</strong>（如循环变量、条件赋值变量）；</li>
+<li><code>var</code>：存在变量提升、全局污染问题，避免使用。</li>
+</ul>
+<h4 id="示例：正确的变量声明">示例：正确的变量声明</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 推荐</span></span><br><span class="line"><span class="keyword">const</span> <span class="variable constant_">PI</span> = <span class="number">3.14</span>; <span class="comment">// 常量用const</span></span><br><span class="line"><span class="keyword">const</span> user = &#123; <span class="attr">name</span>: <span class="string">&quot;Alice&quot;</span> &#125;; <span class="comment">// 对象引用不可变（内容可改）</span></span><br><span class="line"><span class="keyword">let</span> count = <span class="number">0</span>; <span class="comment">// 可变变量用let</span></span><br><span class="line">count++; <span class="comment">// 合法</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 不推荐</span></span><br><span class="line"><span class="keyword">var</span> age = <span class="number">20</span>; <span class="comment">// 避免var</span></span><br><span class="line">age = <span class="number">21</span>;</span><br></pre></td></tr></table></figure>
+<h3 id="280-2-函数定义：优先使用箭头函数和简洁语法">280.2 函数定义：优先使用箭头函数和简洁语法</h3>
+<ul>
+<li>单行函数：用箭头函数简化代码（<code>(a,b) =&gt; a+b</code>）；</li>
+<li>多行函数：若需<code>this</code>绑定（如对象方法），用<code>function</code>关键字；</li>
+<li>避免匿名函数（如<code>setTimeout(function() &#123;&#125;, 1000)</code>），使用命名函数提升可读性。</li>
+</ul>
+<h4 id="示例：简洁的函数定义">示例：简洁的函数定义</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 推荐</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">sum</span> = (<span class="params">a, b</span>) =&gt; a + b; <span class="comment">// 单行箭头函数</span></span><br><span class="line"><span class="keyword">const</span> <span class="title function_">getUser</span> = (<span class="params"></span>) =&gt; (&#123; <span class="attr">name</span>: <span class="string">&quot;Bob&quot;</span>, <span class="attr">age</span>: <span class="number">30</span> &#125;); <span class="comment">// 返回对象（需加括号）</span></span><br><span class="line"></span><br><span class="line"><span class="keyword">const</span> calculator = &#123;</span><br><span class="line">  <span class="attr">value</span>: <span class="number">0</span>,</span><br><span class="line">  <span class="title function_">add</span>(<span class="params">n</span>) &#123;</span><br><span class="line">    <span class="comment">// 对象方法用function简写</span></span><br><span class="line">    <span class="variable language_">this</span>.<span class="property">value</span> += n;</span><br><span class="line">    <span class="keyword">return</span> <span class="variable language_">this</span>.<span class="property">value</span>;</span><br><span class="line">  &#125;,</span><br><span class="line">&#125;;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 不推荐</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">multiply</span>(<span class="params">a, b</span>) &#123;</span><br><span class="line">  <span class="comment">// 单行函数可简化为箭头函数</span></span><br><span class="line">  <span class="keyword">return</span> a * b;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="built_in">setTimeout</span>(<span class="keyword">function</span> (<span class="params"></span>) &#123;</span><br><span class="line">  <span class="comment">// 匿名函数，调试时难以定位</span></span><br><span class="line">  <span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="string">&quot;done&quot;</span>);</span><br><span class="line">&#125;, <span class="number">1000</span>);</span><br></pre></td></tr></table></figure>
+<h3 id="280-3-数据结构：优先使用数组方法和对象简写">280.3 数据结构：优先使用数组方法和对象简写</h3>
+<ul>
+<li>数组遍历：用<code>map</code>/<code>filter</code>/<code>reduce</code>替代<code>for</code>循环（函数式编程，可读性高）；</li>
+<li>对象简写：属性名与变量名相同时，用<code>&#123; name &#125;</code>替代<code>&#123; name: name &#125;</code>；</li>
+<li>解构赋值：快速提取数组/对象的属性，避免重复代码。</li>
+</ul>
+<h4 id="示例：现代数据结构操作">示例：现代数据结构操作</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 数组方法</span></span><br><span class="line"><span class="keyword">const</span> numbers = [<span class="number">1</span>, <span class="number">2</span>, <span class="number">3</span>, <span class="number">4</span>];</span><br><span class="line"><span class="keyword">const</span> doubled = numbers.<span class="title function_">map</span>(<span class="function">(<span class="params">n</span>) =&gt;</span> n * <span class="number">2</span>); <span class="comment">// [2,4,6,8]</span></span><br><span class="line"><span class="keyword">const</span> even = numbers.<span class="title function_">filter</span>(<span class="function">(<span class="params">n</span>) =&gt;</span> n % <span class="number">2</span> === <span class="number">0</span>); <span class="comment">// [2,4]</span></span><br><span class="line"><span class="keyword">const</span> sum = numbers.<span class="title function_">reduce</span>(<span class="function">(<span class="params">acc, n</span>) =&gt;</span> acc + n, <span class="number">0</span>); <span class="comment">// 10</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 对象简写</span></span><br><span class="line"><span class="keyword">const</span> name = <span class="string">&quot;Charlie&quot;</span>;</span><br><span class="line"><span class="keyword">const</span> age = <span class="number">25</span>;</span><br><span class="line"><span class="keyword">const</span> person = &#123; name, age &#125;; <span class="comment">// 简写，等价于&#123; name: name, age: age &#125;</span></span><br><span class="line"></span><br><span class="line"><span class="comment">// 3. 解构赋值</span></span><br><span class="line"><span class="keyword">const</span> &#123; <span class="attr">name</span>: userName &#125; = person; <span class="comment">// 提取name并改名为userName</span></span><br><span class="line"><span class="keyword">const</span> [first, second] = numbers; <span class="comment">// 提取数组前两个元素</span></span><br></pre></td></tr></table></figure>
+<h3 id="280-4-模块化：使用ES6-Modules拆分代码">280.4 模块化：使用ES6 Modules拆分代码</h3>
+<ul>
+<li>按功能拆分模块（如<code>math.js</code>、<code>utils.js</code>）；</li>
+<li>明确导出接口（优先用命名导出，单一功能用默认导出）；</li>
+<li>避免全局变量，通过<code>import</code>/<code>export</code>管理依赖。</li>
+</ul>
+<h4 id="示例：模块化代码">示例：模块化代码</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// utils.js（工具模块）</span></span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">formatDate</span> = (<span class="params">date</span>) =&gt; date.<span class="title function_">toLocaleDateString</span>(<span class="string">&quot;zh-CN&quot;</span>);</span><br><span class="line"><span class="keyword">export</span> <span class="keyword">const</span> <span class="title function_">isEmpty</span> = (<span class="params">value</span>) =&gt;</span><br><span class="line">  value === <span class="literal">null</span> || value === <span class="literal">undefined</span> || value === <span class="string">&quot;&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="comment">// main.js（入口模块）</span></span><br><span class="line"><span class="keyword">import</span> &#123; formatDate, isEmpty &#125; <span class="keyword">from</span> <span class="string">&quot;./utils.js&quot;</span>;</span><br><span class="line"></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">formatDate</span>(<span class="keyword">new</span> <span class="title class_">Date</span>())); <span class="comment">// &quot;2024/5/20&quot;</span></span><br><span class="line"><span class="variable language_">console</span>.<span class="title function_">log</span>(<span class="title function_">isEmpty</span>(<span class="string">&quot;&quot;</span>)); <span class="comment">// true</span></span><br></pre></td></tr></table></figure>
+<h3 id="280-5-错误处理：用try-catch捕获异步-同步错误">280.5 错误处理：用<code>try/catch</code>捕获异步/同步错误</h3>
+<ul>
+<li>同步错误：直接用<code>try/catch</code>包裹；</li>
+<li>异步错误：<code>async/await</code>中用<code>try/catch</code>，或<code>Promise</code>中用<code>.catch()</code>；</li>
+<li>避免“沉默错误”（如不处理<code>Promise</code>的<code>reject</code>）。</li>
+</ul>
+<h4 id="示例：正确的错误处理">示例：正确的错误处理</h4>
+<figure class="highlight javascript"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 1. 同步错误处理</span></span><br><span class="line"><span class="keyword">function</span> <span class="title function_">parseJSON</span>(<span class="params">str</span>) &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">return</span> <span class="title class_">JSON</span>.<span class="title function_">parse</span>(str);</span><br><span class="line">  &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&quot;JSON解析错误：&quot;</span>, err);</span><br><span class="line">    <span class="keyword">return</span> <span class="literal">null</span>; <span class="comment">// 提供默认值</span></span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 2. 异步错误处理（async/await）</span></span><br><span class="line"><span class="keyword">async</span> <span class="keyword">function</span> <span class="title function_">fetchData</span>(<span class="params"></span>) &#123;</span><br><span class="line">  <span class="keyword">try</span> &#123;</span><br><span class="line">    <span class="keyword">const</span> res = <span class="keyword">await</span> <span class="title function_">fetch</span>(<span class="string">&quot;https://api.example.com/data&quot;</span>);</span><br><span class="line">    <span class="keyword">if</span> (!res.<span class="property">ok</span>) <span class="keyword">throw</span> <span class="keyword">new</span> <span class="title class_">Error</span>(<span class="string">`HTTP错误：<span class="subst">$&#123;res.status&#125;</span>`</span>); <span class="comment">// 主动抛出错误</span></span><br><span class="line">    <span class="keyword">const</span> data = <span class="keyword">await</span> res.<span class="title function_">json</span>();</span><br><span class="line">    <span class="keyword">return</span> data;</span><br><span class="line">  &#125; <span class="keyword">catch</span> (err) &#123;</span><br><span class="line">    <span class="variable language_">console</span>.<span class="title function_">error</span>(<span class="string">&quot;数据加载失败：&quot;</span>, err);</span><br><span class="line">    <span class="keyword">return</span> &#123; <span class="attr">fallback</span>: <span class="string">&quot;默认数据&quot;</span> &#125;;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="280-6-代码风格：遵循ESLint规范">280.6 代码风格：遵循ESLint规范</h3>
+<ul>
+<li>安装ESLint：<code>npm install -D eslint</code>；</li>
+<li>初始化配置：<code>npx eslint --init</code>（选择Airbnb/Standard等流行规范）；</li>
+<li>自动修复：<code>npx eslint src --fix</code>（自动修复多数代码风格问题）。</li>
+</ul>
+<h4 id="示例：ESLint检测的常见问题">示例：ESLint检测的常见问题</h4>
+<ul>
+<li>未使用的变量（如<code>const a = 1;</code>未被使用）；</li>
+<li>语句末尾缺少分号（或多余分号，根据规范）；</li>
+<li>缩进不一致（如混用空格和制表符）；</li>
+<li>字符串引号不统一（如混用单引号和双引号）。</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author_group"><div class="post-copyright__author_img"><img class="post-copyright__author_img_front" src="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg"></div><div class="post-copyright__author_name">woodfish</div><div class="post-copyright__author_desc">HOLA,this is woodfish!</div></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div id="quit-box" onclick="RemoveRewardMask()"></div><div class="post-reward"><div class="reward-button" title="赞赏作者" onclick="AddRewardMask()"><i class="solitude fas fa-heart"></i>赞赏作者</div><div class="reward-main"><ul class="reward-all"><span class="reward-title"></span><ul class="reward-group"><li class="reward-item"><a href="/null"><img class="post-qr-code-img nolazyload" src="https://www.woodfishhhh.xyz/images/e926e309585e5a5826ab0c3b485f8b6.png?_t=1751445131356" alt="微信" style="border-color: var(--efu-main)"></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/null"><img class="post-qr-code-img nolazyload" src="https://www.woodfishhhh.xyz/images/8147e2d92fa8287fac8774305c99661.jpg.jpeg?_t=1751445131356" alt="支付宝" style="border-color: var(--efu-main)"></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/"><div class="reward-text">赞赏名单</div><div class="reward-dec"></div></a></ul></div></div><script>function RemoveRewardMask() {
+    let rewardMainElements = document.querySelectorAll(".reward-main");
+    let quitBoxElement = document.querySelector("#quit-box");
+
+    rewardMainElements.forEach(element => {
+        element.style.display = "none";
+    });
+
+    if (quitBoxElement) {
+        quitBoxElement.style.display = "none";
+    }
+}
+
+function AddRewardMask() {
+    let rewardMainElements = document.querySelectorAll(".reward-main");
+    let quitBoxElement = document.querySelector("#quit-box");
+
+    rewardMainElements.forEach(element => {
+        element.style.display = "flex";
+    });
+
+    if (quitBoxElement) {
+        quitBoxElement.style.display = "flex";
+    }
+}</script></div></div><div class="social-share"><a class="social-share-ico icon-qq" target="_blank" rel="noopener" href="https://connect.qq.com/widget/shareqq/index.html?url=https%3A%2F%2Fwww.woodfishhhh.xyz%2F2026%2F01%2F06%2FUdemy%2520JS%2F268-280%2520%25E7%258E%25B0%25E4%25BB%25A3js%25E5%25BC%2580%25E5%258F%2591%2F&amp;title=%E7%8E%B0%E4%BB%A3JavaScript%E5%BC%80%E5%8F%91&amp;desc=undefined&amp;summary=undefined&amp;site=%E7%8E%B0%E4%BB%A3JavaScript%E5%BC%80%E5%8F%91&amp;pics=https%3A%2F%2Fpic1.imgdb.cn%2Fitem%2F682f3d1658cb8da5c807b704.jpg" title="分享到QQ"><i class="solitude fab fa-qq"></i></a><a class="social-share-ico icon-weibo" target="_blank" rel="noopener" href="http://service.weibo.com/share/share.php?url=https%3A%2F%2Fwww.woodfishhhh.xyz%2F2026%2F01%2F06%2FUdemy%2520JS%2F268-280%2520%25E7%258E%25B0%25E4%25BB%25A3js%25E5%25BC%2580%25E5%258F%2591%2F&amp;title=%E7%8E%B0%E4%BB%A3JavaScript%E5%BC%80%E5%8F%91&amp;pic=https%3A%2F%2Fpic1.imgdb.cn%2Fitem%2F682f3d1658cb8da5c807b704.jpg" title="分享到微博"><i class="solitude fab fa-weibo"></i></a><a class="social-share-ico icon-twitter" target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.woodfishhhh.xyz%2F2026%2F01%2F06%2FUdemy%2520JS%2F268-280%2520%25E7%258E%25B0%25E4%25BB%25A3js%25E5%25BC%2580%25E5%258F%2591%2F&amp;text=%E7%8E%B0%E4%BB%A3JavaScript%E5%BC%80%E5%8F%91" title="分享到Twitter"><i class="solitude fab fa-twitter"></i></a><a class="social-share-ico icon-facebook" target="_blank" rel="noopener" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.woodfishhhh.xyz%2F2026%2F01%2F06%2FUdemy%2520JS%2F268-280%2520%25E7%258E%25B0%25E4%25BB%25A3js%25E5%25BC%2580%25E5%258F%2591%2F" title="分享到Facebook"><i class="solitude fab fa-facebook"></i></a><div class="social-share-ico icon-link" onclick="utils.copy(&quot;https://www.woodfishhhh.xyz/2026/01/06/Udemy%20JS/268-280%20%E7%8E%B0%E4%BB%A3js%E5%BC%80%E5%8F%91/&quot;)" title="复制文章链接"><i class="solitude fas fa-link"></i></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本文是原创文章，采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>协议，完整转载请注明来自<a href="/">木鱼的鱼窝</a></span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/JavaScript/"><span class="tags-punctuation"><i class="solitude fas fa-hashtag"></i>JavaScript<span class="tagsPageCount">37</span></span></a><a class="post-meta__tags" href="/tags/%E7%8E%B0%E4%BB%A3%E5%BC%80%E5%8F%91/"><span class="tags-punctuation"><i class="solitude fas fa-hashtag"></i>现代开发<span class="tagsPageCount">1</span></span></a></div></div></div><nav class="needEndHide pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2026/01/06/Udemy%20JS/263%20Error%20Handling%20With%20try...catch/"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">try...catch错误处理</div></div></a></div><div class="next-post pull-right"><a href="/2026/01/06/Udemy%20JS/264%20Returning%20Values%20from%20Async%20Functions/"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">异步函数返回值</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><div class="top-group"><div class="sayhi" id="sayhi" onclick="sco.changeWittyWord()"></div></div></div><div class="avatar"><img alt="头像" src="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg"></div><div class="description">欢迎来到我的鱼窝~</div><div class="bottom-group"><span class="left"><div class="name">woodfish</div><div class="desc">河汉微明星乍稀，碧莲香湿袭人衣。夜凉如水琉璃滑，自起开窗放月归。</div></span><div class="social-icons is-center"><a class="social-icon" target="_blank" rel="noopener" href="https://github.com/woodfishhhh" title="Github"><i class="solitude  fab fa-github"></i></a><a class="social-icon" target="_blank" rel="noopener" href="https://space.bilibili.com/359728114" title="Bilibili"><i class="solitude  fab fa-bilibili"></i></a><a class="social-icon" href="https://www.woodfishhhh.xyz/images/af1a055d14e4f7f6eae2886f2865d13.jpg.jpeg?_t=1750312382930" title="QQ"><i class="solitude  fab fa-qq"></i></a><a class="social-icon" href="https://www.woodfishhhh.xyz/images/f59723db9159310b6056abe8341f5d7.jpg.jpeg?_t=1750312263368" title="Wechat"><i class="solitude  fab fa-weixin"></i></a><a class="social-icon" href="https://www.woodfishhhh.xyz/images/d8d58d2f2c7ac5790fd37f388da41db4.png?_t=1759286665402" title="Email"><i class="solitude  far fa-envelope"></i></a><a class="social-icon" target="_blank" rel="noopener" href="https://www.douyin.com/user/MS4wLjABAAAAgbOrIhdi7Rl5RfaQ3fE3i7c2WnyR3zEOyLiK2Cjtcqk?from_tab_name=main" title="Douyin"><i class="solitude  fab fa-tiktok"></i></a></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="solitude fas fa-bars"></i><span>文章目录</span></div><div class="toc-content" id="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">268-280</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#268-Section-Intro%EF%BC%88%E7%AB%A0%E8%8A%82%E4%BB%8B%E7%BB%8D%EF%BC%89"><span class="toc-text">268 Section Intro（章节介绍）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E7%9B%AE%E6%A0%87"><span class="toc-text">核心目标</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#270-An-Overview-of-Modern-JavaScript-Development%EF%BC%88%E7%8E%B0%E4%BB%A3JavaScript%E5%BC%80%E5%8F%91%E6%A6%82%E8%BF%B0%EF%BC%89"><span class="toc-text">270 An Overview of Modern JavaScript Development（现代JavaScript开发概述）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#270-1-%E7%8E%B0%E4%BB%A3JS%E5%BC%80%E5%8F%91%E7%9A%84%E6%A0%B8%E5%BF%83%E7%97%9B%E7%82%B9"><span class="toc-text">270.1 现代JS开发的核心痛点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#270-2-%E7%8E%B0%E4%BB%A3JS%E5%BC%80%E5%8F%91%E7%9A%84%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-text">270.2 现代JS开发的解决方案</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#270-3-%E7%8E%B0%E4%BB%A3JS%E5%BC%80%E5%8F%91%E6%B5%81%E7%A8%8B%E7%A4%BA%E4%BE%8B"><span class="toc-text">270.3 现代JS开发流程示例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#271-An-Overview-of-Modules-in-JavaScript%EF%BC%88JavaScript%E6%A8%A1%E5%9D%97%E6%A6%82%E8%BF%B0%EF%BC%89"><span class="toc-text">271 An Overview of Modules in JavaScript（JavaScript模块概述）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#271-1-%E6%A8%A1%E5%9D%97%E7%9A%84%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="toc-text">271.1 模块的核心概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#271-2-%E5%B8%B8%E8%A7%81%E6%A8%A1%E5%9D%97%E8%A7%84%E8%8C%83%E5%AF%B9%E6%AF%94"><span class="toc-text">271.2 常见模块规范对比</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#271-3-%E6%A8%A1%E5%9D%97%E4%B8%8E%E8%84%9A%E6%9C%AC%EF%BC%88Script%EF%BC%89%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">271.3 模块与脚本（Script）的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#271-4-%E6%B5%8F%E8%A7%88%E5%99%A8%E4%B8%AD%E5%90%AF%E7%94%A8ES6-Modules"><span class="toc-text">271.4 浏览器中启用ES6 Modules</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#272-Exporting-and-Importing-in-ES6-Modules%EF%BC%88ES6%E6%A8%A1%E5%9D%97%E7%9A%84%E5%AF%BC%E5%87%BA%E4%B8%8E%E5%AF%BC%E5%85%A5%EF%BC%89"><span class="toc-text">272 Exporting and Importing in ES6 Modules（ES6模块的导出与导入）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#272-1-%E5%91%BD%E5%90%8D%E5%AF%BC%E5%87%BA%EF%BC%88Named-Exports%EF%BC%89"><span class="toc-text">272.1 命名导出（Named Exports）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%AD%E6%B3%951%EF%BC%9A%E7%9B%B4%E6%8E%A5%E5%AF%BC%E5%87%BA%EF%BC%88%E5%A3%B0%E6%98%8E%E6%97%B6%E5%AF%BC%E5%87%BA%EF%BC%89"><span class="toc-text">语法1：直接导出（声明时导出）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%AD%E6%B3%952%EF%BC%9A%E9%9B%86%E4%B8%AD%E5%AF%BC%E5%87%BA%EF%BC%88%E5%A3%B0%E6%98%8E%E5%90%8E%E7%BB%9F%E4%B8%80%E5%AF%BC%E5%87%BA%EF%BC%89"><span class="toc-text">语法2：集中导出（声明后统一导出）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%AD%E6%B3%953%EF%BC%9A%E5%AF%BC%E5%87%BA%E6%97%B6%E9%87%8D%E5%91%BD%E5%90%8D%EF%BC%88%E8%A7%A3%E5%86%B3%E5%90%8D%E7%A7%B0%E5%86%B2%E7%AA%81%EF%BC%89"><span class="toc-text">语法3：导出时重命名（解决名称冲突）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%91%BD%E5%90%8D%E5%AF%BC%E5%85%A5%E7%A4%BA%E4%BE%8B"><span class="toc-text">命名导入示例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#272-2-%E9%BB%98%E8%AE%A4%E5%AF%BC%E5%87%BA%EF%BC%88Default-Exports%EF%BC%89"><span class="toc-text">272.2 默认导出（Default Exports）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%AD%E6%B3%951%EF%BC%9A%E7%9B%B4%E6%8E%A5%E9%BB%98%E8%AE%A4%E5%AF%BC%E5%87%BA"><span class="toc-text">语法1：直接默认导出</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%AD%E6%B3%952%EF%BC%9A%E5%85%88%E5%A3%B0%E6%98%8E%E5%90%8E%E9%BB%98%E8%AE%A4%E5%AF%BC%E5%87%BA"><span class="toc-text">语法2：先声明后默认导出</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%AF%AD%E6%B3%953%EF%BC%9A%E9%BB%98%E8%AE%A4%E5%AF%BC%E5%87%BA%E5%8C%BF%E5%90%8D%E5%86%85%E5%AE%B9"><span class="toc-text">语法3：默认导出匿名内容</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%BB%98%E8%AE%A4%E5%AF%BC%E5%85%A5%E7%A4%BA%E4%BE%8B"><span class="toc-text">默认导入示例</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#272-3-%E5%AF%BC%E5%87%BA%E4%B8%8E%E5%AF%BC%E5%85%A5%E7%9A%84%E2%80%9C%E7%94%9F%E5%91%BD%E8%81%94%E7%B3%BB%E2%80%9D%EF%BC%88Live-Binding%EF%BC%89"><span class="toc-text">272.3 导出与导入的“生命联系”（Live Binding）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9A%E7%94%9F%E5%91%BD%E8%81%94%E7%B3%BB%E7%9A%84%E4%BD%93%E7%8E%B0"><span class="toc-text">示例：生命联系的体现</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#272-4-%E5%B8%B8%E8%A7%81%E9%94%99%E8%AF%AF%E4%B8%8E%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-text">272.4 常见错误与注意事项</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#273-Top-Level-await-ES2022-%EF%BC%88%E9%A1%B6%E5%B1%82await%EF%BC%8CES2022%E7%89%B9%E6%80%A7%EF%BC%89"><span class="toc-text">273 Top-Level await (ES2022)（顶层await，ES2022特性）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#273-1-%E9%A1%B6%E5%B1%82await%E7%9A%84%E6%A0%B8%E5%BF%83%E4%BD%9C%E7%94%A8"><span class="toc-text">273.1 顶层await的核心作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#273-2-%E9%A1%B6%E5%B1%82await%E7%9A%84%E4%BD%BF%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">273.2 顶层await的使用场景</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF1%EF%BC%9A%E7%AD%89%E5%BE%85API%E6%95%B0%E6%8D%AE%E5%8A%A0%E8%BD%BD"><span class="toc-text">场景1：等待API数据加载</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E5%9C%BA%E6%99%AF2%EF%BC%9A%E7%AD%89%E5%BE%85%E7%AC%AC%E4%B8%89%E6%96%B9%E5%BA%93%E5%88%9D%E5%A7%8B%E5%8C%96"><span class="toc-text">场景2：等待第三方库初始化</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#273-3-%E9%A1%B6%E5%B1%82await%E7%9A%84%E6%B3%A8%E6%84%8F%E4%BA%8B%E9%A1%B9"><span class="toc-text">273.3 顶层await的注意事项</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#273-4-%E9%A1%B6%E5%B1%82await-vs-%E5%BC%82%E6%AD%A5%E5%87%BD%E6%95%B0%E5%8C%85%E8%A3%B9"><span class="toc-text">273.4 顶层await vs 异步函数包裹</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#274-The-Module-Pattern%EF%BC%88%E6%A8%A1%E5%9D%97%E6%A8%A1%E5%BC%8F%EF%BC%89"><span class="toc-text">274 The Module Pattern（模块模式）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#274-1-%E6%A8%A1%E5%9D%97%E6%A8%A1%E5%BC%8F%E7%9A%84%E6%A0%B8%E5%BF%83%E6%80%9D%E6%83%B3"><span class="toc-text">274.1 模块模式的核心思想</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#274-2-%E6%A8%A1%E5%9D%97%E6%A8%A1%E5%BC%8F%E7%9A%84%E5%AE%9E%E7%8E%B0%E6%AD%A5%E9%AA%A4"><span class="toc-text">274.2 模块模式的实现步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#274-3-%E6%A8%A1%E5%9D%97%E6%A8%A1%E5%BC%8F%E7%A4%BA%E4%BE%8B%EF%BC%9A%E8%AE%A1%E7%AE%97%E5%99%A8%E6%A8%A1%E5%9D%97"><span class="toc-text">274.3 模块模式示例：计算器模块</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#274-4-%E6%A8%A1%E5%9D%97%E6%A8%A1%E5%BC%8F%E7%9A%84%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-text">274.4 模块模式的优缺点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#274-5-%E6%A8%A1%E5%9D%97%E6%A8%A1%E5%BC%8F%E4%B8%8EES6-Modules%E7%9A%84%E5%AF%B9%E6%AF%94"><span class="toc-text">274.5 模块模式与ES6 Modules的对比</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#275-CommonJS-Modules%EF%BC%88CommonJS%E6%A8%A1%E5%9D%97%EF%BC%89"><span class="toc-text">275 CommonJS Modules（CommonJS模块）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#275-1-CommonJS%E7%9A%84%E6%A0%B8%E5%BF%83%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">275.1 CommonJS的核心应用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#275-2-CommonJS%E7%9A%84%E5%AF%BC%E5%87%BA%E4%B8%8E%E5%AF%BC%E5%85%A5%E8%AF%AD%E6%B3%95"><span class="toc-text">275.2 CommonJS的导出与导入语法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%AF%BC%E5%87%BA%E8%AF%AD%E6%B3%95%EF%BC%88module-exports%EF%BC%89"><span class="toc-text">1. 导出语法（module.exports）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%AF%BC%E5%85%A5%E8%AF%AD%E6%B3%95%EF%BC%88require-%EF%BC%89"><span class="toc-text">2. 导入语法（require()）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#275-3-CommonJS%E7%9A%84%E5%8A%A0%E8%BD%BD%E6%9C%BA%E5%88%B6"><span class="toc-text">275.3 CommonJS的加载机制</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9ACommonJS%E7%BC%93%E5%AD%98%E6%9C%BA%E5%88%B6"><span class="toc-text">示例：CommonJS缓存机制</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#275-4-CommonJS%E4%B8%8EES6-Modules%E7%9A%84%E6%A0%B8%E5%BF%83%E5%8C%BA%E5%88%AB"><span class="toc-text">275.4 CommonJS与ES6 Modules的核心区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#276-A-Brief-Introduction-to-the-Command-Line%EF%BC%88%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%AE%80%E4%BB%8B%EF%BC%89"><span class="toc-text">276 A Brief Introduction to the Command Line（命令行简介）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#276-1-%E5%91%BD%E4%BB%A4%E8%A1%8C%E7%9A%84%E6%A0%B8%E5%BF%83%E4%BD%9C%E7%94%A8"><span class="toc-text">276.1 命令行的核心作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#276-2-%E5%B8%B8%E8%A7%81%E5%91%BD%E4%BB%A4%E8%A1%8C%E5%B7%A5%E5%85%B7"><span class="toc-text">276.2 常见命令行工具</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#276-3-%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%EF%BC%88%E9%80%9A%E7%94%A8%EF%BC%89"><span class="toc-text">276.3 常用命令（通用）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#276-4-JS%E5%BC%80%E5%8F%91%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4%E7%A4%BA%E4%BE%8B"><span class="toc-text">276.4 JS开发常用命令示例</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#277-Introduction-to-NPM%EF%BC%88NPM%E7%AE%80%E4%BB%8B%EF%BC%89"><span class="toc-text">277 Introduction to NPM（NPM简介）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#277-1-NPM%E7%9A%84%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5"><span class="toc-text">277.1 NPM的核心概念</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#277-2-NPM%E7%9A%84%E6%A0%B8%E5%BF%83%E6%96%87%E4%BB%B6%EF%BC%9Apackage-json"><span class="toc-text">277.2 NPM的核心文件：package.json</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#277-3-%E8%AF%AD%E4%B9%89%E5%8C%96%E7%89%88%E6%9C%AC%EF%BC%88Semantic-Versioning%EF%BC%89"><span class="toc-text">277.3 语义化版本（Semantic Versioning）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#277-4-NPM%E5%B8%B8%E7%94%A8%E5%91%BD%E4%BB%A4"><span class="toc-text">277.4 NPM常用命令</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#277-5-NPM%E4%B8%8EYarn%E7%9A%84%E5%AF%B9%E6%AF%94"><span class="toc-text">277.5 NPM与Yarn的对比</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#278-Bundling-With-Parcel-and-NPM-Scripts%EF%BC%88%E4%BD%BF%E7%94%A8Parcel%E5%92%8CNPM%E8%84%9A%E6%9C%AC%E6%89%93%E5%8C%85%EF%BC%89"><span class="toc-text">278 Bundling With Parcel and NPM Scripts（使用Parcel和NPM脚本打包）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#278-1-%E6%89%93%E5%8C%85%E5%B7%A5%E5%85%B7%E7%9A%84%E6%A0%B8%E5%BF%83%E4%BD%9C%E7%94%A8"><span class="toc-text">278.1 打包工具的核心作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#278-2-Parcel%E7%9A%84%E6%A0%B8%E5%BF%83%E4%BC%98%E5%8A%BF"><span class="toc-text">278.2 Parcel的核心优势</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#278-3-%E4%BD%BF%E7%94%A8Parcel%E6%89%93%E5%8C%85%E9%A1%B9%E7%9B%AE%E7%9A%84%E6%AD%A5%E9%AA%A4"><span class="toc-text">278.3 使用Parcel打包项目的步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A41%EF%BC%9A%E5%88%9D%E5%A7%8B%E5%8C%96%E9%A1%B9%E7%9B%AE%E5%B9%B6%E5%AE%89%E8%A3%85Parcel"><span class="toc-text">步骤1：初始化项目并安装Parcel</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A42%EF%BC%9A%E5%88%9B%E5%BB%BA%E9%A1%B9%E7%9B%AE%E6%96%87%E4%BB%B6"><span class="toc-text">步骤2：创建项目文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A43%EF%BC%9A%E9%85%8D%E7%BD%AENPM%E8%84%9A%E6%9C%AC"><span class="toc-text">步骤3：配置NPM脚本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A44%EF%BC%9A%E8%BF%90%E8%A1%8C%E5%BC%80%E5%8F%91%E6%A8%A1%E5%BC%8F"><span class="toc-text">步骤4：运行开发模式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A45%EF%BC%9A%E6%89%93%E5%8C%85%E7%94%9F%E4%BA%A7%E7%89%88%E6%9C%AC"><span class="toc-text">步骤5：打包生产版本</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#278-4-Parcel%E7%9A%84%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E7%A4%BA%E4%BE%8B"><span class="toc-text">278.4 Parcel的核心特性示例</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E7%83%AD%E6%9B%B4%E6%96%B0%EF%BC%88Hot-Reload%EF%BC%89"><span class="toc-text">1. 热更新（Hot Reload）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E8%87%AA%E5%8A%A8%E5%A4%84%E7%90%86CSS"><span class="toc-text">2. 自动处理CSS</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%9B%BE%E7%89%87%E5%A4%84%E7%90%86"><span class="toc-text">3. 图片处理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-Tree-Shaking%EF%BC%88%E7%A7%BB%E9%99%A4%E6%9C%AA%E4%BD%BF%E7%94%A8%E4%BB%A3%E7%A0%81%EF%BC%89"><span class="toc-text">4. Tree Shaking（移除未使用代码）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#278-5-%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98%E4%B8%8E%E8%A7%A3%E5%86%B3%E6%96%B9%E6%A1%88"><span class="toc-text">278.5 常见问题与解决方案</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#279-Configuring-Babel-and-Polyfilling%EF%BC%88%E9%85%8D%E7%BD%AEBabel%E4%B8%8E%E5%9E%AB%E7%89%87%EF%BC%89"><span class="toc-text">279 Configuring Babel and Polyfilling（配置Babel与垫片）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#279-1-Babel%E7%9A%84%E6%A0%B8%E5%BF%83%E4%BD%9C%E7%94%A8"><span class="toc-text">279.1 Babel的核心作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#279-2-%E5%9E%AB%E7%89%87%EF%BC%88Polyfill%EF%BC%89%E7%9A%84%E6%A0%B8%E5%BF%83%E4%BD%9C%E7%94%A8"><span class="toc-text">279.2 垫片（Polyfill）的核心作用</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#279-3-Babel%E4%B8%8EPolyfill%E7%9A%84%E9%85%8D%E7%BD%AE%E6%AD%A5%E9%AA%A4"><span class="toc-text">279.3 Babel与Polyfill的配置步骤</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A41%EF%BC%9A%E5%AE%89%E8%A3%85%E4%BE%9D%E8%B5%96"><span class="toc-text">步骤1：安装依赖</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A42%EF%BC%9A%E5%88%9B%E5%BB%BABabel%E9%85%8D%E7%BD%AE%E6%96%87%E4%BB%B6"><span class="toc-text">步骤2：创建Babel配置文件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A43%EF%BC%9A%E9%85%8D%E7%BD%AENPM%E8%84%9A%E6%9C%AC-2"><span class="toc-text">步骤3：配置NPM脚本</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E6%AD%A5%E9%AA%A44%EF%BC%9A%E6%B5%8B%E8%AF%95%E8%AF%AD%E6%B3%95%E8%BD%AC%E6%8D%A2%E4%B8%8E%E5%9E%AB%E7%89%87"><span class="toc-text">步骤4：测试语法转换与垫片</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#279-4-Babel%E9%A2%84%E8%AE%BE%E4%B8%8E%E6%8F%92%E4%BB%B6"><span class="toc-text">279.4 Babel预设与插件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9A%E6%B7%BB%E5%8A%A0%E7%B1%BB%E7%A7%81%E6%9C%89%E5%B1%9E%E6%80%A7%E6%94%AF%E6%8C%81"><span class="toc-text">示例：添加类私有属性支持</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#279-5-useBuiltIns%E7%9A%84%E4%B8%89%E7%A7%8D%E6%A8%A1%E5%BC%8F"><span class="toc-text">279.5 useBuiltIns的三种模式</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#280-Review-Writing-Clean-and-Modern-JavaScript%EF%BC%88%E5%A4%8D%E4%B9%A0%EF%BC%9A%E7%BC%96%E5%86%99%E7%AE%80%E6%B4%81%E7%8E%B0%E4%BB%A3%E7%9A%84JavaScript%EF%BC%89"><span class="toc-text">280 Review: Writing Clean and Modern JavaScript（复习：编写简洁现代的JavaScript）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#280-1-%E5%8F%98%E9%87%8F%E5%A3%B0%E6%98%8E%EF%BC%9A%E4%BC%98%E5%85%88%E4%BD%BF%E7%94%A8const-let%EF%BC%8C%E9%81%BF%E5%85%8Dvar"><span class="toc-text">280.1 变量声明：优先使用const&#x2F;let，避免var</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9A%E6%AD%A3%E7%A1%AE%E7%9A%84%E5%8F%98%E9%87%8F%E5%A3%B0%E6%98%8E"><span class="toc-text">示例：正确的变量声明</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#280-2-%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89%EF%BC%9A%E4%BC%98%E5%85%88%E4%BD%BF%E7%94%A8%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%E5%92%8C%E7%AE%80%E6%B4%81%E8%AF%AD%E6%B3%95"><span class="toc-text">280.2 函数定义：优先使用箭头函数和简洁语法</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9A%E7%AE%80%E6%B4%81%E7%9A%84%E5%87%BD%E6%95%B0%E5%AE%9A%E4%B9%89"><span class="toc-text">示例：简洁的函数定义</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#280-3-%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%EF%BC%9A%E4%BC%98%E5%85%88%E4%BD%BF%E7%94%A8%E6%95%B0%E7%BB%84%E6%96%B9%E6%B3%95%E5%92%8C%E5%AF%B9%E8%B1%A1%E7%AE%80%E5%86%99"><span class="toc-text">280.3 数据结构：优先使用数组方法和对象简写</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9A%E7%8E%B0%E4%BB%A3%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%93%8D%E4%BD%9C"><span class="toc-text">示例：现代数据结构操作</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#280-4-%E6%A8%A1%E5%9D%97%E5%8C%96%EF%BC%9A%E4%BD%BF%E7%94%A8ES6-Modules%E6%8B%86%E5%88%86%E4%BB%A3%E7%A0%81"><span class="toc-text">280.4 模块化：使用ES6 Modules拆分代码</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9A%E6%A8%A1%E5%9D%97%E5%8C%96%E4%BB%A3%E7%A0%81"><span class="toc-text">示例：模块化代码</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#280-5-%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86%EF%BC%9A%E7%94%A8try-catch%E6%8D%95%E8%8E%B7%E5%BC%82%E6%AD%A5-%E5%90%8C%E6%AD%A5%E9%94%99%E8%AF%AF"><span class="toc-text">280.5 错误处理：用try&#x2F;catch捕获异步&#x2F;同步错误</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9A%E6%AD%A3%E7%A1%AE%E7%9A%84%E9%94%99%E8%AF%AF%E5%A4%84%E7%90%86"><span class="toc-text">示例：正确的错误处理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#280-6-%E4%BB%A3%E7%A0%81%E9%A3%8E%E6%A0%BC%EF%BC%9A%E9%81%B5%E5%BE%AAESLint%E8%A7%84%E8%8C%83"><span class="toc-text">280.6 代码风格：遵循ESLint规范</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E7%A4%BA%E4%BE%8B%EF%BC%9AESLint%E6%A3%80%E6%B5%8B%E7%9A%84%E5%B8%B8%E8%A7%81%E9%97%AE%E9%A2%98"><span class="toc-text">示例：ESLint检测的常见问题</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="solitude fas fa-map"></i><span>最近发布</span></div><div class="aside-list"><a class="aside-list-item" href="/2026/01/06/Udemy%20TS/ts%E7%AC%94%E8%AE%B0/" title="TypeScript笔记"><div class="content"><span class="title" href="/2026/01/06/Udemy%20TS/ts%E7%AC%94%E8%AE%B0/" title="TypeScript笔记">TypeScript笔记</span><span class="categories" href="/2026/01/06/Udemy%20TS/ts%E7%AC%94%E8%AE%B0/">编程</span></div></a><a class="aside-list-item" href="/2026/01/06/Udemy%20JS/099%20Primitives%20vs.%20Objects%20(Primitive%20vs.%20Reference%20Types)%20/" title="基本类型与对象类型"><div class="content"><span class="title" href="/2026/01/06/Udemy%20JS/099%20Primitives%20vs.%20Objects%20(Primitive%20vs.%20Reference%20Types)%20/" title="基本类型与对象类型">基本类型与对象类型</span><span class="categories" href="/2026/01/06/Udemy%20JS/099%20Primitives%20vs.%20Objects%20(Primitive%20vs.%20Reference%20Types)%20/">前端</span></div></a><a class="aside-list-item" href="/2026/01/06/Udemy%20JS/103%20Destructuring%20Arrays%EF%BC%89%E7%AC%94%E8%AE%B0/" title="数组解构"><div class="content"><span class="title" href="/2026/01/06/Udemy%20JS/103%20Destructuring%20Arrays%EF%BC%89%E7%AC%94%E8%AE%B0/" title="数组解构">数组解构</span><span class="categories" href="/2026/01/06/Udemy%20JS/103%20Destructuring%20Arrays%EF%BC%89%E7%AC%94%E8%AE%B0/">前端</span></div></a><a class="aside-list-item" href="/2026/01/06/Udemy%20JS/104%20Destructuring%20Objects%EF%BC%88%E5%AF%B9%E8%B1%A1%E8%A7%A3%E6%9E%84%EF%BC%89/" title="对象解构"><div class="content"><span class="title" href="/2026/01/06/Udemy%20JS/104%20Destructuring%20Objects%EF%BC%88%E5%AF%B9%E8%B1%A1%E8%A7%A3%E6%9E%84%EF%BC%89/" title="对象解构">对象解构</span><span class="categories" href="/2026/01/06/Udemy%20JS/104%20Destructuring%20Objects%EF%BC%88%E5%AF%B9%E8%B1%A1%E8%A7%A3%E6%9E%84%EF%BC%89/">前端</span></div></a><a class="aside-list-item" href="/2026/01/06/Udemy%20JS/098%20Regular%20Functions%20vs.%20Arrow%20Functions%EF%BC%88%E5%B8%B8%E8%A7%84%E5%87%BD%E6%95%B0%E4%B8%8E%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%EF%BC%89/" title="常规函数与箭头函数"><div class="content"><span class="title" href="/2026/01/06/Udemy%20JS/098%20Regular%20Functions%20vs.%20Arrow%20Functions%EF%BC%88%E5%B8%B8%E8%A7%84%E5%87%BD%E6%95%B0%E4%B8%8E%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%EF%BC%89/" title="常规函数与箭头函数">常规函数与箭头函数</span><span class="categories" href="/2026/01/06/Udemy%20JS/098%20Regular%20Functions%20vs.%20Arrow%20Functions%EF%BC%88%E5%B8%B8%E8%A7%84%E5%87%BD%E6%95%B0%E4%B8%8E%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%EF%BC%89/">前端</span></div></a></div></div></div></div></main><footer id="footer"><div id="footer_deal"><a class="deal_link" target="_blank" rel="noopener" href="https://github.com/woodfishhhh" title="Github"><i class="solitude  fab fa-github"></i></a><a class="deal_link" href="https://www.woodfishhhh.xyz/images/d8d58d2f2c7ac5790fd37f388da41db4.png?_t=1759286665402" title="Email"><i class="solitude  far fa-envelope"></i></a><div><div class="nolazyload footer_mini_logo" id="footer_mini_logo" title="返回顶部" onclick="sco.toTop()"><img src= "" data-lazy-src="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg" alt="返回顶部"></div></div><a class="deal_link" target="_blank" rel="noopener" href="https://space.bilibili.com/359728114" title="Bilibili"><i class="solitude  fab fa-bilibili"></i></a><a class="deal_link" target="_blank" rel="noopener" href="https://www.douyin.com/user/MS4wLjABAAAAgbOrIhdi7Rl5RfaQ3fE3i7c2WnyR3zEOyLiK2Cjtcqk?from_tab_name=main" title="Douyin"><i class="solitude  fab fa-tiktok"></i></a></div><div><div id="st-footer"><div class="footer-group"><h3 class="footer-title">导航</h3><div class="footer-links"><a class="footer-item" href="/archives/" title="Archives">Archives</a><a class="footer-item" href="/categories/" title="Categories">Categories</a><a class="footer-item" href="/tags/" title="Tags">Tags</a></div></div><div class="footer-group"><h3 class="footer-title">排列</h3><div class="footer-links"><a class="footer-item" href="/about/" title="About">About</a><a class="footer-item" href="/link/" title="Friends">Friends</a></div></div><div class="footer-group"><div class="footer-title-group"><h3 class="footer-title">友链</h3><button class="random-friends-btn" onclick="randomLinksList()" title="友链"><i class="solitude fas fa-arrows-rotate"></i></button></div><div class="footer-links" id="friend-links-in-footer"></div></div></div></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div class="copyright">© 2025 - 2026 By<a class="footer-bar-link" href="/" title="woodfish">woodfish</a></div><div class="beian-group"><div></div><a class="footer-bar-link" target="_blank" rel="noopener" href="https://hexo.io/" title="框架：Hexo">框架：Hexo</a><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/everfu/hexo-theme-solitude" title="主题：Solitude">主题：Solitude</a></div></div><div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/everfu/hexo-theme-solitude" title="">主题</a><a class="footer-bar-link" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" title="">License</a></div></div></div></div><div class="comment-barrage needEndHide"></div></footer></div><div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="solitude fas fa-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="solitude fas fa-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="solitude fas fa-arrows-rotate"></i></div><div class="rightMenu-item" id="menu-top"><i class="solitude fas fa-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="solitude fas fa-clone"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="solitude fas fa-clipboard"></i><span>粘贴文本</span></div><div class="rightMenu-item" id="menu-newwindow"><i class="solitude far fa-window-maximize"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="solitude fas fa-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="solitude fas fa-clone"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="solitude fas fa-cloud-arrow-down"></i><span>下载此图片</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><div class="rightMenu-item" id="menu-randomPost" onclick="toRandomPost()||rm.hideRightMenu()"><i class="solitude fas fa-tower-broadcast"></i><span>随机文章</span></div><div class="rightMenu-item" onclick="pjax.loadUrl('/categories/')||rm.hideRightMenu()"><i class="solitude fas fa-clone"></i><span>全部分类</span></div><div class="rightMenu-item" onclick="pjax.loadUrl('/tags/')||rm.hideRightMenu()"><i class="solitude fas fa-tags"></i><span>全部标签</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><div class="rightMenu-item" id="menu-darkmode" onclick="sco.switchDarkMode()"><i class="solitude fas fa-circle-half-stroke"></i><span class="menu-darkmode-text">浅色模式</span></div><div class="rightMenu-item" id="menu-translate"><i class="solitude fas fa-language"></i><span>轉為繁體</span></div></div></div><div id="rightmenu-mask"></div></div><div><!-- Critical scripts loaded synchronously--><script src="/js/utils.js?v=3.0.20"></script><script src="/js/main.js?v=3.0.20"></script><!-- Non-critical scripts loaded asynchronously--><script async src="/js/third_party/waterfall.min.js?v=3.0.20"></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><!-- Feature-specific scripts loaded asynchronously--><script defer src="/js/third_party/universe.min.js?v=3.0.20"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  if (typeof dark === 'function') dark();
+});
+</script><script defer src="/js/tw_cn.js?v=3.0.20"></script><!-- UI enhancement scripts--><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.iife.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><!-- Music player scripts--><!-- Cover color processing scripts--><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+utils.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+</script><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!-- Search functionality--><!-- Right menu functionality--><script defer src="/js/right_menu.js?v=3.0.20"></script><div class="js-pjax"><script defer pjax src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.min.js"></script></div></div><!-- pjax--><script>let pjax = null;
+
+function initPjax() {
+    if (typeof Pjax === 'undefined') {
+        console.warn('Pjax is not loaded yet, retrying...');
+        setTimeout(initPjax, 100);
+        return;
+    }
+
+    pjax = new Pjax({
+        elements: 'a:not([target="_blank"])',
+        selectors: ["title","#body-wrap","#site-config","meta[name=\"description\"]",".js-pjax","meta[property^=\"og:\"]","#config-diff",".rs_show",".rs_hide"],
+        cacheBust: false,
+        analytics: false,
+        scrollRestoration: false
+    })
+
+    // 将 pjax 实例挂载到全局
+    window.pjax = pjax;
+
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+        const newScript = document.createElement('script')
+        const content = item.text || item.textContent || item.innerHTML || ""
+        Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+        newScript.appendChild(document.createTextNode(content))
+        item.parentNode.replaceChild(newScript, item)
+    })
+
+    document.addEventListener('pjax:complete', () => {
+        window.refreshFn()
+
+        document.querySelectorAll('script[data-pjax]').forEach(item => {
+            const newScript = document.createElement('script')
+            const content = item.text || item.textContent || item.innerHTML || ""
+            Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+            newScript.appendChild(document.createTextNode(content))
+            item.parentNode.replaceChild(newScript, item)
+        })
+
+        GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+    })
+
+    document.addEventListener('pjax:error', (e) => {
+        if (e.request.status === 404) {
+            pjax.loadUrl('/404.html')
+        }
+    })
+}
+
+// 初始化 Pjax
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPjax);
+} else {
+    initPjax();
+}</script><!-- google adsense--></body></html>
+        <script>
+            const posts = ["2026/01/06/Udemy TS/ts笔记/","2026/01/06/Udemy JS/099 Primitives vs. Objects (Primitive vs. Reference Types) /","2026/01/06/Udemy JS/103 Destructuring Arrays）笔记/","2026/01/06/Udemy JS/104 Destructuring Objects（对象解构）/","2026/01/06/Udemy JS/098 Regular Functions vs. Arrow Functions（常规函数与箭头函数）/","2026/01/06/Udemy JS/105 JavaScript 扩展运算符（...）/","2026/01/06/Udemy JS/106 Rest Pattern and Parameters/","2026/01/06/Udemy JS/108 空值合并运算符（Nullish Coalescing Operator）/","2026/01/06/Udemy JS/109 Logical Assignment Operators）/","2026/01/06/Udemy JS/111 for-of 循环笔记/","2026/01/06/Udemy JS/112 Enhanced Object Literals（ES6 增强对象字面量）/","2026/01/06/Udemy JS/113 可选链（Optional Chaining）笔记/","2026/01/06/Udemy JS/112 JavaScript数组方法(forEach, map, filter, reduce等)/","2026/01/06/Udemy JS/231 How to Plan a Web Project /","2026/01/06/Udemy JS/256 JavaScript 异步编程核心笔记/","2026/01/06/Udemy JS/258 The Event Loop in Practice/","2026/01/06/Udemy JS/262 Consuming Promises with Async_Await/","2026/01/06/Udemy JS/263 Error Handling With try...catch/","2026/01/06/Udemy JS/268-280 现代js开发/","2026/01/06/Udemy JS/264 Returning Values from Async Functions/","2026/01/06/杂项/Udemy Vue/","2026/01/06/杂项/new JS/","2026/01/06/杂项/数据结构期末速通/","2026/01/06/杂项/管理模拟卷/","2026/01/06/杂项/马原模拟卷/","2026/01/06/前端/AJAX基础入门教程/","2026/01/06/题解/Day5题解/","2026/01/06/题解/E题超详解：帮哈基鱼算标签/","2026/01/06/题解/F. Beautiful Intervals/","2026/01/06/题解/JUFE国庆新生编程语法培训/","2026/01/06/计算机网络/划分子网/","2026/01/06/计算机网络/最长前缀匹配原则/","2026/01/06/计算机网络/计算机网络第一章：概论/","2026/01/06/计算机网络/计算机网络第二章：物理层/","2026/01/06/计算机网络/计算机网络第三章：链路层/","2026/01/06/计算机网络/计算机网络第五章：运输层/","2026/01/06/计算机网络/计算机网络第六章：应用层/","2026/01/06/计算机组成原理/加减乘除/","2026/01/06/计算机组成原理/Cache缓存/","2026/01/06/计算机组成原理/存储器，主存扩展/","2026/01/06/计算机组成原理/指令系统/","2026/01/06/计算机组成原理/数据的表示/","2026/01/06/计算机组成原理/计算机存储器/","2025/10/21/计算机网络/计算机网络第四章：网络层/","2025/10/21/计算机网络/计算机网络第四章：网络层（edit）/","2025/09/11/前端/Day04_AJAX进阶/","2025/09/10/前端/Day03_AJAX原理/","2025/09/09/前端/Day02_AJAX综合案例/","2025/09/08/前端/Day01_AJAX入门/","2025/08/25/Linux/Linux课程笔记/","2025/08/13/前端/js易错点/","2025/08/11/前端/JavaScript 学习笔记（9）：深浅拷贝、异常处理、this 指向与防抖节流/","2025/08/03/前端/JavaScript 学习笔记（8）：面向对象编程与原型机制详解/","2025/08/02/前端/JavaScript 学习笔记（7）：面向对象与内置构造函数/","2025/07/31/前端/JavaScript 学习笔记（6）：作用域、闭包与函数进阶/","2025/07/28/前端/Web API 学习笔记（6）：正则表达式与表单验证/","2025/07/27/前端/Web API 学习笔记（5）：BOM 操作与本地存储/","2025/07/26/前端/Web API 学习笔记（4）：Date 对象与 DOM-节点操作要点/","2025/07/23/前端/Web API 学习笔记（3）：事件流与事件委托/","2025/07/22/前端/Web API 学习笔记（2）：事件处理与-this-指向/","2025/07/21/前端/Web API 学习笔记（1）：DOM 基础操作/","2025/07/20/前端/JavaScript 学习笔记（5）：对象数据类型与内置数学对象/","2025/07/19/前端/JavaScript 学习笔记（4）：函数封装与对象基础/","2025/07/18/前端/JavaScript 学习笔记（3）：数组的增删操作方法详解/","2025/07/17/前端/JavaScript 学习笔记（2）：运算符、语句与综合案例/","2025/07/17/前端/JavaScript 学习笔记（1）：基础语法与数据类型/","2025/07/15/前端/CSS 学习笔记（12）：响应式布局与 Bootstrap 框架应用/","2025/07/14/前端/CSS 学习笔记（11）：移动 Web 开发之 vw 适配与酷我音乐案例实践/","2025/07/13/前端/CSS 学习笔记（10）：移动 Web 开发基础与 rem 布局、Less 预处理器/","2025/07/12/前端/CSS 学习笔记（9）：移动 Web 开发之空间转换与动画效果/","2025/07/11/前端/CSS 学习笔记（8）：移动 Web 开发之平面转换与渐变效果/","2025/07/10/前端/小兔仙/","2025/07/08/前端/学成在线/","2025/07/08/前端/CSS 学习笔记（6）：小兔鲜儿项目搭建及基础配置（目录结构、SEO 标签、版心设置）/","2025/07/04/前端/CSS我的易错点/","2025/07/03/前端/CSS 学习笔记（7）：CSS 优先级叠加计算规则详解/","2025/07/02/前端/CSS 学习笔记（5）：定位模式、CSS 精灵、字体图标及过渡效果应用/","2025/06/30/前端/CSS 学习笔记（4）：浮动布局与 Flex 弹性布局详解及应用案例/","2025/06/27/前端/CSS 学习笔记（3）：伪类与伪元素选择器、盒子模型及相关特性详解/","2025/06/24/前端/CSS 学习笔记（2）：复合选择器、CSS 特性及背景与显示模式设置/","2025/06/23/前端/CSS 学习笔记（1）：引入方式、选择器及文字样式控制/","2025/06/23/前端/HTML 学习笔记（2）：列表、表格、表单及布局标签详解/","2025/06/22/前端/HTML 学习笔记（1）：核心标签、文档结构及多媒体应用/","2025/06/19/JAVA/Java期末复习重点易错点/","2025/06/18/杂项/中国近代史复习重点/","2025/06/03/JAVA/Java的final/","2025/06/03/JAVA/Java的继承/","2025/06/03/JAVA/Java的多态/","2025/05/27/JAVA/Java的List集合/","2025/05/27/JAVA/Java的Collection集合/","2025/05/27/JAVA/Java的包装类/","2025/05/15/JAVA/Java的内部类/","2025/05/15/JAVA/Java的抽象与接口类/"];
+            function toRandomPost() {
+                const randomPost = posts[Math.floor(Math.random() * posts.length)];
+                pjax.loadUrl(GLOBAL_CONFIG.root + randomPost);
+            }
+        </script>

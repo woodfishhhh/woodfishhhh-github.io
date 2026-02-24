@@ -1,0 +1,1069 @@
+<!DOCTYPE html><html lang="zh-Hans" data-theme="light"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>计算机网络第六章：应用层 | 木鱼的鱼窝</title><noscript>开启JavaScript才能访问本站哦~</noscript><link rel="icon" href="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg"><link rel="stylesheet" href="/css/index.css?v=3.0.20"><link rel="canonical" href="https://www.woodfishhhh.xyz/2026/01/06/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%AC%E5%85%AD%E7%AB%A0%EF%BC%9A%E5%BA%94%E7%94%A8%E5%B1%82/index.html"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css"><!-- Feature-specific CSS--><!-- aplayer--><!-- swiper--><!-- fancybox ui--><!-- katex--><!-- Open Graph--><meta name="description" content="第六章 应用层 6.1 应用层概述 应用层的定义：应用层是 OSI 体系结构的顶层，是离用户最近的一层，也是设计和建立计算机网络的最终目的。 主要任务：通过应用进程的交互来实现特定网络应用。 本章重点内容：  动态主机配置协议 (DHCP) 域名系统 (DNS) 文件传送协议 (FTP) 电子邮件 万维网 (HTTP)  6.2 客户 &#x2F; 服务器方式和对等方式 基本概念：  客户 (client)">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络第六章：应用层">
+<meta property="og:url" content="https://www.woodfishhhh.xyz/2026/01/06/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%AC%E5%85%AD%E7%AB%A0%EF%BC%9A%E5%BA%94%E7%94%A8%E5%B1%82/index.html">
+<meta property="og:site_name" content="木鱼的鱼窝">
+<meta property="og:description" content="第六章 应用层 6.1 应用层概述 应用层的定义：应用层是 OSI 体系结构的顶层，是离用户最近的一层，也是设计和建立计算机网络的最终目的。 主要任务：通过应用进程的交互来实现特定网络应用。 本章重点内容：  动态主机配置协议 (DHCP) 域名系统 (DNS) 文件传送协议 (FTP) 电子邮件 万维网 (HTTP)  6.2 客户 &#x2F; 服务器方式和对等方式 基本概念：  客户 (client)">
+<meta property="og:locale">
+<meta property="og:image" content="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg">
+<meta property="article:published_time" content="2026-01-06T15:39:48.000Z">
+<meta property="article:modified_time" content="2026-01-22T07:17:45.073Z">
+<meta property="article:author" content="woodfish">
+<meta property="article:tag" content="计算机网络">
+<meta property="article:tag" content="应用层">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg"><!-- pwa--><meta name="apple-mobile-web-app-capable" content="木鱼的鱼窝"><meta name="theme-color" content="var(--efu-main)"><meta name="apple-mobile-web-app-status-bar-style" content="var(--efu-main)"><link rel="bookmark" href="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg"><link rel="apple-touch-icon" href="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg" sizes="180x180"><script>console.log(' %c Solitude %c ' + '3.0.20' + ' %c https://github.com/everfu/hexo-theme-solitude',
+    'background:#35495e ; padding: 1px; border-radius: 3px 0 0 3px;  color: #fff',
+    'background:#ff9a9a ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff',
+    'background:unset ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff')
+</script><script>(()=>{
+        const saveToLocal = {
+            set: function setWithExpiry(key, value, ttl) {
+                if (ttl === 0)
+                    return
+                const now = new Date()
+                const expiryDay = ttl * 86400000
+                const item = {
+                    value: value,
+                    expiry: now.getTime() + expiryDay
+                }
+                localStorage.setItem(key, JSON.stringify(item))
+            },
+            get: function getWithExpiry(key) {
+                const itemStr = localStorage.getItem(key)
+
+                if (!itemStr) {
+                    return undefined
+                }
+                const item = JSON.parse(itemStr)
+                const now = new Date()
+
+                if (now.getTime() > item.expiry) {
+                    localStorage.removeItem(key)
+                    return undefined
+                }
+                return item.value
+            }
+        };
+        window.utils = {
+            saveToLocal: saveToLocal,
+            getCSS: (url, id = false) => new Promise((resolve, reject) => {
+              const link = document.createElement('link')
+              link.rel = 'stylesheet'
+              link.href = url
+              if (id) link.id = id
+              link.onerror = reject
+              link.onload = link.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                link.onload = link.onreadystatechange = null
+                resolve()
+              }
+              document.head.appendChild(link)
+            }),
+            getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+              const script = document.createElement('script')
+              script.src = url
+              script.async = true
+              script.onerror = reject
+              script.onload = script.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                script.onload = script.onreadystatechange = null
+                resolve()
+              }
+
+              Object.keys(attr).forEach(key => {
+                script.setAttribute(key, attr[key])
+              })
+
+              document.head.appendChild(script)
+            }),
+            addGlobalFn: (key, fn, name = false, parent = window) => {
+                const globalFn = parent.globalFn || {}
+                const keyObj = globalFn[key] || {}
+
+                if (name && keyObj[name]) return
+
+                name = name || Object.keys(keyObj).length
+                keyObj[name] = fn
+                globalFn[key] = keyObj
+                parent.globalFn = globalFn
+            },
+            addEventListenerPjax: (ele, event, fn, option = false) => {
+              ele.addEventListener(event, fn, option)
+              utils.addGlobalFn('pjax', () => {
+                  ele.removeEventListener(event, fn, option)
+              })
+            },
+            diffDateFormat: (selector) => {
+                selector.forEach(item => {
+                    const date = new Date(item.getAttribute('datetime') || item.textContent);
+                    item.textContent = (date.getMonth() + 1).toString()+'/'+date.getDate().toString();
+                });
+            },
+        }
+    })()</script><!-- theme--><script>initTheme = () => {
+    const cachedMode = utils.saveToLocal.get('theme');
+    if (cachedMode === undefined)
+        document.documentElement.setAttribute('data-theme', 'dark');
+    else
+        document.documentElement.setAttribute('data-theme', cachedMode);
+    typeof rm === 'object' && rm.mode(cachedMode === undefined || cachedMode === 'dark')
+}
+initTheme()</script><script>const GLOBAL_CONFIG = {
+    root: '/',
+    algolia: undefined,
+    localsearch: undefined,
+    runtime: '2025-06-02 00:00:00',
+    lazyload: {
+        enable: true,
+        error: 'https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png'
+    },
+    copyright: {"limit":50,"author":"作者: woodfish","link":"链接: ","source":"来源: 木鱼的鱼窝","info":"著作权归作者所有。 商业转载请联系作者获得授权，非商业转载请注明出处。"},
+    highlight: {"limit":200,"expand":true,"copy":true,"syntax":"highlight.js"},
+    randomlink: false,
+    lang: {"theme":{"dark":"已切换至深色模式","light":"已切换至浅色模式"},"copy":{"success":"复制成功","error":"复制失败"},"backtop":"返回顶部","time":{"day":"天前","hour":"小时前","just":"刚刚","min":"分钟前","month":"个月前"},"day":" 天","f12":"开发者模式已打开，请遵循GPL协议。","totalk":"无需删除空行，直接输入评论即可"},
+    aside: {
+        state: {
+            morning: "✨ 早上好，新的一天开始了",
+            noon: "🍲 午餐时间",
+            afternoon: "🌞 下午好",
+            night: "早点休息",
+            goodnight: "晚安 😴",
+        },
+        witty_words: [],
+        witty_comment: {
+            prefix: '好久不见，',
+            back: '欢迎再次回来，',
+        },
+    },
+    covercolor: {
+        enable: false
+    },
+    comment: false,
+    lightbox: 'fancybox',
+    right_menu: {"mode":{"dark":"深色模式","light":"浅色模式"},"img_error":"此图片无法复制与下载","translate":true},
+    translate: {"translateDelay":0,"defaultEncoding":2},
+    lure: false,
+    expire: false,
+};</script><script id="config-diff">var PAGE_CONFIG = {
+    is_post: true,
+    is_page: false,
+    is_home: false,
+    page: '',
+    toc: true,
+    comment: false,
+    ai_text: false,
+    color: false,
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body id="body"><div><canvas id="universe"></canvas></div><div><div id="loading-box" onclick="preloader.endLoading();" style="zoom:1"><div class="loading-bg"><img class="loading-img nolazyload" src="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg" alt="loading image"></div></div><script>const preloader = {
+    isLoaded: false,
+    endLoading: () => {
+        if (!preloader.isLoaded) {
+            document.getElementById('loading-box').classList.add('loaded');
+            preloader.isLoaded = true;
+            preloader.togglePaceDone();
+        }
+    },
+    initLoading: () => {
+        document.getElementById('loading-box').classList.remove('loaded');
+        preloader.isLoaded = false;
+        preloader.togglePaceDone();
+    },
+    togglePaceDone: () => {
+        document.getElementById('body').className = preloader.isLoaded ? 'pace-done' : '';
+    }
+}
+
+window.addEventListener('load', () => {
+    preloader.endLoading();
+});
+
+window.addEventListener('pjax:send', () => {
+    preloader.initLoading();
+});
+
+document.addEventListener('pjax:complete', () => {
+    preloader.endLoading();
+});
+
+setTimeout(() => {
+    preloader.endLoading();
+}, 5000);</script></div><div><div id="console"><div class="close-btn" onclick="sco.hideConsole()"><i class="solitude fas fa-xmark"></i></div><div class="console-card-group"><div class="console-card-group-right"><div class="console-card tags" onclick="sco.hideConsole()"><div class="card-content"><div class="author-content-item-tips">标签</div><div class="author-content-item-title">寻找感兴趣的领域</div></div><div class="card-tag-cloud"><a href="/tags/Java/">Java<sup>9</sup></a><a href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/">期末复习<sup>2</sup></a><a href="/tags/Linux/">Linux<sup>1</sup></a><a href="/tags/TypeScript/">TypeScript<sup>1</sup></a><a href="/tags/JavaScript/">JavaScript<sup>37</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF/">前端<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">数据类型<sup>1</sup></a><a href="/tags/ES6/">ES6<sup>5</sup></a><a href="/tags/%E5%87%BD%E6%95%B0/">函数<sup>1</sup></a><a href="/tags/ES2020/">ES2020<sup>2</sup></a><a href="/tags/ES2021/">ES2021<sup>1</sup></a><a href="/tags/%E5%BE%AA%E7%8E%AF/">循环<sup>1</sup></a><a href="/tags/%E6%95%B0%E7%BB%84/">数组<sup>1</sup></a><a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/">项目管理<sup>1</sup></a><a href="/tags/Web%E5%BC%80%E5%8F%91/">Web开发<sup>1</sup></a><a href="/tags/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/">异步编程<sup>1</sup></a><a href="/tags/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/">事件循环<sup>1</sup></a><a href="/tags/%E5%BC%82%E6%AD%A5/">异步<sup>2</sup></a><a href="/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理<sup>1</sup></a><a href="/tags/%E7%8E%B0%E4%BB%A3%E5%BC%80%E5%8F%91/">现代开发<sup>1</sup></a><a href="/tags/Vue/">Vue<sup>1</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/">前端框架<sup>1</sup></a><a href="/tags/C/">C++<sup>1</sup></a><a href="/tags/%E7%AE%97%E6%B3%95/">算法<sup>5</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构<sup>1</sup></a><a href="/tags/%E7%AE%A1%E7%90%86%E5%AD%A6/">管理学<sup>1</sup></a><a href="/tags/%E6%A8%A1%E6%8B%9F%E5%8D%B7/">模拟卷<sup>2</sup></a><a href="/tags/%E9%A9%AC%E5%85%8B%E6%80%9D%E4%B8%BB%E4%B9%89/">马克思主义<sup>1</sup></a><a href="/tags/AJAX/">AJAX<sup>1</sup></a><a href="/tags/HTTP/">HTTP<sup>1</sup></a><a href="/tags/CSS/">CSS<sup>15</sup></a><a href="/tags/HTML/">HTML<sup>17</sup></a><a href="/tags/web/">web<sup>11</sup></a><a href="/tags/Ajax/">Ajax<sup>4</sup></a><a href="/tags/%E9%A2%98%E8%A7%A3/">题解<sup>3</sup></a><a href="/tags/%E7%BC%96%E7%A8%8B/">编程<sup>1</sup></a><a href="/tags/%E5%9F%B9%E8%AE%AD/">培训<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络<sup>7</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/">网络层<sup>1</sup></a><a href="/tags/%E8%B7%AF%E7%94%B1/">路由<sup>1</sup></a><a href="/tags/%E6%A6%82%E8%AE%BA/">概论<sup>1</sup></a><a href="/tags/%E7%89%A9%E7%90%86%E5%B1%82/">物理层<sup>1</sup></a><a href="/tags/%E9%93%BE%E8%B7%AF%E5%B1%82/">链路层<sup>1</sup></a><a href="/tags/%E8%BF%90%E8%BE%93%E5%B1%82/">运输层<sup>1</sup></a><a href="/tags/%E5%BA%94%E7%94%A8%E5%B1%82/">应用层<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">计算机组成原理<sup>6</sup></a><a href="/tags/%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97/">算术运算<sup>1</sup></a><a href="/tags/%E7%BC%93%E5%AD%98/">缓存<sup>1</sup></a><a href="/tags/%E5%AD%98%E5%82%A8%E5%99%A8/">存储器<sup>2</sup></a><a href="/tags/%E6%8C%87%E4%BB%A4%E7%B3%BB%E7%BB%9F/">指令系统<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A4%BA/">数据表示<sup>1</sup></a></div></div><div class="console-card history" onclick="sco.hideConsole()"><ul class="card-archive-list"><li class="item"><a href="/archives/2026/01/"><span class="date">2026/01</span><div class="count-group"><span class="count">43</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/10/"><span class="date">2025/10</span><div class="count-group"><span class="count">2</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/09/"><span class="date">2025/09</span><div class="count-group"><span class="count">4</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/08/"><span class="date">2025/08</span><div class="count-group"><span class="count">5</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/07/"><span class="date">2025/07</span><div class="count-group"><span class="count">23</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/06/"><span class="date">2025/06</span><div class="count-group"><span class="count">11</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/05/"><span class="date">2025/05</span><div class="count-group"><span class="count">5</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/"><span class="date">全部文章</span><div class="count-group"><span class="count">93</span><span class="unit">篇</span></div></a></li></ul></div></div></div><div class="button-group"><div class="console-btn-item"><span class="darkmode_switchbutton" onclick="sco.switchDarkMode()" title="昼夜切换"><i class="solitude fas fa-circle-half-stroke"></i></span></div><div class="console-btn-item" id="consoleHideAside"><span class="asideSwitch" onclick="sco.switchHideAside()" title="边栏显示控制"><i class="solitude fas fa-arrows-left-right-to-line"></i></span></div></div><div class="console-mask" onclick="sco.hideConsole()"></div></div></div><div id="sidebar" style="zoom: 1;"><div id="menu-mask" style="display: none;"></div><div id="sidebar-menus"><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">93</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">51</div></a></div></div></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><span class="darkmode_switchbutton menu-child" onclick="sco.switchDarkMode()"><i class="solitude fas fa-circle-half-stroke"></i><span>显示模式</span></span></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://www.woodfishhhh.xyz/" title="woodfishhhh博客"><img class="nolazyload back-menu-item-icon" src="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg" alt="woodfishhhh博客"><span class="back-menu-item-text">woodfishhhh博客</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/%20%7C%7C%20fas%20fa-home"><span>主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%20%7C%7C%20fas%20fa-tags"><span>标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%20%7C%7C%20fas%20fa-th"><span>分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/%20%7C%7C%20fas%20fa-link"><span>友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/%20%7C%7C%20fas%20fa-user"><span>关于我</span></a></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="card-tag-cloud"><a href="/tags/Java/">Java<sup>9</sup></a><a href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/">期末复习<sup>2</sup></a><a href="/tags/Linux/">Linux<sup>1</sup></a><a href="/tags/TypeScript/">TypeScript<sup>1</sup></a><a href="/tags/JavaScript/">JavaScript<sup>37</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF/">前端<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">数据类型<sup>1</sup></a><a href="/tags/ES6/">ES6<sup>5</sup></a><a href="/tags/%E5%87%BD%E6%95%B0/">函数<sup>1</sup></a><a href="/tags/ES2020/">ES2020<sup>2</sup></a><a href="/tags/ES2021/">ES2021<sup>1</sup></a><a href="/tags/%E5%BE%AA%E7%8E%AF/">循环<sup>1</sup></a><a href="/tags/%E6%95%B0%E7%BB%84/">数组<sup>1</sup></a><a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/">项目管理<sup>1</sup></a><a href="/tags/Web%E5%BC%80%E5%8F%91/">Web开发<sup>1</sup></a><a href="/tags/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/">异步编程<sup>1</sup></a><a href="/tags/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/">事件循环<sup>1</sup></a><a href="/tags/%E5%BC%82%E6%AD%A5/">异步<sup>2</sup></a><a href="/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理<sup>1</sup></a><a href="/tags/%E7%8E%B0%E4%BB%A3%E5%BC%80%E5%8F%91/">现代开发<sup>1</sup></a><a href="/tags/Vue/">Vue<sup>1</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/">前端框架<sup>1</sup></a><a href="/tags/C/">C++<sup>1</sup></a><a href="/tags/%E7%AE%97%E6%B3%95/">算法<sup>5</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构<sup>1</sup></a><a href="/tags/%E7%AE%A1%E7%90%86%E5%AD%A6/">管理学<sup>1</sup></a><a href="/tags/%E6%A8%A1%E6%8B%9F%E5%8D%B7/">模拟卷<sup>2</sup></a><a href="/tags/%E9%A9%AC%E5%85%8B%E6%80%9D%E4%B8%BB%E4%B9%89/">马克思主义<sup>1</sup></a><a href="/tags/AJAX/">AJAX<sup>1</sup></a><a href="/tags/HTTP/">HTTP<sup>1</sup></a><a href="/tags/CSS/">CSS<sup>15</sup></a><a href="/tags/HTML/">HTML<sup>17</sup></a><a href="/tags/web/">web<sup>11</sup></a><a href="/tags/Ajax/">Ajax<sup>4</sup></a><a href="/tags/%E9%A2%98%E8%A7%A3/">题解<sup>3</sup></a><a href="/tags/%E7%BC%96%E7%A8%8B/">编程<sup>1</sup></a><a href="/tags/%E5%9F%B9%E8%AE%AD/">培训<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络<sup>7</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/">网络层<sup>1</sup></a><a href="/tags/%E8%B7%AF%E7%94%B1/">路由<sup>1</sup></a><a href="/tags/%E6%A6%82%E8%AE%BA/">概论<sup>1</sup></a><a href="/tags/%E7%89%A9%E7%90%86%E5%B1%82/">物理层<sup>1</sup></a><a href="/tags/%E9%93%BE%E8%B7%AF%E5%B1%82/">链路层<sup>1</sup></a><a href="/tags/%E8%BF%90%E8%BE%93%E5%B1%82/">运输层<sup>1</sup></a><a href="/tags/%E5%BA%94%E7%94%A8%E5%B1%82/">应用层<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">计算机组成原理<sup>6</sup></a><a href="/tags/%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97/">算术运算<sup>1</sup></a><a href="/tags/%E7%BC%93%E5%AD%98/">缓存<sup>1</sup></a><a href="/tags/%E5%AD%98%E5%82%A8%E5%99%A8/">存储器<sup>2</sup></a><a href="/tags/%E6%8C%87%E4%BB%A4%E7%B3%BB%E7%BB%9F/">指令系统<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A4%BA/">数据表示<sup>1</sup></a></div></div></div></div><div><div class="needEndHide" id="rightside"><div class="rs_hide"><button class="translate" type="button" title="简繁转换">简</button><button class="mode" type="button" title="显示模式切换" onclick="sco.switchDarkMode()"><i class="fas fa-circle-half-stroke"></i></button><button class="aside pc" type="button" title="侧边栏" onclick="sco.switchHideAside()"><i class="fas fa-arrows-alt-h"></i></button></div><div class="rs_show"><button class="config" type="button" title="扩展" onclick="document.querySelector(&quot;.rs_hide&quot;).classList.toggle(&quot;show&quot;)"><i class="fas fa-gear fa-spin"></i></button><button class="mobile toc" type="button" title="目录" onclick="document.querySelector('#card-toc').classList.toggle('open')"><i class="fas fa-list"></i></button><button class="top" type="button" title="返回顶部" onclick="sco.toTop()"><i class="fas fa-arrow-up"></i><span id="percent">0</span></button></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="show" id="nav"><div id="nav-group"><div id="blog_name"><a href="/" title="返回博客主页" id="site-name"><span class="title">木鱼的鱼窝</span><i class="solitude fas fa-home"></i></a></div><div id="page-name-mask"><div id="page-name"><a id="page-name-text" onclick="sco.toTop()">计算机网络第六章：应用层</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/%20%7C%7C%20fas%20fa-home"><span>主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%20%7C%7C%20fas%20fa-tags"><span>标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%20%7C%7C%20fas%20fa-th"><span>分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/%20%7C%7C%20fas%20fa-link"><span>友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/%20%7C%7C%20fas%20fa-user"><span>关于我</span></a></div></div></div><div id="nav-left"></div><div id="nav-right"><div class="nav-button" id="travellings_button"><a class="site-page" target="_blank" rel="noopener" href="https://www.travellings.cn/go.html" onclick="javascript:travelling()" title=""><i class="solitude fas fa-train"></i></a></div><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机一篇文章" href="javascript:void(0);"><i class="solitude fas fa-dice-d6"></i></a></div><div class="nav-button" id="nav-console"><a class="console_switchbutton" onclick="sco.showConsole()" title="中控台" href="javascript:void(0);"><label><i class="left"></i><i class="center"></i><i class="right"></i></label></a></div><div id="toggle-menu"><a class="site-page"><i class="solitude fas fa-bars"></i></a></div></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original" title="该文章为原创文章，注意版权协议">原创</a><span class="post-meta-categories"><a class="post-meta-categories" href="/categories/%E7%9F%A5%E8%AF%86/">知识</a></span><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"><span class="tags-name tags-punctuation"><i class="solitude fas fa-hashtag"></i>计算机网络</span></a><a class="post-meta__tags" href="/tags/%E5%BA%94%E7%94%A8%E5%B1%82/"><span class="tags-name tags-punctuation"><i class="solitude fas fa-hashtag"></i>应用层</span></a></div></div></div></div><h1 class="post-title">计算机网络第六章：应用层</h1><div id="post-meta"><div class="meta-secondline"><span class="post-meta-date" title="发布于 2026-01-06 23:39:48"><i class="post-meta-icon solitude fas fa-calendar-days"></i><time datetime="2026-01-06T15:39:48.000Z">2026-01-06T15:39:48.000Z</time></span><span class="post-meta-date" title="最后更新于 2026-01-22 15:17:45"><i class="post-meta-icon solitude fas fa-arrows-rotate"></i><time datetime="2026-01-22T07:17:45.073Z">2026-01-22T07:17:45.073Z</time></span></div></div></div><div class="post-radius-bottom"></div><article class="post-content article-container"><h2 id="第六章-应用层">第六章 应用层</h2>
+<h3 id="6-1-应用层概述">6.1 应用层概述</h3>
+<p><strong>应用层的定义</strong>：应用层是 OSI 体系结构的顶层，是离用户最近的一层，也是设计和建立计算机网络的最终目的。</p>
+<p><strong>主要任务</strong>：通过应用进程的交互来实现特定网络应用。</p>
+<p><strong>本章重点内容</strong>：</p>
+<ul>
+<li>动态主机配置协议 (DHCP)</li>
+<li>域名系统 (DNS)</li>
+<li>文件传送协议 (FTP)</li>
+<li>电子邮件</li>
+<li>万维网 (HTTP)</li>
+</ul>
+<h3 id="6-2-客户-服务器方式和对等方式">6.2 客户 / 服务器方式和对等方式</h3>
+<p><strong>基本概念</strong>：</p>
+<ul>
+<li><strong>客户 (client)</strong>：发起连接请求的应用进程</li>
+<li><strong>服务器 (server)</strong>：等待并接受连接请求的应用进程</li>
+</ul>
+<p><strong>客户 / 服务器方式 (C/S 方式)</strong>：</p>
+<ul>
+<li>客户是服务的请求方，服务器是服务的提供方</li>
+<li>服务器需要预先启动并等待客户的请求</li>
+<li>客户可以随时启动并向服务器发起请求</li>
+</ul>
+<p><strong>对等方式 (P2P 方式)</strong>：</p>
+<ul>
+<li>两个应用进程在通信时是平等的</li>
+<li>既可以作为客户，也可以作为服务器</li>
+<li>典型应用：文件共享、即时通信</li>
+</ul>
+<p><strong>例题</strong>：</p>
+<p>Q: 以下哪种应用采用客户 / 服务器方式？</p>
+<p>A. 微信聊天</p>
+<p>B. HTTP 网页浏览</p>
+<p>C. BitTorrent 文件下载</p>
+<p>D. 网络电话</p>
+<p>答案：B. HTTP 网页浏览</p>
+<h3 id="6-3-动态主机配置协议-DHCP">6.3 动态主机配置协议 (DHCP)</h3>
+<p><img src= "" data-lazy-src="C:%5CUsers%5Cwoodfish%5CDesktop%5CMyBlog%5C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%5C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%AC%E5%85%AD%E7%AB%A0%EF%BC%9A%E5%BA%94%E7%94%A8%E5%B1%82.assets%5Cimage-20251202172921122.png" alt="image-20251202172921122"></p>
+<h4 id="6-3-1-动态主机配置协议的作用">6.3.1 动态主机配置协议的作用</h4>
+<p><strong>DHCP 的基本概念</strong>：</p>
+<ul>
+<li><strong>全称</strong>：Dynamic Host Configuration Protocol</li>
+<li><strong>标准</strong>：RFC 2131, RFC 2132</li>
+<li><strong>工作方式</strong>：客户 / 服务器方式</li>
+<li><strong>传输层协议</strong>：UDP</li>
+</ul>
+<p><strong>需要配置的网络参数</strong>：</p>
+<ul>
+<li>IP 地址</li>
+<li>子网掩码</li>
+<li>默认网关的 IP 地址</li>
+<li>域名服务器的 IP 地址</li>
+</ul>
+<p><strong>DHCP 的优势</strong>：</p>
+<ul>
+<li>自动分配 IP 地址，避免手动配置的麻烦</li>
+<li>集中管理 IP 地址资源</li>
+<li>支持 IP 地址的动态分配和回收</li>
+</ul>
+<h4 id="6-3-2-DHCP-的工作过程">6.3.2 DHCP 的工作过程</h4>
+<p><strong>DHCP 的工作步骤</strong>：</p>
+<ol>
+<li><strong>DHCP 发现 (DHCP DISCOVERY)</strong>
+<ul>
+<li>DHCP 客户广播发送发现报文</li>
+<li>源 IP 地址：0.0.0.0</li>
+<li>目的 IP 地址：255.255.255.255</li>
+<li>包含事务 ID 和 DHCP 客户端的 MAC 地址</li>
+</ul>
+</li>
+<li><strong>DHCP 提供 (DHCP OFFER)</strong>
+<ul>
+<li>DHCP 服务器收到发现报文后，查找数据库</li>
+<li>广播发送提供报文</li>
+<li>包含可用的 IP 地址、子网掩码、地址租期等信息</li>
+<li>服务器会使用 ARP 确保所选 IP 地址未被占用</li>
+</ul>
+</li>
+<li><strong>DHCP 请求 (DHCP REQUEST)</strong>
+<ul>
+<li>DHCP 客户选择一个 DHCP 服务器</li>
+<li>广播发送请求报文</li>
+<li>告知其他 DHCP 服务器自己的选择</li>
+</ul>
+</li>
+<li><strong>DHCP 确认 (DHCP ACK)</strong>
+<ul>
+<li>DHCP 服务器发送确认报文</li>
+<li>DHCP 客户获得 IP 地址并开始使用</li>
+<li>使用前会再次 ARP 检测 IP 地址是否被占用</li>
+</ul>
+</li>
+</ol>
+<p><strong>IP 地址租用期管理</strong>：</p>
+<ul>
+<li>租用期过一半时，DHCP 客户请求更新租用期</li>
+<li>租用期过 87.5% 时，若未收到响应，重新发送请求</li>
+<li>租用期到期后，必须停止使用该 IP 地址</li>
+</ul>
+<p><strong>DHCP 中继代理</strong>：</p>
+<ul>
+<li>解决不同网络间的 DHCP 通信问题</li>
+<li>路由器配置为 DHCP 中继代理</li>
+<li>将广播的 DHCP 发现报文单播转发给 DHCP 服务器</li>
+</ul>
+<p><strong>例题</strong>：</p>
+<p>Q: DHCP 客户首次获取 IP 地址时，发送的第一个报文是什么？</p>
+<p>A. DHCP OFFER</p>
+<p>B. DHCP REQUEST</p>
+<p>C. DHCP DISCOVERY</p>
+<p>D. DHCP ACK</p>
+<p>答案：C. DHCP DISCOVERY</p>
+<h3 id="6-4-域名系统-DNS">6.4 域名系统 (DNS)</h3>
+<p><img src= "" data-lazy-src="C:%5CUsers%5Cwoodfish%5CDesktop%5CMyBlog%5C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%5C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%AC%E5%85%AD%E7%AB%A0%EF%BC%9A%E5%BA%94%E7%94%A8%E5%B1%82.assets%5Cimage-20251202190457904.png" alt="image-20251202190457904"></p>
+<h4 id="6-4-1-DNS-的基本概念">6.4.1 DNS 的基本概念</h4>
+<p><strong>DNS 的作用</strong>：</p>
+<ul>
+<li>将域名转换为 IP 地址</li>
+<li>分布式的域名解析系统</li>
+<li>早在 1983 年就开始采用层次结构的命名树</li>
+</ul>
+<p><strong>域名结构</strong>：</p>
+<ul>
+<li>层次树状结构</li>
+<li>各级域名用点 “.” 隔开</li>
+<li>级别最低的域名写在最左边</li>
+<li>级别最高的顶级域名写在最右边</li>
+<li>完整域名不超过 255 个字符</li>
+</ul>
+<p><strong>顶级域名分类</strong>：</p>
+<ol>
+<li><strong>通用顶级域名 (gTLD)</strong>：
+<ul>
+<li>com：公司企业</li>
+<li>edu：教育机构</li>
+<li>gov：政府部门</li>
+<li>org：非营利组织</li>
+<li>net：网络服务机构</li>
+<li>mil：军事机构</li>
+<li>int：国际组织</li>
+</ul>
+</li>
+<li><strong>国家顶级域名 (ccTLD)</strong>：
+<ul>
+<li>cn：中国</li>
+<li>us：美国</li>
+<li>uk：英国等</li>
+</ul>
+</li>
+<li><strong>反向域 (arpa)</strong>：用于反向域名解析</li>
+</ol>
+<p><strong>域名管理机构</strong>：</p>
+<ul>
+<li>最高级别：ICANN (因特网名称与数字地址分配机构)</li>
+<li>各级域名由其上一级域名管理机构管理</li>
+</ul>
+<h4 id="6-4-2-DNS-服务器的类型">6.4.2 DNS 服务器的类型</h4>
+<p><strong>四种域名服务器</strong>：</p>
+<ol>
+<li><strong>根域名服务器</strong>：
+<ul>
+<li>最高层次的域名服务器</li>
+<li>共有 13 个不同 IP 地址的根域名服务器</li>
+<li>每个根域名服务器实际上是由许多分布在世界各地的计算机构成的服务器群集</li>
+<li>通常不直接解析域名，而是返回顶级域名服务器的 IP 地址</li>
+</ul>
+</li>
+<li><strong>顶级域名服务器</strong>：
+<ul>
+<li>负责管理在其下注册的所有二级域名</li>
+<li>例如：com、cn、edu 等顶级域名服务器</li>
+</ul>
+</li>
+<li><strong>权限域名服务器</strong>：
+<ul>
+<li>负责管理某个区的域名</li>
+<li>每一个主机的域名都必须在某个权限域名服务器处注册登记</li>
+</ul>
+</li>
+<li><strong>本地域名服务器</strong>：
+<ul>
+<li>不属于域名服务器的等级结构</li>
+<li>通常由 ISP 提供</li>
+<li>当主机发出 DNS 查询请求时，这个查询请求报文就发送给本地域名服务器</li>
+</ul>
+</li>
+</ol>
+<h4 id="6-4-3-DNS-查询过程">6.4.3 DNS 查询过程</h4>
+<p><strong>两种查询方式</strong>：</p>
+<ol>
+<li><strong>递归查询</strong>：
+<ul>
+<li>客户只发送一次查询请求</li>
+<li>本地域名服务器负责完成整个查询过程</li>
+<li>客户只需等待最终结果</li>
+</ul>
+</li>
+<li><strong>迭代查询</strong>：
+<ul>
+<li>本地域名服务器向根域名服务器查询</li>
+<li>根域名服务器返回下一个应查询的顶级域名服务器的 IP 地址</li>
+<li>本地域名服务器继续向顶级域名服务器查询</li>
+<li>重复上述过程直到得到最终结果</li>
+</ul>
+</li>
+</ol>
+<p><strong>DNS 查询的具体步骤</strong>：</p>
+<ol>
+<li>主机向本地域名服务器进行递归查询</li>
+<li>本地域名服务器向根域名服务器进行迭代查询</li>
+<li>根域名服务器返回顶级域名服务器的 IP 地址</li>
+<li>本地域名服务器向顶级域名服务器进行迭代查询</li>
+<li>顶级域名服务器返回权限域名服务器的 IP 地址</li>
+<li>本地域名服务器向权限域名服务器进行迭代查询</li>
+<li>权限域名服务器返回所查询域名的 IP 地址</li>
+<li>本地域名服务器将结果返回给主机</li>
+</ol>
+<p><strong>例题</strong>：</p>
+<p>Q: 当用户在浏览器中输入 “<a target="_blank" rel="noopener" href="https://www.baidu.com/">www.baidu.com</a>” 时，首先会向哪个服务器发送 DNS 查询请求？</p>
+<p>A. 根域名服务器</p>
+<p>B. 顶级域名服务器</p>
+<p>C. 本地域名服务器</p>
+<p>D. 权限域名服务器</p>
+<p>答案：C. 本地域名服务器</p>
+<h3 id="6-5-文件传送协议-FTP">6.5 文件传送协议 (FTP)</h3>
+<h4 id="6-5-1-FTP-的基本概念">6.5.1 FTP 的基本概念</h4>
+<p><strong>FTP 的作用</strong>：</p>
+<ul>
+<li>文件传送协议 (File Transfer Protocol)</li>
+<li>用于在不同主机之间传送文件</li>
+<li>是因特网上使用较早的协议之一</li>
+</ul>
+<p><strong>FTP 的特点</strong>：</p>
+<ul>
+<li>使用客户 / 服务器方式</li>
+<li>基于 TCP 协议</li>
+<li>支持文件的上传和下载</li>
+<li>支持多种文件类型</li>
+</ul>
+<h4 id="6-5-2-FTP-的工作原理">6.5.2 FTP 的工作原理</h4>
+<p><strong>FTP 的两个连接</strong>：</p>
+<ol>
+<li><strong>控制连接</strong>：
+<ul>
+<li>FTP 服务器监听<strong>熟知端口号 21</strong></li>
+<li>FTP 客户随机选择一个<strong>临时端口号</strong></li>
+<li>用于传送 FTP 的相关控制命令</li>
+<li>整个会话期间一直保持连接</li>
+</ul>
+</li>
+<li><strong>数据连接</strong>：
+<ul>
+<li>当有数据要传送时建立</li>
+<li>FTP 服务器使用<strong>熟知端口号 20</strong></li>
+<li>FTP 客户使用另一个<strong>临时端口号</strong></li>
+<li>数据传输完成后关闭</li>
+</ul>
+</li>
+</ol>
+<p><strong>FTP 的工作步骤</strong>：</p>
+<ol>
+<li>FTP 客户与服务器建立控制连接 (端口 21)</li>
+<li>通过控制连接传送命令</li>
+<li>需要传输数据时，建立数据连接 (端口 20)</li>
+<li>通过数据连接传输文件数据</li>
+<li>数据传输完成后，关闭数据连接</li>
+<li>会话结束后，关闭控制连接</li>
+</ol>
+<p><strong>例题</strong>：</p>
+<p>Q: FTP 使用的两个端口号分别是什么？</p>
+<p>A. 20 和 21</p>
+<p>B. 80 和 443</p>
+<p>C. 25 和 110</p>
+<p>D. 53 和 67</p>
+<p>答案：A. 20 和 21</p>
+<h3 id="6-6-电子邮件">6.6 电子邮件</h3>
+<h4 id="6-6-1-电子邮件系统的组成">6.6.1 电子邮件系统的组成</h4>
+<p><strong>电子邮件系统的三个主要组成部分</strong>：</p>
+<ol>
+<li><strong>用户代理 (UA)</strong>：邮件客户端软件</li>
+<li><strong>邮件服务器</strong>：存储和转发邮件</li>
+<li><strong>邮件协议</strong>：SMTP、POP3、IMAP 等</li>
+</ol>
+<p><strong>电子邮件的地址格式</strong>：</p>
+<ul>
+<li>格式：用户名 @域名</li>
+<li>例如：user@example.com</li>
+</ul>
+<h4 id="6-6-2-简单邮件传送协议-SMTP">6.6.2 简单邮件传送协议 (SMTP)</h4>
+<p><strong>SMTP 的基本概念</strong>：</p>
+<ul>
+<li><strong>全称</strong>：Simple Mail Transfer Protocol</li>
+<li><strong>标准</strong>：RFC 821, RFC 5321</li>
+<li><strong>工作方式</strong>：客户 / 服务器方式</li>
+<li><strong>传输层协议</strong>：TCP</li>
+<li><strong>端口号</strong>：25</li>
+</ul>
+<p><strong>SMTP 的工作过程</strong>：</p>
+<ol>
+<li>发送方的用户代理作为 SMTP 客户</li>
+<li>与发送方邮件服务器的 SMTP 服务器建立 TCP 连接</li>
+<li>使用 SMTP 协议发送邮件</li>
+<li>发送方邮件服务器作为 SMTP 客户</li>
+<li>与接收方邮件服务器的 SMTP 服务器建立 TCP 连接</li>
+<li>使用 SMTP 协议转发邮件</li>
+</ol>
+<h4 id="6-6-3-邮件读取协议-POP3">6.6.3 邮件读取协议 (POP3)</h4>
+<p><strong>POP3 的基本概念</strong>：</p>
+<ul>
+<li><strong>全称</strong>：Post Office Protocol - Version 3</li>
+<li><strong>作用</strong>：从邮件服务器读取邮件</li>
+<li><strong>工作方式</strong>：客户 / 服务器方式</li>
+<li><strong>传输层协议</strong>：TCP</li>
+<li><strong>端口号</strong>：110</li>
+</ul>
+<p><strong>POP3 的工作过程</strong>：</p>
+<ol>
+<li>接收方的用户代理作为 POP3 客户</li>
+<li>与接收方邮件服务器的 POP3 服务器建立 TCP 连接</li>
+<li>进行身份验证</li>
+<li>读取邮件</li>
+<li>可以选择删除服务器上的邮件</li>
+<li>关闭连接</li>
+</ol>
+<p><strong>IMAP 与 POP3 的区别</strong>：</p>
+<ul>
+<li><strong>POP3</strong>：邮件下载到本地后，通常会从服务器删除</li>
+<li><strong>IMAP</strong>：邮件可以保留在服务器上，支持文件夹管理</li>
+</ul>
+<p><strong>例题</strong>：</p>
+<p>Q: 用于发送电子邮件的协议是什么？</p>
+<p>A. POP3</p>
+<p>B. SMTP</p>
+<p>C. IMAP</p>
+<p>D. HTTP</p>
+<p>答案：B. SMTP</p>
+<h3 id="6-7-万维网-WWW">6.7 万维网 (WWW)</h3>
+<h4 id="6-7-1-万维网的基本概念">6.7.1 万维网的基本概念</h4>
+<p><strong>万维网的定义</strong>：</p>
+<ul>
+<li><strong>全称</strong>：World Wide Web</li>
+<li>是一个大规模的、联机式的信息储藏所</li>
+<li>采用超文本方式对信息进行组织</li>
+</ul>
+<p><strong>URL 的格式</strong>：</p>
+<ul>
+<li>一般格式：协议:// 主机：端口 / 路径</li>
+<li>例如：<a target="_blank" rel="noopener" href="http://www.example.com/index.html">http://www.example.com:80/index.html</a></li>
+</ul>
+<p><strong>网页的组成技术</strong>：</p>
+<ol>
+<li><strong>HTML</strong>：超文本标记语言，描述网页结构和内容</li>
+<li><strong>CSS</strong>：层叠样式表，描述网页样式</li>
+<li><strong>JavaScript</strong>：脚本语言，实现网页交互功能</li>
+</ol>
+<h4 id="6-7-2-超文本传输协议-HTTP">6.7.2 超文本传输协议 (HTTP)</h4>
+<p><strong>HTTP 的基本概念</strong>：</p>
+<ul>
+<li><strong>全称</strong>：HyperText Transfer Protocol</li>
+<li><strong>作用</strong>：用于万维网上的客户与服务器之间的通信</li>
+<li><strong>工作方式</strong>：客户 / 服务器方式</li>
+<li><strong>传输层协议</strong>：TCP</li>
+<li><strong>端口号</strong>：80(HTTP)，443(HTTPS)</li>
+</ul>
+<p><strong>HTTP 的特点</strong>：</p>
+<ul>
+<li>无连接：每次连接只处理一个请求</li>
+<li>无状态：服务器不保留客户的状态信息</li>
+<li>媒体独立：可以传输任意类型的数据</li>
+</ul>
+<h4 id="6-7-3-HTTP-请求报文">6.7.3 HTTP 请求报文</h4>
+<p><strong>HTTP 请求报文的格式</strong>：</p>
+<ol>
+<li><strong>请求行</strong>：包含方法、URL、版本</li>
+<li><strong>首部行</strong>：包含各种首部字段</li>
+<li><strong>空行</strong>：分隔首部和实体主体</li>
+<li><strong>实体主体</strong>：请求的数据</li>
+</ol>
+<p><strong>常见的 HTTP 方法</strong>：</p>
+<ul>
+<li><strong>GET</strong>：请求获取资源</li>
+<li><strong>POST</strong>：提交数据给服务器</li>
+<li><strong>PUT</strong>：上传资源</li>
+<li><strong>DELETE</strong>：删除资源</li>
+<li><strong>HEAD</strong>：只请求首部</li>
+</ul>
+<h4 id="6-7-4-HTTP-响应报文">6.7.4 HTTP 响应报文</h4>
+<p><strong>HTTP 响应报文的格式</strong>：</p>
+<ol>
+<li><strong>状态行</strong>：包含版本、状态码、原因短语</li>
+<li><strong>首部行</strong>：包含各种首部字段</li>
+<li><strong>空行</strong>：分隔首部和实体主体</li>
+<li><strong>实体主体</strong>：响应的数据</li>
+</ol>
+<p><strong>HTTP 状态码分类</strong>：</p>
+<ul>
+<li><strong>1xx</strong>：信息性状态码</li>
+<li><strong>2xx</strong>：成功状态码 (如 200 OK)</li>
+<li><strong>3xx</strong>：重定向状态码 (如 301 Moved Permanently)</li>
+<li><strong>4xx</strong>：客户端错误状态码 (如 404 Not Found)</li>
+<li><strong>5xx</strong>：服务器错误状态码 (如 500 Internal Server Error)</li>
+</ul>
+<h4 id="6-7-5-Cookie-技术">6.7.5 Cookie 技术</h4>
+<p><strong>Cookie 的作用</strong>：</p>
+<ul>
+<li>解决 HTTP 无状态的问题</li>
+<li>记录用户的状态信息</li>
+<li>实现用户识别和个性化服务</li>
+</ul>
+<p><strong>Cookie 的工作过程</strong>：</p>
+<ol>
+<li>Web 服务器产生唯一的 Cookie 识别码</li>
+<li>在 HTTP 响应报文中添加 Set-Cookie 首部</li>
+<li>浏览器将 Cookie 存储在本地</li>
+<li>下次访问时，浏览器在请求报文中添加 Cookie 首部</li>
+<li>Web 服务器根据 Cookie 识别用户</li>
+</ol>
+<p><strong>例题</strong>：</p>
+<p>Q: HTTP 的默认端口号是多少？</p>
+<p>A. 21</p>
+<p>B. 25</p>
+<p>C. 80</p>
+<p>D. 110</p>
+<p>答案：C. 80</p>
+<hr>
+<h2 id="总结">总结</h2>
+<p>本章介绍了 TCP/IP 体系结构应用层中的几个重要协议：</p>
+<ul>
+<li><strong>DHCP</strong>：动态主机配置协议，用于自动分配 IP 地址</li>
+<li><strong>DNS</strong>：域名系统，用于域名到 IP 地址的转换</li>
+<li><strong>FTP</strong>：文件传送协议，用于文件的上传和下载</li>
+<li><strong>SMTP/POP3</strong>：电子邮件协议，用于邮件的发送和接收</li>
+<li><strong>HTTP</strong>：超文本传输协议，用于万维网的通信</li>
+</ul>
+<h1>DHCP特讲</h1>
+<h2 id="一、DHCP-的核心作用与问题解决（对应视频-00-15-00-48）">一、DHCP 的核心作用与问题解决（对应视频 00:15-00:48）</h2>
+<h3 id="1-1-网络主机正常联网的前提配置">1.1 网络主机正常联网的前提配置</h3>
+<p>要使网络中的主机能访问 Web 服务器，必须手动配置以下 4 类核心网络参数（缺一不可）：</p>
+<ul>
+<li>IP 地址：主机在网络中的唯一标识（如<code>192.168.1.10</code>）</li>
+<li>子网掩码：划分网络段与主机段的依据（如<code>255.255.255.0</code>）</li>
+<li>默认网关：跨网段通信时的 “出口”（如<code>192.168.1.1</code>，通常是路由器 IP）</li>
+<li>DNS 服务器：将域名转换为 IP 的服务器（如<code>8.8.8.8</code>，谷歌公共 DNS）</li>
+</ul>
+<h3 id="1-2-手工配置的缺陷与-DHCP-的优势">1.2 手工配置的缺陷与 DHCP 的优势</h3>
+<table>
+<thead>
+<tr>
+<th>配置方式</th>
+<th>工作量</th>
+<th>出错率</th>
+<th>灵活性</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>手工配置</td>
+<td>大（每台主机单独设置）</td>
+<td>高（易输错 IP、网关等）</td>
+<td>差（主机变动需重新配置）</td>
+<td>主机数量≤10 台的小型网络</td>
+</tr>
+<tr>
+<td>DHCP 自动配置</td>
+<td>无（仅需配置 1 台 DHCP 服务器）</td>
+<td>低（服务器统一管理参数）</td>
+<td>高（主机开机自动获取）</td>
+<td>企业、校园等中大型网络（主机数≥20 台）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="1-3-例题-1：判断场景是否需要-DHCP">1.3 例题 1：判断场景是否需要 DHCP</h3>
+<p>某校园实验室有 50 台台式机，每天有不同班级学生使用，需保证所有电脑开机后能正常访问校园网服务器。请问该场景适合手工配置还是 DHCP 配置？为什么？</p>
+<p><strong>答案</strong>：适合 DHCP 配置。理由：①50 台主机手工配置工作量极大，且易因 IP 冲突（如重复分配<code>192.168.2.5</code>）导致部分电脑无法联网；②学生使用时无需手动设置参数，开机即可用，提升效率。</p>
+<h2 id="二、DHCP-的协议基础与封装逻辑（对应视频-00-53-02-35）">二、DHCP 的协议基础与封装逻辑（对应视频 00:53-02:35）</h2>
+<h3 id="2-1-客户-服务器工作模式">2.1 客户 - 服务器工作模式</h3>
+<ul>
+<li>DHCP 服务器：运行<code>DHCP服务器进程</code>，预先存储可分配的网络参数（IP 地址池、子网掩码等），监听 UDP 端口 67。</li>
+<li>DHCP 客户：运行<code>DHCP客户进程</code>，主机开机后自动启动，主动向服务器请求参数，使用 UDP 端口 68。</li>
+</ul>
+<h3 id="2-2-协议分层与报文封装">2.2 协议分层与报文封装</h3>
+<p>DHCP 属于 TCP/IP 体系的<strong>应用层协议</strong>，报文需经过 3 层封装才能在网络中传输，流程如下：</p>
+<p><code>应用层DHCP报文</code> → 封装为<code>运输层UDP用户数据报</code>（源端口 68，目的端口 67） → 封装为<code>网络层IP数据报</code> → 封装为<code>数据链路层帧</code>（如以太网帧，添加源 / 目的 MAC 地址）。</p>
+<h3 id="2-3-例题-2：DHCP-报文的端口与封装">2.3 例题 2：DHCP 报文的端口与封装</h3>
+<p>判断下列说法是否正确：</p>
+<p>（1）DHCP 服务器使用 UDP 端口 68 接收客户请求；</p>
+<p>（2）DHCP 报文在运输层会被封装为 TCP 段，因为需要可靠传输。</p>
+<p><strong>答案</strong>：（1）错误，DHCP 服务器监听 UDP 端口 67，客户使用端口 68；（2）错误，DHCP 使用 UDP 而非 TCP，虽 UDP 不可靠，但 DHCP 通过 “请求 - 确认” 机制保证参数传输有效性。</p>
+<h2 id="三、DHCP-客户与服务器的核心交互过程（对应视频-02-42-10-45）">三、DHCP 客户与服务器的核心交互过程（对应视频 02:42-10:45）</h2>
+<h3 id="3-1-阶段-1：DHCP-发现（Discover）——-客户找服务器">3.1 阶段 1：DHCP 发现（Discover）—— 客户找服务器</h3>
+<h4 id="3-1-1-触发条件">3.1.1 触发条件</h4>
+<p>主机刚开机，未分配任何 IP 地址，需主动寻找网络中的 DHCP 服务器。</p>
+<h4 id="3-1-2-报文特点">3.1.2 报文特点</h4>
+<ul>
+<li>IP 数据报源 IP：<code>0.0.0.0</code>（无 IP 时的临时标识）；</li>
+<li>IP 数据报目的 IP：<code>255.255.255.255</code>（广播地址，因客户不知道服务器 IP）；</li>
+<li>报文内容：包含<code>事务ID</code>（后续匹配响应）和<code>DHCP客户MAC地址</code>（服务器识别客户的唯一标识）。</li>
+</ul>
+<h4 id="3-1-3-网络设备处理逻辑">3.1.3 网络设备处理逻辑</h4>
+<ul>
+<li>交换机：广播转发该帧（因目的 MAC 是广播 MAC <code>FF:FF:FF:FF:FF:FF</code>）；</li>
+<li>非 DHCP 服务器：解封后发现应用层无监听端口 67 的进程，丢弃报文；</li>
+<li>DHCP 服务器：监听端口 67，接收并处理该报文。</li>
+</ul>
+<h3 id="3-2-阶段-2：DHCP-提供（Offer）——-服务器给选项">3.2 阶段 2：DHCP 提供（Offer）—— 服务器给选项</h3>
+<h4 id="3-2-1-服务器处理逻辑">3.2.1 服务器处理逻辑</h4>
+<p>服务器收到发现报文后，根据客户 MAC 地址查询本地数据库：</p>
+<ul>
+<li>若有该 MAC 的专属配置（如某台服务器需固定 IP），则用专属参数；</li>
+<li>若无，则从 IP 地址池中随机选择一个未分配的 IP，搭配默认子网掩码、网关、DNS、地址租期（通常为 24 小时）生成配置。</li>
+</ul>
+<h4 id="3-2-2-关键验证：ARP-检测-IP-可用性">3.2.2 关键验证：ARP 检测 IP 可用性</h4>
+<p>服务器在发送提供报文前，会发送<code>ARP请求</code>（如 &quot; 谁在用<code>192.168.1.20</code>？&quot;），确认所选 IP 未被其他主机占用，避免 IP 冲突。</p>
+<h4 id="3-2-3-报文特点">3.2.3 报文特点</h4>
+<ul>
+<li>IP 数据报源 IP：DHCP 服务器自身 IP（如<code>192.168.1.254</code>）；</li>
+<li>IP 数据报目的 IP：仍为<code>255.255.255.255</code>（客户无 IP，只能广播接收）。</li>
+</ul>
+<h3 id="3-3-阶段-3：DHCP-请求（Request）——-客户选选项">3.3 阶段 3：DHCP 请求（Request）—— 客户选选项</h3>
+<h4 id="3-3-1-客户选择逻辑">3.3.1 客户选择逻辑</h4>
+<p>若网络中有多台 DHCP 服务器（如主备服务器），客户会收到多个提供报文，<strong>默认选择最先到达的报文</strong>，并向该服务器发送请求报文（确认选择）。</p>
+<h4 id="3-3-2-报文特点">3.3.2 报文特点</h4>
+<ul>
+<li>IP 数据报源 IP：仍为<code>0.0.0.0</code>（未获得服务器最终确认，暂不使用分配的 IP）；</li>
+<li>IP 数据报目的 IP：<code>255.255.255.255</code>（广播通知所有服务器：“我已选好服务器，其他服务器可收回提供的 IP”）；</li>
+<li>报文内容：包含事务 ID（匹配对应提供报文）、接受的租约 IP（如<code>192.168.1.20</code>）、提供该 IP 的服务器 IP（如<code>192.168.1.254</code>）。</li>
+</ul>
+<h3 id="3-4-阶段-4：DHCP-确认（Acknowledge）——-服务器终确认">3.4 阶段 4：DHCP 确认（Acknowledge）—— 服务器终确认</h3>
+<h4 id="3-4-1-服务器响应">3.4.1 服务器响应</h4>
+<p>若服务器同意客户的选择，发送确认报文，包含最终的网络配置参数；若 IP 已被占用（如确认阶段突发冲突），则发送否认报文（Nak）。</p>
+<h4 id="3-4-2-客户最终验证：ARP-二次检测">3.4.2 客户最终验证：ARP 二次检测</h4>
+<p>客户收到确认报文后，<strong>再次发送 ARP 请求</strong>，确认租约 IP 未被占用：</p>
+<ul>
+<li>若未占用：立即应用配置，正常联网；</li>
+<li>若已占用：发送 DHCP 谢绝报文（Decline），拒绝该 IP，并重新发送发现报文，重新申请。</li>
+</ul>
+<h3 id="3-5-例题-3：交互过程故障分析">3.5 例题 3：交互过程故障分析</h3>
+<p>某主机开机后无法获取 IP，抓包发现仅能收到 DHCP 发现报文和提供报文，无请求和确认报文。可能的原因是什么？</p>
+<p><strong>答案</strong>：可能是客户进程异常，无法识别提供报文的事务 ID（如事务 ID 不匹配），导致未发送请求报文；或网络中存在防火墙，拦截了客户发送的请求报文（目的端口 67 被屏蔽）。</p>
+<h2 id="四、DHCP-地址租约管理（对应视频-10-48-12-19）">四、DHCP 地址租约管理（对应视频 10:48-12:19）</h2>
+<h3 id="4-1-租约时长与续约机制">4.1 租约时长与续约机制</h3>
+<p>租约默认时长通常为 24 小时，客户需在租约到期前申请续约，避免 IP 被收回，具体流程如下：</p>
+<table>
+<thead>
+<tr>
+<th>租约阶段</th>
+<th>时间节点（以 24 小时租约为例）</th>
+<th>客户操作</th>
+<th>服务器响应</th>
+<th>客户后续处理</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>首次续约</td>
+<td>租约过半（12 小时）</td>
+<td>发送请求报文（单播，源 IP = 租约 IP，目的 IP = 服务器 IP）</td>
+<td>同意：发确认报文（延长租约至 24 小时）；不同意：发否认报文</td>
+<td>同意：继续使用 IP；不同意：立即停止使用，重新申请</td>
+</tr>
+<tr>
+<td>二次续约</td>
+<td>租约过 87.5%（21 小时）</td>
+<td>再次发送请求报文（单播）</td>
+<td>无响应</td>
+<td>继续等待，直至租约到期</td>
+</tr>
+<tr>
+<td>租约到期</td>
+<td>24 小时</td>
+<td>无操作</td>
+<td>无</td>
+<td>立即停止使用 IP，重新发送发现报文</td>
+</tr>
+</tbody>
+</table>
+<h3 id="4-2-租约提前终止">4.2 租约提前终止</h3>
+<p>客户可主动终止租约（如主机关机前），只需向服务器发送 DHCP 释放报文（Release），服务器收到后立即收回该 IP，加入地址池，供其他主机使用。</p>
+<h3 id="4-3-例题-4：租约续约计算">4.3 例题 4：租约续约计算</h3>
+<p>某 DHCP 服务器分配的租约时长为 8 小时，主机在 8:00 获取 IP。请问：</p>
+<p>（1）首次续约的时间是几点？</p>
+<p>（2）若服务器在 12:00 未响应首次续约，二次续约的时间是几点？</p>
+<p><strong>答案</strong>：（1）首次续约时间 = 8:00 + 8 小时 ×50% = 12:00；（2）二次续约时间 = 8:00 + 8 小时 ×87.5% = 15:00。</p>
+<h2 id="五、DHCP-中继代理（对应视频-12-22-14-32）">五、DHCP 中继代理（对应视频 12:22-14:32）</h2>
+<h3 id="5-1-跨网段-DHCP-的核心问题">5.1 跨网段 DHCP 的核心问题</h3>
+<p>路由器默认不转发广播报文（如 DHCP 发现报文的目的 IP 是<code>255.255.255.255</code>），导致不同网段的主机无法找到 DHCP 服务器（如服务器在网段 A，主机在网段 B）。</p>
+<h3 id="5-2-中继代理的作用与原理">5.2 中继代理的作用与原理</h3>
+<h4 id="5-2-1-配置方式">5.2.1 配置方式</h4>
+<p>在连接不同网段的路由器上，配置 DHCP 服务器的 IP 地址，使路由器成为<strong>DHCP 中继代理</strong>。</p>
+<h4 id="5-2-2-数据转发流程">5.2.2 数据转发流程</h4>
+<ol>
+<li>网段 B 的主机发送广播的发现报文；</li>
+<li>路由器（中继代理）收到广播报文后，将其转换为<strong>单播报文</strong>（目的 IP=DHCP 服务器 IP），转发给服务器；</li>
+<li>服务器发送的提供、确认等报文，通过路由器单播转发给主机；</li>
+<li>后续交互均为单播，无需广播，解决跨网段问题。</li>
+</ol>
+<h3 id="5-3-中继代理的优势">5.3 中继代理的优势</h3>
+<p>避免在每个网段都部署 DHCP 服务器，减少设备成本和管理复杂度（如 10 个网段仅需 1 台服务器 + 9 台中继代理路由器）。</p>
+<h3 id="5-4-例题-5：中继代理场景设计">5.4 例题 5：中继代理场景设计</h3>
+<p>某公司有 2 个网段：网段 1（<code>192.168.1.0/24</code>，有 10 台主机）和网段 2（<code>192.168.2.0/24</code>，有 20 台主机），仅在网段 1 部署 1 台 DHCP 服务器（<code>192.168.1.254</code>）。如何让网段 2 的主机自动获取 IP？</p>
+<p><strong>答案</strong>：在连接两个网段的路由器上配置 DHCP 中继代理，指定服务器 IP 为<code>192.168.1.254</code>。网段 2 的主机发送广播发现报文后，路由器将其单播转发给服务器，服务器通过路由器向主机发送提供、确认报文，实现自动获取 IP。</p>
+<h2 id="六、核心知识点总结">六、核心知识点总结</h2>
+<ol>
+<li>DHCP 的核心价值：解决大量主机手动配置 IP 的效率低、易出错问题；</li>
+<li>交互四阶段：发现（Discover）→ 提供（Offer）→ 请求（Request）→ 确认（Acknowledge）；</li>
+<li>关键验证：服务器和客户均需通过 ARP 检测 IP 可用性，避免冲突；</li>
+<li>租约管理：过半续约、87.5% 二次续约，到期收回 IP；</li>
+<li>跨网段方案：通过 DHCP 中继代理，将广播报文转为单播，实现跨网段 IP 分配。</li>
+</ol>
+<h1>FTP特讲</h1>
+<h1>6.5 文件传送协议FTP 笔记</h1>
+<h2 id="一、FTP的定义与核心价值">一、FTP的定义与核心价值</h2>
+<h3 id="1-1-基本定义">1.1 基本定义</h3>
+<p>文件传送协议（FTP，File Transfer Protocol）是因特网上使用最广泛的<strong>文件传送标准协议</strong>，核心功能是实现“将某台计算机中的文件通过网络传送到远距离另一台计算机”，是网络文件传输的基础应用。</p>
+<h3 id="1-2-核心特点">1.2 核心特点</h3>
+<table>
+<thead>
+<tr>
+<th>特点分类</th>
+<th>具体说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>交互式访问</td>
+<td>允许客户明确指定文件的类型与格式（如是否使用ASCII编码），灵活适配不同文件传输需求</td>
+</tr>
+<tr>
+<td>权限控制</td>
+<td>支持文件存取权限管理，例如访问文件需经过授权（如输入有效用户名和口令），保障文件安全性</td>
+</tr>
+<tr>
+<td>跨系统兼容</td>
+<td>屏蔽了不同计算机系统的底层细节（如操作系统、硬件架构差异），可在<strong>异构网络</strong>（如Windows与Linux计算机互联的网络）中实现任意计算机间的文件传送</td>
+</tr>
+<tr>
+<td>历史通信量地位</td>
+<td>因特网早期（1995年前），FTP文件传送的通信量约占整个因特网通信量的1/3，远超电子邮件、域名系统（DNS）的通信量；1995年万维网（WWW）通信量才首次超过FTP</td>
+</tr>
+</tbody>
+</table>
+<h2 id="二、FTP的应用场景与实现方式（客户-服务器模式）">二、FTP的应用场景与实现方式（客户-服务器模式）</h2>
+<h3 id="2-1-核心架构：客户-服务器（C-S）模式">2.1 核心架构：客户-服务器（C/S）模式</h3>
+<p>FTP基于C/S架构工作，核心交互流程为：</p>
+<ul>
+<li><strong>FTP客户机</strong>：发起文件传输请求（上传/下载）的终端设备（如个人电脑）</li>
+<li><strong>FTP服务器</strong>：接收并响应客户请求，存储待传输文件的设备</li>
+</ul>
+<h3 id="2-2-FTP服务器的部署要求">2.2 FTP服务器的部署要求</h3>
+<ul>
+<li>高性能场景：若需支持大量用户同时访问、传输大文件（如企业文件服务器），需使用<strong>高性能、高可靠性的服务器计算机</strong></li>
+<li>简易场景：若仅用于局域网内小范围文件共享（如个人与同事间传输文件），普通个人计算机即可作为FTP服务器</li>
+</ul>
+<h3 id="2-3-FTP服务器的创建方式">2.3 FTP服务器的创建方式</h3>
+<ol>
+<li>操作系统自带工具：如Windows系统可启用自带的FTP服务器功能，通过系统设置创建FTP站点（具体操作可参考操作系统官方文档或网络教程）</li>
+<li>第三方软件：如FileZilla Server、Serv-U等，功能更丰富（如支持多用户权限管理、日志记录）</li>
+</ol>
+<h3 id="2-4-FTP客户机的访问方式">2.4 FTP客户机的访问方式</h3>
+<table>
+<thead>
+<tr>
+<th>访问方式</th>
+<th>操作说明</th>
+<th>优缺点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>浏览器访问</td>
+<td>在浏览器地址栏输入<code>ftp://服务器IP地址</code>（需指定FTP协议，而非HTTP协议），按提示完成登录</td>
+<td>优点：无需安装额外软件，操作简单；缺点：功能有限（如不支持批量传输进度查看）</td>
+</tr>
+<tr>
+<td>命令行工具（Windows自带）</td>
+<td>1. 打开“命令提示符”，输入<code>ftp 服务器IP地址</code>建立连接；2. 若服务器支持匿名登录（无需密码），用户名输入“anonymous”，直接回车即可登录；3. 登录后可执行命令：<code>ls</code>（查看服务器当前目录文件）、<code>get 文件名</code>（下载文件）、<code>put 文件名</code>（上传文件）</td>
+<td>优点：无需安装软件，适合技术人员快速操作；缺点：需记忆命令，对普通用户不友好，无图形界面</td>
+</tr>
+<tr>
+<td>第三方客户软件</td>
+<td>使用FileZilla Client、FlashFXP等工具，通过图形界面完成登录（输入服务器IP、用户名、密码）、文件拖拽上传/下载</td>
+<td>优点：界面友好，支持批量传输、断点续传，适合普通用户；缺点：需安装额外软件</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-5-FTP的典型应用场景">2.5 FTP的典型应用场景</h3>
+<ol>
+<li>批量文件传输：如企业将员工手册、培训视频等批量传送到各部门计算机</li>
+<li>网站内容部署：网站设计者将网页文件（HTML、CSS、图片等）批量上传到Web服务器，实现网站上线</li>
+</ol>
+<h2 id="三、FTP的基本工作原理（双TCP连接机制）">三、FTP的基本工作原理（双TCP连接机制）</h2>
+<p>FTP的核心特点是<strong>建立两个并行的TCP连接</strong>：控制连接与数据连接，二者分工明确，保障传输效率与可靠性。</p>
+<h3 id="3-1-核心概念：控制连接与数据连接的区别">3.1 核心概念：控制连接与数据连接的区别</h3>
+<table>
+<thead>
+<tr>
+<th>连接类型</th>
+<th>作用</th>
+<th>生命周期</th>
+<th>端口号（默认）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>控制连接</td>
+<td>传输FTP控制命令（如登录请求、上传/下载指令、目录查看命令）</td>
+<td>整个FTP会话期间（从登录到退出）持续打开，不中断</td>
+<td>服务器端：21号端口（熟知端口，固定）；客户端：随机临时端口</td>
+</tr>
+<tr>
+<td>数据连接</td>
+<td>仅传输文件数据（如文档、图片内容）或目录列表数据（如<code>ls</code>命令返回的文件列表）</td>
+<td>按需建立、用完关闭：每次传输文件/目录列表时建立，传输结束后立即关闭</td>
+<td>随传输模式不同而变化（见3.2、3.3小节）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-2-传输模式一：主动模式（PORT模式）">3.2 传输模式一：主动模式（PORT模式）</h3>
+<h4 id="3-2-1-工作流程（以“客户机下载文件”为例）">3.2.1 工作流程（以“客户机下载文件”为例）</h4>
+<ol>
+<li>建立控制连接：<br>
+FTP服务器监听21号端口 → 客户机随机选择一个临时端口（如5000），向服务器21号端口发起TCP连接 → 控制连接建立，用于传输控制命令。</li>
+<li>发起数据传输请求：<br>
+客户机通过控制连接向服务器发送“下载文件”命令，并告知服务器自己的“数据连接临时端口”（如5001）。</li>
+<li>服务器主动建立数据连接：<br>
+服务器使用<strong>20号端口</strong>（固定数据端口），主动向客户机的5001端口发起TCP连接 → 数据连接建立。</li>
+<li>传输数据与关闭连接：<br>
+通过数据连接传输文件数据 → 传输完成后，关闭数据连接（控制连接仍保持打开，可继续发起新的传输请求）。</li>
+</ol>
+<h4 id="3-2-2-关键特征">3.2.2 关键特征</h4>
+<ul>
+<li>数据连接由<strong>FTP服务器主动发起</strong>（服务器主动连接客户机的临时端口），因此称为“主动模式”。</li>
+</ul>
+<h3 id="3-3-传输模式二：被动模式（PASV模式）">3.3 传输模式二：被动模式（PASV模式）</h3>
+<h4 id="3-3-1-工作流程（以“客户机上传文件”为例）">3.3.1 工作流程（以“客户机上传文件”为例）</h4>
+<ol>
+<li>建立控制连接：与主动模式完全相同（服务器21号端口 ↔ 客户机临时端口）。</li>
+<li>发起数据传输请求并协商端口：<br>
+客户机通过控制连接向服务器发送“上传文件”命令，并请求服务器进入“被动模式” → 服务器生成一个<strong>临时数据端口</strong>（如6000），通过控制连接告知客户机。</li>
+<li>客户机主动建立数据连接：<br>
+客户机随机选择一个临时端口（如5002），向服务器的6000端口发起TCP连接 → 数据连接建立。</li>
+<li>传输数据与关闭连接：<br>
+通过数据连接上传文件数据 → 传输完成后，关闭数据连接。</li>
+</ol>
+<h4 id="3-3-2-关键特征">3.3.2 关键特征</h4>
+<ul>
+<li>数据连接由<strong>FTP客户机主动发起</strong>（服务器被动等待客户机连接），因此称为“被动模式”；</li>
+<li>被动模式下服务器不使用20号端口，而是使用协商的临时端口，可规避部分防火墙对20号端口的限制（更适合客户端在防火墙后访问服务器的场景）。</li>
+</ul>
+<h2 id="四、考研真题解析（巩固核心知识点）">四、考研真题解析（巩固核心知识点）</h2>
+<h3 id="真题1（2009年计算机专业考研统考40题）">真题1（2009年计算机专业考研统考40题）</h3>
+<p><strong>题目</strong>：FTP客户和服务器间需要建立两个并行的TCP连接，它们是（ ）<br>
+A. 控制连接和数据连接<br>
+B. 控制连接和命令连接<br>
+C. 数据连接和命令连接<br>
+D. 控制连接和会话连接</p>
+<p><strong>答案</strong>：A<br>
+<strong>解析</strong>：FTP的核心机制是“双TCP连接”，分别为“控制连接”（传输命令）和“数据连接”（传输文件数据），二者并行工作，生命周期不同（控制连接持续整个会话，数据连接按需建立/关闭），因此选A。</p>
+<h3 id="真题2（2017年计算机专业考研统考40题）">真题2（2017年计算机专业考研统考40题）</h3>
+<p><strong>题目</strong>：关于FTP的描述，正确的是（ ）<br>
+A. FTP使用UDP协议进行数据传输<br>
+B. 控制连接在数据传输结束后关闭<br>
+C. 主动模式下数据连接由服务器端主动建立，使用20号端口<br>
+D. 被动模式下数据连接由服务器端主动建立，端口由协商确定</p>
+<p><strong>答案</strong>：C<br>
+<strong>解析</strong>：</p>
+<ul>
+<li>选项A错误：FTP基于TCP协议（而非UDP），因TCP提供可靠传输，可保障文件传输的完整性（避免数据丢失）；</li>
+<li>选项B错误：控制连接在整个FTP会话期间（从登录到退出）保持打开，数据传输结束后仅关闭“数据连接”；</li>
+<li>选项C正确：主动模式下，服务器使用20号端口主动向客户机的临时端口建立数据连接；</li>
+<li>选项D错误：被动模式下，数据连接由“客户机主动发起”，服务器被动等待连接，端口由双方协商确定。</li>
+</ul>
+<h2 id="五、本节核心知识点总结">五、本节核心知识点总结</h2>
+<ol>
+<li>FTP的核心价值：跨异构网络、带权限控制的文件传送，是因特网早期重要的应用协议；</li>
+<li>架构：基于客户-服务器（C/S）模式，服务器可灵活部署，客户机有3种访问方式；</li>
+<li>关键原理：双TCP连接（控制连接：21号端口，持续会话；数据连接：按需建立，主动/被动模式差异）；</li>
+<li>考研高频考点：双连接的区分、主动/被动模式的端口差异（20号端口仅用于主动模式数据连接）。</li>
+</ol>
+</article><div class="post-copyright"><div class="post-copyright__author_group"><div class="post-copyright__author_img"><img class="post-copyright__author_img_front" src="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg"></div><div class="post-copyright__author_name">woodfish</div><div class="post-copyright__author_desc">HOLA,this is woodfish!</div></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div id="quit-box" onclick="RemoveRewardMask()"></div><div class="post-reward"><div class="reward-button" title="赞赏作者" onclick="AddRewardMask()"><i class="solitude fas fa-heart"></i>赞赏作者</div><div class="reward-main"><ul class="reward-all"><span class="reward-title"></span><ul class="reward-group"><li class="reward-item"><a href="/null"><img class="post-qr-code-img nolazyload" src="https://www.woodfishhhh.xyz/images/e926e309585e5a5826ab0c3b485f8b6.png?_t=1751445131356" alt="微信" style="border-color: var(--efu-main)"></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/null"><img class="post-qr-code-img nolazyload" src="https://www.woodfishhhh.xyz/images/8147e2d92fa8287fac8774305c99661.jpg.jpeg?_t=1751445131356" alt="支付宝" style="border-color: var(--efu-main)"></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/"><div class="reward-text">赞赏名单</div><div class="reward-dec"></div></a></ul></div></div><script>function RemoveRewardMask() {
+    let rewardMainElements = document.querySelectorAll(".reward-main");
+    let quitBoxElement = document.querySelector("#quit-box");
+
+    rewardMainElements.forEach(element => {
+        element.style.display = "none";
+    });
+
+    if (quitBoxElement) {
+        quitBoxElement.style.display = "none";
+    }
+}
+
+function AddRewardMask() {
+    let rewardMainElements = document.querySelectorAll(".reward-main");
+    let quitBoxElement = document.querySelector("#quit-box");
+
+    rewardMainElements.forEach(element => {
+        element.style.display = "flex";
+    });
+
+    if (quitBoxElement) {
+        quitBoxElement.style.display = "flex";
+    }
+}</script></div></div><div class="social-share"><a class="social-share-ico icon-qq" target="_blank" rel="noopener" href="https://connect.qq.com/widget/shareqq/index.html?url=https%3A%2F%2Fwww.woodfishhhh.xyz%2F2026%2F01%2F06%2F%25E8%25AE%25A1%25E7%25AE%2597%25E6%259C%25BA%25E7%25BD%2591%25E7%25BB%259C%2F%25E8%25AE%25A1%25E7%25AE%2597%25E6%259C%25BA%25E7%25BD%2591%25E7%25BB%259C%25E7%25AC%25AC%25E5%2585%25AD%25E7%25AB%25A0%25EF%25BC%259A%25E5%25BA%2594%25E7%2594%25A8%25E5%25B1%2582%2F&amp;title=%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%AC%E5%85%AD%E7%AB%A0%EF%BC%9A%E5%BA%94%E7%94%A8%E5%B1%82&amp;desc=undefined&amp;summary=undefined&amp;site=%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%AC%E5%85%AD%E7%AB%A0%EF%BC%9A%E5%BA%94%E7%94%A8%E5%B1%82&amp;pics=https%3A%2F%2Fpic1.imgdb.cn%2Fitem%2F682f3d1658cb8da5c807b704.jpg" title="分享到QQ"><i class="solitude fab fa-qq"></i></a><a class="social-share-ico icon-weibo" target="_blank" rel="noopener" href="http://service.weibo.com/share/share.php?url=https%3A%2F%2Fwww.woodfishhhh.xyz%2F2026%2F01%2F06%2F%25E8%25AE%25A1%25E7%25AE%2597%25E6%259C%25BA%25E7%25BD%2591%25E7%25BB%259C%2F%25E8%25AE%25A1%25E7%25AE%2597%25E6%259C%25BA%25E7%25BD%2591%25E7%25BB%259C%25E7%25AC%25AC%25E5%2585%25AD%25E7%25AB%25A0%25EF%25BC%259A%25E5%25BA%2594%25E7%2594%25A8%25E5%25B1%2582%2F&amp;title=%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%AC%E5%85%AD%E7%AB%A0%EF%BC%9A%E5%BA%94%E7%94%A8%E5%B1%82&amp;pic=https%3A%2F%2Fpic1.imgdb.cn%2Fitem%2F682f3d1658cb8da5c807b704.jpg" title="分享到微博"><i class="solitude fab fa-weibo"></i></a><a class="social-share-ico icon-twitter" target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.woodfishhhh.xyz%2F2026%2F01%2F06%2F%25E8%25AE%25A1%25E7%25AE%2597%25E6%259C%25BA%25E7%25BD%2591%25E7%25BB%259C%2F%25E8%25AE%25A1%25E7%25AE%2597%25E6%259C%25BA%25E7%25BD%2591%25E7%25BB%259C%25E7%25AC%25AC%25E5%2585%25AD%25E7%25AB%25A0%25EF%25BC%259A%25E5%25BA%2594%25E7%2594%25A8%25E5%25B1%2582%2F&amp;text=%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%AC%E5%85%AD%E7%AB%A0%EF%BC%9A%E5%BA%94%E7%94%A8%E5%B1%82" title="分享到Twitter"><i class="solitude fab fa-twitter"></i></a><a class="social-share-ico icon-facebook" target="_blank" rel="noopener" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.woodfishhhh.xyz%2F2026%2F01%2F06%2F%25E8%25AE%25A1%25E7%25AE%2597%25E6%259C%25BA%25E7%25BD%2591%25E7%25BB%259C%2F%25E8%25AE%25A1%25E7%25AE%2597%25E6%259C%25BA%25E7%25BD%2591%25E7%25BB%259C%25E7%25AC%25AC%25E5%2585%25AD%25E7%25AB%25A0%25EF%25BC%259A%25E5%25BA%2594%25E7%2594%25A8%25E5%25B1%2582%2F" title="分享到Facebook"><i class="solitude fab fa-facebook"></i></a><div class="social-share-ico icon-link" onclick="utils.copy(&quot;https://www.woodfishhhh.xyz/2026/01/06/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%AC%E5%85%AD%E7%AB%A0%EF%BC%9A%E5%BA%94%E7%94%A8%E5%B1%82/&quot;)" title="复制文章链接"><i class="solitude fas fa-link"></i></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本文是原创文章，采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>协议，完整转载请注明来自<a href="/">木鱼的鱼窝</a></span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"><span class="tags-punctuation"><i class="solitude fas fa-hashtag"></i>计算机网络<span class="tagsPageCount">7</span></span></a><a class="post-meta__tags" href="/tags/%E5%BA%94%E7%94%A8%E5%B1%82/"><span class="tags-punctuation"><i class="solitude fas fa-hashtag"></i>应用层<span class="tagsPageCount">1</span></span></a></div></div></div><nav class="needEndHide pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2026/01/06/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%AC%E4%BA%94%E7%AB%A0%EF%BC%9A%E8%BF%90%E8%BE%93%E5%B1%82/"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">计算机网络第五章：运输层</div></div></a></div><div class="next-post pull-right"><a href="/2026/01/06/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E5%8A%A0%E5%87%8F%E4%B9%98%E9%99%A4/"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">加减乘除</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><div class="top-group"><div class="sayhi" id="sayhi" onclick="sco.changeWittyWord()"></div></div></div><div class="avatar"><img alt="头像" src="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg"></div><div class="description">欢迎来到我的鱼窝~</div><div class="bottom-group"><span class="left"><div class="name">woodfish</div><div class="desc">河汉微明星乍稀，碧莲香湿袭人衣。夜凉如水琉璃滑，自起开窗放月归。</div></span><div class="social-icons is-center"><a class="social-icon" target="_blank" rel="noopener" href="https://github.com/woodfishhhh" title="Github"><i class="solitude  fab fa-github"></i></a><a class="social-icon" target="_blank" rel="noopener" href="https://space.bilibili.com/359728114" title="Bilibili"><i class="solitude  fab fa-bilibili"></i></a><a class="social-icon" href="https://www.woodfishhhh.xyz/images/af1a055d14e4f7f6eae2886f2865d13.jpg.jpeg?_t=1750312382930" title="QQ"><i class="solitude  fab fa-qq"></i></a><a class="social-icon" href="https://www.woodfishhhh.xyz/images/f59723db9159310b6056abe8341f5d7.jpg.jpeg?_t=1750312263368" title="Wechat"><i class="solitude  fab fa-weixin"></i></a><a class="social-icon" href="https://www.woodfishhhh.xyz/images/d8d58d2f2c7ac5790fd37f388da41db4.png?_t=1759286665402" title="Email"><i class="solitude  far fa-envelope"></i></a><a class="social-icon" target="_blank" rel="noopener" href="https://www.douyin.com/user/MS4wLjABAAAAgbOrIhdi7Rl5RfaQ3fE3i7c2WnyR3zEOyLiK2Cjtcqk?from_tab_name=main" title="Douyin"><i class="solitude  fab fa-tiktok"></i></a></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="solitude fas fa-bars"></i><span>文章目录</span></div><div class="toc-content" id="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E7%AC%AC%E5%85%AD%E7%AB%A0-%E5%BA%94%E7%94%A8%E5%B1%82"><span class="toc-text">第六章 应用层</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-%E5%BA%94%E7%94%A8%E5%B1%82%E6%A6%82%E8%BF%B0"><span class="toc-text">6.1 应用层概述</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-%E5%AE%A2%E6%88%B7-%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%96%B9%E5%BC%8F%E5%92%8C%E5%AF%B9%E7%AD%89%E6%96%B9%E5%BC%8F"><span class="toc-text">6.2 客户 &#x2F; 服务器方式和对等方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-3-%E5%8A%A8%E6%80%81%E4%B8%BB%E6%9C%BA%E9%85%8D%E7%BD%AE%E5%8D%8F%E8%AE%AE-DHCP"><span class="toc-text">6.3 动态主机配置协议 (DHCP)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#6-3-1-%E5%8A%A8%E6%80%81%E4%B8%BB%E6%9C%BA%E9%85%8D%E7%BD%AE%E5%8D%8F%E8%AE%AE%E7%9A%84%E4%BD%9C%E7%94%A8"><span class="toc-text">6.3.1 动态主机配置协议的作用</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-3-2-DHCP-%E7%9A%84%E5%B7%A5%E4%BD%9C%E8%BF%87%E7%A8%8B"><span class="toc-text">6.3.2 DHCP 的工作过程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-4-%E5%9F%9F%E5%90%8D%E7%B3%BB%E7%BB%9F-DNS"><span class="toc-text">6.4 域名系统 (DNS)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#6-4-1-DNS-%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">6.4.1 DNS 的基本概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-4-2-DNS-%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E7%B1%BB%E5%9E%8B"><span class="toc-text">6.4.2 DNS 服务器的类型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-4-3-DNS-%E6%9F%A5%E8%AF%A2%E8%BF%87%E7%A8%8B"><span class="toc-text">6.4.3 DNS 查询过程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-5-%E6%96%87%E4%BB%B6%E4%BC%A0%E9%80%81%E5%8D%8F%E8%AE%AE-FTP"><span class="toc-text">6.5 文件传送协议 (FTP)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#6-5-1-FTP-%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">6.5.1 FTP 的基本概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-5-2-FTP-%E7%9A%84%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-text">6.5.2 FTP 的工作原理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-6-%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6"><span class="toc-text">6.6 电子邮件</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#6-6-1-%E7%94%B5%E5%AD%90%E9%82%AE%E4%BB%B6%E7%B3%BB%E7%BB%9F%E7%9A%84%E7%BB%84%E6%88%90"><span class="toc-text">6.6.1 电子邮件系统的组成</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-6-2-%E7%AE%80%E5%8D%95%E9%82%AE%E4%BB%B6%E4%BC%A0%E9%80%81%E5%8D%8F%E8%AE%AE-SMTP"><span class="toc-text">6.6.2 简单邮件传送协议 (SMTP)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-6-3-%E9%82%AE%E4%BB%B6%E8%AF%BB%E5%8F%96%E5%8D%8F%E8%AE%AE-POP3"><span class="toc-text">6.6.3 邮件读取协议 (POP3)</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-7-%E4%B8%87%E7%BB%B4%E7%BD%91-WWW"><span class="toc-text">6.7 万维网 (WWW)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#6-7-1-%E4%B8%87%E7%BB%B4%E7%BD%91%E7%9A%84%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">6.7.1 万维网的基本概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-7-2-%E8%B6%85%E6%96%87%E6%9C%AC%E4%BC%A0%E8%BE%93%E5%8D%8F%E8%AE%AE-HTTP"><span class="toc-text">6.7.2 超文本传输协议 (HTTP)</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-7-3-HTTP-%E8%AF%B7%E6%B1%82%E6%8A%A5%E6%96%87"><span class="toc-text">6.7.3 HTTP 请求报文</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-7-4-HTTP-%E5%93%8D%E5%BA%94%E6%8A%A5%E6%96%87"><span class="toc-text">6.7.4 HTTP 响应报文</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#6-7-5-Cookie-%E6%8A%80%E6%9C%AF"><span class="toc-text">6.7.5 Cookie 技术</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E6%80%BB%E7%BB%93"><span class="toc-text">总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">DHCP特讲</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81DHCP-%E7%9A%84%E6%A0%B8%E5%BF%83%E4%BD%9C%E7%94%A8%E4%B8%8E%E9%97%AE%E9%A2%98%E8%A7%A3%E5%86%B3%EF%BC%88%E5%AF%B9%E5%BA%94%E8%A7%86%E9%A2%91-00-15-00-48%EF%BC%89"><span class="toc-text">一、DHCP 的核心作用与问题解决（对应视频 00:15-00:48）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E7%BD%91%E7%BB%9C%E4%B8%BB%E6%9C%BA%E6%AD%A3%E5%B8%B8%E8%81%94%E7%BD%91%E7%9A%84%E5%89%8D%E6%8F%90%E9%85%8D%E7%BD%AE"><span class="toc-text">1.1 网络主机正常联网的前提配置</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E6%89%8B%E5%B7%A5%E9%85%8D%E7%BD%AE%E7%9A%84%E7%BC%BA%E9%99%B7%E4%B8%8E-DHCP-%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="toc-text">1.2 手工配置的缺陷与 DHCP 的优势</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E4%BE%8B%E9%A2%98-1%EF%BC%9A%E5%88%A4%E6%96%AD%E5%9C%BA%E6%99%AF%E6%98%AF%E5%90%A6%E9%9C%80%E8%A6%81-DHCP"><span class="toc-text">1.3 例题 1：判断场景是否需要 DHCP</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81DHCP-%E7%9A%84%E5%8D%8F%E8%AE%AE%E5%9F%BA%E7%A1%80%E4%B8%8E%E5%B0%81%E8%A3%85%E9%80%BB%E8%BE%91%EF%BC%88%E5%AF%B9%E5%BA%94%E8%A7%86%E9%A2%91-00-53-02-35%EF%BC%89"><span class="toc-text">二、DHCP 的协议基础与封装逻辑（对应视频 00:53-02:35）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%AE%A2%E6%88%B7-%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%B7%A5%E4%BD%9C%E6%A8%A1%E5%BC%8F"><span class="toc-text">2.1 客户 - 服务器工作模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%8D%8F%E8%AE%AE%E5%88%86%E5%B1%82%E4%B8%8E%E6%8A%A5%E6%96%87%E5%B0%81%E8%A3%85"><span class="toc-text">2.2 协议分层与报文封装</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E4%BE%8B%E9%A2%98-2%EF%BC%9ADHCP-%E6%8A%A5%E6%96%87%E7%9A%84%E7%AB%AF%E5%8F%A3%E4%B8%8E%E5%B0%81%E8%A3%85"><span class="toc-text">2.3 例题 2：DHCP 报文的端口与封装</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81DHCP-%E5%AE%A2%E6%88%B7%E4%B8%8E%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E6%A0%B8%E5%BF%83%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B%EF%BC%88%E5%AF%B9%E5%BA%94%E8%A7%86%E9%A2%91-02-42-10-45%EF%BC%89"><span class="toc-text">三、DHCP 客户与服务器的核心交互过程（对应视频 02:42-10:45）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E9%98%B6%E6%AE%B5-1%EF%BC%9ADHCP-%E5%8F%91%E7%8E%B0%EF%BC%88Discover%EF%BC%89%E2%80%94%E2%80%94-%E5%AE%A2%E6%88%B7%E6%89%BE%E6%9C%8D%E5%8A%A1%E5%99%A8"><span class="toc-text">3.1 阶段 1：DHCP 发现（Discover）—— 客户找服务器</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-1-%E8%A7%A6%E5%8F%91%E6%9D%A1%E4%BB%B6"><span class="toc-text">3.1.1 触发条件</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-2-%E6%8A%A5%E6%96%87%E7%89%B9%E7%82%B9"><span class="toc-text">3.1.2 报文特点</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-3-%E7%BD%91%E7%BB%9C%E8%AE%BE%E5%A4%87%E5%A4%84%E7%90%86%E9%80%BB%E8%BE%91"><span class="toc-text">3.1.3 网络设备处理逻辑</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E9%98%B6%E6%AE%B5-2%EF%BC%9ADHCP-%E6%8F%90%E4%BE%9B%EF%BC%88Offer%EF%BC%89%E2%80%94%E2%80%94-%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BB%99%E9%80%89%E9%A1%B9"><span class="toc-text">3.2 阶段 2：DHCP 提供（Offer）—— 服务器给选项</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-1-%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%A4%84%E7%90%86%E9%80%BB%E8%BE%91"><span class="toc-text">3.2.1 服务器处理逻辑</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-2-%E5%85%B3%E9%94%AE%E9%AA%8C%E8%AF%81%EF%BC%9AARP-%E6%A3%80%E6%B5%8B-IP-%E5%8F%AF%E7%94%A8%E6%80%A7"><span class="toc-text">3.2.2 关键验证：ARP 检测 IP 可用性</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-3-%E6%8A%A5%E6%96%87%E7%89%B9%E7%82%B9"><span class="toc-text">3.2.3 报文特点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E9%98%B6%E6%AE%B5-3%EF%BC%9ADHCP-%E8%AF%B7%E6%B1%82%EF%BC%88Request%EF%BC%89%E2%80%94%E2%80%94-%E5%AE%A2%E6%88%B7%E9%80%89%E9%80%89%E9%A1%B9"><span class="toc-text">3.3 阶段 3：DHCP 请求（Request）—— 客户选选项</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-1-%E5%AE%A2%E6%88%B7%E9%80%89%E6%8B%A9%E9%80%BB%E8%BE%91"><span class="toc-text">3.3.1 客户选择逻辑</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-2-%E6%8A%A5%E6%96%87%E7%89%B9%E7%82%B9"><span class="toc-text">3.3.2 报文特点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-%E9%98%B6%E6%AE%B5-4%EF%BC%9ADHCP-%E7%A1%AE%E8%AE%A4%EF%BC%88Acknowledge%EF%BC%89%E2%80%94%E2%80%94-%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%BB%88%E7%A1%AE%E8%AE%A4"><span class="toc-text">3.4 阶段 4：DHCP 确认（Acknowledge）—— 服务器终确认</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-1-%E6%9C%8D%E5%8A%A1%E5%99%A8%E5%93%8D%E5%BA%94"><span class="toc-text">3.4.1 服务器响应</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-4-2-%E5%AE%A2%E6%88%B7%E6%9C%80%E7%BB%88%E9%AA%8C%E8%AF%81%EF%BC%9AARP-%E4%BA%8C%E6%AC%A1%E6%A3%80%E6%B5%8B"><span class="toc-text">3.4.2 客户最终验证：ARP 二次检测</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-5-%E4%BE%8B%E9%A2%98-3%EF%BC%9A%E4%BA%A4%E4%BA%92%E8%BF%87%E7%A8%8B%E6%95%85%E9%9A%9C%E5%88%86%E6%9E%90"><span class="toc-text">3.5 例题 3：交互过程故障分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81DHCP-%E5%9C%B0%E5%9D%80%E7%A7%9F%E7%BA%A6%E7%AE%A1%E7%90%86%EF%BC%88%E5%AF%B9%E5%BA%94%E8%A7%86%E9%A2%91-10-48-12-19%EF%BC%89"><span class="toc-text">四、DHCP 地址租约管理（对应视频 10:48-12:19）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E7%A7%9F%E7%BA%A6%E6%97%B6%E9%95%BF%E4%B8%8E%E7%BB%AD%E7%BA%A6%E6%9C%BA%E5%88%B6"><span class="toc-text">4.1 租约时长与续约机制</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E7%A7%9F%E7%BA%A6%E6%8F%90%E5%89%8D%E7%BB%88%E6%AD%A2"><span class="toc-text">4.2 租约提前终止</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E4%BE%8B%E9%A2%98-4%EF%BC%9A%E7%A7%9F%E7%BA%A6%E7%BB%AD%E7%BA%A6%E8%AE%A1%E7%AE%97"><span class="toc-text">4.3 例题 4：租约续约计算</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81DHCP-%E4%B8%AD%E7%BB%A7%E4%BB%A3%E7%90%86%EF%BC%88%E5%AF%B9%E5%BA%94%E8%A7%86%E9%A2%91-12-22-14-32%EF%BC%89"><span class="toc-text">五、DHCP 中继代理（对应视频 12:22-14:32）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E8%B7%A8%E7%BD%91%E6%AE%B5-DHCP-%E7%9A%84%E6%A0%B8%E5%BF%83%E9%97%AE%E9%A2%98"><span class="toc-text">5.1 跨网段 DHCP 的核心问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-%E4%B8%AD%E7%BB%A7%E4%BB%A3%E7%90%86%E7%9A%84%E4%BD%9C%E7%94%A8%E4%B8%8E%E5%8E%9F%E7%90%86"><span class="toc-text">5.2 中继代理的作用与原理</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#5-2-1-%E9%85%8D%E7%BD%AE%E6%96%B9%E5%BC%8F"><span class="toc-text">5.2.1 配置方式</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-2-2-%E6%95%B0%E6%8D%AE%E8%BD%AC%E5%8F%91%E6%B5%81%E7%A8%8B"><span class="toc-text">5.2.2 数据转发流程</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-3-%E4%B8%AD%E7%BB%A7%E4%BB%A3%E7%90%86%E7%9A%84%E4%BC%98%E5%8A%BF"><span class="toc-text">5.3 中继代理的优势</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-4-%E4%BE%8B%E9%A2%98-5%EF%BC%9A%E4%B8%AD%E7%BB%A7%E4%BB%A3%E7%90%86%E5%9C%BA%E6%99%AF%E8%AE%BE%E8%AE%A1"><span class="toc-text">5.4 例题 5：中继代理场景设计</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93"><span class="toc-text">六、核心知识点总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">FTP特讲</span></a></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">6.5 文件传送协议FTP 笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81FTP%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E6%A0%B8%E5%BF%83%E4%BB%B7%E5%80%BC"><span class="toc-text">一、FTP的定义与核心价值</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E5%9F%BA%E6%9C%AC%E5%AE%9A%E4%B9%89"><span class="toc-text">1.1 基本定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E6%A0%B8%E5%BF%83%E7%89%B9%E7%82%B9"><span class="toc-text">1.2 核心特点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81FTP%E7%9A%84%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E4%B8%8E%E5%AE%9E%E7%8E%B0%E6%96%B9%E5%BC%8F%EF%BC%88%E5%AE%A2%E6%88%B7-%E6%9C%8D%E5%8A%A1%E5%99%A8%E6%A8%A1%E5%BC%8F%EF%BC%89"><span class="toc-text">二、FTP的应用场景与实现方式（客户-服务器模式）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E6%A0%B8%E5%BF%83%E6%9E%B6%E6%9E%84%EF%BC%9A%E5%AE%A2%E6%88%B7-%E6%9C%8D%E5%8A%A1%E5%99%A8%EF%BC%88C-S%EF%BC%89%E6%A8%A1%E5%BC%8F"><span class="toc-text">2.1 核心架构：客户-服务器（C&#x2F;S）模式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-FTP%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E9%83%A8%E7%BD%B2%E8%A6%81%E6%B1%82"><span class="toc-text">2.2 FTP服务器的部署要求</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-FTP%E6%9C%8D%E5%8A%A1%E5%99%A8%E7%9A%84%E5%88%9B%E5%BB%BA%E6%96%B9%E5%BC%8F"><span class="toc-text">2.3 FTP服务器的创建方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-FTP%E5%AE%A2%E6%88%B7%E6%9C%BA%E7%9A%84%E8%AE%BF%E9%97%AE%E6%96%B9%E5%BC%8F"><span class="toc-text">2.4 FTP客户机的访问方式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-5-FTP%E7%9A%84%E5%85%B8%E5%9E%8B%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">2.5 FTP的典型应用场景</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81FTP%E7%9A%84%E5%9F%BA%E6%9C%AC%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86%EF%BC%88%E5%8F%8CTCP%E8%BF%9E%E6%8E%A5%E6%9C%BA%E5%88%B6%EF%BC%89"><span class="toc-text">三、FTP的基本工作原理（双TCP连接机制）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%EF%BC%9A%E6%8E%A7%E5%88%B6%E8%BF%9E%E6%8E%A5%E4%B8%8E%E6%95%B0%E6%8D%AE%E8%BF%9E%E6%8E%A5%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">3.1 核心概念：控制连接与数据连接的区别</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E4%BC%A0%E8%BE%93%E6%A8%A1%E5%BC%8F%E4%B8%80%EF%BC%9A%E4%B8%BB%E5%8A%A8%E6%A8%A1%E5%BC%8F%EF%BC%88PORT%E6%A8%A1%E5%BC%8F%EF%BC%89"><span class="toc-text">3.2 传输模式一：主动模式（PORT模式）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-1-%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%EF%BC%88%E4%BB%A5%E2%80%9C%E5%AE%A2%E6%88%B7%E6%9C%BA%E4%B8%8B%E8%BD%BD%E6%96%87%E4%BB%B6%E2%80%9D%E4%B8%BA%E4%BE%8B%EF%BC%89"><span class="toc-text">3.2.1 工作流程（以“客户机下载文件”为例）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-2-%E5%85%B3%E9%94%AE%E7%89%B9%E5%BE%81"><span class="toc-text">3.2.2 关键特征</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E4%BC%A0%E8%BE%93%E6%A8%A1%E5%BC%8F%E4%BA%8C%EF%BC%9A%E8%A2%AB%E5%8A%A8%E6%A8%A1%E5%BC%8F%EF%BC%88PASV%E6%A8%A1%E5%BC%8F%EF%BC%89"><span class="toc-text">3.3 传输模式二：被动模式（PASV模式）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-1-%E5%B7%A5%E4%BD%9C%E6%B5%81%E7%A8%8B%EF%BC%88%E4%BB%A5%E2%80%9C%E5%AE%A2%E6%88%B7%E6%9C%BA%E4%B8%8A%E4%BC%A0%E6%96%87%E4%BB%B6%E2%80%9D%E4%B8%BA%E4%BE%8B%EF%BC%89"><span class="toc-text">3.3.1 工作流程（以“客户机上传文件”为例）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-3-2-%E5%85%B3%E9%94%AE%E7%89%B9%E5%BE%81"><span class="toc-text">3.3.2 关键特征</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E8%80%83%E7%A0%94%E7%9C%9F%E9%A2%98%E8%A7%A3%E6%9E%90%EF%BC%88%E5%B7%A9%E5%9B%BA%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9%EF%BC%89"><span class="toc-text">四、考研真题解析（巩固核心知识点）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9C%9F%E9%A2%981%EF%BC%882009%E5%B9%B4%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%93%E4%B8%9A%E8%80%83%E7%A0%94%E7%BB%9F%E8%80%8340%E9%A2%98%EF%BC%89"><span class="toc-text">真题1（2009年计算机专业考研统考40题）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%9C%9F%E9%A2%982%EF%BC%882017%E5%B9%B4%E8%AE%A1%E7%AE%97%E6%9C%BA%E4%B8%93%E4%B8%9A%E8%80%83%E7%A0%94%E7%BB%9F%E8%80%8340%E9%A2%98%EF%BC%89"><span class="toc-text">真题2（2017年计算机专业考研统考40题）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E6%9C%AC%E8%8A%82%E6%A0%B8%E5%BF%83%E7%9F%A5%E8%AF%86%E7%82%B9%E6%80%BB%E7%BB%93"><span class="toc-text">五、本节核心知识点总结</span></a></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="solitude fas fa-map"></i><span>最近发布</span></div><div class="aside-list"><a class="aside-list-item" href="/2026/01/06/Udemy%20TS/ts%E7%AC%94%E8%AE%B0/" title="TypeScript笔记"><div class="content"><span class="title" href="/2026/01/06/Udemy%20TS/ts%E7%AC%94%E8%AE%B0/" title="TypeScript笔记">TypeScript笔记</span><span class="categories" href="/2026/01/06/Udemy%20TS/ts%E7%AC%94%E8%AE%B0/">编程</span></div></a><a class="aside-list-item" href="/2026/01/06/Udemy%20JS/099%20Primitives%20vs.%20Objects%20(Primitive%20vs.%20Reference%20Types)%20/" title="基本类型与对象类型"><div class="content"><span class="title" href="/2026/01/06/Udemy%20JS/099%20Primitives%20vs.%20Objects%20(Primitive%20vs.%20Reference%20Types)%20/" title="基本类型与对象类型">基本类型与对象类型</span><span class="categories" href="/2026/01/06/Udemy%20JS/099%20Primitives%20vs.%20Objects%20(Primitive%20vs.%20Reference%20Types)%20/">前端</span></div></a><a class="aside-list-item" href="/2026/01/06/Udemy%20JS/103%20Destructuring%20Arrays%EF%BC%89%E7%AC%94%E8%AE%B0/" title="数组解构"><div class="content"><span class="title" href="/2026/01/06/Udemy%20JS/103%20Destructuring%20Arrays%EF%BC%89%E7%AC%94%E8%AE%B0/" title="数组解构">数组解构</span><span class="categories" href="/2026/01/06/Udemy%20JS/103%20Destructuring%20Arrays%EF%BC%89%E7%AC%94%E8%AE%B0/">前端</span></div></a><a class="aside-list-item" href="/2026/01/06/Udemy%20JS/104%20Destructuring%20Objects%EF%BC%88%E5%AF%B9%E8%B1%A1%E8%A7%A3%E6%9E%84%EF%BC%89/" title="对象解构"><div class="content"><span class="title" href="/2026/01/06/Udemy%20JS/104%20Destructuring%20Objects%EF%BC%88%E5%AF%B9%E8%B1%A1%E8%A7%A3%E6%9E%84%EF%BC%89/" title="对象解构">对象解构</span><span class="categories" href="/2026/01/06/Udemy%20JS/104%20Destructuring%20Objects%EF%BC%88%E5%AF%B9%E8%B1%A1%E8%A7%A3%E6%9E%84%EF%BC%89/">前端</span></div></a><a class="aside-list-item" href="/2026/01/06/Udemy%20JS/098%20Regular%20Functions%20vs.%20Arrow%20Functions%EF%BC%88%E5%B8%B8%E8%A7%84%E5%87%BD%E6%95%B0%E4%B8%8E%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%EF%BC%89/" title="常规函数与箭头函数"><div class="content"><span class="title" href="/2026/01/06/Udemy%20JS/098%20Regular%20Functions%20vs.%20Arrow%20Functions%EF%BC%88%E5%B8%B8%E8%A7%84%E5%87%BD%E6%95%B0%E4%B8%8E%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%EF%BC%89/" title="常规函数与箭头函数">常规函数与箭头函数</span><span class="categories" href="/2026/01/06/Udemy%20JS/098%20Regular%20Functions%20vs.%20Arrow%20Functions%EF%BC%88%E5%B8%B8%E8%A7%84%E5%87%BD%E6%95%B0%E4%B8%8E%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%EF%BC%89/">前端</span></div></a></div></div></div></div></main><footer id="footer"><div id="footer_deal"><a class="deal_link" target="_blank" rel="noopener" href="https://github.com/woodfishhhh" title="Github"><i class="solitude  fab fa-github"></i></a><a class="deal_link" href="https://www.woodfishhhh.xyz/images/d8d58d2f2c7ac5790fd37f388da41db4.png?_t=1759286665402" title="Email"><i class="solitude  far fa-envelope"></i></a><div><div class="nolazyload footer_mini_logo" id="footer_mini_logo" title="返回顶部" onclick="sco.toTop()"><img src= "" data-lazy-src="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg" alt="返回顶部"></div></div><a class="deal_link" target="_blank" rel="noopener" href="https://space.bilibili.com/359728114" title="Bilibili"><i class="solitude  fab fa-bilibili"></i></a><a class="deal_link" target="_blank" rel="noopener" href="https://www.douyin.com/user/MS4wLjABAAAAgbOrIhdi7Rl5RfaQ3fE3i7c2WnyR3zEOyLiK2Cjtcqk?from_tab_name=main" title="Douyin"><i class="solitude  fab fa-tiktok"></i></a></div><div><div id="st-footer"><div class="footer-group"><h3 class="footer-title">导航</h3><div class="footer-links"><a class="footer-item" href="/archives/" title="Archives">Archives</a><a class="footer-item" href="/categories/" title="Categories">Categories</a><a class="footer-item" href="/tags/" title="Tags">Tags</a></div></div><div class="footer-group"><h3 class="footer-title">排列</h3><div class="footer-links"><a class="footer-item" href="/about/" title="About">About</a><a class="footer-item" href="/link/" title="Friends">Friends</a></div></div><div class="footer-group"><div class="footer-title-group"><h3 class="footer-title">友链</h3><button class="random-friends-btn" onclick="randomLinksList()" title="友链"><i class="solitude fas fa-arrows-rotate"></i></button></div><div class="footer-links" id="friend-links-in-footer"></div></div></div></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div class="copyright">© 2025 - 2026 By<a class="footer-bar-link" href="/" title="woodfish">woodfish</a></div><div class="beian-group"><div></div><a class="footer-bar-link" target="_blank" rel="noopener" href="https://hexo.io/" title="框架：Hexo">框架：Hexo</a><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/everfu/hexo-theme-solitude" title="主题：Solitude">主题：Solitude</a></div></div><div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/everfu/hexo-theme-solitude" title="">主题</a><a class="footer-bar-link" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" title="">License</a></div></div></div></div><div class="comment-barrage needEndHide"></div></footer></div><div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="solitude fas fa-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="solitude fas fa-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="solitude fas fa-arrows-rotate"></i></div><div class="rightMenu-item" id="menu-top"><i class="solitude fas fa-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="solitude fas fa-clone"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="solitude fas fa-clipboard"></i><span>粘贴文本</span></div><div class="rightMenu-item" id="menu-newwindow"><i class="solitude far fa-window-maximize"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="solitude fas fa-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="solitude fas fa-clone"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="solitude fas fa-cloud-arrow-down"></i><span>下载此图片</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><div class="rightMenu-item" id="menu-randomPost" onclick="toRandomPost()||rm.hideRightMenu()"><i class="solitude fas fa-tower-broadcast"></i><span>随机文章</span></div><div class="rightMenu-item" onclick="pjax.loadUrl('/categories/')||rm.hideRightMenu()"><i class="solitude fas fa-clone"></i><span>全部分类</span></div><div class="rightMenu-item" onclick="pjax.loadUrl('/tags/')||rm.hideRightMenu()"><i class="solitude fas fa-tags"></i><span>全部标签</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><div class="rightMenu-item" id="menu-darkmode" onclick="sco.switchDarkMode()"><i class="solitude fas fa-circle-half-stroke"></i><span class="menu-darkmode-text">浅色模式</span></div><div class="rightMenu-item" id="menu-translate"><i class="solitude fas fa-language"></i><span>轉為繁體</span></div></div></div><div id="rightmenu-mask"></div></div><div><!-- Critical scripts loaded synchronously--><script src="/js/utils.js?v=3.0.20"></script><script src="/js/main.js?v=3.0.20"></script><!-- Non-critical scripts loaded asynchronously--><script async src="/js/third_party/waterfall.min.js?v=3.0.20"></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><!-- Feature-specific scripts loaded asynchronously--><script defer src="/js/third_party/universe.min.js?v=3.0.20"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  if (typeof dark === 'function') dark();
+});
+</script><script defer src="/js/tw_cn.js?v=3.0.20"></script><!-- UI enhancement scripts--><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.iife.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><!-- Music player scripts--><!-- Cover color processing scripts--><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+utils.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+</script><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!-- Search functionality--><!-- Right menu functionality--><script defer src="/js/right_menu.js?v=3.0.20"></script><div class="js-pjax"><script defer pjax src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.min.js"></script></div></div><!-- pjax--><script>let pjax = null;
+
+function initPjax() {
+    if (typeof Pjax === 'undefined') {
+        console.warn('Pjax is not loaded yet, retrying...');
+        setTimeout(initPjax, 100);
+        return;
+    }
+
+    pjax = new Pjax({
+        elements: 'a:not([target="_blank"])',
+        selectors: ["title","#body-wrap","#site-config","meta[name=\"description\"]",".js-pjax","meta[property^=\"og:\"]","#config-diff",".rs_show",".rs_hide"],
+        cacheBust: false,
+        analytics: false,
+        scrollRestoration: false
+    })
+
+    // 将 pjax 实例挂载到全局
+    window.pjax = pjax;
+
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+        const newScript = document.createElement('script')
+        const content = item.text || item.textContent || item.innerHTML || ""
+        Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+        newScript.appendChild(document.createTextNode(content))
+        item.parentNode.replaceChild(newScript, item)
+    })
+
+    document.addEventListener('pjax:complete', () => {
+        window.refreshFn()
+
+        document.querySelectorAll('script[data-pjax]').forEach(item => {
+            const newScript = document.createElement('script')
+            const content = item.text || item.textContent || item.innerHTML || ""
+            Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+            newScript.appendChild(document.createTextNode(content))
+            item.parentNode.replaceChild(newScript, item)
+        })
+
+        GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+    })
+
+    document.addEventListener('pjax:error', (e) => {
+        if (e.request.status === 404) {
+            pjax.loadUrl('/404.html')
+        }
+    })
+}
+
+// 初始化 Pjax
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPjax);
+} else {
+    initPjax();
+}</script><!-- google adsense--></body></html>
+        <script>
+            const posts = ["2026/01/06/Udemy TS/ts笔记/","2026/01/06/Udemy JS/099 Primitives vs. Objects (Primitive vs. Reference Types) /","2026/01/06/Udemy JS/103 Destructuring Arrays）笔记/","2026/01/06/Udemy JS/104 Destructuring Objects（对象解构）/","2026/01/06/Udemy JS/098 Regular Functions vs. Arrow Functions（常规函数与箭头函数）/","2026/01/06/Udemy JS/105 JavaScript 扩展运算符（...）/","2026/01/06/Udemy JS/106 Rest Pattern and Parameters/","2026/01/06/Udemy JS/108 空值合并运算符（Nullish Coalescing Operator）/","2026/01/06/Udemy JS/109 Logical Assignment Operators）/","2026/01/06/Udemy JS/111 for-of 循环笔记/","2026/01/06/Udemy JS/112 Enhanced Object Literals（ES6 增强对象字面量）/","2026/01/06/Udemy JS/113 可选链（Optional Chaining）笔记/","2026/01/06/Udemy JS/112 JavaScript数组方法(forEach, map, filter, reduce等)/","2026/01/06/Udemy JS/231 How to Plan a Web Project /","2026/01/06/Udemy JS/256 JavaScript 异步编程核心笔记/","2026/01/06/Udemy JS/258 The Event Loop in Practice/","2026/01/06/Udemy JS/262 Consuming Promises with Async_Await/","2026/01/06/Udemy JS/263 Error Handling With try...catch/","2026/01/06/Udemy JS/268-280 现代js开发/","2026/01/06/Udemy JS/264 Returning Values from Async Functions/","2026/01/06/杂项/Udemy Vue/","2026/01/06/杂项/new JS/","2026/01/06/杂项/数据结构期末速通/","2026/01/06/杂项/管理模拟卷/","2026/01/06/杂项/马原模拟卷/","2026/01/06/前端/AJAX基础入门教程/","2026/01/06/题解/Day5题解/","2026/01/06/题解/E题超详解：帮哈基鱼算标签/","2026/01/06/题解/F. Beautiful Intervals/","2026/01/06/题解/JUFE国庆新生编程语法培训/","2026/01/06/计算机网络/划分子网/","2026/01/06/计算机网络/最长前缀匹配原则/","2026/01/06/计算机网络/计算机网络第一章：概论/","2026/01/06/计算机网络/计算机网络第二章：物理层/","2026/01/06/计算机网络/计算机网络第三章：链路层/","2026/01/06/计算机网络/计算机网络第五章：运输层/","2026/01/06/计算机网络/计算机网络第六章：应用层/","2026/01/06/计算机组成原理/加减乘除/","2026/01/06/计算机组成原理/Cache缓存/","2026/01/06/计算机组成原理/存储器，主存扩展/","2026/01/06/计算机组成原理/指令系统/","2026/01/06/计算机组成原理/数据的表示/","2026/01/06/计算机组成原理/计算机存储器/","2025/10/21/计算机网络/计算机网络第四章：网络层/","2025/10/21/计算机网络/计算机网络第四章：网络层（edit）/","2025/09/11/前端/Day04_AJAX进阶/","2025/09/10/前端/Day03_AJAX原理/","2025/09/09/前端/Day02_AJAX综合案例/","2025/09/08/前端/Day01_AJAX入门/","2025/08/25/Linux/Linux课程笔记/","2025/08/13/前端/js易错点/","2025/08/11/前端/JavaScript 学习笔记（9）：深浅拷贝、异常处理、this 指向与防抖节流/","2025/08/03/前端/JavaScript 学习笔记（8）：面向对象编程与原型机制详解/","2025/08/02/前端/JavaScript 学习笔记（7）：面向对象与内置构造函数/","2025/07/31/前端/JavaScript 学习笔记（6）：作用域、闭包与函数进阶/","2025/07/28/前端/Web API 学习笔记（6）：正则表达式与表单验证/","2025/07/27/前端/Web API 学习笔记（5）：BOM 操作与本地存储/","2025/07/26/前端/Web API 学习笔记（4）：Date 对象与 DOM-节点操作要点/","2025/07/23/前端/Web API 学习笔记（3）：事件流与事件委托/","2025/07/22/前端/Web API 学习笔记（2）：事件处理与-this-指向/","2025/07/21/前端/Web API 学习笔记（1）：DOM 基础操作/","2025/07/20/前端/JavaScript 学习笔记（5）：对象数据类型与内置数学对象/","2025/07/19/前端/JavaScript 学习笔记（4）：函数封装与对象基础/","2025/07/18/前端/JavaScript 学习笔记（3）：数组的增删操作方法详解/","2025/07/17/前端/JavaScript 学习笔记（2）：运算符、语句与综合案例/","2025/07/17/前端/JavaScript 学习笔记（1）：基础语法与数据类型/","2025/07/15/前端/CSS 学习笔记（12）：响应式布局与 Bootstrap 框架应用/","2025/07/14/前端/CSS 学习笔记（11）：移动 Web 开发之 vw 适配与酷我音乐案例实践/","2025/07/13/前端/CSS 学习笔记（10）：移动 Web 开发基础与 rem 布局、Less 预处理器/","2025/07/12/前端/CSS 学习笔记（9）：移动 Web 开发之空间转换与动画效果/","2025/07/11/前端/CSS 学习笔记（8）：移动 Web 开发之平面转换与渐变效果/","2025/07/10/前端/小兔仙/","2025/07/08/前端/学成在线/","2025/07/08/前端/CSS 学习笔记（6）：小兔鲜儿项目搭建及基础配置（目录结构、SEO 标签、版心设置）/","2025/07/04/前端/CSS我的易错点/","2025/07/03/前端/CSS 学习笔记（7）：CSS 优先级叠加计算规则详解/","2025/07/02/前端/CSS 学习笔记（5）：定位模式、CSS 精灵、字体图标及过渡效果应用/","2025/06/30/前端/CSS 学习笔记（4）：浮动布局与 Flex 弹性布局详解及应用案例/","2025/06/27/前端/CSS 学习笔记（3）：伪类与伪元素选择器、盒子模型及相关特性详解/","2025/06/24/前端/CSS 学习笔记（2）：复合选择器、CSS 特性及背景与显示模式设置/","2025/06/23/前端/CSS 学习笔记（1）：引入方式、选择器及文字样式控制/","2025/06/23/前端/HTML 学习笔记（2）：列表、表格、表单及布局标签详解/","2025/06/22/前端/HTML 学习笔记（1）：核心标签、文档结构及多媒体应用/","2025/06/19/JAVA/Java期末复习重点易错点/","2025/06/18/杂项/中国近代史复习重点/","2025/06/03/JAVA/Java的final/","2025/06/03/JAVA/Java的继承/","2025/06/03/JAVA/Java的多态/","2025/05/27/JAVA/Java的List集合/","2025/05/27/JAVA/Java的Collection集合/","2025/05/27/JAVA/Java的包装类/","2025/05/15/JAVA/Java的内部类/","2025/05/15/JAVA/Java的抽象与接口类/"];
+            function toRandomPost() {
+                const randomPost = posts[Math.floor(Math.random() * posts.length)];
+                pjax.loadUrl(GLOBAL_CONFIG.root + randomPost);
+            }
+        </script>

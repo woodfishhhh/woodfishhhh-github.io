@@ -1,0 +1,1184 @@
+<!DOCTYPE html><html lang="zh-Hans" data-theme="light"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>数据结构期末速通 | 木鱼的鱼窝</title><noscript>开启JavaScript才能访问本站哦~</noscript><link rel="icon" href="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg"><link rel="stylesheet" href="/css/index.css?v=3.0.20"><link rel="canonical" href="https://www.woodfishhhh.xyz/2026/01/06/%E6%9D%82%E9%A1%B9/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%9C%9F%E6%9C%AB%E9%80%9F%E9%80%9A/index.html"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css"><!-- Feature-specific CSS--><!-- aplayer--><!-- swiper--><!-- fancybox ui--><!-- katex--><!-- Open Graph--><meta name="description" content="数据结构期末考前救急 1 模式匹配 1.1 核心解题步骤   构建分析表格 需创建4行多列表格，列数&#x3D;关键字个数+1（预留补充列），各行含义如下：  第1行（下标）：从0开始依次递增（如关键字有10个，下标为0~9）； 第2行（关键字）：直接复制题目给定的字符序列（如&quot;ababacaaad&quot;）； 第3行（next数组）：前两个值固定，next[0] &#x3D; -1，next[1] &#x3D;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="数据结构期末速通">
+<meta property="og:url" content="https://www.woodfishhhh.xyz/2026/01/06/%E6%9D%82%E9%A1%B9/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%9C%9F%E6%9C%AB%E9%80%9F%E9%80%9A/index.html">
+<meta property="og:site_name" content="木鱼的鱼窝">
+<meta property="og:description" content="数据结构期末考前救急 1 模式匹配 1.1 核心解题步骤   构建分析表格 需创建4行多列表格，列数&#x3D;关键字个数+1（预留补充列），各行含义如下：  第1行（下标）：从0开始依次递增（如关键字有10个，下标为0~9）； 第2行（关键字）：直接复制题目给定的字符序列（如&quot;ababacaaad&quot;）； 第3行（next数组）：前两个值固定，next[0] &#x3D; -1，next[1] &#x3D;">
+<meta property="og:locale">
+<meta property="og:image" content="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg">
+<meta property="article:published_time" content="2026-01-06T15:39:48.000Z">
+<meta property="article:modified_time" content="2026-01-22T07:17:44.798Z">
+<meta property="article:author" content="woodfish">
+<meta property="article:tag" content="算法">
+<meta property="article:tag" content="数据结构">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg"><!-- pwa--><meta name="apple-mobile-web-app-capable" content="木鱼的鱼窝"><meta name="theme-color" content="var(--efu-main)"><meta name="apple-mobile-web-app-status-bar-style" content="var(--efu-main)"><link rel="bookmark" href="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg"><link rel="apple-touch-icon" href="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg" sizes="180x180"><script>console.log(' %c Solitude %c ' + '3.0.20' + ' %c https://github.com/everfu/hexo-theme-solitude',
+    'background:#35495e ; padding: 1px; border-radius: 3px 0 0 3px;  color: #fff',
+    'background:#ff9a9a ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff',
+    'background:unset ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff')
+</script><script>(()=>{
+        const saveToLocal = {
+            set: function setWithExpiry(key, value, ttl) {
+                if (ttl === 0)
+                    return
+                const now = new Date()
+                const expiryDay = ttl * 86400000
+                const item = {
+                    value: value,
+                    expiry: now.getTime() + expiryDay
+                }
+                localStorage.setItem(key, JSON.stringify(item))
+            },
+            get: function getWithExpiry(key) {
+                const itemStr = localStorage.getItem(key)
+
+                if (!itemStr) {
+                    return undefined
+                }
+                const item = JSON.parse(itemStr)
+                const now = new Date()
+
+                if (now.getTime() > item.expiry) {
+                    localStorage.removeItem(key)
+                    return undefined
+                }
+                return item.value
+            }
+        };
+        window.utils = {
+            saveToLocal: saveToLocal,
+            getCSS: (url, id = false) => new Promise((resolve, reject) => {
+              const link = document.createElement('link')
+              link.rel = 'stylesheet'
+              link.href = url
+              if (id) link.id = id
+              link.onerror = reject
+              link.onload = link.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                link.onload = link.onreadystatechange = null
+                resolve()
+              }
+              document.head.appendChild(link)
+            }),
+            getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+              const script = document.createElement('script')
+              script.src = url
+              script.async = true
+              script.onerror = reject
+              script.onload = script.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                script.onload = script.onreadystatechange = null
+                resolve()
+              }
+
+              Object.keys(attr).forEach(key => {
+                script.setAttribute(key, attr[key])
+              })
+
+              document.head.appendChild(script)
+            }),
+            addGlobalFn: (key, fn, name = false, parent = window) => {
+                const globalFn = parent.globalFn || {}
+                const keyObj = globalFn[key] || {}
+
+                if (name && keyObj[name]) return
+
+                name = name || Object.keys(keyObj).length
+                keyObj[name] = fn
+                globalFn[key] = keyObj
+                parent.globalFn = globalFn
+            },
+            addEventListenerPjax: (ele, event, fn, option = false) => {
+              ele.addEventListener(event, fn, option)
+              utils.addGlobalFn('pjax', () => {
+                  ele.removeEventListener(event, fn, option)
+              })
+            },
+            diffDateFormat: (selector) => {
+                selector.forEach(item => {
+                    const date = new Date(item.getAttribute('datetime') || item.textContent);
+                    item.textContent = (date.getMonth() + 1).toString()+'/'+date.getDate().toString();
+                });
+            },
+        }
+    })()</script><!-- theme--><script>initTheme = () => {
+    const cachedMode = utils.saveToLocal.get('theme');
+    if (cachedMode === undefined)
+        document.documentElement.setAttribute('data-theme', 'dark');
+    else
+        document.documentElement.setAttribute('data-theme', cachedMode);
+    typeof rm === 'object' && rm.mode(cachedMode === undefined || cachedMode === 'dark')
+}
+initTheme()</script><script>const GLOBAL_CONFIG = {
+    root: '/',
+    algolia: undefined,
+    localsearch: undefined,
+    runtime: '2025-06-02 00:00:00',
+    lazyload: {
+        enable: true,
+        error: 'https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png'
+    },
+    copyright: {"limit":50,"author":"作者: woodfish","link":"链接: ","source":"来源: 木鱼的鱼窝","info":"著作权归作者所有。 商业转载请联系作者获得授权，非商业转载请注明出处。"},
+    highlight: {"limit":200,"expand":true,"copy":true,"syntax":"highlight.js"},
+    randomlink: false,
+    lang: {"theme":{"dark":"已切换至深色模式","light":"已切换至浅色模式"},"copy":{"success":"复制成功","error":"复制失败"},"backtop":"返回顶部","time":{"day":"天前","hour":"小时前","just":"刚刚","min":"分钟前","month":"个月前"},"day":" 天","f12":"开发者模式已打开，请遵循GPL协议。","totalk":"无需删除空行，直接输入评论即可"},
+    aside: {
+        state: {
+            morning: "✨ 早上好，新的一天开始了",
+            noon: "🍲 午餐时间",
+            afternoon: "🌞 下午好",
+            night: "早点休息",
+            goodnight: "晚安 😴",
+        },
+        witty_words: [],
+        witty_comment: {
+            prefix: '好久不见，',
+            back: '欢迎再次回来，',
+        },
+    },
+    covercolor: {
+        enable: false
+    },
+    comment: false,
+    lightbox: 'fancybox',
+    right_menu: {"mode":{"dark":"深色模式","light":"浅色模式"},"img_error":"此图片无法复制与下载","translate":true},
+    translate: {"translateDelay":0,"defaultEncoding":2},
+    lure: false,
+    expire: false,
+};</script><script id="config-diff">var PAGE_CONFIG = {
+    is_post: true,
+    is_page: false,
+    is_home: false,
+    page: '',
+    toc: true,
+    comment: false,
+    ai_text: false,
+    color: false,
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body id="body"><div><canvas id="universe"></canvas></div><div><div id="loading-box" onclick="preloader.endLoading();" style="zoom:1"><div class="loading-bg"><img class="loading-img nolazyload" src="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg" alt="loading image"></div></div><script>const preloader = {
+    isLoaded: false,
+    endLoading: () => {
+        if (!preloader.isLoaded) {
+            document.getElementById('loading-box').classList.add('loaded');
+            preloader.isLoaded = true;
+            preloader.togglePaceDone();
+        }
+    },
+    initLoading: () => {
+        document.getElementById('loading-box').classList.remove('loaded');
+        preloader.isLoaded = false;
+        preloader.togglePaceDone();
+    },
+    togglePaceDone: () => {
+        document.getElementById('body').className = preloader.isLoaded ? 'pace-done' : '';
+    }
+}
+
+window.addEventListener('load', () => {
+    preloader.endLoading();
+});
+
+window.addEventListener('pjax:send', () => {
+    preloader.initLoading();
+});
+
+document.addEventListener('pjax:complete', () => {
+    preloader.endLoading();
+});
+
+setTimeout(() => {
+    preloader.endLoading();
+}, 5000);</script></div><div><div id="console"><div class="close-btn" onclick="sco.hideConsole()"><i class="solitude fas fa-xmark"></i></div><div class="console-card-group"><div class="console-card-group-right"><div class="console-card tags" onclick="sco.hideConsole()"><div class="card-content"><div class="author-content-item-tips">标签</div><div class="author-content-item-title">寻找感兴趣的领域</div></div><div class="card-tag-cloud"><a href="/tags/Java/">Java<sup>9</sup></a><a href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/">期末复习<sup>2</sup></a><a href="/tags/Linux/">Linux<sup>1</sup></a><a href="/tags/TypeScript/">TypeScript<sup>1</sup></a><a href="/tags/JavaScript/">JavaScript<sup>37</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF/">前端<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">数据类型<sup>1</sup></a><a href="/tags/ES6/">ES6<sup>5</sup></a><a href="/tags/%E5%87%BD%E6%95%B0/">函数<sup>1</sup></a><a href="/tags/ES2020/">ES2020<sup>2</sup></a><a href="/tags/ES2021/">ES2021<sup>1</sup></a><a href="/tags/%E5%BE%AA%E7%8E%AF/">循环<sup>1</sup></a><a href="/tags/%E6%95%B0%E7%BB%84/">数组<sup>1</sup></a><a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/">项目管理<sup>1</sup></a><a href="/tags/Web%E5%BC%80%E5%8F%91/">Web开发<sup>1</sup></a><a href="/tags/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/">异步编程<sup>1</sup></a><a href="/tags/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/">事件循环<sup>1</sup></a><a href="/tags/%E5%BC%82%E6%AD%A5/">异步<sup>2</sup></a><a href="/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理<sup>1</sup></a><a href="/tags/%E7%8E%B0%E4%BB%A3%E5%BC%80%E5%8F%91/">现代开发<sup>1</sup></a><a href="/tags/Vue/">Vue<sup>1</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/">前端框架<sup>1</sup></a><a href="/tags/C/">C++<sup>1</sup></a><a href="/tags/%E7%AE%97%E6%B3%95/">算法<sup>5</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构<sup>1</sup></a><a href="/tags/%E7%AE%A1%E7%90%86%E5%AD%A6/">管理学<sup>1</sup></a><a href="/tags/%E6%A8%A1%E6%8B%9F%E5%8D%B7/">模拟卷<sup>2</sup></a><a href="/tags/%E9%A9%AC%E5%85%8B%E6%80%9D%E4%B8%BB%E4%B9%89/">马克思主义<sup>1</sup></a><a href="/tags/AJAX/">AJAX<sup>1</sup></a><a href="/tags/HTTP/">HTTP<sup>1</sup></a><a href="/tags/CSS/">CSS<sup>15</sup></a><a href="/tags/HTML/">HTML<sup>17</sup></a><a href="/tags/web/">web<sup>11</sup></a><a href="/tags/Ajax/">Ajax<sup>4</sup></a><a href="/tags/%E9%A2%98%E8%A7%A3/">题解<sup>3</sup></a><a href="/tags/%E7%BC%96%E7%A8%8B/">编程<sup>1</sup></a><a href="/tags/%E5%9F%B9%E8%AE%AD/">培训<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络<sup>7</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/">网络层<sup>1</sup></a><a href="/tags/%E8%B7%AF%E7%94%B1/">路由<sup>1</sup></a><a href="/tags/%E6%A6%82%E8%AE%BA/">概论<sup>1</sup></a><a href="/tags/%E7%89%A9%E7%90%86%E5%B1%82/">物理层<sup>1</sup></a><a href="/tags/%E9%93%BE%E8%B7%AF%E5%B1%82/">链路层<sup>1</sup></a><a href="/tags/%E8%BF%90%E8%BE%93%E5%B1%82/">运输层<sup>1</sup></a><a href="/tags/%E5%BA%94%E7%94%A8%E5%B1%82/">应用层<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">计算机组成原理<sup>6</sup></a><a href="/tags/%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97/">算术运算<sup>1</sup></a><a href="/tags/%E7%BC%93%E5%AD%98/">缓存<sup>1</sup></a><a href="/tags/%E5%AD%98%E5%82%A8%E5%99%A8/">存储器<sup>2</sup></a><a href="/tags/%E6%8C%87%E4%BB%A4%E7%B3%BB%E7%BB%9F/">指令系统<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A4%BA/">数据表示<sup>1</sup></a></div></div><div class="console-card history" onclick="sco.hideConsole()"><ul class="card-archive-list"><li class="item"><a href="/archives/2026/01/"><span class="date">2026/01</span><div class="count-group"><span class="count">43</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/10/"><span class="date">2025/10</span><div class="count-group"><span class="count">2</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/09/"><span class="date">2025/09</span><div class="count-group"><span class="count">4</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/08/"><span class="date">2025/08</span><div class="count-group"><span class="count">5</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/07/"><span class="date">2025/07</span><div class="count-group"><span class="count">23</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/06/"><span class="date">2025/06</span><div class="count-group"><span class="count">11</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/05/"><span class="date">2025/05</span><div class="count-group"><span class="count">5</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/"><span class="date">全部文章</span><div class="count-group"><span class="count">93</span><span class="unit">篇</span></div></a></li></ul></div></div></div><div class="button-group"><div class="console-btn-item"><span class="darkmode_switchbutton" onclick="sco.switchDarkMode()" title="昼夜切换"><i class="solitude fas fa-circle-half-stroke"></i></span></div><div class="console-btn-item" id="consoleHideAside"><span class="asideSwitch" onclick="sco.switchHideAside()" title="边栏显示控制"><i class="solitude fas fa-arrows-left-right-to-line"></i></span></div></div><div class="console-mask" onclick="sco.hideConsole()"></div></div></div><div id="sidebar" style="zoom: 1;"><div id="menu-mask" style="display: none;"></div><div id="sidebar-menus"><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">93</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">51</div></a></div></div></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><span class="darkmode_switchbutton menu-child" onclick="sco.switchDarkMode()"><i class="solitude fas fa-circle-half-stroke"></i><span>显示模式</span></span></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://www.woodfishhhh.xyz/" title="woodfishhhh博客"><img class="nolazyload back-menu-item-icon" src="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg" alt="woodfishhhh博客"><span class="back-menu-item-text">woodfishhhh博客</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/%20%7C%7C%20fas%20fa-home"><span>主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%20%7C%7C%20fas%20fa-tags"><span>标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%20%7C%7C%20fas%20fa-th"><span>分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/%20%7C%7C%20fas%20fa-link"><span>友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/%20%7C%7C%20fas%20fa-user"><span>关于我</span></a></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="card-tag-cloud"><a href="/tags/Java/">Java<sup>9</sup></a><a href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/">期末复习<sup>2</sup></a><a href="/tags/Linux/">Linux<sup>1</sup></a><a href="/tags/TypeScript/">TypeScript<sup>1</sup></a><a href="/tags/JavaScript/">JavaScript<sup>37</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF/">前端<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">数据类型<sup>1</sup></a><a href="/tags/ES6/">ES6<sup>5</sup></a><a href="/tags/%E5%87%BD%E6%95%B0/">函数<sup>1</sup></a><a href="/tags/ES2020/">ES2020<sup>2</sup></a><a href="/tags/ES2021/">ES2021<sup>1</sup></a><a href="/tags/%E5%BE%AA%E7%8E%AF/">循环<sup>1</sup></a><a href="/tags/%E6%95%B0%E7%BB%84/">数组<sup>1</sup></a><a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/">项目管理<sup>1</sup></a><a href="/tags/Web%E5%BC%80%E5%8F%91/">Web开发<sup>1</sup></a><a href="/tags/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/">异步编程<sup>1</sup></a><a href="/tags/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/">事件循环<sup>1</sup></a><a href="/tags/%E5%BC%82%E6%AD%A5/">异步<sup>2</sup></a><a href="/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理<sup>1</sup></a><a href="/tags/%E7%8E%B0%E4%BB%A3%E5%BC%80%E5%8F%91/">现代开发<sup>1</sup></a><a href="/tags/Vue/">Vue<sup>1</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/">前端框架<sup>1</sup></a><a href="/tags/C/">C++<sup>1</sup></a><a href="/tags/%E7%AE%97%E6%B3%95/">算法<sup>5</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构<sup>1</sup></a><a href="/tags/%E7%AE%A1%E7%90%86%E5%AD%A6/">管理学<sup>1</sup></a><a href="/tags/%E6%A8%A1%E6%8B%9F%E5%8D%B7/">模拟卷<sup>2</sup></a><a href="/tags/%E9%A9%AC%E5%85%8B%E6%80%9D%E4%B8%BB%E4%B9%89/">马克思主义<sup>1</sup></a><a href="/tags/AJAX/">AJAX<sup>1</sup></a><a href="/tags/HTTP/">HTTP<sup>1</sup></a><a href="/tags/CSS/">CSS<sup>15</sup></a><a href="/tags/HTML/">HTML<sup>17</sup></a><a href="/tags/web/">web<sup>11</sup></a><a href="/tags/Ajax/">Ajax<sup>4</sup></a><a href="/tags/%E9%A2%98%E8%A7%A3/">题解<sup>3</sup></a><a href="/tags/%E7%BC%96%E7%A8%8B/">编程<sup>1</sup></a><a href="/tags/%E5%9F%B9%E8%AE%AD/">培训<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络<sup>7</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/">网络层<sup>1</sup></a><a href="/tags/%E8%B7%AF%E7%94%B1/">路由<sup>1</sup></a><a href="/tags/%E6%A6%82%E8%AE%BA/">概论<sup>1</sup></a><a href="/tags/%E7%89%A9%E7%90%86%E5%B1%82/">物理层<sup>1</sup></a><a href="/tags/%E9%93%BE%E8%B7%AF%E5%B1%82/">链路层<sup>1</sup></a><a href="/tags/%E8%BF%90%E8%BE%93%E5%B1%82/">运输层<sup>1</sup></a><a href="/tags/%E5%BA%94%E7%94%A8%E5%B1%82/">应用层<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">计算机组成原理<sup>6</sup></a><a href="/tags/%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97/">算术运算<sup>1</sup></a><a href="/tags/%E7%BC%93%E5%AD%98/">缓存<sup>1</sup></a><a href="/tags/%E5%AD%98%E5%82%A8%E5%99%A8/">存储器<sup>2</sup></a><a href="/tags/%E6%8C%87%E4%BB%A4%E7%B3%BB%E7%BB%9F/">指令系统<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A4%BA/">数据表示<sup>1</sup></a></div></div></div></div><div><div class="needEndHide" id="rightside"><div class="rs_hide"><button class="translate" type="button" title="简繁转换">简</button><button class="mode" type="button" title="显示模式切换" onclick="sco.switchDarkMode()"><i class="fas fa-circle-half-stroke"></i></button><button class="aside pc" type="button" title="侧边栏" onclick="sco.switchHideAside()"><i class="fas fa-arrows-alt-h"></i></button></div><div class="rs_show"><button class="config" type="button" title="扩展" onclick="document.querySelector(&quot;.rs_hide&quot;).classList.toggle(&quot;show&quot;)"><i class="fas fa-gear fa-spin"></i></button><button class="mobile toc" type="button" title="目录" onclick="document.querySelector('#card-toc').classList.toggle('open')"><i class="fas fa-list"></i></button><button class="top" type="button" title="返回顶部" onclick="sco.toTop()"><i class="fas fa-arrow-up"></i><span id="percent">0</span></button></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="show" id="nav"><div id="nav-group"><div id="blog_name"><a href="/" title="返回博客主页" id="site-name"><span class="title">木鱼的鱼窝</span><i class="solitude fas fa-home"></i></a></div><div id="page-name-mask"><div id="page-name"><a id="page-name-text" onclick="sco.toTop()">数据结构期末速通</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/%20%7C%7C%20fas%20fa-home"><span>主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%20%7C%7C%20fas%20fa-tags"><span>标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%20%7C%7C%20fas%20fa-th"><span>分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/%20%7C%7C%20fas%20fa-link"><span>友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/%20%7C%7C%20fas%20fa-user"><span>关于我</span></a></div></div></div><div id="nav-left"></div><div id="nav-right"><div class="nav-button" id="travellings_button"><a class="site-page" target="_blank" rel="noopener" href="https://www.travellings.cn/go.html" onclick="javascript:travelling()" title=""><i class="solitude fas fa-train"></i></a></div><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机一篇文章" href="javascript:void(0);"><i class="solitude fas fa-dice-d6"></i></a></div><div class="nav-button" id="nav-console"><a class="console_switchbutton" onclick="sco.showConsole()" title="中控台" href="javascript:void(0);"><label><i class="left"></i><i class="center"></i><i class="right"></i></label></a></div><div id="toggle-menu"><a class="site-page"><i class="solitude fas fa-bars"></i></a></div></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original" title="该文章为原创文章，注意版权协议">原创</a><span class="post-meta-categories"><a class="post-meta-categories" href="/categories/%E7%9F%A5%E8%AF%86/">知识</a></span><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%AE%97%E6%B3%95/"><span class="tags-name tags-punctuation"><i class="solitude fas fa-hashtag"></i>算法</span></a><a class="post-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><span class="tags-name tags-punctuation"><i class="solitude fas fa-hashtag"></i>数据结构</span></a></div></div></div></div><h1 class="post-title">数据结构期末速通</h1><div id="post-meta"><div class="meta-secondline"><span class="post-meta-date" title="发布于 2026-01-06 23:39:48"><i class="post-meta-icon solitude fas fa-calendar-days"></i><time datetime="2026-01-06T15:39:48.000Z">2026-01-06T15:39:48.000Z</time></span><span class="post-meta-date" title="最后更新于 2026-01-22 15:17:44"><i class="post-meta-icon solitude fas fa-arrows-rotate"></i><time datetime="2026-01-22T07:17:44.798Z">2026-01-22T07:17:44.798Z</time></span></div></div></div><div class="post-radius-bottom"></div><article class="post-content article-container"><h1>数据结构期末考前救急</h1>
+<h2 id="1-模式匹配">1 模式匹配</h2>
+<h3 id="1-1-核心解题步骤">1.1 核心解题步骤</h3>
+<ol>
+<li>
+<p><strong>构建分析表格</strong><br>
+需创建4行多列表格，列数=关键字个数+1（预留补充列），各行含义如下：</p>
+<ul>
+<li>第1行（下标）：从0开始依次递增（如关键字有10个，下标为0~9）；</li>
+<li>第2行（关键字）：直接复制题目给定的字符序列（如<code>&quot;ababacaaad&quot;</code>）；</li>
+<li>第3行（next数组）：前两个值固定，<code>next[0] = -1</code>，<code>next[1] = 0</code>，后续值需计算；</li>
+<li>第4行（nextval数组）：<code>nextval[0] = -1</code>，后续值根据next值和关键字推导。</li>
+</ul>
+</li>
+<li>
+<p><strong>计算next数组</strong><br>
+对下标<code>i ≥ 2</code>，比较当前关键字<code>T[i]</code>前的子串与字符串起始子串的<strong>最长相等前缀后缀长度</strong>：</p>
+<ul>
+<li>规则：若<code>T[i]</code>前<code>k</code>个字符与起始<code>k</code>个字符相等，且<code>k</code>是最大可能值，则<code>next[i] = k</code>；若无相等子串，<code>next[i] = 0</code>。</li>
+<li>例题：已知<code>T = &quot;ababacaaad&quot;</code>，计算<code>next[3]</code>（<code>T[3] = 'b'</code>）：
+<ol>
+<li><code>i=3</code>，前子串为<code>T[1..2] = &quot;ba&quot;</code>；</li>
+<li>对比起始子串<code>T[0..1] = &quot;ab&quot;</code>（不相等）；</li>
+<li>缩小范围，对比前1个字符<code>T[2] = &quot;a&quot;</code>与起始1个字符<code>T[0] = &quot;a&quot;</code>（相等）；</li>
+<li>故<code>next[3] = 1</code>。</li>
+</ol>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>计算nextval数组</strong><br>
+对每个下标<code>i</code>，根据<code>next[i] = k</code>判断：</p>
+<ul>
+<li>若<code>T[i] == T[k]</code>，则<code>nextval[i] = nextval[k]</code>；<strong>相同则延续上一个的<code>nextval</code></strong></li>
+<li>若<code>T[i] != T[k]</code>，则<code>nextval[i] = k</code>。<strong>不同则直接使用自己的<code>next</code>值</strong></li>
+<li>例题：延续上述<code>T</code>，计算<code>nextval[2]</code>（<code>T[2] = 'a'</code>）：
+<ol>
+<li><code>next[2] = 0</code>，<code>T[2] = 'a'</code>，<code>T[0] = 'a'</code>（相等）；</li>
+<li>故<code>nextval[2] = nextval[0] = -1</code>。</li>
+</ol>
+</li>
+</ul>
+</li>
+</ol>
+<h2 id="2-二叉树构建与线索化">2 二叉树构建与线索化</h2>
+<h3 id="2-1-基于遍历序列构建二叉树">2.1 基于遍历序列构建二叉树</h3>
+<h4 id="2-1-1-中序-后序遍历构建">2.1.1 中序+后序遍历构建</h4>
+<ul>
+<li><strong>核心规则</strong>：
+<ol>
+<li>后序遍历的最后一个元素是二叉树的<strong>根节点</strong>；</li>
+<li>在中序遍历中找到根节点的位置，根左侧所有元素为<strong>左子树节点</strong>，右侧所有元素为<strong>右子树节点</strong>；</li>
+<li>递归对左、右子树执行上述步骤，直至子树节点为空。</li>
+</ol>
+</li>
+</ul>
+<h4 id="2-1-2-前序-中序遍历构建">2.1.2 前序+中序遍历构建</h4>
+<ul>
+<li><strong>核心规则</strong>：
+<ol>
+<li>前序遍历的第一个元素是二叉树的<strong>根节点</strong>；</li>
+<li>中序遍历中根节点左侧为左子树，右侧为右子树；</li>
+<li>递归构建左、右子树（前序中左子树节点为根后连续<code>k</code>个元素，<code>k</code>为中序左子树节点个数）。</li>
+</ol>
+</li>
+</ul>
+<h3 id="2-2-中序线索二叉树">2.2 中序线索二叉树</h3>
+<ul>
+<li><strong>核心逻辑</strong>：中序遍历顺序为“左→根→右”，对无左孩子的节点，左指针指向<strong>中序前驱</strong>；对无右孩子的节点，右指针指向<strong>中序后继</strong>（前驱/后继为中序遍历中相邻的节点）。</li>
+<li><strong>例题</strong>：对2.1.1构建的二叉树进行中序线索化：
+<ol>
+<li>中序遍历序列：<code>a→b→c→d→e→f→g→h→i</code>；</li>
+<li><code>a</code>无左孩子，左指针为<code>NULL</code>（无前驱），右指针指向后继<code>b</code>；</li>
+<li><code>b</code>有左孩子<code>a</code>（无需线索），无右孩子，右指针指向后继<code>c</code>；</li>
+<li><code>c</code>无左孩子，左指针指向前驱<code>b</code>，无右孩子，右指针指向后继<code>d</code>；</li>
+<li>以此类推，直至所有无孩子节点完成线索化。</li>
+</ol>
+</li>
+</ul>
+<h2 id="3-树的节点个数计算（以度为3的树为例）">3 树的节点个数计算（以度为3的树为例）</h2>
+<h3 id="3-1-核心公式">3.1 核心公式</h3>
+<ol>
+<li>
+<p><strong>节点总数公式</strong>：<br>
+树的节点总数等于所有不同度数节点的个数之和：<br>
+$$n = n_0 + n_1 + n_2 + n_3$$<br>
+其中：</p>
+<ul>
+<li>$n_0$：度为0的节点数（叶子节点数）；</li>
+<li>$n_1$：度为1的节点数；</li>
+<li>$n_2$：度为2的节点数；</li>
+<li>$n_3$：度为3的节点数。</li>
+</ul>
+</li>
+<li>
+<p><strong>节点度数关系公式</strong>：<br>
+所有节点的度数之和加1（根节点无父节点）等于节点总数：<br>
+$$n = 0 \times n_0 + 1 \times n_1 + 2 \times n_2 + 3 \times n_3 + 1$$</p>
+</li>
+</ol>
+<h3 id="3-2-例题">3.2 例题</h3>
+<p>已知某度为3的树中，$n_2 = 200$，$n_3 = 100$，求叶子节点数$n_0$：</p>
+<ol>
+<li>联立两个公式：
+<ul>
+<li>公式1：$n = n_0 + n_1 + 200 + 100 = n_0 + n_1 + 300$；</li>
+<li>公式2：$n = 0 \times n_0 + 1 \times n_1 + 2 \times 200 + 3 \times 100 + 1 = n_1 + 701$；</li>
+</ul>
+</li>
+<li>两式相等消去$n_1$：<br>
+$n_0 + n_1 + 300 = n_1 + 701$ → $n_0 = 401$。</li>
+</ol>
+<h2 id="4-二叉排序树-BST-复习笔记">4. 二叉排序树 (BST) 复习笔记</h2>
+<h3 id="4-1-构建规则">4.1 构建规则</h3>
+<p><strong>核心原则</strong>：左孩子 &lt; 根节点 &lt; 右孩子</p>
+<ol>
+<li><strong>根节点确定</strong>：序列中第一个元素作为根。</li>
+<li><strong>插入逻辑</strong>：
+<ul>
+<li>若元素值 &gt; 当前节点值 $\rightarrow$ 往<strong>右子树</strong>走；</li>
+<li>若元素值 &lt; 当前节点值 $\rightarrow$ 往<strong>左子树</strong>走；</li>
+</ul>
+</li>
+<li><strong>终止条件</strong>：直到找到叶子节点的左/右空位置（NULL），将新元素放入该位置。</li>
+</ol>
+<hr>
+<h3 id="4-2-例题：构建与查找分析">4.2 例题：构建与查找分析</h3>
+<p><strong>题目</strong>：已知关键字序列 <code>K = &#123;34, 76, 45, 18, 26, 54, 92, 38&#125;</code>。</p>
+<h4 id="1-构建过程图解">1. 构建过程图解</h4>
+<ul>
+<li><strong>34</strong> 为根。</li>
+<li><strong>76</strong> &gt; 34 (右)。</li>
+<li><strong>45</strong> &gt; 34 (右) $\rightarrow$ &lt; 76 (左)。</li>
+<li><strong>18</strong> &lt; 34 (左)。</li>
+<li><strong>26</strong> &lt; 34 (左) $\rightarrow$ &gt; 18 (右)。</li>
+<li><strong>54</strong> &gt; 34 $\rightarrow$ &lt; 76 $\rightarrow$ &gt; 45 (右)。</li>
+<li><strong>92</strong> &gt; 34 $\rightarrow$ &gt; 76 (右)。</li>
+<li><strong>38</strong> &gt; 34 $\rightarrow$ &lt; 76 $\rightarrow$ &lt; 45 (左)。</li>
+</ul>
+<p><strong>最终树结构</strong>：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">      34 (L1)</span><br><span class="line">     /  \</span><br><span class="line">(L2)18   76</span><br><span class="line">     \   /  \</span><br><span class="line">(L3) 26 45   92</span><br><span class="line">       /  \</span><br><span class="line">(L4)  38   54</span><br></pre></td></tr></table></figure>
+<h4 id="2-查找次数计算">2. 查找次数计算</h4>
+<ul>
+<li><strong>查找 54</strong>（存在）：
+<ul>
+<li>路径：34 $\rightarrow$ 76 $\rightarrow$ 45 $\rightarrow$ 54</li>
+<li>比较次数：<strong>4次</strong>。</li>
+</ul>
+</li>
+<li><strong>查找 100</strong>（不存在）：
+<ul>
+<li>路径：34 $\rightarrow$ 76 $\rightarrow$ 92 $\rightarrow$ NULL</li>
+<li>比较次数：<strong>3次</strong>（比较至92后，发现应往右走但为空，确定失败）。</li>
+</ul>
+</li>
+</ul>
+<h4 id="3-平均查找长度-ASL-计算">3. 平均查找长度 (ASL) 计算</h4>
+<p><strong>① 查找成功 ($ASL_{success}$)</strong></p>
+<ul>
+<li><strong>公式</strong>：$\sum(本层节点数 \times 层数) / 节点总数$</li>
+<li><strong>统计</strong>：
+<ul>
+<li>第1层：1个 (34)</li>
+<li>第2层：2个 (18, 76)</li>
+<li>第3层：3个 (26, 45, 92)</li>
+<li>第4层：2个 (38, 54)</li>
+</ul>
+</li>
+<li><strong>计算</strong>：<br>
+$$ASL_{success} = \frac{1 \times 1 + 2 \times 2 + 3 \times 3 + 4 \times 2}{8} = \frac{22}{8} = 2.75$$</li>
+</ul>
+<p><strong>② 查找不成功 ($ASL_{unsuccess}$) —— 重点/难点</strong></p>
+<ul>
+<li><strong>方法</strong>：<strong>补坑法</strong>。统计所有空指针（NULL）及其父节点的层数。</li>
+<li><strong>总失败情况</strong>：$n + 1 = 9$ 个空指针。</li>
+<li><strong>统计过程</strong>：
+<ul>
+<li><strong>第2层空指针</strong>：节点18的左孩子 (1个) $\rightarrow$ 比较 2 次</li>
+<li><strong>第3层空指针</strong>：节点26左右、节点92左右 (4个) $\rightarrow$ 比较 3 次</li>
+<li><strong>第4层空指针</strong>：节点38左右、节点54左右 (4个) $\rightarrow$ 比较 4 次</li>
+</ul>
+</li>
+<li><strong>计算</strong>：<br>
+$$ASL_{unsuccess} = \frac{1\times2 + 4\times3 + 4\times4}{9} = \frac{2 + 12 + 16}{9} = \frac{30}{9} \approx 3.33$$</li>
+</ul>
+<hr>
+<h3 id="4-3-节点的删除操作">4.3 节点的删除操作</h3>
+<p>删除节点 <strong>p</strong> 后，必须保持二叉排序树的有序性。</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">节点情况</th>
+<th style="text-align:left">操作方法</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>叶子节点 (度0)</strong></td>
+<td style="text-align:left">直接删除，修改父节点指针为 NULL</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>单孩子节点 (度1)</strong></td>
+<td style="text-align:left"><strong>子承父业</strong>。让 p 的唯一孩子直接顶替 p 的位置</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>双孩子节点 (度2)</strong></td>
+<td style="text-align:left"><strong>找替身</strong>（转变为删度0或度1节点的问题）。<br>1. <strong>找后继</strong>：p 的<strong>右</strong>子树中的<strong>最左</strong>节点（最小值）。<br>2. <strong>找前驱</strong>：p 的<strong>左</strong>子树中的<strong>最右</strong>节点（最大值）。<br>3. 用替身的值覆盖 p，然后删除替身节点。</td>
+</tr>
+</tbody>
+</table>
+<p><strong>示例：在原树中删除 76</strong></p>
+<ul>
+<li>76 有两个孩子 (45, 92)。</li>
+<li><strong>方案 A (找后继)</strong>：右子树 (92…) 最小是 <strong>92</strong>。用 92 覆盖 76，删除原来的 92。</li>
+<li><strong>方案 B (找前驱)</strong>：左子树 (45…) 最大是 <strong>54</strong>。用 54 覆盖 76，删除原来的 54。</li>
+</ul>
+<h2 id="5-广义表">5 广义表</h2>
+<h3 id="5-1-核心概念计算">5.1 核心概念计算</h3>
+<table>
+<thead>
+<tr>
+<th>概念</th>
+<th>计算规则</th>
+<th>例题（广义表<code>L = (a, (b), (c, (d,e,f)))</code>）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>表头</td>
+<td>最外层括号内第一个逗号前的内容（含内层括号，若有）</td>
+<td>表头 = <code>a</code></td>
+</tr>
+<tr>
+<td>表尾</td>
+<td>去掉表头后，剩余内容外层加括号（表尾必为广义表）</td>
+<td>表尾 = <code>((b), (c, (d,e,f)))</code></td>
+</tr>
+<tr>
+<td>长度</td>
+<td>最外层元素的个数（每个可为原子或广义表，不嵌套计数）</td>
+<td>长度 = 3（<code>a</code>、<code>(b)</code>、<code>(c, (d,e,f))</code>）</td>
+</tr>
+<tr>
+<td>深度</td>
+<td>嵌套括号的最大层数（含最外层括号，原子深度为0，广义表深度为子表最大深度+1）</td>
+<td>深度 = 3（最内层<code>(d,e,f)</code>深度为2，加最外层共3）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="5-2-存储结构画法">5.2 存储结构画法</h3>
+<ul>
+<li><strong>节点规则</strong>：用方框表示节点，<code>1</code>代表广义表，<code>0</code>代表原子；并列节点用箭头连接，最后一个节点箭头指向<code>NULL</code>。</li>
+<li><strong>例题</strong>：广义表<code>(a, (b), (c, (d,e,f)))</code>的存储结构：
+<ol>
+<li>最外层为广义表节点（<code>1</code>），连接3个并列节点；</li>
+<li>第一个节点：原子<code>a</code>（<code>0,a</code>），箭头指向第二个节点；</li>
+<li>第二个节点：广义表<code>(b)</code>（<code>1</code>），内部连接原子<code>b</code>（<code>0,b</code>），箭头指向第三个节点；</li>
+<li>第三个节点：广义表<code>(c, (d,e,f))</code>（<code>1</code>），内部连接原子<code>c</code>（<code>0,c</code>）和广义表<code>(d,e,f)</code>（<code>1</code>），箭头指向<code>NULL</code>；</li>
+<li>广义表<code>(d,e,f)</code>（<code>1</code>）内部连接3个原子<code>d</code>、<code>e</code>、<code>f</code>（均为<code>0</code>），最后一个原子箭头指向<code>NULL</code>。</li>
+</ol>
+</li>
+</ul>
+<h2 id="6-数组存储地址计算">6 数组存储地址计算</h2>
+<h3 id="6-1-核心公式">6.1 核心公式</h3>
+<p>对于<code>m</code>行<code>n</code>列的二维数组（下标从1开始），元素<code>a[i][j]</code>的存储地址（顺序存储，行优先）：<br>
+$$LOC(a[i][j]) = LOC(a[1][1]) + [(i-1) \times n + (j-1)] \times k$$<br>
+其中：</p>
+<ul>
+<li>$LOC(a[1][1])$：数组首元素的存储地址；</li>
+<li>$i,j$：目标元素的行、列下标；</li>
+<li>$n$：数组的列数；</li>
+<li>$k$：每个元素占用的存储单元数（如int类型<code>k=4</code>）。</li>
+</ul>
+<h3 id="6-2-例题">6.2 例题</h3>
+<p>已知二维数组<code>A[1..3][1..4]</code>（3行4列），首地址<code>LOC(A[1][1]) = 2000</code>，每个元素占2个单元，求<code>LOC(A[2][3])</code>：</p>
+<ol>
+<li>代入公式：
+<ul>
+<li>$i=2$，$j=3$，$n=4$，$k=2$，$LOC(a[1][1])=2000$；</li>
+<li>计算过程：<br>
+$$LOC(A[2][3]) = 2000 + [(2-1) \times 4 + (3-1)] \times 2 = 2000 + (4 + 2) \times 2 = 2012$$</li>
+</ul>
+</li>
+</ol>
+<h2 id="7-二叉树相关代码设计">7 二叉树相关代码设计</h2>
+<h3 id="7-1-求二叉树节点总数">7.1 求二叉树节点总数</h3>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 二叉树节点结构（假设数据为int类型）</span></span><br><span class="line"><span class="keyword">typedef</span> <span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span> &#123;</span></span><br><span class="line">    <span class="type">int</span> data;</span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span> *<span class="title">left</span>;</span></span><br><span class="line">    <span class="class"><span class="keyword">struct</span> <span class="title">TreeNode</span> *<span class="title">right</span>;</span></span><br><span class="line">&#125; TreeNode;</span><br><span class="line"></span><br><span class="line"><span class="comment">// 递归求节点总数：空树返回0，非空则左子树+右子树+当前节点</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">countNodes</span><span class="params">(TreeNode *b)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (b == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span> <span class="keyword">return</span> countNodes(b-&gt;left) + countNodes(b-&gt;right) + <span class="number">1</span>;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="7-2-求二叉树高度">7.2 求二叉树高度</h3>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 递归求高度：空树高度为0，非空则取左/右子树最大高度+1</span></span><br><span class="line"><span class="type">int</span> <span class="title function_">treeHeight</span><span class="params">(TreeNode *b)</span> &#123;</span><br><span class="line">    <span class="type">int</span> leftH, rightH;</span><br><span class="line">    <span class="keyword">if</span> (b == <span class="literal">NULL</span>) <span class="keyword">return</span> <span class="number">0</span>;</span><br><span class="line">    <span class="keyword">else</span> &#123;</span><br><span class="line">        leftH = treeHeight(b-&gt;left);  <span class="comment">// 左子树高度</span></span><br><span class="line">        rightH = treeHeight(b-&gt;right); <span class="comment">// 右子树高度</span></span><br><span class="line">        <span class="keyword">return</span> (leftH &gt; rightH) ? (leftH + <span class="number">1</span>) : (rightH + <span class="number">1</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="7-3-输出二叉树叶子节点">7.3 输出二叉树叶子节点</h3>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">// 叶子节点：左右子树均为空，递归遍历输出</span></span><br><span class="line"><span class="type">void</span> <span class="title function_">printLeaves</span><span class="params">(TreeNode *b)</span> &#123;</span><br><span class="line">    <span class="keyword">if</span> (b != <span class="literal">NULL</span>) &#123;</span><br><span class="line">        <span class="keyword">if</span> (b-&gt;left == <span class="literal">NULL</span> &amp;&amp; b-&gt;right == <span class="literal">NULL</span>) &#123;</span><br><span class="line">            <span class="built_in">printf</span>(<span class="string">&quot;%d &quot;</span>, b-&gt;data);  <span class="comment">// 输出叶子节点值</span></span><br><span class="line">        &#125;</span><br><span class="line">        printLeaves(b-&gt;left);   <span class="comment">// 遍历左子树</span></span><br><span class="line">        printLeaves(b-&gt;right);  <span class="comment">// 遍历右子树</span></span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="8-哈弗曼树与编码">8 哈弗曼树与编码</h2>
+<h3 id="8-1-哈弗曼树构建规则">8.1 哈弗曼树构建规则</h3>
+<ol>
+<li>初始：将所有给定权重（如字符出现频率）作为独立的叶子节点；</li>
+<li>迭代：每次选择两个<strong>权重最小</strong>的节点，构建新节点（新节点权重=两节点权重之和）；</li>
+<li>更新：删除原两个节点，将新节点加入节点集合；</li>
+<li>终止：直至节点集合中只剩一个节点（根节点），哈弗曼树构建完成。</li>
+</ol>
+<h3 id="8-2-例题：构建与编码">8.2 例题：构建与编码</h3>
+<p>已知权重<code>[2,3,6,7,10,19,21,32]</code>，构建哈弗曼树并生成编码（左子树记为0，右子树记为1）：</p>
+<ol>
+<li>
+<p><strong>构建过程</strong>：</p>
+<ul>
+<li>第1轮：选2、3→新节点5；剩余<code>[5,6,7,10,19,21,32]</code>；</li>
+<li>第2轮：选5、6→新节点11；剩余<code>[7,10,11,19,21,32]</code>；</li>
+<li>第3轮：选7、10→新节点17；剩余<code>[11,17,19,21,32]</code>；</li>
+<li>第4轮：选11、17→新节点28；剩余<code>[19,21,28,32]</code>；</li>
+<li>第5轮：选19、21→新节点40；剩余<code>[28,32,40]</code>；</li>
+<li>第6轮：选28、32→新节点60；剩余<code>[40,60]</code>；</li>
+<li>第7轮：选40、60→新节点100（根）；构建完成。</li>
+</ul>
+</li>
+<li>
+<p><strong>哈弗曼编码</strong>：</p>
+<ul>
+<li>权重2（字符c）：路径<code>100→60→28→11→5→2</code>→编码<code>10000</code>；</li>
+<li>权重7（字符a）：路径<code>100→60→28→17→7</code>→编码<code>1010</code>；</li>
+<li>权重19（字符b）：路径<code>100→40→19</code>→编码<code>00</code>。</li>
+</ul>
+</li>
+</ol>
+<h3 id="8-3-带权路径长度-WPL">8.3 带权路径长度 (WPL)</h3>
+<p>这是考试最爱问的计算题。<br>
+<strong>公式</strong>：$WPL = \sum (\text{叶子权值} \times \text{路径长度})$</p>
+<ul>
+<li><strong>路径长度</strong>：从根到叶子经过了几根线（或者看编码有几位）。</li>
+<li><strong>计算本题 WPL</strong>：
+<ul>
+<li>C(2), F(3): 5层 $\to (2+3) \times 5 = 25$</li>
+<li>D(6), A(7), H(10): 4层 $\to (6+7+10) \times 4 = 92$</li>
+<li>E(32): 2层 $\to 32 \times 2 = 64$</li>
+<li>B(19), G(21): 2层 $\to (19+21) \times 2 = 80$</li>
+<li><strong>Total WPL</strong> = $25 + 92 + 64 + 80 = \mathbf{261}$</li>
+</ul>
+</li>
+</ul>
+<blockquote>
+<p><strong>速算技巧</strong>：WPL 也等于<strong>所有非叶子节点的权值之和</strong>。<br>
+本题非叶子节点有：5, 11, 17, 28, 40, 60, 100。<br>
+$5+11+17+28+40+60+100 = 261$。</p>
+</blockquote>
+<h2 id="9-最小生成树">9 最小生成树</h2>
+<h3 id="9-1-Prim算法（从节点出发）">9.1 Prim算法（从节点出发）</h3>
+<ul>
+<li>
+<p><strong>核心思想</strong>：从指定起始节点开始，逐步将“已选节点集”与“未选节点集”之间<strong>权值最小的边</strong>对应的节点加入已选集，避免环路，直至所有节点加入。</p>
+</li>
+<li>
+<p><strong>例题</strong>：图节点<code>0~5</code>，边权重<code>(0,1)=1</code>、<code>(0,2)=5</code>、<code>(0,3)=2</code>、<code>(1,2)=3</code>、<code>(1,4)=4</code>、<code>(2,5)=6</code>、<code>(3,5)=8</code>、<code>(4,5)=4</code>，从0出发构建：</p>
+<ol>
+<li>初始已选<code>&#123;0&#125;</code>，选边<code>(0,1)=1</code>→已选<code>&#123;0,1&#125;</code>；</li>
+<li>选边<code>(0,3)=2</code>→已选<code>&#123;0,1,3&#125;</code>；</li>
+<li>选边<code>(1,2)=3</code>→已选<code>&#123;0,1,3,2&#125;</code>；</li>
+<li>选边<code>(2,5)=6</code>→已选<code>&#123;0,1,3,2,5&#125;</code>；</li>
+<li>选边<code>(4,5)=4</code>→已选<code>&#123;0,1,3,2,5,4&#125;</code>；</li>
+<li>最小生成树边集：<code>&#123;(0,1),(0,3),(1,2),(2,5),(4,5)&#125;</code>，总权重<code>1+2+3+6+4=16</code>。</li>
+</ol>
+</li>
+</ul>
+<h3 id="9-2-Kruskal算法（从边出发）">9.2 Kruskal算法（从边出发）</h3>
+<ul>
+<li>
+<p><strong>核心思想</strong>：按边权重从小到大排序，每次选权重最小的边，若不构成环路则保留，直至边数=节点数-1（无环路的连通图）。</p>
+</li>
+<li>
+<p><strong>例题</strong>（同9.1的图）：</p>
+<ol>
+<li>边按权重排序：<code>(0,1)=1</code>、<code>(0,3)=2</code>、<code>(1,2)=3</code>、<code>(1,4)=4</code>、<code>(4,5)=4</code>、<code>(2,5)=6</code>、<code>(3,5)=8</code>；</li>
+<li>依次选边：<code>(0,1)</code>（无环）→<code>(0,3)</code>（无环）→<code>(1,2)</code>（无环）→<code>(4,5)</code>（无环）→<code>(2,5)</code>（无环）；</li>
+<li>边数=5（节点数6-1），停止，结果与Prim算法一致。</li>
+</ol>
+</li>
+</ul>
+<h2 id="10-图的遍历">10 图的遍历</h2>
+<h3 id="10-1-深度优先遍历（DFS）">10.1 深度优先遍历（DFS）</h3>
+<ul>
+<li>
+<p><strong>核心规则</strong>：从起始节点出发，优先访问当前节点的<strong>未访问邻接节点</strong>，深入到无法继续时回溯，直至所有节点访问完毕（类似“走迷宫优先探到底”）。</p>
+</li>
+<li>
+<p><strong>例题</strong>：图结构<code>1-2-3-4</code>、<code>1-5</code>、<code>1-6</code>（节点1与2、5、6相连，2与3相连，3与4相连），从1出发：</p>
+<ul>
+<li>遍历路径1：<code>1→2→3→4→5→6</code>（访问1后先探2，再探3、4；回溯1后探5，最后探6）；</li>
+<li>遍历路径2：<code>1→5→2→3→4→6</code>（邻接节点选择顺序不同，路径可变化，但均为深度优先）。</li>
+</ul>
+</li>
+</ul>
+<h3 id="10-2-广度优先遍历（BFS）">10.2 广度优先遍历（BFS）</h3>
+<ul>
+<li>
+<p><strong>核心规则</strong>：从起始节点出发，先访问当前节点的<strong>所有未访问邻接节点</strong>（按“层”访问），再依次访问邻接节点的未访问邻接节点（类似“水波扩散”）。</p>
+</li>
+<li>
+<p><strong>例题</strong>（同10.1的图）：</p>
+<ul>
+<li>遍历路径：<code>1→2→5→6→3→4</code>（先访问1的邻接节点2、5、6；再访问2的邻接节点3；最后访问3的邻接节点4）。</li>
+</ul>
+</li>
+</ul>
+<p>我们将哈希冲突的处理方法分为两大类：</p>
+<ol>
+<li><strong>开放定址法</strong>（Open Addressing）：包括线性探测、二次探测。</li>
+<li><strong>链地址法</strong>（Chaining）：即拉链法。</li>
+</ol>
+<hr>
+<h3 id="一、-线性探测法-Linear-Probing">一、 线性探测法 (Linear Probing)</h3>
+<p><strong>“挨个找车位”</strong></p>
+<h4 id="1-原理">1. 原理</h4>
+<p>当计算出的哈希地址 $H(key) = d$ 被占用时，就去检查下一个位置 $d+1$，如果还被占，就检查 $d+2$，直到找到一个空位置为止。</p>
+<ul>
+<li><strong>公式</strong>：$H_i = (H(key) + i) % m$ （$m$ 为表长，$i = 1, 2, 3…$）</li>
+<li><strong>注意</strong>：这是一种<strong>循环探测</strong>。如果查到了表尾（$m-1$），下一个探测位置是表头（$0$）。</li>
+</ul>
+<h4 id="2-核心考点：堆积（Clustering）现象">2. 核心考点：堆积（Clustering）现象</h4>
+<p>这是线性探测法最大的<strong>缺点</strong>。</p>
+<ul>
+<li><strong>现象</strong>：因为冲突的元素都被挤到了相邻的位置，形成了一大片连续的“非空区域”。</li>
+<li><strong>后果</strong>：后来的元素（即使它们的哈希值本来不冲突），一旦撞进这个区域，也得一路往后找，导致冲突概率像滚雪球一样越来越大，大大降低了查找效率。</li>
+</ul>
+<h4 id="3-示例简述">3. 示例简述</h4>
+<ul>
+<li>表长 5，H(key)=key%5。</li>
+<li>插入 5：放下标 0。</li>
+<li>插入 10：0 被占 $\to$ 找 1 (空)，放入。</li>
+<li>插入 11：1 被占 $\to$ 找 2 (空)，放入。</li>
+<li><strong>查找 11</strong>：先去 1，不是 11；再去 2，是 11。比较 2 次。</li>
+</ul>
+<hr>
+<h3 id="二、-二次探测法-Quadratic-Probing">二、 二次探测法 (Quadratic Probing)</h3>
+<p><strong>“跳着找车位”</strong></p>
+<h4 id="1-原理-2">1. 原理</h4>
+<p>为了解决线性探测的“堆积”问题，二次探测法在冲突时不挨个找，而是<strong>双向跳跃式</strong>寻找。</p>
+<ul>
+<li><strong>增量序列</strong>：$1^2, -1^2, 2^2, -2^2, 3^2, -3^2 …$</li>
+<li><strong>公式</strong>：
+<ul>
+<li>第 1 次冲突：$d_1 = (H(key) + 1^2) % m$</li>
+<li>第 2 次冲突：$d_2 = (H(key) - 1^2) % m$</li>
+<li>第 3 次冲突：$d_3 = (H(key) + 2^2) % m$</li>
+<li>…</li>
+<li>第 $i$ 次冲突：$d_i = (H(key) \pm k^2) % m$</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-举例演示（必看）">2. 举例演示（必看）</h4>
+<p>设表长 $m=13$，关键码 $key=14$，哈希函数 $H(key) = key % 13 = 1$。<br>
+假设下标 1 已经被占了。</p>
+<ul>
+<li><strong>线性探测</strong>会找：2, 3, 4…</li>
+<li><strong>二次探测</strong>的寻找路径：
+<ol>
+<li><strong>+1²</strong>：$(1 + 1) % 13 = 2$。若 2 被占，则：</li>
+<li><strong>-1²</strong>：$(1 - 1) % 13 = 0$。若 0 被占，则：</li>
+<li><strong>+2²</strong>：$(1 + 4) % 13 = 5$。若 5 被占，则：</li>
+<li><strong>-2²</strong>：$(1 - 4) % 13 = -3$ $\rightarrow$ <strong>注意负数取模</strong>：$13-3=10$。</li>
+</ol>
+</li>
+</ul>
+<h4 id="3-优缺点">3. 优缺点</h4>
+<ul>
+<li><strong>优点</strong>：能较好地避免“堆积”现象（只有哈希值相同的元素才会走同一条探测路径）。</li>
+<li><strong>缺点</strong>：计算稍麻烦；可能会出现“表里明明有空位，但跳来跳去就是跳不到空位”的情况（为了避免这个，表长 $m$ 通常取 $4k+3$ 形式的素数）。</li>
+</ul>
+<hr>
+<h3 id="三、-链地址法-Chain-Address-拉链法">三、 链地址法 (Chain Address / 拉链法)</h3>
+<p><strong>“无限深抽屉”</strong></p>
+<h4 id="1-原理-3">1. 原理</h4>
+<p>不把冲突的元素硬塞到别人的位置里，而是把哈希表看作一个<strong>指针数组</strong>。<br>
+所有哈希地址为 $i$ 的元素，都挂在下标为 $i$ 的<strong>单链表</strong>中。</p>
+<h4 id="2-结构图示">2. 结构图示</h4>
+<p>设 $H(key) = key % 13$。序列：<code>&#123;1, 14, 27, 2&#125;</code></p>
+<ul>
+<li>$1 % 13 = 1$</li>
+<li>$14 % 13 = 1$</li>
+<li>$27 % 13 = 1$</li>
+<li>$2 % 13 = 2$</li>
+</ul>
+<p><strong>结构如下</strong>：</p>
+<figure class="highlight text"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">下标</span><br><span class="line">[0] -&gt; NULL</span><br><span class="line">[1] -&gt; 27 -&gt; 14 -&gt; 1 -&gt; NULL  (冲突的都在这串链表上)</span><br><span class="line">[2] -&gt; 2 -&gt; NULL</span><br><span class="line">[3] -&gt; NULL</span><br><span class="line">...</span><br></pre></td></tr></table></figure>
+<p><em>(注：新元素通常可以用“头插法”插入链表，比较快)</em></p>
+<h4 id="3-链地址法的-ASL-计算（与开放定址法完全不同！）">3. 链地址法的 ASL 计算（与开放定址法完全不同！）</h4>
+<p><strong>例题</strong>：上述链表结构中，求查找成功的 ASL。</p>
+<ul>
+<li><strong>第 1 层节点</strong>（27, 2）：比较 1 次就能找到。共 2 个。</li>
+<li><strong>第 2 层节点</strong>（14）：比较 2 次。共 1 个。</li>
+<li><strong>第 3 层节点</strong>（1）：比较 3 次。共 1 个。</li>
+<li>总数 $n = 4$。</li>
+</ul>
+<p>$$ASL_{成功} = \frac{1\times2 + 2\times1 + 3\times1}{4} = \frac{7}{4} = 1.75$$</p>
+<h4 id="4-优缺点（高频考点）">4. 优缺点（高频考点）</h4>
+<ul>
+<li><strong>优点</strong>：
+<ol>
+<li><strong>无堆积</strong>：非同义词（Hash值不一样的）决不会发生冲突。</li>
+<li><strong>删除简单</strong>：直接在链表上删节点即可（开放定址法通常不能物理删除，只能标记为“已删除”，否则会截断后续元素的探测路径）。</li>
+<li><strong>空间弹性大</strong>：适合无法确定元素个数的情况。</li>
+</ol>
+</li>
+<li><strong>缺点</strong>：
+<ol>
+<li>指针占用额外的空间。</li>
+</ol>
+</li>
+</ul>
+<hr>
+<h3 id="四、-三种方法的终极对比（考前背诵）">四、 三种方法的终极对比（考前背诵）</h3>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">特性</th>
+<th style="text-align:left">线性探测法</th>
+<th style="text-align:left">二次探测法</th>
+<th style="text-align:left">链地址法（拉链法）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>冲突处理</strong></td>
+<td style="text-align:left">$d+1, d+2, …$</td>
+<td style="text-align:left">$d+1^2, d-1^2, d+2^2…$</td>
+<td style="text-align:left">挂链表</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>堆积现象</strong></td>
+<td style="text-align:left"><strong>严重</strong></td>
+<td style="text-align:left">较轻</td>
+<td style="text-align:left"><strong>无</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>查找效率</strong></td>
+<td style="text-align:left">最差（因为堆积）</td>
+<td style="text-align:left">中等</td>
+<td style="text-align:left"><strong>最高</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>空间利用</strong></td>
+<td style="text-align:left">容易填满，装填因子不能太大</td>
+<td style="text-align:left">同左</td>
+<td style="text-align:left">需额外指针空间，但可存更多元素</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>删除操作</strong></td>
+<td style="text-align:left"><strong>困难</strong>（需用逻辑标记）</td>
+<td style="text-align:left">困难</td>
+<td style="text-align:left"><strong>简单</strong>（链表删除）</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>ASL计算</strong></td>
+<td style="text-align:left">累加探测次数 / $n$</td>
+<td style="text-align:left">同左</td>
+<td style="text-align:left">$\sum(层数 \times 个数) / n$</td>
+</tr>
+</tbody>
+</table>
+<ol>
+<li>
+<p><strong>看到“线性探测”</strong>：画表格，注意不要算错下标，注意循环回表头。</p>
+</li>
+<li>
+<p><strong>看到“二次探测”</strong>：如果算出来是负数，记得加上表长 $m$ 变正数。</p>
+</li>
+<li>
+<p><strong>看到“链地址”</strong>：ASL 计算时，是算链表的深度，别用线性探测的方法算。</p>
+</li>
+<li>
+<p><strong>取余的除数是谁？</strong></p>
+<ul>
+<li>公式 $H(key) = key % p$。如果题目给了 $p$ 就用 $p$；没给 $p$ 就直接用<strong>表长 $m$</strong>。</li>
+<li><em>陷阱</em>：有些题目表长 $m=16$，但要求 $p=13$（最大素数）。一定要看清题意。</li>
+</ul>
+</li>
+<li>
+<p><strong>分母不要搞错！</strong></p>
+<ul>
+<li>算<strong>成功</strong> ASL：分母是<strong>元素个数</strong> (有多少个数据)。</li>
+<li>算<strong>不成功</strong> ASL：分母是<strong>表长</strong> (有多少个坑位)。</li>
+</ul>
+</li>
+<li>
+<p><strong>循环边界</strong></p>
+<ul>
+<li>线性探测查到表尾（下标12）还没停，下一步是回到下标0，不是停止！</li>
+</ul>
+</li>
+<li>
+<p><strong>不成功的计算逻辑</strong></p>
+<ul>
+<li>一定要数到**空位置（NULL）**为止，包括那个空位置本身也算一次比较。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="12-排序-Sorting">12 排序 (Sorting)</h2>
+<h2 id="12-1-基本概念">12.1 基本概念</h2>
+<ol>
+<li><strong>稳定性</strong>：若待排序表中存在两个关键字相同的元素 $R_i$ 和 $R_j$ ($R_i=R_j$)，排序后它们的相对位置保持不变，则称算法是<strong>稳定</strong>的；否则为<strong>不稳定</strong>。
+<ul>
+<li><em>口诀</em>：快（速）、希（尔）、选（择）、堆（排）是不稳定的。</li>
+</ul>
+</li>
+<li><strong>内/外排序</strong>：
+<ul>
+<li>内排序：数据全部在内存中进行。</li>
+<li>外排序：数据量太大，需要在内存和外存之间移动（如磁盘排序）。</li>
+</ul>
+</li>
+</ol>
+<hr>
+<h2 id="12-2-插入排序-Insertion-Sort">12.2 插入排序 (Insertion Sort)</h2>
+<h3 id="1-直接插入排序-Direct-Insertion-Sort">1. 直接插入排序 (Direct Insertion Sort)</h3>
+<ul>
+<li><strong>核心思想</strong>：类似打扑克牌。将待排序元素插入到前面已排好序的子序列中。</li>
+<li><strong>规则</strong>：
+<ol>
+<li>第 1 趟：认为第 1 个元素有序。</li>
+<li>第 $i$ 趟：将第 $i+1$ 个元素插入到前 $i$ 个有序序列的适当位置。</li>
+</ol>
+</li>
+<li><strong>考点</strong>：
+<ul>
+<li><strong>最好情况</strong>：输入已有序，复杂度 $O(n)$。</li>
+<li><strong>最坏情况</strong>：输入逆序，复杂度 $O(n^2)$。</li>
+</ul>
+</li>
+<li><strong>例题演示</strong>：<code>[34, 50, 25]</code>
+<ul>
+<li>初始：<code>[34], 50, 25</code></li>
+<li>插入50：<code>[34, 50], 25</code></li>
+<li>插入25：<code>[25, 34, 50]</code></li>
+</ul>
+</li>
+</ul>
+<h3 id="2-希尔排序-Shell-Sort">2. 希尔排序 (Shell Sort)</h3>
+<ul>
+<li><strong>核心思想</strong>：<strong>缩小增量排序</strong>。先将序列按增量 $d$ 分组，组内进行直接插入排序，然后缩小 $d$ 直至 1。</li>
+<li><strong>规则</strong>：
+<ul>
+<li>跳跃式比较和移动。</li>
+<li>最后一步一定是 $d=1$ 的直接插入排序。</li>
+</ul>
+</li>
+<li><strong>考点</strong>：
+<ul>
+<li><strong>不稳定</strong>（因为跳跃交换）。</li>
+<li>适合初期让原本无序的序列基本有序。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="12-3-交换排序-Exchange-Sort">12.3 交换排序 (Exchange Sort)</h2>
+<h3 id="1-冒泡排序-Bubble-Sort">1. 冒泡排序 (Bubble Sort)</h3>
+<ul>
+<li><strong>核心思想</strong>：两两比较，反序则交换。每趟将一个“最大”的元素“沉底”。</li>
+<li><strong>规则</strong>：
+<ul>
+<li>若一趟排序中没有发生交换，说明序列已有序，算法提前结束。</li>
+</ul>
+</li>
+<li><strong>考点</strong>：
+<ul>
+<li>第 $i$ 趟结束，倒数第 $i$ 个元素归位（全局最大/小）。</li>
+<li><strong>稳定</strong>。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-快速排序-Quick-Sort-——-★-重中之重">2. 快速排序 (Quick Sort) —— <strong>★ 重中之重</strong></h3>
+<ul>
+<li><strong>核心思想</strong>：分治法。
+<ol>
+<li><strong>基准</strong>：选一个元素（通常是第一个）作为 Pivot。</li>
+<li><strong>分区</strong>：比 Pivot 小的放左边，比 Pivot 大的放右边。</li>
+<li><strong>递归</strong>：对左右两边继续排。</li>
+</ol>
+</li>
+<li><strong>例题</strong>：序列 <code>[34, 50, 25, 23, 56, 20]</code>，基准 34。
+<ul>
+<li><strong>分区过程</strong>：
+<ul>
+<li>L指向34，R指向20。20 &lt; 34，20移到L位置 <code>[20, 50, 25, 23, 56, (20)]</code>。</li>
+<li>L右移找大：50 &gt; 34，50移到R位置 <code>[20, (50), 25, 23, 56, 50]</code>。</li>
+<li>R左移找小：23 &lt; 34，23移到L位置 <code>[20, 23, 25, (23), 56, 50]</code>。</li>
+<li>L右移找大：25 &lt; 34，继续；碰到R。</li>
+<li>将 34 填入相遇点。</li>
+</ul>
+</li>
+<li><strong>结果</strong>：<code>[20, 23, 25, 34, 56, 50]</code>。</li>
+</ul>
+</li>
+<li><strong>考点</strong>：
+<ul>
+<li><strong>平均性能最优</strong>：$O(n\log n)$。</li>
+<li><strong>最坏情况</strong>：序列已有序（正序或逆序），退化为冒泡 $O(n^2)$。</li>
+<li><strong>空间复杂度</strong>：需要递归栈 $O(\log n)$。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="12-4-选择排序-Selection-Sort">12.4 选择排序 (Selection Sort)</h2>
+<h3 id="1-简单选择排序-Simple-Selection-Sort">1. 简单选择排序 (Simple Selection Sort)</h3>
+<ul>
+<li><strong>核心思想</strong>：在无序区中选出最小的元素，与无序区的第一个元素<strong>交换</strong>。</li>
+<li><strong>规则</strong>：
+<ul>
+<li>无论输入是否有序，比较次数恒为 $n(n-1)/2$。</li>
+</ul>
+</li>
+<li><strong>考点</strong>：
+<ul>
+<li><strong>不稳定</strong>。例：序列 <code>[2, 2', 1]</code>，第一趟 1 和 2 交换 $\rightarrow$ <code>[1, 2', 2]</code>，两个 2 相对位置变了。</li>
+</ul>
+</li>
+</ul>
+<h3 id="2-堆排序-Heap-Sort-——-难点">2. 堆排序 (Heap Sort) —— <strong>难点</strong></h3>
+<ul>
+<li><strong>前置概念</strong>：
+<ul>
+<li><strong>大顶堆</strong>：根 $\ge$ 左右孩子（数组看起来是乱的，但逻辑结构满足堆定义）。</li>
+</ul>
+</li>
+<li><strong>步骤</strong>：
+<ol>
+<li><strong>建堆</strong>：从最后一个非叶子节点开始，自下而上调整。</li>
+<li><strong>排序</strong>：输出堆顶元素（与末尾交换），剩余元素重新调整为堆。</li>
+</ol>
+</li>
+<li><strong>考点</strong>：
+<ul>
+<li><strong>空间复杂度低</strong>：$O(1)$，不需要像归并那样开额外数组。</li>
+<li>时间复杂度恒为 $O(n\log n)$。</li>
+<li>适合从海量数据中选出前 $K$ 个最大/最小的数。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="12-5-归并排序-Merge-Sort">12.5 归并排序 (Merge Sort)</h2>
+<ul>
+<li><strong>核心思想</strong>：分治与合并。将两个有序表合并成一个有序表（2-路归并）。</li>
+<li><strong>步骤</strong>：
+<ul>
+<li>初始视作 $n$ 个长度为 1 的有序子序列。</li>
+<li>两两合并，得到 $\lceil n/2 \rceil$ 个长度为 2 的序列…</li>
+</ul>
+</li>
+<li><strong>考点</strong>：
+<ul>
+<li><strong>空间复杂度最高</strong>：$O(n)$，需要辅助数组。</li>
+<li><strong>稳定</strong>且效率高。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h2 id="12-6-核心对比表（★背诵★）">12.6 核心对比表（★背诵★）</h2>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">排序算法</th>
+<th style="text-align:left">平均时间</th>
+<th style="text-align:left">最好时间</th>
+<th style="text-align:left">最坏时间</th>
+<th style="text-align:left">空间</th>
+<th style="text-align:left">稳定性</th>
+<th style="text-align:left">备注</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>直接插入</strong></td>
+<td style="text-align:left">$O(n^2)$</td>
+<td style="text-align:left">$O(n)$</td>
+<td style="text-align:left">$O(n^2)$</td>
+<td style="text-align:left">$O(1)$</td>
+<td style="text-align:left">稳定</td>
+<td style="text-align:left">序列基本有序时最快</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>希尔排序</strong></td>
+<td style="text-align:left">$O(n^{1.3})$</td>
+<td style="text-align:left">-</td>
+<td style="text-align:left">$O(n^2)$</td>
+<td style="text-align:left">$O(1)$</td>
+<td style="text-align:left"><strong>不稳定</strong></td>
+<td style="text-align:left">增量分组</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>冒泡排序</strong></td>
+<td style="text-align:left">$O(n^2)$</td>
+<td style="text-align:left">$O(n)$</td>
+<td style="text-align:left">$O(n^2)$</td>
+<td style="text-align:left">$O(1)$</td>
+<td style="text-align:left">稳定</td>
+<td style="text-align:left">没交换就停止</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>快速排序</strong></td>
+<td style="text-align:left">$O(n\log n)$</td>
+<td style="text-align:left">$O(n\log n)$</td>
+<td style="text-align:left">$O(n^2)$</td>
+<td style="text-align:left">$O(\log n)$</td>
+<td style="text-align:left"><strong>不稳定</strong></td>
+<td style="text-align:left"><strong>综合性能最好</strong></td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>简单选择</strong></td>
+<td style="text-align:left">$O(n^2)$</td>
+<td style="text-align:left">$O(n^2)$</td>
+<td style="text-align:left">$O(n^2)$</td>
+<td style="text-align:left">$O(1)$</td>
+<td style="text-align:left"><strong>不稳定</strong></td>
+<td style="text-align:left">比较次数固定</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>堆排序</strong></td>
+<td style="text-align:left">$O(n\log n)$</td>
+<td style="text-align:left">$O(n\log n)$</td>
+<td style="text-align:left">$O(n\log n)$</td>
+<td style="text-align:left">$O(1)$</td>
+<td style="text-align:left"><strong>不稳定</strong></td>
+<td style="text-align:left">适合选Top K</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>归并排序</strong></td>
+<td style="text-align:left">$O(n\log n)$</td>
+<td style="text-align:left">$O(n\log n)$</td>
+<td style="text-align:left">$O(n\log n)$</td>
+<td style="text-align:left"><strong>$O(n)$</strong></td>
+<td style="text-align:left">稳定</td>
+<td style="text-align:left">占内存</td>
+</tr>
+</tbody>
+</table>
+<hr>
+<h2 id="12-7-考试解题方法论">12.7 考试解题方法论</h2>
+<h3 id="题型一：手写排序过程">题型一：手写排序过程</h3>
+<p><strong>题目问法</strong>：“请写出使用XX排序算法进行第3趟排序后的结果。”</p>
+<ul>
+<li><strong>直接插入</strong>：数前 3 个数，把它们排好序，后面的完全不动。</li>
+<li><strong>冒泡排序</strong>：看最后 3 个数，把最大的 3 个找出来放到最后（有序区在尾部）。</li>
+<li><strong>简单选择</strong>：看前 3 个数，把最小的 3 个找出来放到前面（有序区在头部）。</li>
+<li><strong>快速排序</strong>：
+<ul>
+<li>这也是最容易错的。切记<strong>基准（Pivot）归位</strong>。</li>
+<li>画图法：画两个指针，左边找大，右边找小，填坑。</li>
+<li>检查标准：基准归位后，左边的都比它小，右边的都比它大。</li>
+</ul>
+</li>
+</ul>
+<h3 id="题型二：排序算法的选择">题型二：排序算法的选择</h3>
+<p><strong>题目问法</strong>：“数据基本有序，选什么？数据量极大，选什么？”</p>
+<ol>
+<li><strong>若 $n$ 较小</strong>：直接插入排序，简单选择排序。</li>
+<li><strong>若数据基本有序</strong>：直接插入排序（最快）、冒泡排序。
+<ul>
+<li><em>避坑</em>：此时快速排序最慢！</li>
+</ul>
+</li>
+<li><strong>若 $n$ 较大</strong>：快速排序、堆排序、归并排序。
+<ul>
+<li>要求稳定 $\rightarrow$ 归并。</li>
+<li>内存空间紧张 $\rightarrow$ 堆排。</li>
+<li>追求平均速度 $\rightarrow$ 快排。</li>
+</ul>
+</li>
+</ol>
+<h3 id="题型三：复杂度与稳定性判断">题型三：复杂度与稳定性判断</h3>
+<p><strong>记忆口诀</strong>：</p>
+<ul>
+<li><strong>稳定性</strong>：<strong>“快希选堆”不稳定</strong>（心情不稳定：快些选一堆朋友去玩）。</li>
+<li><strong>空间</strong>：快排 $\log n$（递归），归并 $n$（辅助），其他 $1$。</li>
+<li><strong>时间</strong>：
+<ul>
+<li>$O(n^2)$ 组：插、冒、选。</li>
+<li>$O(n\log n)$ 组：快、归、堆。</li>
+</ul>
+</li>
+</ul>
+<hr>
+<h3 id="模拟练习">模拟练习</h3>
+<p><strong>题目</strong>：有一组数据 <code>[12, 2, 16, 30, 28, 10, 16*, 20, 6, 18]</code>，使用某种排序后，变成了 <code>[2, 6, 10, 12, 16, 16*, 18, 20, 28, 30]</code>（注意两个16的相对位置没变）。<br>
+请问下列哪种算法<strong>不可能</strong>是它使用的算法？<br>
+A. 冒泡排序<br>
+B. 快速排序<br>
+C. 归并排序<br>
+D. 直接插入排序</p>
+<details>
+<summary>👉 点击查看解析</summary>
+**答案：B**
+**解析**：
+题目中排序后的结果显示，两个 16 的相对位置保持不变（$16$ 在 $16*$ 前面），说明该算法是**稳定**的。
+A. 冒泡（稳定）
+B. 快速（不稳定）
+C. 归并（稳定）
+D. 插入（稳定）
+所以不可能是快速排序。
+</details>
+</article><div class="post-copyright"><div class="post-copyright__author_group"><div class="post-copyright__author_img"><img class="post-copyright__author_img_front" src="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg"></div><div class="post-copyright__author_name">woodfish</div><div class="post-copyright__author_desc">HOLA,this is woodfish!</div></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div id="quit-box" onclick="RemoveRewardMask()"></div><div class="post-reward"><div class="reward-button" title="赞赏作者" onclick="AddRewardMask()"><i class="solitude fas fa-heart"></i>赞赏作者</div><div class="reward-main"><ul class="reward-all"><span class="reward-title"></span><ul class="reward-group"><li class="reward-item"><a href="/null"><img class="post-qr-code-img nolazyload" src="https://www.woodfishhhh.xyz/images/e926e309585e5a5826ab0c3b485f8b6.png?_t=1751445131356" alt="微信" style="border-color: var(--efu-main)"></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/null"><img class="post-qr-code-img nolazyload" src="https://www.woodfishhhh.xyz/images/8147e2d92fa8287fac8774305c99661.jpg.jpeg?_t=1751445131356" alt="支付宝" style="border-color: var(--efu-main)"></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/"><div class="reward-text">赞赏名单</div><div class="reward-dec"></div></a></ul></div></div><script>function RemoveRewardMask() {
+    let rewardMainElements = document.querySelectorAll(".reward-main");
+    let quitBoxElement = document.querySelector("#quit-box");
+
+    rewardMainElements.forEach(element => {
+        element.style.display = "none";
+    });
+
+    if (quitBoxElement) {
+        quitBoxElement.style.display = "none";
+    }
+}
+
+function AddRewardMask() {
+    let rewardMainElements = document.querySelectorAll(".reward-main");
+    let quitBoxElement = document.querySelector("#quit-box");
+
+    rewardMainElements.forEach(element => {
+        element.style.display = "flex";
+    });
+
+    if (quitBoxElement) {
+        quitBoxElement.style.display = "flex";
+    }
+}</script></div></div><div class="social-share"><a class="social-share-ico icon-qq" target="_blank" rel="noopener" href="https://connect.qq.com/widget/shareqq/index.html?url=https%3A%2F%2Fwww.woodfishhhh.xyz%2F2026%2F01%2F06%2F%25E6%259D%2582%25E9%25A1%25B9%2F%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584%25E6%259C%259F%25E6%259C%25AB%25E9%2580%259F%25E9%2580%259A%2F&amp;title=%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%9C%9F%E6%9C%AB%E9%80%9F%E9%80%9A&amp;desc=undefined&amp;summary=undefined&amp;site=%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%9C%9F%E6%9C%AB%E9%80%9F%E9%80%9A&amp;pics=https%3A%2F%2Fpic1.imgdb.cn%2Fitem%2F682f3d1658cb8da5c807b704.jpg" title="分享到QQ"><i class="solitude fab fa-qq"></i></a><a class="social-share-ico icon-weibo" target="_blank" rel="noopener" href="http://service.weibo.com/share/share.php?url=https%3A%2F%2Fwww.woodfishhhh.xyz%2F2026%2F01%2F06%2F%25E6%259D%2582%25E9%25A1%25B9%2F%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584%25E6%259C%259F%25E6%259C%25AB%25E9%2580%259F%25E9%2580%259A%2F&amp;title=%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%9C%9F%E6%9C%AB%E9%80%9F%E9%80%9A&amp;pic=https%3A%2F%2Fpic1.imgdb.cn%2Fitem%2F682f3d1658cb8da5c807b704.jpg" title="分享到微博"><i class="solitude fab fa-weibo"></i></a><a class="social-share-ico icon-twitter" target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.woodfishhhh.xyz%2F2026%2F01%2F06%2F%25E6%259D%2582%25E9%25A1%25B9%2F%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584%25E6%259C%259F%25E6%259C%25AB%25E9%2580%259F%25E9%2580%259A%2F&amp;text=%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%9C%9F%E6%9C%AB%E9%80%9F%E9%80%9A" title="分享到Twitter"><i class="solitude fab fa-twitter"></i></a><a class="social-share-ico icon-facebook" target="_blank" rel="noopener" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.woodfishhhh.xyz%2F2026%2F01%2F06%2F%25E6%259D%2582%25E9%25A1%25B9%2F%25E6%2595%25B0%25E6%258D%25AE%25E7%25BB%2593%25E6%259E%2584%25E6%259C%259F%25E6%259C%25AB%25E9%2580%259F%25E9%2580%259A%2F" title="分享到Facebook"><i class="solitude fab fa-facebook"></i></a><div class="social-share-ico icon-link" onclick="utils.copy(&quot;https://www.woodfishhhh.xyz/2026/01/06/%E6%9D%82%E9%A1%B9/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84%E6%9C%9F%E6%9C%AB%E9%80%9F%E9%80%9A/&quot;)" title="复制文章链接"><i class="solitude fas fa-link"></i></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本文是原创文章，采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>协议，完整转载请注明来自<a href="/">木鱼的鱼窝</a></span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E7%AE%97%E6%B3%95/"><span class="tags-punctuation"><i class="solitude fas fa-hashtag"></i>算法<span class="tagsPageCount">5</span></span></a><a class="post-meta__tags" href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/"><span class="tags-punctuation"><i class="solitude fas fa-hashtag"></i>数据结构<span class="tagsPageCount">1</span></span></a></div></div></div><nav class="needEndHide pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2026/01/06/%E6%9D%82%E9%A1%B9/new%20JS/"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">C++与JavaScript对照</div></div></a></div><div class="next-post pull-right"><a href="/2026/01/06/%E6%9D%82%E9%A1%B9/%E7%AE%A1%E7%90%86%E6%A8%A1%E6%8B%9F%E5%8D%B7/"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">管理模拟卷</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><div class="top-group"><div class="sayhi" id="sayhi" onclick="sco.changeWittyWord()"></div></div></div><div class="avatar"><img alt="头像" src="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg"></div><div class="description">欢迎来到我的鱼窝~</div><div class="bottom-group"><span class="left"><div class="name">woodfish</div><div class="desc">河汉微明星乍稀，碧莲香湿袭人衣。夜凉如水琉璃滑，自起开窗放月归。</div></span><div class="social-icons is-center"><a class="social-icon" target="_blank" rel="noopener" href="https://github.com/woodfishhhh" title="Github"><i class="solitude  fab fa-github"></i></a><a class="social-icon" target="_blank" rel="noopener" href="https://space.bilibili.com/359728114" title="Bilibili"><i class="solitude  fab fa-bilibili"></i></a><a class="social-icon" href="https://www.woodfishhhh.xyz/images/af1a055d14e4f7f6eae2886f2865d13.jpg.jpeg?_t=1750312382930" title="QQ"><i class="solitude  fab fa-qq"></i></a><a class="social-icon" href="https://www.woodfishhhh.xyz/images/f59723db9159310b6056abe8341f5d7.jpg.jpeg?_t=1750312263368" title="Wechat"><i class="solitude  fab fa-weixin"></i></a><a class="social-icon" href="https://www.woodfishhhh.xyz/images/d8d58d2f2c7ac5790fd37f388da41db4.png?_t=1759286665402" title="Email"><i class="solitude  far fa-envelope"></i></a><a class="social-icon" target="_blank" rel="noopener" href="https://www.douyin.com/user/MS4wLjABAAAAgbOrIhdi7Rl5RfaQ3fE3i7c2WnyR3zEOyLiK2Cjtcqk?from_tab_name=main" title="Douyin"><i class="solitude  fab fa-tiktok"></i></a></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="solitude fas fa-bars"></i><span>文章目录</span></div><div class="toc-content" id="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">数据结构期末考前救急</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E6%A8%A1%E5%BC%8F%E5%8C%B9%E9%85%8D"><span class="toc-text">1 模式匹配</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E6%A0%B8%E5%BF%83%E8%A7%A3%E9%A2%98%E6%AD%A5%E9%AA%A4"><span class="toc-text">1.1 核心解题步骤</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E4%BA%8C%E5%8F%89%E6%A0%91%E6%9E%84%E5%BB%BA%E4%B8%8E%E7%BA%BF%E7%B4%A2%E5%8C%96"><span class="toc-text">2 二叉树构建与线索化</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%9F%BA%E4%BA%8E%E9%81%8D%E5%8E%86%E5%BA%8F%E5%88%97%E6%9E%84%E5%BB%BA%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="toc-text">2.1 基于遍历序列构建二叉树</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-1-%E4%B8%AD%E5%BA%8F-%E5%90%8E%E5%BA%8F%E9%81%8D%E5%8E%86%E6%9E%84%E5%BB%BA"><span class="toc-text">2.1.1 中序+后序遍历构建</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-2-%E5%89%8D%E5%BA%8F-%E4%B8%AD%E5%BA%8F%E9%81%8D%E5%8E%86%E6%9E%84%E5%BB%BA"><span class="toc-text">2.1.2 前序+中序遍历构建</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E4%B8%AD%E5%BA%8F%E7%BA%BF%E7%B4%A2%E4%BA%8C%E5%8F%89%E6%A0%91"><span class="toc-text">2.2 中序线索二叉树</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E6%A0%91%E7%9A%84%E8%8A%82%E7%82%B9%E4%B8%AA%E6%95%B0%E8%AE%A1%E7%AE%97%EF%BC%88%E4%BB%A5%E5%BA%A6%E4%B8%BA3%E7%9A%84%E6%A0%91%E4%B8%BA%E4%BE%8B%EF%BC%89"><span class="toc-text">3 树的节点个数计算（以度为3的树为例）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E6%A0%B8%E5%BF%83%E5%85%AC%E5%BC%8F"><span class="toc-text">3.1 核心公式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E4%BE%8B%E9%A2%98"><span class="toc-text">3.2 例题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E4%BA%8C%E5%8F%89%E6%8E%92%E5%BA%8F%E6%A0%91-BST-%E5%A4%8D%E4%B9%A0%E7%AC%94%E8%AE%B0"><span class="toc-text">4. 二叉排序树 (BST) 复习笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E6%9E%84%E5%BB%BA%E8%A7%84%E5%88%99"><span class="toc-text">4.1 构建规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E4%BE%8B%E9%A2%98%EF%BC%9A%E6%9E%84%E5%BB%BA%E4%B8%8E%E6%9F%A5%E6%89%BE%E5%88%86%E6%9E%90"><span class="toc-text">4.2 例题：构建与查找分析</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E6%9E%84%E5%BB%BA%E8%BF%87%E7%A8%8B%E5%9B%BE%E8%A7%A3"><span class="toc-text">1. 构建过程图解</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%9F%A5%E6%89%BE%E6%AC%A1%E6%95%B0%E8%AE%A1%E7%AE%97"><span class="toc-text">2. 查找次数计算</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E5%B9%B3%E5%9D%87%E6%9F%A5%E6%89%BE%E9%95%BF%E5%BA%A6-ASL-%E8%AE%A1%E7%AE%97"><span class="toc-text">3. 平均查找长度 (ASL) 计算</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E8%8A%82%E7%82%B9%E7%9A%84%E5%88%A0%E9%99%A4%E6%93%8D%E4%BD%9C"><span class="toc-text">4.3 节点的删除操作</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E5%B9%BF%E4%B9%89%E8%A1%A8"><span class="toc-text">5 广义表</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#5-1-%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E8%AE%A1%E7%AE%97"><span class="toc-text">5.1 核心概念计算</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#5-2-%E5%AD%98%E5%82%A8%E7%BB%93%E6%9E%84%E7%94%BB%E6%B3%95"><span class="toc-text">5.2 存储结构画法</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#6-%E6%95%B0%E7%BB%84%E5%AD%98%E5%82%A8%E5%9C%B0%E5%9D%80%E8%AE%A1%E7%AE%97"><span class="toc-text">6 数组存储地址计算</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#6-1-%E6%A0%B8%E5%BF%83%E5%85%AC%E5%BC%8F"><span class="toc-text">6.1 核心公式</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#6-2-%E4%BE%8B%E9%A2%98"><span class="toc-text">6.2 例题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#7-%E4%BA%8C%E5%8F%89%E6%A0%91%E7%9B%B8%E5%85%B3%E4%BB%A3%E7%A0%81%E8%AE%BE%E8%AE%A1"><span class="toc-text">7 二叉树相关代码设计</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#7-1-%E6%B1%82%E4%BA%8C%E5%8F%89%E6%A0%91%E8%8A%82%E7%82%B9%E6%80%BB%E6%95%B0"><span class="toc-text">7.1 求二叉树节点总数</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-2-%E6%B1%82%E4%BA%8C%E5%8F%89%E6%A0%91%E9%AB%98%E5%BA%A6"><span class="toc-text">7.2 求二叉树高度</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#7-3-%E8%BE%93%E5%87%BA%E4%BA%8C%E5%8F%89%E6%A0%91%E5%8F%B6%E5%AD%90%E8%8A%82%E7%82%B9"><span class="toc-text">7.3 输出二叉树叶子节点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#8-%E5%93%88%E5%BC%97%E6%9B%BC%E6%A0%91%E4%B8%8E%E7%BC%96%E7%A0%81"><span class="toc-text">8 哈弗曼树与编码</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#8-1-%E5%93%88%E5%BC%97%E6%9B%BC%E6%A0%91%E6%9E%84%E5%BB%BA%E8%A7%84%E5%88%99"><span class="toc-text">8.1 哈弗曼树构建规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-2-%E4%BE%8B%E9%A2%98%EF%BC%9A%E6%9E%84%E5%BB%BA%E4%B8%8E%E7%BC%96%E7%A0%81"><span class="toc-text">8.2 例题：构建与编码</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#8-3-%E5%B8%A6%E6%9D%83%E8%B7%AF%E5%BE%84%E9%95%BF%E5%BA%A6-WPL"><span class="toc-text">8.3 带权路径长度 (WPL)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#9-%E6%9C%80%E5%B0%8F%E7%94%9F%E6%88%90%E6%A0%91"><span class="toc-text">9 最小生成树</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#9-1-Prim%E7%AE%97%E6%B3%95%EF%BC%88%E4%BB%8E%E8%8A%82%E7%82%B9%E5%87%BA%E5%8F%91%EF%BC%89"><span class="toc-text">9.1 Prim算法（从节点出发）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#9-2-Kruskal%E7%AE%97%E6%B3%95%EF%BC%88%E4%BB%8E%E8%BE%B9%E5%87%BA%E5%8F%91%EF%BC%89"><span class="toc-text">9.2 Kruskal算法（从边出发）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#10-%E5%9B%BE%E7%9A%84%E9%81%8D%E5%8E%86"><span class="toc-text">10 图的遍历</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#10-1-%E6%B7%B1%E5%BA%A6%E4%BC%98%E5%85%88%E9%81%8D%E5%8E%86%EF%BC%88DFS%EF%BC%89"><span class="toc-text">10.1 深度优先遍历（DFS）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#10-2-%E5%B9%BF%E5%BA%A6%E4%BC%98%E5%85%88%E9%81%8D%E5%8E%86%EF%BC%88BFS%EF%BC%89"><span class="toc-text">10.2 广度优先遍历（BFS）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%80%E3%80%81-%E7%BA%BF%E6%80%A7%E6%8E%A2%E6%B5%8B%E6%B3%95-Linear-Probing"><span class="toc-text">一、 线性探测法 (Linear Probing)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%8E%9F%E7%90%86"><span class="toc-text">1. 原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E6%A0%B8%E5%BF%83%E8%80%83%E7%82%B9%EF%BC%9A%E5%A0%86%E7%A7%AF%EF%BC%88Clustering%EF%BC%89%E7%8E%B0%E8%B1%A1"><span class="toc-text">2. 核心考点：堆积（Clustering）现象</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E7%A4%BA%E4%BE%8B%E7%AE%80%E8%BF%B0"><span class="toc-text">3. 示例简述</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BA%8C%E3%80%81-%E4%BA%8C%E6%AC%A1%E6%8E%A2%E6%B5%8B%E6%B3%95-Quadratic-Probing"><span class="toc-text">二、 二次探测法 (Quadratic Probing)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%8E%9F%E7%90%86-2"><span class="toc-text">1. 原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E4%B8%BE%E4%BE%8B%E6%BC%94%E7%A4%BA%EF%BC%88%E5%BF%85%E7%9C%8B%EF%BC%89"><span class="toc-text">2. 举例演示（必看）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E4%BC%98%E7%BC%BA%E7%82%B9"><span class="toc-text">3. 优缺点</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B8%89%E3%80%81-%E9%93%BE%E5%9C%B0%E5%9D%80%E6%B3%95-Chain-Address-%E6%8B%89%E9%93%BE%E6%B3%95"><span class="toc-text">三、 链地址法 (Chain Address &#x2F; 拉链法)</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%8E%9F%E7%90%86-3"><span class="toc-text">1. 原理</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E7%BB%93%E6%9E%84%E5%9B%BE%E7%A4%BA"><span class="toc-text">2. 结构图示</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E9%93%BE%E5%9C%B0%E5%9D%80%E6%B3%95%E7%9A%84-ASL-%E8%AE%A1%E7%AE%97%EF%BC%88%E4%B8%8E%E5%BC%80%E6%94%BE%E5%AE%9A%E5%9D%80%E6%B3%95%E5%AE%8C%E5%85%A8%E4%B8%8D%E5%90%8C%EF%BC%81%EF%BC%89"><span class="toc-text">3. 链地址法的 ASL 计算（与开放定址法完全不同！）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E4%BC%98%E7%BC%BA%E7%82%B9%EF%BC%88%E9%AB%98%E9%A2%91%E8%80%83%E7%82%B9%EF%BC%89"><span class="toc-text">4. 优缺点（高频考点）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%9B%9B%E3%80%81-%E4%B8%89%E7%A7%8D%E6%96%B9%E6%B3%95%E7%9A%84%E7%BB%88%E6%9E%81%E5%AF%B9%E6%AF%94%EF%BC%88%E8%80%83%E5%89%8D%E8%83%8C%E8%AF%B5%EF%BC%89"><span class="toc-text">四、 三种方法的终极对比（考前背诵）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-%E6%8E%92%E5%BA%8F-Sorting"><span class="toc-text">12 排序 (Sorting)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-1-%E5%9F%BA%E6%9C%AC%E6%A6%82%E5%BF%B5"><span class="toc-text">12.1 基本概念</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-2-%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F-Insertion-Sort"><span class="toc-text">12.2 插入排序 (Insertion Sort)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%9B%B4%E6%8E%A5%E6%8F%92%E5%85%A5%E6%8E%92%E5%BA%8F-Direct-Insertion-Sort"><span class="toc-text">1. 直接插入排序 (Direct Insertion Sort)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%B8%8C%E5%B0%94%E6%8E%92%E5%BA%8F-Shell-Sort"><span class="toc-text">2. 希尔排序 (Shell Sort)</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-3-%E4%BA%A4%E6%8D%A2%E6%8E%92%E5%BA%8F-Exchange-Sort"><span class="toc-text">12.3 交换排序 (Exchange Sort)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%86%92%E6%B3%A1%E6%8E%92%E5%BA%8F-Bubble-Sort"><span class="toc-text">1. 冒泡排序 (Bubble Sort)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%BF%AB%E9%80%9F%E6%8E%92%E5%BA%8F-Quick-Sort-%E2%80%94%E2%80%94-%E2%98%85-%E9%87%8D%E4%B8%AD%E4%B9%8B%E9%87%8D"><span class="toc-text">2. 快速排序 (Quick Sort) —— ★ 重中之重</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-4-%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F-Selection-Sort"><span class="toc-text">12.4 选择排序 (Selection Sort)</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E7%AE%80%E5%8D%95%E9%80%89%E6%8B%A9%E6%8E%92%E5%BA%8F-Simple-Selection-Sort"><span class="toc-text">1. 简单选择排序 (Simple Selection Sort)</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%A0%86%E6%8E%92%E5%BA%8F-Heap-Sort-%E2%80%94%E2%80%94-%E9%9A%BE%E7%82%B9"><span class="toc-text">2. 堆排序 (Heap Sort) —— 难点</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-5-%E5%BD%92%E5%B9%B6%E6%8E%92%E5%BA%8F-Merge-Sort"><span class="toc-text">12.5 归并排序 (Merge Sort)</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-6-%E6%A0%B8%E5%BF%83%E5%AF%B9%E6%AF%94%E8%A1%A8%EF%BC%88%E2%98%85%E8%83%8C%E8%AF%B5%E2%98%85%EF%BC%89"><span class="toc-text">12.6 核心对比表（★背诵★）</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#12-7-%E8%80%83%E8%AF%95%E8%A7%A3%E9%A2%98%E6%96%B9%E6%B3%95%E8%AE%BA"><span class="toc-text">12.7 考试解题方法论</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E5%9E%8B%E4%B8%80%EF%BC%9A%E6%89%8B%E5%86%99%E6%8E%92%E5%BA%8F%E8%BF%87%E7%A8%8B"><span class="toc-text">题型一：手写排序过程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E5%9E%8B%E4%BA%8C%EF%BC%9A%E6%8E%92%E5%BA%8F%E7%AE%97%E6%B3%95%E7%9A%84%E9%80%89%E6%8B%A9"><span class="toc-text">题型二：排序算法的选择</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%A2%98%E5%9E%8B%E4%B8%89%EF%BC%9A%E5%A4%8D%E6%9D%82%E5%BA%A6%E4%B8%8E%E7%A8%B3%E5%AE%9A%E6%80%A7%E5%88%A4%E6%96%AD"><span class="toc-text">题型三：复杂度与稳定性判断</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A8%A1%E6%8B%9F%E7%BB%83%E4%B9%A0"><span class="toc-text">模拟练习</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="solitude fas fa-map"></i><span>最近发布</span></div><div class="aside-list"><a class="aside-list-item" href="/2026/01/06/Udemy%20TS/ts%E7%AC%94%E8%AE%B0/" title="TypeScript笔记"><div class="content"><span class="title" href="/2026/01/06/Udemy%20TS/ts%E7%AC%94%E8%AE%B0/" title="TypeScript笔记">TypeScript笔记</span><span class="categories" href="/2026/01/06/Udemy%20TS/ts%E7%AC%94%E8%AE%B0/">编程</span></div></a><a class="aside-list-item" href="/2026/01/06/Udemy%20JS/099%20Primitives%20vs.%20Objects%20(Primitive%20vs.%20Reference%20Types)%20/" title="基本类型与对象类型"><div class="content"><span class="title" href="/2026/01/06/Udemy%20JS/099%20Primitives%20vs.%20Objects%20(Primitive%20vs.%20Reference%20Types)%20/" title="基本类型与对象类型">基本类型与对象类型</span><span class="categories" href="/2026/01/06/Udemy%20JS/099%20Primitives%20vs.%20Objects%20(Primitive%20vs.%20Reference%20Types)%20/">前端</span></div></a><a class="aside-list-item" href="/2026/01/06/Udemy%20JS/103%20Destructuring%20Arrays%EF%BC%89%E7%AC%94%E8%AE%B0/" title="数组解构"><div class="content"><span class="title" href="/2026/01/06/Udemy%20JS/103%20Destructuring%20Arrays%EF%BC%89%E7%AC%94%E8%AE%B0/" title="数组解构">数组解构</span><span class="categories" href="/2026/01/06/Udemy%20JS/103%20Destructuring%20Arrays%EF%BC%89%E7%AC%94%E8%AE%B0/">前端</span></div></a><a class="aside-list-item" href="/2026/01/06/Udemy%20JS/104%20Destructuring%20Objects%EF%BC%88%E5%AF%B9%E8%B1%A1%E8%A7%A3%E6%9E%84%EF%BC%89/" title="对象解构"><div class="content"><span class="title" href="/2026/01/06/Udemy%20JS/104%20Destructuring%20Objects%EF%BC%88%E5%AF%B9%E8%B1%A1%E8%A7%A3%E6%9E%84%EF%BC%89/" title="对象解构">对象解构</span><span class="categories" href="/2026/01/06/Udemy%20JS/104%20Destructuring%20Objects%EF%BC%88%E5%AF%B9%E8%B1%A1%E8%A7%A3%E6%9E%84%EF%BC%89/">前端</span></div></a><a class="aside-list-item" href="/2026/01/06/Udemy%20JS/098%20Regular%20Functions%20vs.%20Arrow%20Functions%EF%BC%88%E5%B8%B8%E8%A7%84%E5%87%BD%E6%95%B0%E4%B8%8E%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%EF%BC%89/" title="常规函数与箭头函数"><div class="content"><span class="title" href="/2026/01/06/Udemy%20JS/098%20Regular%20Functions%20vs.%20Arrow%20Functions%EF%BC%88%E5%B8%B8%E8%A7%84%E5%87%BD%E6%95%B0%E4%B8%8E%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%EF%BC%89/" title="常规函数与箭头函数">常规函数与箭头函数</span><span class="categories" href="/2026/01/06/Udemy%20JS/098%20Regular%20Functions%20vs.%20Arrow%20Functions%EF%BC%88%E5%B8%B8%E8%A7%84%E5%87%BD%E6%95%B0%E4%B8%8E%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%EF%BC%89/">前端</span></div></a></div></div></div></div></main><footer id="footer"><div id="footer_deal"><a class="deal_link" target="_blank" rel="noopener" href="https://github.com/woodfishhhh" title="Github"><i class="solitude  fab fa-github"></i></a><a class="deal_link" href="https://www.woodfishhhh.xyz/images/d8d58d2f2c7ac5790fd37f388da41db4.png?_t=1759286665402" title="Email"><i class="solitude  far fa-envelope"></i></a><div><div class="nolazyload footer_mini_logo" id="footer_mini_logo" title="返回顶部" onclick="sco.toTop()"><img src= "" data-lazy-src="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg" alt="返回顶部"></div></div><a class="deal_link" target="_blank" rel="noopener" href="https://space.bilibili.com/359728114" title="Bilibili"><i class="solitude  fab fa-bilibili"></i></a><a class="deal_link" target="_blank" rel="noopener" href="https://www.douyin.com/user/MS4wLjABAAAAgbOrIhdi7Rl5RfaQ3fE3i7c2WnyR3zEOyLiK2Cjtcqk?from_tab_name=main" title="Douyin"><i class="solitude  fab fa-tiktok"></i></a></div><div><div id="st-footer"><div class="footer-group"><h3 class="footer-title">导航</h3><div class="footer-links"><a class="footer-item" href="/archives/" title="Archives">Archives</a><a class="footer-item" href="/categories/" title="Categories">Categories</a><a class="footer-item" href="/tags/" title="Tags">Tags</a></div></div><div class="footer-group"><h3 class="footer-title">排列</h3><div class="footer-links"><a class="footer-item" href="/about/" title="About">About</a><a class="footer-item" href="/link/" title="Friends">Friends</a></div></div><div class="footer-group"><div class="footer-title-group"><h3 class="footer-title">友链</h3><button class="random-friends-btn" onclick="randomLinksList()" title="友链"><i class="solitude fas fa-arrows-rotate"></i></button></div><div class="footer-links" id="friend-links-in-footer"></div></div></div></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div class="copyright">© 2025 - 2026 By<a class="footer-bar-link" href="/" title="woodfish">woodfish</a></div><div class="beian-group"><div></div><a class="footer-bar-link" target="_blank" rel="noopener" href="https://hexo.io/" title="框架：Hexo">框架：Hexo</a><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/everfu/hexo-theme-solitude" title="主题：Solitude">主题：Solitude</a></div></div><div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/everfu/hexo-theme-solitude" title="">主题</a><a class="footer-bar-link" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" title="">License</a></div></div></div></div><div class="comment-barrage needEndHide"></div></footer></div><div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="solitude fas fa-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="solitude fas fa-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="solitude fas fa-arrows-rotate"></i></div><div class="rightMenu-item" id="menu-top"><i class="solitude fas fa-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="solitude fas fa-clone"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="solitude fas fa-clipboard"></i><span>粘贴文本</span></div><div class="rightMenu-item" id="menu-newwindow"><i class="solitude far fa-window-maximize"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="solitude fas fa-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="solitude fas fa-clone"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="solitude fas fa-cloud-arrow-down"></i><span>下载此图片</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><div class="rightMenu-item" id="menu-randomPost" onclick="toRandomPost()||rm.hideRightMenu()"><i class="solitude fas fa-tower-broadcast"></i><span>随机文章</span></div><div class="rightMenu-item" onclick="pjax.loadUrl('/categories/')||rm.hideRightMenu()"><i class="solitude fas fa-clone"></i><span>全部分类</span></div><div class="rightMenu-item" onclick="pjax.loadUrl('/tags/')||rm.hideRightMenu()"><i class="solitude fas fa-tags"></i><span>全部标签</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><div class="rightMenu-item" id="menu-darkmode" onclick="sco.switchDarkMode()"><i class="solitude fas fa-circle-half-stroke"></i><span class="menu-darkmode-text">浅色模式</span></div><div class="rightMenu-item" id="menu-translate"><i class="solitude fas fa-language"></i><span>轉為繁體</span></div></div></div><div id="rightmenu-mask"></div></div><div><!-- Critical scripts loaded synchronously--><script src="/js/utils.js?v=3.0.20"></script><script src="/js/main.js?v=3.0.20"></script><!-- Non-critical scripts loaded asynchronously--><script async src="/js/third_party/waterfall.min.js?v=3.0.20"></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><!-- Feature-specific scripts loaded asynchronously--><script defer src="/js/third_party/universe.min.js?v=3.0.20"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  if (typeof dark === 'function') dark();
+});
+</script><script defer src="/js/tw_cn.js?v=3.0.20"></script><!-- UI enhancement scripts--><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.iife.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><!-- Music player scripts--><!-- Cover color processing scripts--><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+utils.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+</script><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!-- Search functionality--><!-- Right menu functionality--><script defer src="/js/right_menu.js?v=3.0.20"></script><div class="js-pjax"><script defer pjax src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.min.js"></script></div></div><!-- pjax--><script>let pjax = null;
+
+function initPjax() {
+    if (typeof Pjax === 'undefined') {
+        console.warn('Pjax is not loaded yet, retrying...');
+        setTimeout(initPjax, 100);
+        return;
+    }
+
+    pjax = new Pjax({
+        elements: 'a:not([target="_blank"])',
+        selectors: ["title","#body-wrap","#site-config","meta[name=\"description\"]",".js-pjax","meta[property^=\"og:\"]","#config-diff",".rs_show",".rs_hide"],
+        cacheBust: false,
+        analytics: false,
+        scrollRestoration: false
+    })
+
+    // 将 pjax 实例挂载到全局
+    window.pjax = pjax;
+
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+        const newScript = document.createElement('script')
+        const content = item.text || item.textContent || item.innerHTML || ""
+        Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+        newScript.appendChild(document.createTextNode(content))
+        item.parentNode.replaceChild(newScript, item)
+    })
+
+    document.addEventListener('pjax:complete', () => {
+        window.refreshFn()
+
+        document.querySelectorAll('script[data-pjax]').forEach(item => {
+            const newScript = document.createElement('script')
+            const content = item.text || item.textContent || item.innerHTML || ""
+            Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+            newScript.appendChild(document.createTextNode(content))
+            item.parentNode.replaceChild(newScript, item)
+        })
+
+        GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+    })
+
+    document.addEventListener('pjax:error', (e) => {
+        if (e.request.status === 404) {
+            pjax.loadUrl('/404.html')
+        }
+    })
+}
+
+// 初始化 Pjax
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPjax);
+} else {
+    initPjax();
+}</script><!-- google adsense--></body></html>
+        <script>
+            const posts = ["2026/01/06/Udemy TS/ts笔记/","2026/01/06/Udemy JS/099 Primitives vs. Objects (Primitive vs. Reference Types) /","2026/01/06/Udemy JS/103 Destructuring Arrays）笔记/","2026/01/06/Udemy JS/104 Destructuring Objects（对象解构）/","2026/01/06/Udemy JS/098 Regular Functions vs. Arrow Functions（常规函数与箭头函数）/","2026/01/06/Udemy JS/105 JavaScript 扩展运算符（...）/","2026/01/06/Udemy JS/106 Rest Pattern and Parameters/","2026/01/06/Udemy JS/108 空值合并运算符（Nullish Coalescing Operator）/","2026/01/06/Udemy JS/109 Logical Assignment Operators）/","2026/01/06/Udemy JS/111 for-of 循环笔记/","2026/01/06/Udemy JS/112 Enhanced Object Literals（ES6 增强对象字面量）/","2026/01/06/Udemy JS/113 可选链（Optional Chaining）笔记/","2026/01/06/Udemy JS/112 JavaScript数组方法(forEach, map, filter, reduce等)/","2026/01/06/Udemy JS/231 How to Plan a Web Project /","2026/01/06/Udemy JS/256 JavaScript 异步编程核心笔记/","2026/01/06/Udemy JS/258 The Event Loop in Practice/","2026/01/06/Udemy JS/262 Consuming Promises with Async_Await/","2026/01/06/Udemy JS/263 Error Handling With try...catch/","2026/01/06/Udemy JS/268-280 现代js开发/","2026/01/06/Udemy JS/264 Returning Values from Async Functions/","2026/01/06/杂项/Udemy Vue/","2026/01/06/杂项/new JS/","2026/01/06/杂项/数据结构期末速通/","2026/01/06/杂项/管理模拟卷/","2026/01/06/杂项/马原模拟卷/","2026/01/06/前端/AJAX基础入门教程/","2026/01/06/题解/Day5题解/","2026/01/06/题解/E题超详解：帮哈基鱼算标签/","2026/01/06/题解/F. Beautiful Intervals/","2026/01/06/题解/JUFE国庆新生编程语法培训/","2026/01/06/计算机网络/划分子网/","2026/01/06/计算机网络/最长前缀匹配原则/","2026/01/06/计算机网络/计算机网络第一章：概论/","2026/01/06/计算机网络/计算机网络第二章：物理层/","2026/01/06/计算机网络/计算机网络第三章：链路层/","2026/01/06/计算机网络/计算机网络第五章：运输层/","2026/01/06/计算机网络/计算机网络第六章：应用层/","2026/01/06/计算机组成原理/加减乘除/","2026/01/06/计算机组成原理/Cache缓存/","2026/01/06/计算机组成原理/存储器，主存扩展/","2026/01/06/计算机组成原理/指令系统/","2026/01/06/计算机组成原理/数据的表示/","2026/01/06/计算机组成原理/计算机存储器/","2025/10/21/计算机网络/计算机网络第四章：网络层/","2025/10/21/计算机网络/计算机网络第四章：网络层（edit）/","2025/09/11/前端/Day04_AJAX进阶/","2025/09/10/前端/Day03_AJAX原理/","2025/09/09/前端/Day02_AJAX综合案例/","2025/09/08/前端/Day01_AJAX入门/","2025/08/25/Linux/Linux课程笔记/","2025/08/13/前端/js易错点/","2025/08/11/前端/JavaScript 学习笔记（9）：深浅拷贝、异常处理、this 指向与防抖节流/","2025/08/03/前端/JavaScript 学习笔记（8）：面向对象编程与原型机制详解/","2025/08/02/前端/JavaScript 学习笔记（7）：面向对象与内置构造函数/","2025/07/31/前端/JavaScript 学习笔记（6）：作用域、闭包与函数进阶/","2025/07/28/前端/Web API 学习笔记（6）：正则表达式与表单验证/","2025/07/27/前端/Web API 学习笔记（5）：BOM 操作与本地存储/","2025/07/26/前端/Web API 学习笔记（4）：Date 对象与 DOM-节点操作要点/","2025/07/23/前端/Web API 学习笔记（3）：事件流与事件委托/","2025/07/22/前端/Web API 学习笔记（2）：事件处理与-this-指向/","2025/07/21/前端/Web API 学习笔记（1）：DOM 基础操作/","2025/07/20/前端/JavaScript 学习笔记（5）：对象数据类型与内置数学对象/","2025/07/19/前端/JavaScript 学习笔记（4）：函数封装与对象基础/","2025/07/18/前端/JavaScript 学习笔记（3）：数组的增删操作方法详解/","2025/07/17/前端/JavaScript 学习笔记（2）：运算符、语句与综合案例/","2025/07/17/前端/JavaScript 学习笔记（1）：基础语法与数据类型/","2025/07/15/前端/CSS 学习笔记（12）：响应式布局与 Bootstrap 框架应用/","2025/07/14/前端/CSS 学习笔记（11）：移动 Web 开发之 vw 适配与酷我音乐案例实践/","2025/07/13/前端/CSS 学习笔记（10）：移动 Web 开发基础与 rem 布局、Less 预处理器/","2025/07/12/前端/CSS 学习笔记（9）：移动 Web 开发之空间转换与动画效果/","2025/07/11/前端/CSS 学习笔记（8）：移动 Web 开发之平面转换与渐变效果/","2025/07/10/前端/小兔仙/","2025/07/08/前端/学成在线/","2025/07/08/前端/CSS 学习笔记（6）：小兔鲜儿项目搭建及基础配置（目录结构、SEO 标签、版心设置）/","2025/07/04/前端/CSS我的易错点/","2025/07/03/前端/CSS 学习笔记（7）：CSS 优先级叠加计算规则详解/","2025/07/02/前端/CSS 学习笔记（5）：定位模式、CSS 精灵、字体图标及过渡效果应用/","2025/06/30/前端/CSS 学习笔记（4）：浮动布局与 Flex 弹性布局详解及应用案例/","2025/06/27/前端/CSS 学习笔记（3）：伪类与伪元素选择器、盒子模型及相关特性详解/","2025/06/24/前端/CSS 学习笔记（2）：复合选择器、CSS 特性及背景与显示模式设置/","2025/06/23/前端/CSS 学习笔记（1）：引入方式、选择器及文字样式控制/","2025/06/23/前端/HTML 学习笔记（2）：列表、表格、表单及布局标签详解/","2025/06/22/前端/HTML 学习笔记（1）：核心标签、文档结构及多媒体应用/","2025/06/19/JAVA/Java期末复习重点易错点/","2025/06/18/杂项/中国近代史复习重点/","2025/06/03/JAVA/Java的final/","2025/06/03/JAVA/Java的继承/","2025/06/03/JAVA/Java的多态/","2025/05/27/JAVA/Java的List集合/","2025/05/27/JAVA/Java的Collection集合/","2025/05/27/JAVA/Java的包装类/","2025/05/15/JAVA/Java的内部类/","2025/05/15/JAVA/Java的抽象与接口类/"];
+            function toRandomPost() {
+                const randomPost = posts[Math.floor(Math.random() * posts.length)];
+                pjax.loadUrl(GLOBAL_CONFIG.root + randomPost);
+            }
+        </script>

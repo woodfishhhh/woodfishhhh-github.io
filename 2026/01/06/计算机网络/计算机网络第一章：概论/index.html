@@ -1,0 +1,913 @@
+<!DOCTYPE html><html lang="zh-Hans" data-theme="light"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>计算机网络第一章：概论 | 木鱼的鱼窝</title><noscript>开启JavaScript才能访问本站哦~</noscript><link rel="icon" href="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg"><link rel="stylesheet" href="/css/index.css?v=3.0.20"><link rel="canonical" href="https://www.woodfishhhh.xyz/2026/01/06/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%AC%E4%B8%80%E7%AB%A0%EF%BC%9A%E6%A6%82%E8%AE%BA/index.html"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css"><!-- Feature-specific CSS--><!-- aplayer--><!-- swiper--><!-- fancybox ui--><!-- katex--><!-- Open Graph--><meta name="description" content="1.3 电路交换、分组交换和报文交换 1.3.1 电路交换 定义：电话交换机接通电话线的方式就是电路交换（Circuit Switching） 通信三个步骤：   建立连接：主叫方必须首先进行拨号以请求建立连接   通话：主叫方和被叫方基于已建立的连接进行通话   释放连接：通话完毕后释放连接   特点：   需要建立专用的物理通路   数据传输过程中通路独占   适用于实时性要求高的业务   1">
+<meta property="og:type" content="article">
+<meta property="og:title" content="计算机网络第一章：概论">
+<meta property="og:url" content="https://www.woodfishhhh.xyz/2026/01/06/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%AC%E4%B8%80%E7%AB%A0%EF%BC%9A%E6%A6%82%E8%AE%BA/index.html">
+<meta property="og:site_name" content="木鱼的鱼窝">
+<meta property="og:description" content="1.3 电路交换、分组交换和报文交换 1.3.1 电路交换 定义：电话交换机接通电话线的方式就是电路交换（Circuit Switching） 通信三个步骤：   建立连接：主叫方必须首先进行拨号以请求建立连接   通话：主叫方和被叫方基于已建立的连接进行通话   释放连接：通话完毕后释放连接   特点：   需要建立专用的物理通路   数据传输过程中通路独占   适用于实时性要求高的业务   1">
+<meta property="og:locale">
+<meta property="og:image" content="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg">
+<meta property="article:published_time" content="2026-01-06T15:39:48.000Z">
+<meta property="article:modified_time" content="2026-01-22T07:17:44.877Z">
+<meta property="article:author" content="woodfish">
+<meta property="article:tag" content="计算机网络">
+<meta property="article:tag" content="概论">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg"><!-- pwa--><meta name="apple-mobile-web-app-capable" content="木鱼的鱼窝"><meta name="theme-color" content="var(--efu-main)"><meta name="apple-mobile-web-app-status-bar-style" content="var(--efu-main)"><link rel="bookmark" href="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg"><link rel="apple-touch-icon" href="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg" sizes="180x180"><script>console.log(' %c Solitude %c ' + '3.0.20' + ' %c https://github.com/everfu/hexo-theme-solitude',
+    'background:#35495e ; padding: 1px; border-radius: 3px 0 0 3px;  color: #fff',
+    'background:#ff9a9a ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff',
+    'background:unset ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff')
+</script><script>(()=>{
+        const saveToLocal = {
+            set: function setWithExpiry(key, value, ttl) {
+                if (ttl === 0)
+                    return
+                const now = new Date()
+                const expiryDay = ttl * 86400000
+                const item = {
+                    value: value,
+                    expiry: now.getTime() + expiryDay
+                }
+                localStorage.setItem(key, JSON.stringify(item))
+            },
+            get: function getWithExpiry(key) {
+                const itemStr = localStorage.getItem(key)
+
+                if (!itemStr) {
+                    return undefined
+                }
+                const item = JSON.parse(itemStr)
+                const now = new Date()
+
+                if (now.getTime() > item.expiry) {
+                    localStorage.removeItem(key)
+                    return undefined
+                }
+                return item.value
+            }
+        };
+        window.utils = {
+            saveToLocal: saveToLocal,
+            getCSS: (url, id = false) => new Promise((resolve, reject) => {
+              const link = document.createElement('link')
+              link.rel = 'stylesheet'
+              link.href = url
+              if (id) link.id = id
+              link.onerror = reject
+              link.onload = link.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                link.onload = link.onreadystatechange = null
+                resolve()
+              }
+              document.head.appendChild(link)
+            }),
+            getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+              const script = document.createElement('script')
+              script.src = url
+              script.async = true
+              script.onerror = reject
+              script.onload = script.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                script.onload = script.onreadystatechange = null
+                resolve()
+              }
+
+              Object.keys(attr).forEach(key => {
+                script.setAttribute(key, attr[key])
+              })
+
+              document.head.appendChild(script)
+            }),
+            addGlobalFn: (key, fn, name = false, parent = window) => {
+                const globalFn = parent.globalFn || {}
+                const keyObj = globalFn[key] || {}
+
+                if (name && keyObj[name]) return
+
+                name = name || Object.keys(keyObj).length
+                keyObj[name] = fn
+                globalFn[key] = keyObj
+                parent.globalFn = globalFn
+            },
+            addEventListenerPjax: (ele, event, fn, option = false) => {
+              ele.addEventListener(event, fn, option)
+              utils.addGlobalFn('pjax', () => {
+                  ele.removeEventListener(event, fn, option)
+              })
+            },
+            diffDateFormat: (selector) => {
+                selector.forEach(item => {
+                    const date = new Date(item.getAttribute('datetime') || item.textContent);
+                    item.textContent = (date.getMonth() + 1).toString()+'/'+date.getDate().toString();
+                });
+            },
+        }
+    })()</script><!-- theme--><script>initTheme = () => {
+    const cachedMode = utils.saveToLocal.get('theme');
+    if (cachedMode === undefined)
+        document.documentElement.setAttribute('data-theme', 'dark');
+    else
+        document.documentElement.setAttribute('data-theme', cachedMode);
+    typeof rm === 'object' && rm.mode(cachedMode === undefined || cachedMode === 'dark')
+}
+initTheme()</script><script>const GLOBAL_CONFIG = {
+    root: '/',
+    algolia: undefined,
+    localsearch: undefined,
+    runtime: '2025-06-02 00:00:00',
+    lazyload: {
+        enable: true,
+        error: 'https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png'
+    },
+    copyright: {"limit":50,"author":"作者: woodfish","link":"链接: ","source":"来源: 木鱼的鱼窝","info":"著作权归作者所有。 商业转载请联系作者获得授权，非商业转载请注明出处。"},
+    highlight: {"limit":200,"expand":true,"copy":true,"syntax":"highlight.js"},
+    randomlink: false,
+    lang: {"theme":{"dark":"已切换至深色模式","light":"已切换至浅色模式"},"copy":{"success":"复制成功","error":"复制失败"},"backtop":"返回顶部","time":{"day":"天前","hour":"小时前","just":"刚刚","min":"分钟前","month":"个月前"},"day":" 天","f12":"开发者模式已打开，请遵循GPL协议。","totalk":"无需删除空行，直接输入评论即可"},
+    aside: {
+        state: {
+            morning: "✨ 早上好，新的一天开始了",
+            noon: "🍲 午餐时间",
+            afternoon: "🌞 下午好",
+            night: "早点休息",
+            goodnight: "晚安 😴",
+        },
+        witty_words: [],
+        witty_comment: {
+            prefix: '好久不见，',
+            back: '欢迎再次回来，',
+        },
+    },
+    covercolor: {
+        enable: false
+    },
+    comment: false,
+    lightbox: 'fancybox',
+    right_menu: {"mode":{"dark":"深色模式","light":"浅色模式"},"img_error":"此图片无法复制与下载","translate":true},
+    translate: {"translateDelay":0,"defaultEncoding":2},
+    lure: false,
+    expire: false,
+};</script><script id="config-diff">var PAGE_CONFIG = {
+    is_post: true,
+    is_page: false,
+    is_home: false,
+    page: '',
+    toc: true,
+    comment: false,
+    ai_text: false,
+    color: false,
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body id="body"><div><canvas id="universe"></canvas></div><div><div id="loading-box" onclick="preloader.endLoading();" style="zoom:1"><div class="loading-bg"><img class="loading-img nolazyload" src="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg" alt="loading image"></div></div><script>const preloader = {
+    isLoaded: false,
+    endLoading: () => {
+        if (!preloader.isLoaded) {
+            document.getElementById('loading-box').classList.add('loaded');
+            preloader.isLoaded = true;
+            preloader.togglePaceDone();
+        }
+    },
+    initLoading: () => {
+        document.getElementById('loading-box').classList.remove('loaded');
+        preloader.isLoaded = false;
+        preloader.togglePaceDone();
+    },
+    togglePaceDone: () => {
+        document.getElementById('body').className = preloader.isLoaded ? 'pace-done' : '';
+    }
+}
+
+window.addEventListener('load', () => {
+    preloader.endLoading();
+});
+
+window.addEventListener('pjax:send', () => {
+    preloader.initLoading();
+});
+
+document.addEventListener('pjax:complete', () => {
+    preloader.endLoading();
+});
+
+setTimeout(() => {
+    preloader.endLoading();
+}, 5000);</script></div><div><div id="console"><div class="close-btn" onclick="sco.hideConsole()"><i class="solitude fas fa-xmark"></i></div><div class="console-card-group"><div class="console-card-group-right"><div class="console-card tags" onclick="sco.hideConsole()"><div class="card-content"><div class="author-content-item-tips">标签</div><div class="author-content-item-title">寻找感兴趣的领域</div></div><div class="card-tag-cloud"><a href="/tags/Java/">Java<sup>9</sup></a><a href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/">期末复习<sup>2</sup></a><a href="/tags/Linux/">Linux<sup>1</sup></a><a href="/tags/TypeScript/">TypeScript<sup>1</sup></a><a href="/tags/JavaScript/">JavaScript<sup>37</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF/">前端<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">数据类型<sup>1</sup></a><a href="/tags/ES6/">ES6<sup>5</sup></a><a href="/tags/%E5%87%BD%E6%95%B0/">函数<sup>1</sup></a><a href="/tags/ES2020/">ES2020<sup>2</sup></a><a href="/tags/ES2021/">ES2021<sup>1</sup></a><a href="/tags/%E5%BE%AA%E7%8E%AF/">循环<sup>1</sup></a><a href="/tags/%E6%95%B0%E7%BB%84/">数组<sup>1</sup></a><a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/">项目管理<sup>1</sup></a><a href="/tags/Web%E5%BC%80%E5%8F%91/">Web开发<sup>1</sup></a><a href="/tags/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/">异步编程<sup>1</sup></a><a href="/tags/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/">事件循环<sup>1</sup></a><a href="/tags/%E5%BC%82%E6%AD%A5/">异步<sup>2</sup></a><a href="/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理<sup>1</sup></a><a href="/tags/%E7%8E%B0%E4%BB%A3%E5%BC%80%E5%8F%91/">现代开发<sup>1</sup></a><a href="/tags/Vue/">Vue<sup>1</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/">前端框架<sup>1</sup></a><a href="/tags/C/">C++<sup>1</sup></a><a href="/tags/%E7%AE%97%E6%B3%95/">算法<sup>5</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构<sup>1</sup></a><a href="/tags/%E7%AE%A1%E7%90%86%E5%AD%A6/">管理学<sup>1</sup></a><a href="/tags/%E6%A8%A1%E6%8B%9F%E5%8D%B7/">模拟卷<sup>2</sup></a><a href="/tags/%E9%A9%AC%E5%85%8B%E6%80%9D%E4%B8%BB%E4%B9%89/">马克思主义<sup>1</sup></a><a href="/tags/AJAX/">AJAX<sup>1</sup></a><a href="/tags/HTTP/">HTTP<sup>1</sup></a><a href="/tags/CSS/">CSS<sup>15</sup></a><a href="/tags/HTML/">HTML<sup>17</sup></a><a href="/tags/web/">web<sup>11</sup></a><a href="/tags/Ajax/">Ajax<sup>4</sup></a><a href="/tags/%E9%A2%98%E8%A7%A3/">题解<sup>3</sup></a><a href="/tags/%E7%BC%96%E7%A8%8B/">编程<sup>1</sup></a><a href="/tags/%E5%9F%B9%E8%AE%AD/">培训<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络<sup>7</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/">网络层<sup>1</sup></a><a href="/tags/%E8%B7%AF%E7%94%B1/">路由<sup>1</sup></a><a href="/tags/%E6%A6%82%E8%AE%BA/">概论<sup>1</sup></a><a href="/tags/%E7%89%A9%E7%90%86%E5%B1%82/">物理层<sup>1</sup></a><a href="/tags/%E9%93%BE%E8%B7%AF%E5%B1%82/">链路层<sup>1</sup></a><a href="/tags/%E8%BF%90%E8%BE%93%E5%B1%82/">运输层<sup>1</sup></a><a href="/tags/%E5%BA%94%E7%94%A8%E5%B1%82/">应用层<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">计算机组成原理<sup>6</sup></a><a href="/tags/%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97/">算术运算<sup>1</sup></a><a href="/tags/%E7%BC%93%E5%AD%98/">缓存<sup>1</sup></a><a href="/tags/%E5%AD%98%E5%82%A8%E5%99%A8/">存储器<sup>2</sup></a><a href="/tags/%E6%8C%87%E4%BB%A4%E7%B3%BB%E7%BB%9F/">指令系统<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A4%BA/">数据表示<sup>1</sup></a></div></div><div class="console-card history" onclick="sco.hideConsole()"><ul class="card-archive-list"><li class="item"><a href="/archives/2026/01/"><span class="date">2026/01</span><div class="count-group"><span class="count">43</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/10/"><span class="date">2025/10</span><div class="count-group"><span class="count">2</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/09/"><span class="date">2025/09</span><div class="count-group"><span class="count">4</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/08/"><span class="date">2025/08</span><div class="count-group"><span class="count">5</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/07/"><span class="date">2025/07</span><div class="count-group"><span class="count">23</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/06/"><span class="date">2025/06</span><div class="count-group"><span class="count">11</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/05/"><span class="date">2025/05</span><div class="count-group"><span class="count">5</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/"><span class="date">全部文章</span><div class="count-group"><span class="count">93</span><span class="unit">篇</span></div></a></li></ul></div></div></div><div class="button-group"><div class="console-btn-item"><span class="darkmode_switchbutton" onclick="sco.switchDarkMode()" title="昼夜切换"><i class="solitude fas fa-circle-half-stroke"></i></span></div><div class="console-btn-item" id="consoleHideAside"><span class="asideSwitch" onclick="sco.switchHideAside()" title="边栏显示控制"><i class="solitude fas fa-arrows-left-right-to-line"></i></span></div></div><div class="console-mask" onclick="sco.hideConsole()"></div></div></div><div id="sidebar" style="zoom: 1;"><div id="menu-mask" style="display: none;"></div><div id="sidebar-menus"><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">93</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">51</div></a></div></div></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><span class="darkmode_switchbutton menu-child" onclick="sco.switchDarkMode()"><i class="solitude fas fa-circle-half-stroke"></i><span>显示模式</span></span></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://www.woodfishhhh.xyz/" title="woodfishhhh博客"><img class="nolazyload back-menu-item-icon" src="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg" alt="woodfishhhh博客"><span class="back-menu-item-text">woodfishhhh博客</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/%20%7C%7C%20fas%20fa-home"><span>主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%20%7C%7C%20fas%20fa-tags"><span>标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%20%7C%7C%20fas%20fa-th"><span>分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/%20%7C%7C%20fas%20fa-link"><span>友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/%20%7C%7C%20fas%20fa-user"><span>关于我</span></a></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="card-tag-cloud"><a href="/tags/Java/">Java<sup>9</sup></a><a href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/">期末复习<sup>2</sup></a><a href="/tags/Linux/">Linux<sup>1</sup></a><a href="/tags/TypeScript/">TypeScript<sup>1</sup></a><a href="/tags/JavaScript/">JavaScript<sup>37</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF/">前端<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">数据类型<sup>1</sup></a><a href="/tags/ES6/">ES6<sup>5</sup></a><a href="/tags/%E5%87%BD%E6%95%B0/">函数<sup>1</sup></a><a href="/tags/ES2020/">ES2020<sup>2</sup></a><a href="/tags/ES2021/">ES2021<sup>1</sup></a><a href="/tags/%E5%BE%AA%E7%8E%AF/">循环<sup>1</sup></a><a href="/tags/%E6%95%B0%E7%BB%84/">数组<sup>1</sup></a><a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/">项目管理<sup>1</sup></a><a href="/tags/Web%E5%BC%80%E5%8F%91/">Web开发<sup>1</sup></a><a href="/tags/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/">异步编程<sup>1</sup></a><a href="/tags/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/">事件循环<sup>1</sup></a><a href="/tags/%E5%BC%82%E6%AD%A5/">异步<sup>2</sup></a><a href="/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理<sup>1</sup></a><a href="/tags/%E7%8E%B0%E4%BB%A3%E5%BC%80%E5%8F%91/">现代开发<sup>1</sup></a><a href="/tags/Vue/">Vue<sup>1</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/">前端框架<sup>1</sup></a><a href="/tags/C/">C++<sup>1</sup></a><a href="/tags/%E7%AE%97%E6%B3%95/">算法<sup>5</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构<sup>1</sup></a><a href="/tags/%E7%AE%A1%E7%90%86%E5%AD%A6/">管理学<sup>1</sup></a><a href="/tags/%E6%A8%A1%E6%8B%9F%E5%8D%B7/">模拟卷<sup>2</sup></a><a href="/tags/%E9%A9%AC%E5%85%8B%E6%80%9D%E4%B8%BB%E4%B9%89/">马克思主义<sup>1</sup></a><a href="/tags/AJAX/">AJAX<sup>1</sup></a><a href="/tags/HTTP/">HTTP<sup>1</sup></a><a href="/tags/CSS/">CSS<sup>15</sup></a><a href="/tags/HTML/">HTML<sup>17</sup></a><a href="/tags/web/">web<sup>11</sup></a><a href="/tags/Ajax/">Ajax<sup>4</sup></a><a href="/tags/%E9%A2%98%E8%A7%A3/">题解<sup>3</sup></a><a href="/tags/%E7%BC%96%E7%A8%8B/">编程<sup>1</sup></a><a href="/tags/%E5%9F%B9%E8%AE%AD/">培训<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络<sup>7</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/">网络层<sup>1</sup></a><a href="/tags/%E8%B7%AF%E7%94%B1/">路由<sup>1</sup></a><a href="/tags/%E6%A6%82%E8%AE%BA/">概论<sup>1</sup></a><a href="/tags/%E7%89%A9%E7%90%86%E5%B1%82/">物理层<sup>1</sup></a><a href="/tags/%E9%93%BE%E8%B7%AF%E5%B1%82/">链路层<sup>1</sup></a><a href="/tags/%E8%BF%90%E8%BE%93%E5%B1%82/">运输层<sup>1</sup></a><a href="/tags/%E5%BA%94%E7%94%A8%E5%B1%82/">应用层<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">计算机组成原理<sup>6</sup></a><a href="/tags/%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97/">算术运算<sup>1</sup></a><a href="/tags/%E7%BC%93%E5%AD%98/">缓存<sup>1</sup></a><a href="/tags/%E5%AD%98%E5%82%A8%E5%99%A8/">存储器<sup>2</sup></a><a href="/tags/%E6%8C%87%E4%BB%A4%E7%B3%BB%E7%BB%9F/">指令系统<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A4%BA/">数据表示<sup>1</sup></a></div></div></div></div><div><div class="needEndHide" id="rightside"><div class="rs_hide"><button class="translate" type="button" title="简繁转换">简</button><button class="mode" type="button" title="显示模式切换" onclick="sco.switchDarkMode()"><i class="fas fa-circle-half-stroke"></i></button><button class="aside pc" type="button" title="侧边栏" onclick="sco.switchHideAside()"><i class="fas fa-arrows-alt-h"></i></button></div><div class="rs_show"><button class="config" type="button" title="扩展" onclick="document.querySelector(&quot;.rs_hide&quot;).classList.toggle(&quot;show&quot;)"><i class="fas fa-gear fa-spin"></i></button><button class="mobile toc" type="button" title="目录" onclick="document.querySelector('#card-toc').classList.toggle('open')"><i class="fas fa-list"></i></button><button class="top" type="button" title="返回顶部" onclick="sco.toTop()"><i class="fas fa-arrow-up"></i><span id="percent">0</span></button></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="show" id="nav"><div id="nav-group"><div id="blog_name"><a href="/" title="返回博客主页" id="site-name"><span class="title">木鱼的鱼窝</span><i class="solitude fas fa-home"></i></a></div><div id="page-name-mask"><div id="page-name"><a id="page-name-text" onclick="sco.toTop()">计算机网络第一章：概论</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/%20%7C%7C%20fas%20fa-home"><span>主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%20%7C%7C%20fas%20fa-tags"><span>标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%20%7C%7C%20fas%20fa-th"><span>分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/%20%7C%7C%20fas%20fa-link"><span>友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/%20%7C%7C%20fas%20fa-user"><span>关于我</span></a></div></div></div><div id="nav-left"></div><div id="nav-right"><div class="nav-button" id="travellings_button"><a class="site-page" target="_blank" rel="noopener" href="https://www.travellings.cn/go.html" onclick="javascript:travelling()" title=""><i class="solitude fas fa-train"></i></a></div><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机一篇文章" href="javascript:void(0);"><i class="solitude fas fa-dice-d6"></i></a></div><div class="nav-button" id="nav-console"><a class="console_switchbutton" onclick="sco.showConsole()" title="中控台" href="javascript:void(0);"><label><i class="left"></i><i class="center"></i><i class="right"></i></label></a></div><div id="toggle-menu"><a class="site-page"><i class="solitude fas fa-bars"></i></a></div></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original" title="该文章为原创文章，注意版权协议">原创</a><span class="post-meta-categories"><a class="post-meta-categories" href="/categories/%E7%9F%A5%E8%AF%86/">知识</a></span><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"><span class="tags-name tags-punctuation"><i class="solitude fas fa-hashtag"></i>计算机网络</span></a><a class="post-meta__tags" href="/tags/%E6%A6%82%E8%AE%BA/"><span class="tags-name tags-punctuation"><i class="solitude fas fa-hashtag"></i>概论</span></a></div></div></div></div><h1 class="post-title">计算机网络第一章：概论</h1><div id="post-meta"><div class="meta-secondline"><span class="post-meta-date" title="发布于 2026-01-06 23:39:48"><i class="post-meta-icon solitude fas fa-calendar-days"></i><time datetime="2026-01-06T15:39:48.000Z">2026-01-06T15:39:48.000Z</time></span><span class="post-meta-date" title="最后更新于 2026-01-22 15:17:44"><i class="post-meta-icon solitude fas fa-arrows-rotate"></i><time datetime="2026-01-22T07:17:44.877Z">2026-01-22T07:17:44.877Z</time></span></div></div></div><div class="post-radius-bottom"></div><article class="post-content article-container"><h2 id="1-3-电路交换、分组交换和报文交换"><strong>1.3 电路交换、分组交换和报文交换</strong></h2>
+<h3 id="1-3-1-电路交换"><strong>1.3.1 电路交换</strong></h3>
+<p><strong>定义</strong>：电话交换机接通电话线的方式就是电路交换（Circuit Switching）</p>
+<p><strong>通信三个步骤</strong>：</p>
+<ol>
+<li>
+<p><strong>建立连接</strong>：主叫方必须首先进行拨号以请求建立连接</p>
+</li>
+<li>
+<p><strong>通话</strong>：主叫方和被叫方基于已建立的连接进行通话</p>
+</li>
+<li>
+<p><strong>释放连接</strong>：通话完毕后释放连接</p>
+</li>
+</ol>
+<p><strong>特点</strong>：</p>
+<ul>
+<li>
+<p>需要建立专用的物理通路</p>
+</li>
+<li>
+<p>数据传输过程中通路独占</p>
+</li>
+<li>
+<p>适用于实时性要求高的业务</p>
+</li>
+</ul>
+<h3 id="1-3-2-分组交换"><strong>1.3.2 分组交换</strong></h3>
+<p><strong>基本概念</strong>：</p>
+<ul>
+<li>
+<p><strong>报文（Message）</strong>：待发送的整块数据</p>
+</li>
+<li>
+<p><strong>分组（Packet）</strong>：将报文划分成若干较小等长数据段，每个数据段前添加首部</p>
+</li>
+</ul>
+<p><strong>分组构造</strong>：</p>
+<ul>
+<li>
+<p>数据段 + 首部（包含源地址、目的地址等控制信息）</p>
+</li>
+<li>
+<p>分组是分组交换网上传送的数据单元</p>
+</li>
+</ul>
+<p><strong>工作原理</strong>：</p>
+<ol>
+<li>
+<p>源主机将分组发送到分组交换网</p>
+</li>
+<li>
+<p>分组交换机收到分组后先缓存</p>
+</li>
+<li>
+<p>从首部提取目的地址，查找转发表</p>
+</li>
+<li>
+<p>找到相应转发接口后将分组转发出去</p>
+</li>
+</ol>
+<p><strong>存储转发机制</strong>：</p>
+<ul>
+<li>
+<p>分组交换机完整接收一个分组后</p>
+</li>
+<li>
+<p>查表确定转发接口</p>
+</li>
+<li>
+<p>将分组发送到下一个交换机</p>
+</li>
+</ul>
+<h3 id="1-3-3-报文交换"><strong>1.3.3 报文交换</strong></h3>
+<p><strong>定义</strong>：分组交换的前身，报文被整个地发送，而不是拆分成若干个分组</p>
+<p><strong>特点</strong>：</p>
+<ul>
+<li>
+<p>交换节点将报文整体接收完成后才能查找转发表</p>
+</li>
+<li>
+<p>将整个报文转发到下一个节点</p>
+</li>
+<li>
+<p>传输延迟较大</p>
+</li>
+</ul>
+<p><strong>三种交换方式对比</strong>：</p>
+<ul>
+<li>
+<p><strong>电路交换</strong>：建立专用物理通路，数据传输实时性好</p>
+</li>
+<li>
+<p><strong>报文交换</strong>：数据传送单元为整个报文，交换节点需完整接收后才能转发</p>
+</li>
+<li>
+<p><strong>分组交换</strong>：数据传送单元是分组，交换节点接收一个分组后即可转发</p>
+</li>
+</ul>
+<hr>
+<h2 id="1-4-计算机网络的定义和分类"><strong>1.4 计算机网络的定义和分类</strong></h2>
+<h3 id="计算机网络定义"><strong>计算机网络定义</strong></h3>
+<p><strong>早期定义</strong>：一些互连的、自治的计算机的集合</p>
+<ul>
+<li>
+<p>“互连”：计算机之间可以进行数据通信</p>
+</li>
+<li>
+<p>“自治”：独立的计算机，有自己的软硬件，可以独立运行</p>
+</li>
+</ul>
+<p><strong>现代定义</strong></p>
+<ul>
+<li>
+<p>由通用的、可编程的硬件互连而成</p>
+</li>
+<li>
+<p>硬件不限于一般计算机，还包括智能手机、传感器、智能家电等</p>
+</li>
+<li>
+<p>能够实现各种各样的应用</p>
+</li>
+</ul>
+<h3 id="网络分类"><strong>网络分类</strong></h3>
+<p><strong>1. 按网络覆盖范围分类</strong>：</p>
+<ul>
+<li>
+<p><strong>广域网（WAN）</strong>：几十千米到几千千米</p>
+</li>
+<li>
+<p><strong>城域网（MAN）</strong>：5~50km</p>
+</li>
+<li>
+<p><strong>局域网（LAN）</strong>：一般为 1km</p>
+</li>
+<li>
+<p><strong>个域网（PAN）</strong>：范围一般为 10m</p>
+</li>
+</ul>
+<p><strong>2. 按网络使用者分类</strong>：</p>
+<ul>
+<li>
+<p><strong>公用网</strong>：由电信公司出资建造的大型网络</p>
+</li>
+<li>
+<p><strong>专用网</strong>：由特定部门为满足本单位特殊业务需要而建造</p>
+</li>
+</ul>
+<hr>
+<h2 id="1-5-计算机网络的主要性能指标"><strong>1.5 计算机网络的主要性能指标</strong></h2>
+<h3 id="数据量单位"><strong>数据量单位</strong></h3>
+<table>
+<thead>
+<tr>
+<th>单位</th>
+<th>换算关系</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>字节（B）</td>
+<td>基本单位</td>
+</tr>
+<tr>
+<td>千字节（KB）</td>
+<td>$1 \ KB = 2^{10} \ B$</td>
+</tr>
+<tr>
+<td>兆字节（MB）</td>
+<td>$1 \ MB = 2^{20} \ B$</td>
+</tr>
+<tr>
+<td>吉字节（GB）</td>
+<td>$1 \ GB = 2^{30} \ B$</td>
+</tr>
+<tr>
+<td>太字节（TB）</td>
+<td>$1 \ TB = 2^{40} \ B$</td>
+</tr>
+</tbody>
+</table>
+<h3 id="速率（比特率）"><strong>速率（比特率）</strong></h3>
+<p><strong>定义</strong>：数据的传送速率，每秒传送多少个比特，也称为数据率或比特率</p>
+<p><strong>单位换算</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>单位</th>
+<th>换算关系</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>比特 / 秒（b/s）</td>
+<td>基本单位</td>
+</tr>
+<tr>
+<td>千比特 / 秒（kb/s）</td>
+<td>$1 \ kb/s = 10^3 \ b/s$</td>
+</tr>
+<tr>
+<td>兆比特 / 秒（Mb/s）</td>
+<td>$1 \ Mb/s = 10^6 \ b/s$</td>
+</tr>
+<tr>
+<td>吉比特 / 秒（Gb/s）</td>
+<td>$1 \ Gb/s = 10^9 \ b/s$</td>
+</tr>
+<tr>
+<td>太比特 / 秒（Tb/s）</td>
+<td>$1 \ Tb/s = 10^{12} \ b/s$</td>
+</tr>
+</tbody>
+</table>
+<h3 id="带宽"><strong>带宽</strong></h3>
+<ul>
+<li>
+<p><strong>模拟信号</strong>：信号所包含的频率范围（Hz）</p>
+</li>
+<li>
+<p><strong>数字信号</strong>：单位时间内网络中某信道所能通过的最高数据率（b/s）</p>
+</li>
+</ul>
+<h3 id="传播时延"><strong>传播时延</strong></h3>
+<p><strong>电磁波传播速率</strong>：</p>
+<ul>
+<li>
+<p>铜线电缆中：约为 2.3×10^8 m/s</p>
+</li>
+<li>
+<p>光纤中：约为 2.0×10^8 m/s</p>
+</li>
+<li>
+<p>无线信道中：约为 3.0×10^8 m/s</p>
+</li>
+</ul>
+<h3 id="排队时延"><strong>排队时延</strong></h3>
+<ul>
+<li>
+<p>分组在路由器输入队列中等待处理的时间</p>
+</li>
+<li>
+<p>与网络拥塞程度相关</p>
+</li>
+</ul>
+<h3 id="处理时延"><strong>处理时延</strong></h3>
+<p>包括的操作：</p>
+<ul>
+<li>
+<p>检查分组首部是否误码</p>
+</li>
+<li>
+<p>提取分组首部中的目的地址</p>
+</li>
+<li>
+<p>为分组查找相应的转发接口</p>
+</li>
+<li>
+<p>修改分组首部中的部分内容（如生存时间）</p>
+</li>
+</ul>
+<h3 id="1-5-5-时延带宽积"><strong>1.5.5 时延带宽积</strong></h3>
+<p><strong>定义</strong>：传播时延和带宽的乘积</p>
+<p><strong>意义</strong>：</p>
+<ul>
+<li>
+<p>表示链路中可以容纳的比特数</p>
+</li>
+<li>
+<p>链路的 “容量” 指标</p>
+</li>
+</ul>
+<h3 id="1-5-7-利用率"><strong>1.5.7 利用率</strong></h3>
+<p><strong>链路利用率</strong>：</p>
+<ul>
+<li>某条链路有百分之几的时间是被利用的（即有数据通过）</li>
+</ul>
+<p><strong>网络利用率</strong>：</p>
+<ul>
+<li>网络中所有链路的链路利用率的加权平均</li>
+</ul>
+<p><strong>时延与利用率关系</strong>：</p>
+<p>$ D = \frac{D_0}{1-U} $</p>
+<p>其中：</p>
+<ul>
+<li>
+<p>D：实际时延</p>
+</li>
+<li>
+<p>D₀：空闲时的时延</p>
+</li>
+<li>
+<p>U：利用率</p>
+</li>
+</ul>
+<hr>
+<h2 id="1-6-计算机网络体系结构"><strong>1.6 计算机网络体系结构</strong></h2>
+<h3 id="1-6-1-常见的三种计算机网络体系结构"><strong>1.6.1 常见的三种计算机网络体系结构</strong></h3>
+<h4 id="1-开放系统互连参考模型（OSI-RM）"><strong>1. 开放系统互连参考模型（OSI/RM）</strong></h4>
+<p><strong>定义</strong>：International Organization for Standardization Systems Interconnection Reference Model</p>
+<p><strong>七层协议体系结构（自下而上）</strong>：</p>
+<ol>
+<li>
+<p><strong>物理层（Physical Layer）</strong></p>
+</li>
+<li>
+<p><strong>数据链路层（Data Link Layer）</strong></p>
+</li>
+<li>
+<p><strong>网络层（Network Layer）</strong></p>
+</li>
+<li>
+<p><strong>运输层（Transport Layer）</strong></p>
+</li>
+<li>
+<p><strong>会话层（Session Layer）</strong></p>
+</li>
+<li>
+<p><strong>表示层（Presentation Layer）</strong></p>
+</li>
+<li>
+<p><strong>应用层（Application Layer）</strong></p>
+</li>
+</ol>
+<p><strong>特点</strong>：法律上的国际标准</p>
+<h4 id="2-TCP-IP-参考模型"><strong>2. TCP/IP 参考模型</strong></h4>
+<p><strong>四层协议体系结构（自下而上）</strong>：</p>
+<ol>
+<li>
+<p><strong>网络接口层</strong></p>
+</li>
+<li>
+<p><strong>网际层（Internet Layer）</strong></p>
+</li>
+<li>
+<p><strong>运输层（Transport Layer）</strong></p>
+</li>
+<li>
+<p><strong>应用层（Application Layer）</strong></p>
+</li>
+</ol>
+<p><strong>与 OSI 模型对应关系</strong>：</p>
+<ul>
+<li>
+<p>网络接口层 = 物理层 + 数据链路层</p>
+</li>
+<li>
+<p>应用层 = 应用层 + 表示层 + 会话层</p>
+</li>
+</ul>
+<p><strong>核心协议</strong>：</p>
+<ul>
+<li>
+<p><strong>网际协议 IP</strong>：TCP/IP 体系结构网际层的核心协议</p>
+</li>
+<li>
+<p><strong>传输控制协议 TCP</strong>：提供可靠传输服务</p>
+</li>
+<li>
+<p><strong>用户数据报协议 UDP</strong>：提供不可靠传输服务</p>
+</li>
+<li>
+<p><strong>应用层协议</strong>：HTTP、FTP、SMTP 等</p>
+</li>
+</ul>
+<h4 id="3-五层原理体系结构"><strong>3. 五层原理体系结构</strong></h4>
+<p><strong>五层结构（自下而上）</strong>：</p>
+<ol>
+<li>
+<p><strong>物理层</strong></p>
+</li>
+<li>
+<p><strong>数据链路层</strong></p>
+</li>
+<li>
+<p><strong>网络层</strong></p>
+</li>
+<li>
+<p><strong>运输层</strong></p>
+</li>
+<li>
+<p><strong>应用层</strong></p>
+</li>
+</ol>
+<p><strong>特点</strong>：将 TCP/IP 体系结构的网络接口层重新划分为物理层和数据链路层，适合教学使用</p>
+<h3 id="各层主要功能"><strong>各层主要功能</strong></h3>
+<p><strong>物理层</strong>：</p>
+<ul>
+<li>
+<p>解决使用何种信号来表示比特 0 和 1 的问题</p>
+</li>
+<li>
+<p>确定传输媒体和物理接口</p>
+</li>
+<li>
+<p>定义物理层协议（如曼彻斯特编码）</p>
+</li>
+</ul>
+<p><strong>数据链路层</strong>：</p>
+<ul>
+<li>
+<p>解决数据包在一个网络或一段链路上传输的问题</p>
+</li>
+<li>
+<p>封装数据为帧</p>
+</li>
+<li>
+<p>提供 MAC 寻址和帧校验</p>
+</li>
+<li>
+<p>处理总线争用问题</p>
+</li>
+</ul>
+<p><strong>网络层</strong>：</p>
+<ul>
+<li>
+<p>解决数据包在多个网络之间传输和路由的问题</p>
+</li>
+<li>
+<p>提供 IP 寻址和路由选择</p>
+</li>
+<li>
+<p>处理不同网络之间的互连</p>
+</li>
+</ul>
+<p><strong>运输层</strong>：</p>
+<ul>
+<li>
+<p>为应用进程提供端到端的通信服务</p>
+</li>
+<li>
+<p>区分不同的应用进程</p>
+</li>
+<li>
+<p>提供可靠或不可靠的传输服务</p>
+</li>
+</ul>
+<p><strong>应用层</strong>：</p>
+<ul>
+<li>
+<p>为用户提供各种网络应用服务</p>
+</li>
+<li>
+<p>定义应用层协议</p>
+</li>
+<li>
+<p>处理应用特定的功能</p>
+</li>
+</ul>
+<h3 id="数据封装与转发过程示例"><strong>数据封装与转发过程示例</strong></h3>
+<p><strong>发送端处理过程</strong>：</p>
+<ol>
+<li>
+<p><strong>应用层</strong>：构建 HTTP 请求报文</p>
+</li>
+<li>
+<p><strong>运输层</strong>：添加 TCP 首部，封装成 TCP 报文段</p>
+</li>
+<li>
+<p><strong>网络层</strong>：添加 IP 首部，封装成 IP 数据报</p>
+</li>
+<li>
+<p><strong>数据链路层</strong>：添加帧首部和尾部，封装成帧</p>
+</li>
+<li>
+<p><strong>物理层</strong>：转换为比特流，通过传输媒体发送</p>
+</li>
+</ol>
+<p><strong>路由器转发过程</strong>：</p>
+<ol>
+<li>
+<p><strong>物理层</strong>：接收电信号，转换为比特流</p>
+</li>
+<li>
+<p><strong>数据链路层</strong>：去除帧首部和尾部，提取 IP 数据报</p>
+</li>
+<li>
+<p><strong>网络层</strong>：提取目的 IP 地址，查找转发表，决定转发接口</p>
+</li>
+<li>
+<p><strong>数据链路层</strong>：添加新的帧首部和尾部，封装成帧</p>
+</li>
+<li>
+<p><strong>物理层</strong>：转换为电信号发送</p>
+</li>
+</ol>
+<h3 id="1-6-4-计算机网络体系结构中的专用术语"><strong>1.6.4 计算机网络体系结构中的专用术语</strong></h3>
+<h4 id="1-实体和对等实体"><strong>1. 实体和对等实体</strong></h4>
+<p><strong>实体（Entity）</strong>：</p>
+<ul>
+<li>
+<p>任何可发送或接收信息的硬件或软件进程</p>
+</li>
+<li>
+<p>例如：网卡（硬件实体）、浏览器进程（软件实体）</p>
+</li>
+</ul>
+<p><strong>对等实体（Peer Entity）</strong>：</p>
+<ul>
+<li>
+<p>通信双方相同层次中的实体</p>
+</li>
+<li>
+<p>例如：发送方应用层实体与接收方应用层实体互为对等实体</p>
+</li>
+</ul>
+<h4 id="2-协议（Protocol）"><strong>2. 协议（Protocol）</strong></h4>
+<p><strong>定义</strong>：控制两个对等实体在 “水平方向” 进行 “逻辑通信” 的规则的集合</p>
+<p><strong>各层协议示例</strong>：</p>
+<ul>
+<li>
+<p><strong>物理层</strong>：曼彻斯特编码协议</p>
+</li>
+<li>
+<p><strong>数据链路层</strong>：CSMA/CD 协议</p>
+</li>
+<li>
+<p><strong>网络层</strong>：IP 协议</p>
+</li>
+<li>
+<p><strong>运输层</strong>：TCP 协议或 UDP 协议</p>
+</li>
+<li>
+<p><strong>应用层</strong>：HTTP 协议、FTP 协议、SMTP 协议</p>
+</li>
+</ul>
+<p><strong>协议三要素</strong>：</p>
+<ol>
+<li>
+<p><strong>语法（Syntax）</strong>：定义通信双方所交换信息的格式</p>
+</li>
+<li>
+<p><strong>语义（Semantics）</strong>：定义通信双方所要完成的操作</p>
+</li>
+<li>
+<p><strong>同步（Synchronization）</strong>：定义事件实现的顺序</p>
+</li>
+</ol>
+<h4 id="3-服务（Service）"><strong>3. 服务（Service）</strong></h4>
+<p><strong>定义</strong>：下层为上层提供的功能调用</p>
+<p><strong>服务提供方式</strong>：</p>
+<ul>
+<li>
+<p>物理层为数据链路层提供服务</p>
+</li>
+<li>
+<p>数据链路层为网络层提供服务</p>
+</li>
+<li>
+<p>网络层为运输层提供服务</p>
+</li>
+<li>
+<p>运输层为应用层提供服务</p>
+</li>
+<li>
+<p>应用层为用户提供服务</p>
+</li>
+</ul>
+<p><strong>重要特点</strong>：</p>
+<ul>
+<li>
+<p><strong>协议是 “水平” 的</strong>：对等实体之间的通信规则</p>
+</li>
+<li>
+<p><strong>服务是 “垂直” 的</strong>：下层向上层提供的功能</p>
+</li>
+</ul>
+<h4 id="4-服务访问点和服务原语"><strong>4. 服务访问点和服务原语</strong></h4>
+<p><strong>服务访问点（Service Access Point, SAP）</strong>：</p>
+<ul>
+<li>
+<p>同一系统中相邻两层实体交换信息的逻辑接口</p>
+</li>
+<li>
+<p>用于区分不同的服务类型</p>
+</li>
+</ul>
+<p><strong>服务原语（Service Primitive）</strong>：</p>
+<ul>
+<li>
+<p>上层使用下层服务时交换的命令</p>
+</li>
+<li>
+<p>用于请求、指示、响应、确认服务</p>
+</li>
+</ul>
+<h4 id="5-协议数据单元和服务数据单元"><strong>5. 协议数据单元和服务数据单元</strong></h4>
+<p><strong>协议数据单元（Protocol Data Unit, PDU）</strong>：</p>
+<ul>
+<li>
+<p>对等层次之间传送的数据包</p>
+</li>
+<li>
+<p>各层 PDU 名称：</p>
+<ul>
+<li>
+<p>物理层：比特流（bit stream）</p>
+</li>
+<li>
+<p>数据链路层：帧（frame）</p>
+</li>
+<li>
+<p>网络层：分组（packet）或 IP 数据报</p>
+</li>
+<li>
+<p>运输层：TCP 报文段或 UDP 用户数据报</p>
+</li>
+<li>
+<p>应用层：应用报文（message）</p>
+</li>
+</ul>
+</li>
+</ul>
+<p><strong>服务数据单元（Service Data Unit, SDU）</strong>：</p>
+<ul>
+<li>
+<p>同一系统内层与层之间交换的数据包</p>
+</li>
+<li>
+<p>多个 SDU 可以合成为一个 PDU</p>
+</li>
+<li>
+<p>一个 SDU 也可划分为几个 PDU</p>
+</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author_group"><div class="post-copyright__author_img"><img class="post-copyright__author_img_front" src="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg"></div><div class="post-copyright__author_name">woodfish</div><div class="post-copyright__author_desc">HOLA,this is woodfish!</div></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div id="quit-box" onclick="RemoveRewardMask()"></div><div class="post-reward"><div class="reward-button" title="赞赏作者" onclick="AddRewardMask()"><i class="solitude fas fa-heart"></i>赞赏作者</div><div class="reward-main"><ul class="reward-all"><span class="reward-title"></span><ul class="reward-group"><li class="reward-item"><a href="/null"><img class="post-qr-code-img nolazyload" src="https://www.woodfishhhh.xyz/images/e926e309585e5a5826ab0c3b485f8b6.png?_t=1751445131356" alt="微信" style="border-color: var(--efu-main)"></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/null"><img class="post-qr-code-img nolazyload" src="https://www.woodfishhhh.xyz/images/8147e2d92fa8287fac8774305c99661.jpg.jpeg?_t=1751445131356" alt="支付宝" style="border-color: var(--efu-main)"></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/"><div class="reward-text">赞赏名单</div><div class="reward-dec"></div></a></ul></div></div><script>function RemoveRewardMask() {
+    let rewardMainElements = document.querySelectorAll(".reward-main");
+    let quitBoxElement = document.querySelector("#quit-box");
+
+    rewardMainElements.forEach(element => {
+        element.style.display = "none";
+    });
+
+    if (quitBoxElement) {
+        quitBoxElement.style.display = "none";
+    }
+}
+
+function AddRewardMask() {
+    let rewardMainElements = document.querySelectorAll(".reward-main");
+    let quitBoxElement = document.querySelector("#quit-box");
+
+    rewardMainElements.forEach(element => {
+        element.style.display = "flex";
+    });
+
+    if (quitBoxElement) {
+        quitBoxElement.style.display = "flex";
+    }
+}</script></div></div><div class="social-share"><a class="social-share-ico icon-qq" target="_blank" rel="noopener" href="https://connect.qq.com/widget/shareqq/index.html?url=https%3A%2F%2Fwww.woodfishhhh.xyz%2F2026%2F01%2F06%2F%25E8%25AE%25A1%25E7%25AE%2597%25E6%259C%25BA%25E7%25BD%2591%25E7%25BB%259C%2F%25E8%25AE%25A1%25E7%25AE%2597%25E6%259C%25BA%25E7%25BD%2591%25E7%25BB%259C%25E7%25AC%25AC%25E4%25B8%2580%25E7%25AB%25A0%25EF%25BC%259A%25E6%25A6%2582%25E8%25AE%25BA%2F&amp;title=%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%AC%E4%B8%80%E7%AB%A0%EF%BC%9A%E6%A6%82%E8%AE%BA&amp;desc=undefined&amp;summary=undefined&amp;site=%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%AC%E4%B8%80%E7%AB%A0%EF%BC%9A%E6%A6%82%E8%AE%BA&amp;pics=https%3A%2F%2Fpic1.imgdb.cn%2Fitem%2F682f3d1658cb8da5c807b704.jpg" title="分享到QQ"><i class="solitude fab fa-qq"></i></a><a class="social-share-ico icon-weibo" target="_blank" rel="noopener" href="http://service.weibo.com/share/share.php?url=https%3A%2F%2Fwww.woodfishhhh.xyz%2F2026%2F01%2F06%2F%25E8%25AE%25A1%25E7%25AE%2597%25E6%259C%25BA%25E7%25BD%2591%25E7%25BB%259C%2F%25E8%25AE%25A1%25E7%25AE%2597%25E6%259C%25BA%25E7%25BD%2591%25E7%25BB%259C%25E7%25AC%25AC%25E4%25B8%2580%25E7%25AB%25A0%25EF%25BC%259A%25E6%25A6%2582%25E8%25AE%25BA%2F&amp;title=%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%AC%E4%B8%80%E7%AB%A0%EF%BC%9A%E6%A6%82%E8%AE%BA&amp;pic=https%3A%2F%2Fpic1.imgdb.cn%2Fitem%2F682f3d1658cb8da5c807b704.jpg" title="分享到微博"><i class="solitude fab fa-weibo"></i></a><a class="social-share-ico icon-twitter" target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.woodfishhhh.xyz%2F2026%2F01%2F06%2F%25E8%25AE%25A1%25E7%25AE%2597%25E6%259C%25BA%25E7%25BD%2591%25E7%25BB%259C%2F%25E8%25AE%25A1%25E7%25AE%2597%25E6%259C%25BA%25E7%25BD%2591%25E7%25BB%259C%25E7%25AC%25AC%25E4%25B8%2580%25E7%25AB%25A0%25EF%25BC%259A%25E6%25A6%2582%25E8%25AE%25BA%2F&amp;text=%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%AC%E4%B8%80%E7%AB%A0%EF%BC%9A%E6%A6%82%E8%AE%BA" title="分享到Twitter"><i class="solitude fab fa-twitter"></i></a><a class="social-share-ico icon-facebook" target="_blank" rel="noopener" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.woodfishhhh.xyz%2F2026%2F01%2F06%2F%25E8%25AE%25A1%25E7%25AE%2597%25E6%259C%25BA%25E7%25BD%2591%25E7%25BB%259C%2F%25E8%25AE%25A1%25E7%25AE%2597%25E6%259C%25BA%25E7%25BD%2591%25E7%25BB%259C%25E7%25AC%25AC%25E4%25B8%2580%25E7%25AB%25A0%25EF%25BC%259A%25E6%25A6%2582%25E8%25AE%25BA%2F" title="分享到Facebook"><i class="solitude fab fa-facebook"></i></a><div class="social-share-ico icon-link" onclick="utils.copy(&quot;https://www.woodfishhhh.xyz/2026/01/06/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%AC%E4%B8%80%E7%AB%A0%EF%BC%9A%E6%A6%82%E8%AE%BA/&quot;)" title="复制文章链接"><i class="solitude fas fa-link"></i></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本文是原创文章，采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>协议，完整转载请注明来自<a href="/">木鱼的鱼窝</a></span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/"><span class="tags-punctuation"><i class="solitude fas fa-hashtag"></i>计算机网络<span class="tagsPageCount">7</span></span></a><a class="post-meta__tags" href="/tags/%E6%A6%82%E8%AE%BA/"><span class="tags-punctuation"><i class="solitude fas fa-hashtag"></i>概论<span class="tagsPageCount">1</span></span></a></div></div></div><nav class="needEndHide pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2026/01/06/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E6%9C%80%E9%95%BF%E5%89%8D%E7%BC%80%E5%8C%B9%E9%85%8D%E5%8E%9F%E5%88%99/"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">最长前缀匹配原则</div></div></a></div><div class="next-post pull-right"><a href="/2026/01/06/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%AC%AC%E4%BA%8C%E7%AB%A0%EF%BC%9A%E7%89%A9%E7%90%86%E5%B1%82/"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">计算机网络第二章：物理层</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><div class="top-group"><div class="sayhi" id="sayhi" onclick="sco.changeWittyWord()"></div></div></div><div class="avatar"><img alt="头像" src="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg"></div><div class="description">欢迎来到我的鱼窝~</div><div class="bottom-group"><span class="left"><div class="name">woodfish</div><div class="desc">河汉微明星乍稀，碧莲香湿袭人衣。夜凉如水琉璃滑，自起开窗放月归。</div></span><div class="social-icons is-center"><a class="social-icon" target="_blank" rel="noopener" href="https://github.com/woodfishhhh" title="Github"><i class="solitude  fab fa-github"></i></a><a class="social-icon" target="_blank" rel="noopener" href="https://space.bilibili.com/359728114" title="Bilibili"><i class="solitude  fab fa-bilibili"></i></a><a class="social-icon" href="https://www.woodfishhhh.xyz/images/af1a055d14e4f7f6eae2886f2865d13.jpg.jpeg?_t=1750312382930" title="QQ"><i class="solitude  fab fa-qq"></i></a><a class="social-icon" href="https://www.woodfishhhh.xyz/images/f59723db9159310b6056abe8341f5d7.jpg.jpeg?_t=1750312263368" title="Wechat"><i class="solitude  fab fa-weixin"></i></a><a class="social-icon" href="https://www.woodfishhhh.xyz/images/d8d58d2f2c7ac5790fd37f388da41db4.png?_t=1759286665402" title="Email"><i class="solitude  far fa-envelope"></i></a><a class="social-icon" target="_blank" rel="noopener" href="https://www.douyin.com/user/MS4wLjABAAAAgbOrIhdi7Rl5RfaQ3fE3i7c2WnyR3zEOyLiK2Cjtcqk?from_tab_name=main" title="Douyin"><i class="solitude  fab fa-tiktok"></i></a></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="solitude fas fa-bars"></i><span>文章目录</span></div><div class="toc-content" id="toc-content"><ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#1-3-%E7%94%B5%E8%B7%AF%E4%BA%A4%E6%8D%A2%E3%80%81%E5%88%86%E7%BB%84%E4%BA%A4%E6%8D%A2%E5%92%8C%E6%8A%A5%E6%96%87%E4%BA%A4%E6%8D%A2"><span class="toc-text">1.3 电路交换、分组交换和报文交换</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-1-%E7%94%B5%E8%B7%AF%E4%BA%A4%E6%8D%A2"><span class="toc-text">1.3.1 电路交换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-2-%E5%88%86%E7%BB%84%E4%BA%A4%E6%8D%A2"><span class="toc-text">1.3.2 分组交换</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-3-%E6%8A%A5%E6%96%87%E4%BA%A4%E6%8D%A2"><span class="toc-text">1.3.3 报文交换</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-4-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%9A%84%E5%AE%9A%E4%B9%89%E5%92%8C%E5%88%86%E7%B1%BB"><span class="toc-text">1.4 计算机网络的定义和分类</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E5%AE%9A%E4%B9%89"><span class="toc-text">计算机网络定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E7%BD%91%E7%BB%9C%E5%88%86%E7%B1%BB"><span class="toc-text">网络分类</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-5-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E7%9A%84%E4%B8%BB%E8%A6%81%E6%80%A7%E8%83%BD%E6%8C%87%E6%A0%87"><span class="toc-text">1.5 计算机网络的主要性能指标</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E9%87%8F%E5%8D%95%E4%BD%8D"><span class="toc-text">数据量单位</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E9%80%9F%E7%8E%87%EF%BC%88%E6%AF%94%E7%89%B9%E7%8E%87%EF%BC%89"><span class="toc-text">速率（比特率）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%B8%A6%E5%AE%BD"><span class="toc-text">带宽</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BC%A0%E6%92%AD%E6%97%B6%E5%BB%B6"><span class="toc-text">传播时延</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%8E%92%E9%98%9F%E6%97%B6%E5%BB%B6"><span class="toc-text">排队时延</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%A4%84%E7%90%86%E6%97%B6%E5%BB%B6"><span class="toc-text">处理时延</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-5-%E6%97%B6%E5%BB%B6%E5%B8%A6%E5%AE%BD%E7%A7%AF"><span class="toc-text">1.5.5 时延带宽积</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-5-7-%E5%88%A9%E7%94%A8%E7%8E%87"><span class="toc-text">1.5.7 利用率</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-6-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="toc-text">1.6 计算机网络体系结构</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-6-1-%E5%B8%B8%E8%A7%81%E7%9A%84%E4%B8%89%E7%A7%8D%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="toc-text">1.6.1 常见的三种计算机网络体系结构</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%BC%80%E6%94%BE%E7%B3%BB%E7%BB%9F%E4%BA%92%E8%BF%9E%E5%8F%82%E8%80%83%E6%A8%A1%E5%9E%8B%EF%BC%88OSI-RM%EF%BC%89"><span class="toc-text">1. 开放系统互连参考模型（OSI&#x2F;RM）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-TCP-IP-%E5%8F%82%E8%80%83%E6%A8%A1%E5%9E%8B"><span class="toc-text">2. TCP&#x2F;IP 参考模型</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E4%BA%94%E5%B1%82%E5%8E%9F%E7%90%86%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84"><span class="toc-text">3. 五层原理体系结构</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%90%84%E5%B1%82%E4%B8%BB%E8%A6%81%E5%8A%9F%E8%83%BD"><span class="toc-text">各层主要功能</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%95%B0%E6%8D%AE%E5%B0%81%E8%A3%85%E4%B8%8E%E8%BD%AC%E5%8F%91%E8%BF%87%E7%A8%8B%E7%A4%BA%E4%BE%8B"><span class="toc-text">数据封装与转发过程示例</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-6-4-%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C%E4%BD%93%E7%B3%BB%E7%BB%93%E6%9E%84%E4%B8%AD%E7%9A%84%E4%B8%93%E7%94%A8%E6%9C%AF%E8%AF%AD"><span class="toc-text">1.6.4 计算机网络体系结构中的专用术语</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#1-%E5%AE%9E%E4%BD%93%E5%92%8C%E5%AF%B9%E7%AD%89%E5%AE%9E%E4%BD%93"><span class="toc-text">1. 实体和对等实体</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-%E5%8D%8F%E8%AE%AE%EF%BC%88Protocol%EF%BC%89"><span class="toc-text">2. 协议（Protocol）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-%E6%9C%8D%E5%8A%A1%EF%BC%88Service%EF%BC%89"><span class="toc-text">3. 服务（Service）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-%E6%9C%8D%E5%8A%A1%E8%AE%BF%E9%97%AE%E7%82%B9%E5%92%8C%E6%9C%8D%E5%8A%A1%E5%8E%9F%E8%AF%AD"><span class="toc-text">4. 服务访问点和服务原语</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#5-%E5%8D%8F%E8%AE%AE%E6%95%B0%E6%8D%AE%E5%8D%95%E5%85%83%E5%92%8C%E6%9C%8D%E5%8A%A1%E6%95%B0%E6%8D%AE%E5%8D%95%E5%85%83"><span class="toc-text">5. 协议数据单元和服务数据单元</span></a></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="solitude fas fa-map"></i><span>最近发布</span></div><div class="aside-list"><a class="aside-list-item" href="/2026/01/06/Udemy%20TS/ts%E7%AC%94%E8%AE%B0/" title="TypeScript笔记"><div class="content"><span class="title" href="/2026/01/06/Udemy%20TS/ts%E7%AC%94%E8%AE%B0/" title="TypeScript笔记">TypeScript笔记</span><span class="categories" href="/2026/01/06/Udemy%20TS/ts%E7%AC%94%E8%AE%B0/">编程</span></div></a><a class="aside-list-item" href="/2026/01/06/Udemy%20JS/099%20Primitives%20vs.%20Objects%20(Primitive%20vs.%20Reference%20Types)%20/" title="基本类型与对象类型"><div class="content"><span class="title" href="/2026/01/06/Udemy%20JS/099%20Primitives%20vs.%20Objects%20(Primitive%20vs.%20Reference%20Types)%20/" title="基本类型与对象类型">基本类型与对象类型</span><span class="categories" href="/2026/01/06/Udemy%20JS/099%20Primitives%20vs.%20Objects%20(Primitive%20vs.%20Reference%20Types)%20/">前端</span></div></a><a class="aside-list-item" href="/2026/01/06/Udemy%20JS/103%20Destructuring%20Arrays%EF%BC%89%E7%AC%94%E8%AE%B0/" title="数组解构"><div class="content"><span class="title" href="/2026/01/06/Udemy%20JS/103%20Destructuring%20Arrays%EF%BC%89%E7%AC%94%E8%AE%B0/" title="数组解构">数组解构</span><span class="categories" href="/2026/01/06/Udemy%20JS/103%20Destructuring%20Arrays%EF%BC%89%E7%AC%94%E8%AE%B0/">前端</span></div></a><a class="aside-list-item" href="/2026/01/06/Udemy%20JS/104%20Destructuring%20Objects%EF%BC%88%E5%AF%B9%E8%B1%A1%E8%A7%A3%E6%9E%84%EF%BC%89/" title="对象解构"><div class="content"><span class="title" href="/2026/01/06/Udemy%20JS/104%20Destructuring%20Objects%EF%BC%88%E5%AF%B9%E8%B1%A1%E8%A7%A3%E6%9E%84%EF%BC%89/" title="对象解构">对象解构</span><span class="categories" href="/2026/01/06/Udemy%20JS/104%20Destructuring%20Objects%EF%BC%88%E5%AF%B9%E8%B1%A1%E8%A7%A3%E6%9E%84%EF%BC%89/">前端</span></div></a><a class="aside-list-item" href="/2026/01/06/Udemy%20JS/098%20Regular%20Functions%20vs.%20Arrow%20Functions%EF%BC%88%E5%B8%B8%E8%A7%84%E5%87%BD%E6%95%B0%E4%B8%8E%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%EF%BC%89/" title="常规函数与箭头函数"><div class="content"><span class="title" href="/2026/01/06/Udemy%20JS/098%20Regular%20Functions%20vs.%20Arrow%20Functions%EF%BC%88%E5%B8%B8%E8%A7%84%E5%87%BD%E6%95%B0%E4%B8%8E%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%EF%BC%89/" title="常规函数与箭头函数">常规函数与箭头函数</span><span class="categories" href="/2026/01/06/Udemy%20JS/098%20Regular%20Functions%20vs.%20Arrow%20Functions%EF%BC%88%E5%B8%B8%E8%A7%84%E5%87%BD%E6%95%B0%E4%B8%8E%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%EF%BC%89/">前端</span></div></a></div></div></div></div></main><footer id="footer"><div id="footer_deal"><a class="deal_link" target="_blank" rel="noopener" href="https://github.com/woodfishhhh" title="Github"><i class="solitude  fab fa-github"></i></a><a class="deal_link" href="https://www.woodfishhhh.xyz/images/d8d58d2f2c7ac5790fd37f388da41db4.png?_t=1759286665402" title="Email"><i class="solitude  far fa-envelope"></i></a><div><div class="nolazyload footer_mini_logo" id="footer_mini_logo" title="返回顶部" onclick="sco.toTop()"><img src= "" data-lazy-src="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg" alt="返回顶部"></div></div><a class="deal_link" target="_blank" rel="noopener" href="https://space.bilibili.com/359728114" title="Bilibili"><i class="solitude  fab fa-bilibili"></i></a><a class="deal_link" target="_blank" rel="noopener" href="https://www.douyin.com/user/MS4wLjABAAAAgbOrIhdi7Rl5RfaQ3fE3i7c2WnyR3zEOyLiK2Cjtcqk?from_tab_name=main" title="Douyin"><i class="solitude  fab fa-tiktok"></i></a></div><div><div id="st-footer"><div class="footer-group"><h3 class="footer-title">导航</h3><div class="footer-links"><a class="footer-item" href="/archives/" title="Archives">Archives</a><a class="footer-item" href="/categories/" title="Categories">Categories</a><a class="footer-item" href="/tags/" title="Tags">Tags</a></div></div><div class="footer-group"><h3 class="footer-title">排列</h3><div class="footer-links"><a class="footer-item" href="/about/" title="About">About</a><a class="footer-item" href="/link/" title="Friends">Friends</a></div></div><div class="footer-group"><div class="footer-title-group"><h3 class="footer-title">友链</h3><button class="random-friends-btn" onclick="randomLinksList()" title="友链"><i class="solitude fas fa-arrows-rotate"></i></button></div><div class="footer-links" id="friend-links-in-footer"></div></div></div></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div class="copyright">© 2025 - 2026 By<a class="footer-bar-link" href="/" title="woodfish">woodfish</a></div><div class="beian-group"><div></div><a class="footer-bar-link" target="_blank" rel="noopener" href="https://hexo.io/" title="框架：Hexo">框架：Hexo</a><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/everfu/hexo-theme-solitude" title="主题：Solitude">主题：Solitude</a></div></div><div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/everfu/hexo-theme-solitude" title="">主题</a><a class="footer-bar-link" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" title="">License</a></div></div></div></div><div class="comment-barrage needEndHide"></div></footer></div><div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="solitude fas fa-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="solitude fas fa-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="solitude fas fa-arrows-rotate"></i></div><div class="rightMenu-item" id="menu-top"><i class="solitude fas fa-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="solitude fas fa-clone"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="solitude fas fa-clipboard"></i><span>粘贴文本</span></div><div class="rightMenu-item" id="menu-newwindow"><i class="solitude far fa-window-maximize"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="solitude fas fa-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="solitude fas fa-clone"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="solitude fas fa-cloud-arrow-down"></i><span>下载此图片</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><div class="rightMenu-item" id="menu-randomPost" onclick="toRandomPost()||rm.hideRightMenu()"><i class="solitude fas fa-tower-broadcast"></i><span>随机文章</span></div><div class="rightMenu-item" onclick="pjax.loadUrl('/categories/')||rm.hideRightMenu()"><i class="solitude fas fa-clone"></i><span>全部分类</span></div><div class="rightMenu-item" onclick="pjax.loadUrl('/tags/')||rm.hideRightMenu()"><i class="solitude fas fa-tags"></i><span>全部标签</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><div class="rightMenu-item" id="menu-darkmode" onclick="sco.switchDarkMode()"><i class="solitude fas fa-circle-half-stroke"></i><span class="menu-darkmode-text">浅色模式</span></div><div class="rightMenu-item" id="menu-translate"><i class="solitude fas fa-language"></i><span>轉為繁體</span></div></div></div><div id="rightmenu-mask"></div></div><div><!-- Critical scripts loaded synchronously--><script src="/js/utils.js?v=3.0.20"></script><script src="/js/main.js?v=3.0.20"></script><!-- Non-critical scripts loaded asynchronously--><script async src="/js/third_party/waterfall.min.js?v=3.0.20"></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><!-- Feature-specific scripts loaded asynchronously--><script defer src="/js/third_party/universe.min.js?v=3.0.20"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  if (typeof dark === 'function') dark();
+});
+</script><script defer src="/js/tw_cn.js?v=3.0.20"></script><!-- UI enhancement scripts--><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.iife.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><!-- Music player scripts--><!-- Cover color processing scripts--><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+utils.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+</script><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!-- Search functionality--><!-- Right menu functionality--><script defer src="/js/right_menu.js?v=3.0.20"></script><div class="js-pjax"><script defer pjax src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.min.js"></script></div></div><!-- pjax--><script>let pjax = null;
+
+function initPjax() {
+    if (typeof Pjax === 'undefined') {
+        console.warn('Pjax is not loaded yet, retrying...');
+        setTimeout(initPjax, 100);
+        return;
+    }
+
+    pjax = new Pjax({
+        elements: 'a:not([target="_blank"])',
+        selectors: ["title","#body-wrap","#site-config","meta[name=\"description\"]",".js-pjax","meta[property^=\"og:\"]","#config-diff",".rs_show",".rs_hide"],
+        cacheBust: false,
+        analytics: false,
+        scrollRestoration: false
+    })
+
+    // 将 pjax 实例挂载到全局
+    window.pjax = pjax;
+
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+        const newScript = document.createElement('script')
+        const content = item.text || item.textContent || item.innerHTML || ""
+        Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+        newScript.appendChild(document.createTextNode(content))
+        item.parentNode.replaceChild(newScript, item)
+    })
+
+    document.addEventListener('pjax:complete', () => {
+        window.refreshFn()
+
+        document.querySelectorAll('script[data-pjax]').forEach(item => {
+            const newScript = document.createElement('script')
+            const content = item.text || item.textContent || item.innerHTML || ""
+            Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+            newScript.appendChild(document.createTextNode(content))
+            item.parentNode.replaceChild(newScript, item)
+        })
+
+        GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+    })
+
+    document.addEventListener('pjax:error', (e) => {
+        if (e.request.status === 404) {
+            pjax.loadUrl('/404.html')
+        }
+    })
+}
+
+// 初始化 Pjax
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPjax);
+} else {
+    initPjax();
+}</script><!-- google adsense--></body></html>
+        <script>
+            const posts = ["2026/01/06/Udemy TS/ts笔记/","2026/01/06/Udemy JS/099 Primitives vs. Objects (Primitive vs. Reference Types) /","2026/01/06/Udemy JS/103 Destructuring Arrays）笔记/","2026/01/06/Udemy JS/104 Destructuring Objects（对象解构）/","2026/01/06/Udemy JS/098 Regular Functions vs. Arrow Functions（常规函数与箭头函数）/","2026/01/06/Udemy JS/105 JavaScript 扩展运算符（...）/","2026/01/06/Udemy JS/106 Rest Pattern and Parameters/","2026/01/06/Udemy JS/108 空值合并运算符（Nullish Coalescing Operator）/","2026/01/06/Udemy JS/109 Logical Assignment Operators）/","2026/01/06/Udemy JS/111 for-of 循环笔记/","2026/01/06/Udemy JS/112 Enhanced Object Literals（ES6 增强对象字面量）/","2026/01/06/Udemy JS/113 可选链（Optional Chaining）笔记/","2026/01/06/Udemy JS/112 JavaScript数组方法(forEach, map, filter, reduce等)/","2026/01/06/Udemy JS/231 How to Plan a Web Project /","2026/01/06/Udemy JS/256 JavaScript 异步编程核心笔记/","2026/01/06/Udemy JS/258 The Event Loop in Practice/","2026/01/06/Udemy JS/262 Consuming Promises with Async_Await/","2026/01/06/Udemy JS/263 Error Handling With try...catch/","2026/01/06/Udemy JS/268-280 现代js开发/","2026/01/06/Udemy JS/264 Returning Values from Async Functions/","2026/01/06/杂项/Udemy Vue/","2026/01/06/杂项/new JS/","2026/01/06/杂项/数据结构期末速通/","2026/01/06/杂项/管理模拟卷/","2026/01/06/杂项/马原模拟卷/","2026/01/06/前端/AJAX基础入门教程/","2026/01/06/题解/Day5题解/","2026/01/06/题解/E题超详解：帮哈基鱼算标签/","2026/01/06/题解/F. Beautiful Intervals/","2026/01/06/题解/JUFE国庆新生编程语法培训/","2026/01/06/计算机网络/划分子网/","2026/01/06/计算机网络/最长前缀匹配原则/","2026/01/06/计算机网络/计算机网络第一章：概论/","2026/01/06/计算机网络/计算机网络第二章：物理层/","2026/01/06/计算机网络/计算机网络第三章：链路层/","2026/01/06/计算机网络/计算机网络第五章：运输层/","2026/01/06/计算机网络/计算机网络第六章：应用层/","2026/01/06/计算机组成原理/加减乘除/","2026/01/06/计算机组成原理/Cache缓存/","2026/01/06/计算机组成原理/存储器，主存扩展/","2026/01/06/计算机组成原理/指令系统/","2026/01/06/计算机组成原理/数据的表示/","2026/01/06/计算机组成原理/计算机存储器/","2025/10/21/计算机网络/计算机网络第四章：网络层/","2025/10/21/计算机网络/计算机网络第四章：网络层（edit）/","2025/09/11/前端/Day04_AJAX进阶/","2025/09/10/前端/Day03_AJAX原理/","2025/09/09/前端/Day02_AJAX综合案例/","2025/09/08/前端/Day01_AJAX入门/","2025/08/25/Linux/Linux课程笔记/","2025/08/13/前端/js易错点/","2025/08/11/前端/JavaScript 学习笔记（9）：深浅拷贝、异常处理、this 指向与防抖节流/","2025/08/03/前端/JavaScript 学习笔记（8）：面向对象编程与原型机制详解/","2025/08/02/前端/JavaScript 学习笔记（7）：面向对象与内置构造函数/","2025/07/31/前端/JavaScript 学习笔记（6）：作用域、闭包与函数进阶/","2025/07/28/前端/Web API 学习笔记（6）：正则表达式与表单验证/","2025/07/27/前端/Web API 学习笔记（5）：BOM 操作与本地存储/","2025/07/26/前端/Web API 学习笔记（4）：Date 对象与 DOM-节点操作要点/","2025/07/23/前端/Web API 学习笔记（3）：事件流与事件委托/","2025/07/22/前端/Web API 学习笔记（2）：事件处理与-this-指向/","2025/07/21/前端/Web API 学习笔记（1）：DOM 基础操作/","2025/07/20/前端/JavaScript 学习笔记（5）：对象数据类型与内置数学对象/","2025/07/19/前端/JavaScript 学习笔记（4）：函数封装与对象基础/","2025/07/18/前端/JavaScript 学习笔记（3）：数组的增删操作方法详解/","2025/07/17/前端/JavaScript 学习笔记（2）：运算符、语句与综合案例/","2025/07/17/前端/JavaScript 学习笔记（1）：基础语法与数据类型/","2025/07/15/前端/CSS 学习笔记（12）：响应式布局与 Bootstrap 框架应用/","2025/07/14/前端/CSS 学习笔记（11）：移动 Web 开发之 vw 适配与酷我音乐案例实践/","2025/07/13/前端/CSS 学习笔记（10）：移动 Web 开发基础与 rem 布局、Less 预处理器/","2025/07/12/前端/CSS 学习笔记（9）：移动 Web 开发之空间转换与动画效果/","2025/07/11/前端/CSS 学习笔记（8）：移动 Web 开发之平面转换与渐变效果/","2025/07/10/前端/小兔仙/","2025/07/08/前端/学成在线/","2025/07/08/前端/CSS 学习笔记（6）：小兔鲜儿项目搭建及基础配置（目录结构、SEO 标签、版心设置）/","2025/07/04/前端/CSS我的易错点/","2025/07/03/前端/CSS 学习笔记（7）：CSS 优先级叠加计算规则详解/","2025/07/02/前端/CSS 学习笔记（5）：定位模式、CSS 精灵、字体图标及过渡效果应用/","2025/06/30/前端/CSS 学习笔记（4）：浮动布局与 Flex 弹性布局详解及应用案例/","2025/06/27/前端/CSS 学习笔记（3）：伪类与伪元素选择器、盒子模型及相关特性详解/","2025/06/24/前端/CSS 学习笔记（2）：复合选择器、CSS 特性及背景与显示模式设置/","2025/06/23/前端/CSS 学习笔记（1）：引入方式、选择器及文字样式控制/","2025/06/23/前端/HTML 学习笔记（2）：列表、表格、表单及布局标签详解/","2025/06/22/前端/HTML 学习笔记（1）：核心标签、文档结构及多媒体应用/","2025/06/19/JAVA/Java期末复习重点易错点/","2025/06/18/杂项/中国近代史复习重点/","2025/06/03/JAVA/Java的final/","2025/06/03/JAVA/Java的继承/","2025/06/03/JAVA/Java的多态/","2025/05/27/JAVA/Java的List集合/","2025/05/27/JAVA/Java的Collection集合/","2025/05/27/JAVA/Java的包装类/","2025/05/15/JAVA/Java的内部类/","2025/05/15/JAVA/Java的抽象与接口类/"];
+            function toRandomPost() {
+                const randomPost = posts[Math.floor(Math.random() * posts.length)];
+                pjax.loadUrl(GLOBAL_CONFIG.root + randomPost);
+            }
+        </script>

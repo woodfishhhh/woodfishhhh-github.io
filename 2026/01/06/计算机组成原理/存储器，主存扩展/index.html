@@ -1,0 +1,1524 @@
+<!DOCTYPE html><html lang="zh-Hans" data-theme="light"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>存储器主存扩展 | 木鱼的鱼窝</title><noscript>开启JavaScript才能访问本站哦~</noscript><link rel="icon" href="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg"><link rel="stylesheet" href="/css/index.css?v=3.0.20"><link rel="canonical" href="https://www.woodfishhhh.xyz/2026/01/06/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E5%AD%98%E5%82%A8%E5%99%A8%EF%BC%8C%E4%B8%BB%E5%AD%98%E6%89%A9%E5%B1%95/index.html"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css"><!-- Feature-specific CSS--><!-- aplayer--><!-- swiper--><!-- fancybox ui--><!-- katex--><!-- Open Graph--><meta name="description" content="[TOC]    存储体：由若干存储单元组成，是存储数据的核心载体 存储字长：每个存储单元可存储的二进制比特数（所有存储单元的存储字长相同），与存储器数据寄存器（MDR）位数相等（MDR 用于暂存读写的存储器数据，位数需匹配存储单元单次读写的比特数）  主存容量 &#x3D; 存储字长（bit）× 存储单元数量 &#x3D; 存储字长（bit）× 2^（MAR 位数） 存储器容量 &#x3D; 存储字长 × 存储单元数量 2.">
+<meta property="og:type" content="article">
+<meta property="og:title" content="存储器主存扩展">
+<meta property="og:url" content="https://www.woodfishhhh.xyz/2026/01/06/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E5%AD%98%E5%82%A8%E5%99%A8%EF%BC%8C%E4%B8%BB%E5%AD%98%E6%89%A9%E5%B1%95/index.html">
+<meta property="og:site_name" content="木鱼的鱼窝">
+<meta property="og:description" content="[TOC]    存储体：由若干存储单元组成，是存储数据的核心载体 存储字长：每个存储单元可存储的二进制比特数（所有存储单元的存储字长相同），与存储器数据寄存器（MDR）位数相等（MDR 用于暂存读写的存储器数据，位数需匹配存储单元单次读写的比特数）  主存容量 &#x3D; 存储字长（bit）× 存储单元数量 &#x3D; 存储字长（bit）× 2^（MAR 位数） 存储器容量 &#x3D; 存储字长 × 存储单元数量 2.">
+<meta property="og:locale">
+<meta property="og:image" content="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg">
+<meta property="article:published_time" content="2026-01-06T15:39:48.000Z">
+<meta property="article:modified_time" content="2026-01-22T07:17:44.849Z">
+<meta property="article:author" content="woodfish">
+<meta property="article:tag" content="计算机组成原理">
+<meta property="article:tag" content="存储器">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg"><!-- pwa--><meta name="apple-mobile-web-app-capable" content="木鱼的鱼窝"><meta name="theme-color" content="var(--efu-main)"><meta name="apple-mobile-web-app-status-bar-style" content="var(--efu-main)"><link rel="bookmark" href="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg"><link rel="apple-touch-icon" href="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg" sizes="180x180"><script>console.log(' %c Solitude %c ' + '3.0.20' + ' %c https://github.com/everfu/hexo-theme-solitude',
+    'background:#35495e ; padding: 1px; border-radius: 3px 0 0 3px;  color: #fff',
+    'background:#ff9a9a ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff',
+    'background:unset ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff')
+</script><script>(()=>{
+        const saveToLocal = {
+            set: function setWithExpiry(key, value, ttl) {
+                if (ttl === 0)
+                    return
+                const now = new Date()
+                const expiryDay = ttl * 86400000
+                const item = {
+                    value: value,
+                    expiry: now.getTime() + expiryDay
+                }
+                localStorage.setItem(key, JSON.stringify(item))
+            },
+            get: function getWithExpiry(key) {
+                const itemStr = localStorage.getItem(key)
+
+                if (!itemStr) {
+                    return undefined
+                }
+                const item = JSON.parse(itemStr)
+                const now = new Date()
+
+                if (now.getTime() > item.expiry) {
+                    localStorage.removeItem(key)
+                    return undefined
+                }
+                return item.value
+            }
+        };
+        window.utils = {
+            saveToLocal: saveToLocal,
+            getCSS: (url, id = false) => new Promise((resolve, reject) => {
+              const link = document.createElement('link')
+              link.rel = 'stylesheet'
+              link.href = url
+              if (id) link.id = id
+              link.onerror = reject
+              link.onload = link.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                link.onload = link.onreadystatechange = null
+                resolve()
+              }
+              document.head.appendChild(link)
+            }),
+            getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+              const script = document.createElement('script')
+              script.src = url
+              script.async = true
+              script.onerror = reject
+              script.onload = script.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                script.onload = script.onreadystatechange = null
+                resolve()
+              }
+
+              Object.keys(attr).forEach(key => {
+                script.setAttribute(key, attr[key])
+              })
+
+              document.head.appendChild(script)
+            }),
+            addGlobalFn: (key, fn, name = false, parent = window) => {
+                const globalFn = parent.globalFn || {}
+                const keyObj = globalFn[key] || {}
+
+                if (name && keyObj[name]) return
+
+                name = name || Object.keys(keyObj).length
+                keyObj[name] = fn
+                globalFn[key] = keyObj
+                parent.globalFn = globalFn
+            },
+            addEventListenerPjax: (ele, event, fn, option = false) => {
+              ele.addEventListener(event, fn, option)
+              utils.addGlobalFn('pjax', () => {
+                  ele.removeEventListener(event, fn, option)
+              })
+            },
+            diffDateFormat: (selector) => {
+                selector.forEach(item => {
+                    const date = new Date(item.getAttribute('datetime') || item.textContent);
+                    item.textContent = (date.getMonth() + 1).toString()+'/'+date.getDate().toString();
+                });
+            },
+        }
+    })()</script><!-- theme--><script>initTheme = () => {
+    const cachedMode = utils.saveToLocal.get('theme');
+    if (cachedMode === undefined)
+        document.documentElement.setAttribute('data-theme', 'dark');
+    else
+        document.documentElement.setAttribute('data-theme', cachedMode);
+    typeof rm === 'object' && rm.mode(cachedMode === undefined || cachedMode === 'dark')
+}
+initTheme()</script><script>const GLOBAL_CONFIG = {
+    root: '/',
+    algolia: undefined,
+    localsearch: undefined,
+    runtime: '2025-06-02 00:00:00',
+    lazyload: {
+        enable: true,
+        error: 'https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png'
+    },
+    copyright: {"limit":50,"author":"作者: woodfish","link":"链接: ","source":"来源: 木鱼的鱼窝","info":"著作权归作者所有。 商业转载请联系作者获得授权，非商业转载请注明出处。"},
+    highlight: {"limit":200,"expand":true,"copy":true,"syntax":"highlight.js"},
+    randomlink: false,
+    lang: {"theme":{"dark":"已切换至深色模式","light":"已切换至浅色模式"},"copy":{"success":"复制成功","error":"复制失败"},"backtop":"返回顶部","time":{"day":"天前","hour":"小时前","just":"刚刚","min":"分钟前","month":"个月前"},"day":" 天","f12":"开发者模式已打开，请遵循GPL协议。","totalk":"无需删除空行，直接输入评论即可"},
+    aside: {
+        state: {
+            morning: "✨ 早上好，新的一天开始了",
+            noon: "🍲 午餐时间",
+            afternoon: "🌞 下午好",
+            night: "早点休息",
+            goodnight: "晚安 😴",
+        },
+        witty_words: [],
+        witty_comment: {
+            prefix: '好久不见，',
+            back: '欢迎再次回来，',
+        },
+    },
+    covercolor: {
+        enable: false
+    },
+    comment: false,
+    lightbox: 'fancybox',
+    right_menu: {"mode":{"dark":"深色模式","light":"浅色模式"},"img_error":"此图片无法复制与下载","translate":true},
+    translate: {"translateDelay":0,"defaultEncoding":2},
+    lure: false,
+    expire: false,
+};</script><script id="config-diff">var PAGE_CONFIG = {
+    is_post: true,
+    is_page: false,
+    is_home: false,
+    page: '',
+    toc: true,
+    comment: false,
+    ai_text: false,
+    color: false,
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body id="body"><div><canvas id="universe"></canvas></div><div><div id="loading-box" onclick="preloader.endLoading();" style="zoom:1"><div class="loading-bg"><img class="loading-img nolazyload" src="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg" alt="loading image"></div></div><script>const preloader = {
+    isLoaded: false,
+    endLoading: () => {
+        if (!preloader.isLoaded) {
+            document.getElementById('loading-box').classList.add('loaded');
+            preloader.isLoaded = true;
+            preloader.togglePaceDone();
+        }
+    },
+    initLoading: () => {
+        document.getElementById('loading-box').classList.remove('loaded');
+        preloader.isLoaded = false;
+        preloader.togglePaceDone();
+    },
+    togglePaceDone: () => {
+        document.getElementById('body').className = preloader.isLoaded ? 'pace-done' : '';
+    }
+}
+
+window.addEventListener('load', () => {
+    preloader.endLoading();
+});
+
+window.addEventListener('pjax:send', () => {
+    preloader.initLoading();
+});
+
+document.addEventListener('pjax:complete', () => {
+    preloader.endLoading();
+});
+
+setTimeout(() => {
+    preloader.endLoading();
+}, 5000);</script></div><div><div id="console"><div class="close-btn" onclick="sco.hideConsole()"><i class="solitude fas fa-xmark"></i></div><div class="console-card-group"><div class="console-card-group-right"><div class="console-card tags" onclick="sco.hideConsole()"><div class="card-content"><div class="author-content-item-tips">标签</div><div class="author-content-item-title">寻找感兴趣的领域</div></div><div class="card-tag-cloud"><a href="/tags/Java/">Java<sup>9</sup></a><a href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/">期末复习<sup>2</sup></a><a href="/tags/Linux/">Linux<sup>1</sup></a><a href="/tags/TypeScript/">TypeScript<sup>1</sup></a><a href="/tags/JavaScript/">JavaScript<sup>37</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF/">前端<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">数据类型<sup>1</sup></a><a href="/tags/ES6/">ES6<sup>5</sup></a><a href="/tags/%E5%87%BD%E6%95%B0/">函数<sup>1</sup></a><a href="/tags/ES2020/">ES2020<sup>2</sup></a><a href="/tags/ES2021/">ES2021<sup>1</sup></a><a href="/tags/%E5%BE%AA%E7%8E%AF/">循环<sup>1</sup></a><a href="/tags/%E6%95%B0%E7%BB%84/">数组<sup>1</sup></a><a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/">项目管理<sup>1</sup></a><a href="/tags/Web%E5%BC%80%E5%8F%91/">Web开发<sup>1</sup></a><a href="/tags/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/">异步编程<sup>1</sup></a><a href="/tags/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/">事件循环<sup>1</sup></a><a href="/tags/%E5%BC%82%E6%AD%A5/">异步<sup>2</sup></a><a href="/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理<sup>1</sup></a><a href="/tags/%E7%8E%B0%E4%BB%A3%E5%BC%80%E5%8F%91/">现代开发<sup>1</sup></a><a href="/tags/Vue/">Vue<sup>1</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/">前端框架<sup>1</sup></a><a href="/tags/C/">C++<sup>1</sup></a><a href="/tags/%E7%AE%97%E6%B3%95/">算法<sup>5</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构<sup>1</sup></a><a href="/tags/%E7%AE%A1%E7%90%86%E5%AD%A6/">管理学<sup>1</sup></a><a href="/tags/%E6%A8%A1%E6%8B%9F%E5%8D%B7/">模拟卷<sup>2</sup></a><a href="/tags/%E9%A9%AC%E5%85%8B%E6%80%9D%E4%B8%BB%E4%B9%89/">马克思主义<sup>1</sup></a><a href="/tags/AJAX/">AJAX<sup>1</sup></a><a href="/tags/HTTP/">HTTP<sup>1</sup></a><a href="/tags/CSS/">CSS<sup>15</sup></a><a href="/tags/HTML/">HTML<sup>17</sup></a><a href="/tags/web/">web<sup>11</sup></a><a href="/tags/Ajax/">Ajax<sup>4</sup></a><a href="/tags/%E9%A2%98%E8%A7%A3/">题解<sup>3</sup></a><a href="/tags/%E7%BC%96%E7%A8%8B/">编程<sup>1</sup></a><a href="/tags/%E5%9F%B9%E8%AE%AD/">培训<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络<sup>7</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/">网络层<sup>1</sup></a><a href="/tags/%E8%B7%AF%E7%94%B1/">路由<sup>1</sup></a><a href="/tags/%E6%A6%82%E8%AE%BA/">概论<sup>1</sup></a><a href="/tags/%E7%89%A9%E7%90%86%E5%B1%82/">物理层<sup>1</sup></a><a href="/tags/%E9%93%BE%E8%B7%AF%E5%B1%82/">链路层<sup>1</sup></a><a href="/tags/%E8%BF%90%E8%BE%93%E5%B1%82/">运输层<sup>1</sup></a><a href="/tags/%E5%BA%94%E7%94%A8%E5%B1%82/">应用层<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">计算机组成原理<sup>6</sup></a><a href="/tags/%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97/">算术运算<sup>1</sup></a><a href="/tags/%E7%BC%93%E5%AD%98/">缓存<sup>1</sup></a><a href="/tags/%E5%AD%98%E5%82%A8%E5%99%A8/">存储器<sup>2</sup></a><a href="/tags/%E6%8C%87%E4%BB%A4%E7%B3%BB%E7%BB%9F/">指令系统<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A4%BA/">数据表示<sup>1</sup></a></div></div><div class="console-card history" onclick="sco.hideConsole()"><ul class="card-archive-list"><li class="item"><a href="/archives/2026/01/"><span class="date">2026/01</span><div class="count-group"><span class="count">43</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/10/"><span class="date">2025/10</span><div class="count-group"><span class="count">2</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/09/"><span class="date">2025/09</span><div class="count-group"><span class="count">4</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/08/"><span class="date">2025/08</span><div class="count-group"><span class="count">5</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/07/"><span class="date">2025/07</span><div class="count-group"><span class="count">23</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/06/"><span class="date">2025/06</span><div class="count-group"><span class="count">11</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/05/"><span class="date">2025/05</span><div class="count-group"><span class="count">5</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/"><span class="date">全部文章</span><div class="count-group"><span class="count">93</span><span class="unit">篇</span></div></a></li></ul></div></div></div><div class="button-group"><div class="console-btn-item"><span class="darkmode_switchbutton" onclick="sco.switchDarkMode()" title="昼夜切换"><i class="solitude fas fa-circle-half-stroke"></i></span></div><div class="console-btn-item" id="consoleHideAside"><span class="asideSwitch" onclick="sco.switchHideAside()" title="边栏显示控制"><i class="solitude fas fa-arrows-left-right-to-line"></i></span></div></div><div class="console-mask" onclick="sco.hideConsole()"></div></div></div><div id="sidebar" style="zoom: 1;"><div id="menu-mask" style="display: none;"></div><div id="sidebar-menus"><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">93</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">51</div></a></div></div></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><span class="darkmode_switchbutton menu-child" onclick="sco.switchDarkMode()"><i class="solitude fas fa-circle-half-stroke"></i><span>显示模式</span></span></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://www.woodfishhhh.xyz/" title="woodfishhhh博客"><img class="nolazyload back-menu-item-icon" src="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg" alt="woodfishhhh博客"><span class="back-menu-item-text">woodfishhhh博客</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/%20%7C%7C%20fas%20fa-home"><span>主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%20%7C%7C%20fas%20fa-tags"><span>标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%20%7C%7C%20fas%20fa-th"><span>分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/%20%7C%7C%20fas%20fa-link"><span>友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/%20%7C%7C%20fas%20fa-user"><span>关于我</span></a></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="card-tag-cloud"><a href="/tags/Java/">Java<sup>9</sup></a><a href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/">期末复习<sup>2</sup></a><a href="/tags/Linux/">Linux<sup>1</sup></a><a href="/tags/TypeScript/">TypeScript<sup>1</sup></a><a href="/tags/JavaScript/">JavaScript<sup>37</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF/">前端<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">数据类型<sup>1</sup></a><a href="/tags/ES6/">ES6<sup>5</sup></a><a href="/tags/%E5%87%BD%E6%95%B0/">函数<sup>1</sup></a><a href="/tags/ES2020/">ES2020<sup>2</sup></a><a href="/tags/ES2021/">ES2021<sup>1</sup></a><a href="/tags/%E5%BE%AA%E7%8E%AF/">循环<sup>1</sup></a><a href="/tags/%E6%95%B0%E7%BB%84/">数组<sup>1</sup></a><a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/">项目管理<sup>1</sup></a><a href="/tags/Web%E5%BC%80%E5%8F%91/">Web开发<sup>1</sup></a><a href="/tags/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/">异步编程<sup>1</sup></a><a href="/tags/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/">事件循环<sup>1</sup></a><a href="/tags/%E5%BC%82%E6%AD%A5/">异步<sup>2</sup></a><a href="/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理<sup>1</sup></a><a href="/tags/%E7%8E%B0%E4%BB%A3%E5%BC%80%E5%8F%91/">现代开发<sup>1</sup></a><a href="/tags/Vue/">Vue<sup>1</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/">前端框架<sup>1</sup></a><a href="/tags/C/">C++<sup>1</sup></a><a href="/tags/%E7%AE%97%E6%B3%95/">算法<sup>5</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构<sup>1</sup></a><a href="/tags/%E7%AE%A1%E7%90%86%E5%AD%A6/">管理学<sup>1</sup></a><a href="/tags/%E6%A8%A1%E6%8B%9F%E5%8D%B7/">模拟卷<sup>2</sup></a><a href="/tags/%E9%A9%AC%E5%85%8B%E6%80%9D%E4%B8%BB%E4%B9%89/">马克思主义<sup>1</sup></a><a href="/tags/AJAX/">AJAX<sup>1</sup></a><a href="/tags/HTTP/">HTTP<sup>1</sup></a><a href="/tags/CSS/">CSS<sup>15</sup></a><a href="/tags/HTML/">HTML<sup>17</sup></a><a href="/tags/web/">web<sup>11</sup></a><a href="/tags/Ajax/">Ajax<sup>4</sup></a><a href="/tags/%E9%A2%98%E8%A7%A3/">题解<sup>3</sup></a><a href="/tags/%E7%BC%96%E7%A8%8B/">编程<sup>1</sup></a><a href="/tags/%E5%9F%B9%E8%AE%AD/">培训<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络<sup>7</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/">网络层<sup>1</sup></a><a href="/tags/%E8%B7%AF%E7%94%B1/">路由<sup>1</sup></a><a href="/tags/%E6%A6%82%E8%AE%BA/">概论<sup>1</sup></a><a href="/tags/%E7%89%A9%E7%90%86%E5%B1%82/">物理层<sup>1</sup></a><a href="/tags/%E9%93%BE%E8%B7%AF%E5%B1%82/">链路层<sup>1</sup></a><a href="/tags/%E8%BF%90%E8%BE%93%E5%B1%82/">运输层<sup>1</sup></a><a href="/tags/%E5%BA%94%E7%94%A8%E5%B1%82/">应用层<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">计算机组成原理<sup>6</sup></a><a href="/tags/%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97/">算术运算<sup>1</sup></a><a href="/tags/%E7%BC%93%E5%AD%98/">缓存<sup>1</sup></a><a href="/tags/%E5%AD%98%E5%82%A8%E5%99%A8/">存储器<sup>2</sup></a><a href="/tags/%E6%8C%87%E4%BB%A4%E7%B3%BB%E7%BB%9F/">指令系统<sup>1</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A4%BA/">数据表示<sup>1</sup></a></div></div></div></div><div><div class="needEndHide" id="rightside"><div class="rs_hide"><button class="translate" type="button" title="简繁转换">简</button><button class="mode" type="button" title="显示模式切换" onclick="sco.switchDarkMode()"><i class="fas fa-circle-half-stroke"></i></button><button class="aside pc" type="button" title="侧边栏" onclick="sco.switchHideAside()"><i class="fas fa-arrows-alt-h"></i></button></div><div class="rs_show"><button class="config" type="button" title="扩展" onclick="document.querySelector(&quot;.rs_hide&quot;).classList.toggle(&quot;show&quot;)"><i class="fas fa-gear fa-spin"></i></button><button class="mobile toc" type="button" title="目录" onclick="document.querySelector('#card-toc').classList.toggle('open')"><i class="fas fa-list"></i></button><button class="top" type="button" title="返回顶部" onclick="sco.toTop()"><i class="fas fa-arrow-up"></i><span id="percent">0</span></button></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="show" id="nav"><div id="nav-group"><div id="blog_name"><a href="/" title="返回博客主页" id="site-name"><span class="title">木鱼的鱼窝</span><i class="solitude fas fa-home"></i></a></div><div id="page-name-mask"><div id="page-name"><a id="page-name-text" onclick="sco.toTop()">存储器主存扩展</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/%20%7C%7C%20fas%20fa-home"><span>主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/%20%7C%7C%20fas%20fa-tags"><span>标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/%20%7C%7C%20fas%20fa-th"><span>分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/%20%7C%7C%20fas%20fa-link"><span>友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/%20%7C%7C%20fas%20fa-user"><span>关于我</span></a></div></div></div><div id="nav-left"></div><div id="nav-right"><div class="nav-button" id="travellings_button"><a class="site-page" target="_blank" rel="noopener" href="https://www.travellings.cn/go.html" onclick="javascript:travelling()" title=""><i class="solitude fas fa-train"></i></a></div><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机一篇文章" href="javascript:void(0);"><i class="solitude fas fa-dice-d6"></i></a></div><div class="nav-button" id="nav-console"><a class="console_switchbutton" onclick="sco.showConsole()" title="中控台" href="javascript:void(0);"><label><i class="left"></i><i class="center"></i><i class="right"></i></label></a></div><div id="toggle-menu"><a class="site-page"><i class="solitude fas fa-bars"></i></a></div></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original" title="该文章为原创文章，注意版权协议">原创</a><span class="post-meta-categories"><a class="post-meta-categories" href="/categories/%E7%9F%A5%E8%AF%86/">知识</a></span><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/"><span class="tags-name tags-punctuation"><i class="solitude fas fa-hashtag"></i>计算机组成原理</span></a><a class="post-meta__tags" href="/tags/%E5%AD%98%E5%82%A8%E5%99%A8/"><span class="tags-name tags-punctuation"><i class="solitude fas fa-hashtag"></i>存储器</span></a></div></div></div></div><h1 class="post-title">存储器主存扩展</h1><div id="post-meta"><div class="meta-secondline"><span class="post-meta-date" title="发布于 2026-01-06 23:39:48"><i class="post-meta-icon solitude fas fa-calendar-days"></i><time datetime="2026-01-06T15:39:48.000Z">2026-01-06T15:39:48.000Z</time></span><span class="post-meta-date" title="最后更新于 2026-01-22 15:17:44"><i class="post-meta-icon solitude fas fa-arrows-rotate"></i><time datetime="2026-01-22T07:17:44.849Z">2026-01-22T07:17:44.849Z</time></span></div></div></div><div class="post-radius-bottom"></div><article class="post-content article-container"><p>[TOC]</p>
+<img src= "" data-lazy-src="C:\Users\woodfish\Desktop\MyBlog\计算机组成原理\存储器.assets\image-20251121213339248.png" alt="image-20251121213339248" style="zoom: 25%;" />
+<img src= "" data-lazy-src="C:\Users\woodfish\Desktop\MyBlog\计算机组成原理\存储器.assets\image-20251121213411412.png" alt="image-20251121213411412" style="zoom:40%;" />
+<ul>
+<li>存储体：由若干<strong>存储单元</strong>组成，是存储数据的核心载体</li>
+<li>存储字长：每个存储单元可存储的二进制比特数（所有存储单元的存储字长相同），与<strong>存储器数据寄存器（MDR）位数相等</strong>（MDR 用于暂存读写的存储器数据，位数需匹配存储单元单次读写的比特数）</li>
+</ul>
+<p>主存容量 = 存储字长（bit）× 存储单元数量 = 存储字长（bit）× 2^（MAR 位数）</p>
+<p>存储器容量 = 存储字长 × 存储单元数量</p>
+<h4 id="2-2-1-存取时间">2.2.1 存取时间</h4>
+<ol>
+<li><strong>定义</strong>：启动一次存储器操作（读出 / 写入）到操作完成所经历的时间，反映存储器 “单次读写有多快”。</li>
+<li>分类
+<ul>
+<li>读出时间：从发出 “读指令” 到数据从存储器传输到 MDR 的时间</li>
+<li>写入时间：从发出 “写指令” 到数据从 MDR 写入存储器的时间</li>
+</ul>
+</li>
+<li><strong>关键特点</strong>：读出时间与写入时间<strong>可能不相等</strong></li>
+</ol>
+<h4 id="2-2-2-存取周期">2.2.2 存取周期</h4>
+<ol>
+<li><strong>定义</strong>：连续两次访问存储器（两次读、两次写或一读一写）的<strong>最短时间间隔</strong>，反映存储器 “连续读写的最小间隔”，是衡量存储器连续工作能力的关键指标。</li>
+<li>与存取时间的关系
+<ul>
+<li>主存的存取周期 = 存取时间 + 存储器状态<strong>稳定恢复时间</strong>（操作完成后，存储器需短暂时间恢复到可再次操作的稳定状态）</li>
+<li>结论：<strong>存取周期略大于存取时间</strong>（如某内存存取时间为 10ns，存取周期为 12ns，其中 2ns 为稳定恢复时间）</li>
+</ul>
+</li>
+</ol>
+<h4 id="2-2-3-存储器带宽">2.2.3 存储器带宽</h4>
+<ol>
+<li>
+<p><strong>定义</strong>：单位时间内存储器能传输的二进制信息总量，反映存储器 “数据传输速率”，单位为比特每秒（bit/s）、字节每秒（Byte/s，B/s）等（常用 KB/s、MB/s、GB/s 表示）。</p>
+</li>
+<li>
+<p>影响因素</p>
+<ul>
+<li>单次传输数据位宽：位宽越大（如 64bit 比 32bit），单位时间内传输的数据量越多</li>
+<li>存取时间：存取时间越短，单位时间内可完成的传输次数越多</li>
+</ul>
+</li>
+<li>
+<p><strong>计算公式</strong>：存储器带宽 = 单次传输数据量（bit/Byte）÷ 存取周期（s）</p>
+</li>
+</ol>
+<h2 id="主存的核心概念与基本硬件组成">主存的核心概念与基本硬件组成</h2>
+<h3 id="2-1-主存的定义与访问特性">2.1 主存的定义与访问特性</h3>
+<ul>
+<li>
+<p><strong>定义</strong>：主存（内存）是机器指令直接操作的存储器，需基于 “存储地址” 实现<strong>随机访问</strong>（即通过地址可直接定位任意存储单元，无需顺序查找）。</p>
+</li>
+<li>
+<p>关键术语解析</p>
+<table>
+<thead>
+<tr>
+<th>术语</th>
+<th>定义</th>
+<th>示例</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>存储元件</td>
+<td>主存的最小存储单位，仅能存储 1 位二进制数（0 或 1）</td>
+<td>一个晶体管或电容元件</td>
+</tr>
+<tr>
+<td>存储单元</td>
+<td>由若干存储元件组成，可存储 “一串二进制信息”</td>
+<td>8 个存储元件构成 1 个 8 位存储单元</td>
+</tr>
+<tr>
+<td>存储字</td>
+<td>存储单元中存放的 “一串二进制信息”</td>
+<td>存储单元内的 “10110011”</td>
+</tr>
+<tr>
+<td>存储字长</td>
+<td>存储字的二进制位数，常见 8 位（1 字节）、16 位、32 位、64 位</td>
+<td>8 位存储字长对应 1 字节数据</td>
+</tr>
+</tbody>
+</table>
+</li>
+</ul>
+<h3 id="2-2-主存的三大硬件组成部分">2.2 主存的三大硬件组成部分</h3>
+<h4 id="2-2-1-存储体">2.2.1 存储体</h4>
+<ul>
+<li><strong>功能</strong>：主存的 “数据存储核心”，由大量存储单元按一定规则排列构成，所有二进制数据最终存放在存储体的存储元件中。</li>
+<li><strong>结构关系</strong>：存储体 → 存储单元 → 存储元件（1 位），即 “整体 - 局部 - 最小单位” 的层级结构。</li>
+</ul>
+<h4 id="2-2-2-存储器数据寄存器（MDR）">2.2.2 存储器数据寄存器（MDR）</h4>
+<ul>
+<li>功能：暂存两类数据
+<ol>
+<li>从存储体某存储单元<strong>读出的信息</strong>（准备送往 CPU）；</li>
+<li>CPU 准备<strong>写入存储体某单元的信息</strong>（暂存后等待写入）。</li>
+</ol>
+</li>
+<li><strong>关键特性</strong>：MDR 的位数 <strong>必须与存储字长相等</strong>（若存储字长为 8 位，MDR 也为 8 位，确保能完整容纳 1 个存储字）。</li>
+</ul>
+<h4 id="2-2-3-存储器地址寄存器（MAR）">2.2.3 存储器地址寄存器（MAR）</h4>
+<ul>
+<li>
+<p><strong>功能</strong>：存放 “欲访问的存储单元的地址”（相当于主存的 “门牌号登记表”）。</p>
+</li>
+<li>
+<p>关键特性</p>
+<p>MAR 的位数决定主存可容纳的存储单元总数，计算公式为：存储单元总数 = $2^{(MAR位数)}$</p>
+<p>（原理：n 位二进制数可表示 $2^n$ 种不同地址，对应 $2^n$ 个存储单元）</p>
+</li>
+</ul>
+<h3 id="单译码结构（线性译码结构）">单译码结构（线性译码结构）</h3>
+<h4 id="2-1-核心原理">2.1 核心原理</h4>
+<p>单译码结构仅使用一个地址译码器，将输入的 $N$ 位地址信号直接译为 $2^N$ 条译码输出线，每条输出线对应一个存储单元，通过该输出线的 “有效电平”（高电平或低电平，由硬件设计决定）选中唯一对应的存储单元。</p>
+<h3 id="双译码结构（二维译码结构）">双译码结构（二维译码结构）</h3>
+<h4 id="3-1-核心原理">3.1 核心原理</h4>
+<p>针对单译码结构的局限性，双译码结构将存储单元排列成 “二维阵列”（行 × 列），使用两个独立的译码器（行地址译码器、列地址译码器）：</p>
+<ol>
+<li>先将 N 位地址信号拆分为两部分（通常为等分为 $N/2$ 位，若 N 为奇数则按 “整数部分 + 余数部分” 拆分，如 N=7 时拆分为 3 位 + 4 位），分别送入行、列译码器。</li>
+<li>行译码器输出 “行选信号”，选中某一行的所有存储单元；列译码器输出 “列选信号”，选中某一列的所有存储单元。</li>
+<li>行选信号与列选信号的 “交集”（同时有效）对应唯一的存储单元，实现对存储单元的选中。</li>
+</ol>
+<img src= "" data-lazy-src="C:\Users\woodfish\Desktop\MyBlog\计算机组成原理\存储器.assets\image-20251123173932640.png" alt="image-20251123173932640" style="zoom: 67%;" />
+<p><img src= "" data-lazy-src="C:%5CUsers%5Cwoodfish%5CDesktop%5CMyBlog%5C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%5C%E5%AD%98%E5%82%A8%E5%99%A8.assets%5Cimage-20251123174352899.png" alt="image-20251123174352899"></p>
+<img src= "" data-lazy-src="C:\Users\woodfish\Desktop\MyBlog\计算机组成原理\存储器.assets\image-20251123174430848.png" alt="image-20251123174430848" style="zoom:50%;" />
+<p><img src= "" data-lazy-src="C:%5CUsers%5Cwoodfish%5CDesktop%5CMyBlog%5C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%5C%E5%AD%98%E5%82%A8%E5%99%A8.assets%5Cimage-20251123175343067.png" alt="image-20251123175343067"></p>
+<h2 id="二、机器字长与存储字长的区别">二、机器字长与存储字长的区别</h2>
+<h3 id="1-核心定义">1. 核心定义</h3>
+<table>
+<thead>
+<tr>
+<th>术语</th>
+<th>定义</th>
+<th>关键说明</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>机器字长</td>
+<td>CPU 一次能处理的二进制数据位数</td>
+<td>决定 CPU 的运算能力，常见 32 位、64 位（如 Intel i5 处理器多为 64 位机器字长）</td>
+</tr>
+<tr>
+<td>存储字长</td>
+<td>主存中一个存储单元能存储的二进制位数</td>
+<td>决定主存单次读写的基本数据量，由存储芯片硬件设计决定</td>
+</tr>
+<tr>
+<td>关系</td>
+<td>二者<strong>无强制相等关系</strong>，存储字长通常是字节（8 位）的 2 的整数次幂倍（1、2、4、8 字节等）</td>
+<td>例：32 位机器字长的计算机，存储字长可设为 16 位（2 字节）、32 位（4 字节）或 64 位（8 字节）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-例题：机器字长与存储字长匹配分析">2. 例题：机器字长与存储字长匹配分析</h3>
+<p>已知某计算机 CPU 为 64 位机器字长（一次能处理 64 位数据），主存存储字长设计为 32 位（一个存储单元存 32 位）。请问：</p>
+<ul>
+<li>CPU 执行一次 64 位数据运算时，需要从主存读取几次数据？</li>
+<li>若存储字长改为 64 位，读取次数会如何变化？</li>
+</ul>
+<p><strong>解析</strong>：</p>
+<ul>
+<li>
+<p>64 位机器字长需 64 位数据，存储字长 32 位时，需读取 <code>64 ÷ 32 = 2</code> 次；</p>
+</li>
+<li>
+<p>存储字长改为 64 位时，单次读取即可获取 64 位数据，读取次数变为 1 次。</p>
+<p>结论:存储字长与机器字长匹配时，可减少主存访问次数，提升效率。</p>
+</li>
+</ul>
+<h2 id="三、地址访问模式（主存按字节编址）">三、地址访问模式（主存按字节编址）</h2>
+<h3 id="1-基础规则">1. 基础规则</h3>
+<p>主存默认按<strong>字节编址</strong>（每个字节对应唯一地址，1 字节 = 8 位），存储字长是字节的 $2^n$倍（ $n$ 为 0、1、2…），因此支持多粒度地址访问，常见访问类型如下：</p>
+<table>
+<thead>
+<tr>
+<th>访问类型</th>
+<th>对应字节数</th>
+<th>存储字长要求</th>
+<th>地址特征（以 32 位机器为例）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>字节访问</td>
+<td>1 字节（8 位）</td>
+<td>无特殊要求</td>
+<td>地址可为任意值（如 0x0001、0x0002）</td>
+</tr>
+<tr>
+<td>半字访问</td>
+<td>2 字节（16 位）</td>
+<td>存储字长$≥$2 字节</td>
+<td>地址最低位为 0（即地址是 2 的整数倍，如 0x0002、0x0004）</td>
+</tr>
+<tr>
+<td>字访问</td>
+<td>4 字节（32 位）</td>
+<td>存储字长$≥$4 字节</td>
+<td>地址最低两位为 00（即地址是 4 的整数倍，如 0x0004、0x0008）</td>
+</tr>
+<tr>
+<td>双字访问</td>
+<td>8 字节（64 位）</td>
+<td>存储字长$≥$8 字节</td>
+<td>地址最低三位为 000（即地址是 8 的整数倍，如 0x0008、0x0010）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-地址转换关系（32-位机器示例）">2. 地址转换关系（32 位机器示例）</h3>
+<p>以字节地址为基础，不同访问类型的地址转换遵循 “右移 n 位” 规则（n 为访问字节数的对数）：</p>
+<ul>
+<li>
+<p>字节地址 → 半字地址：</p>
+<p>字节地址逻辑右移 1 位</p>
+<p>（因 2 字节 = 2¹，右移 1 位等价于除以 2）；</p>
+<p>例：字节地址 0x0004（二进制 100）右移 1 位 → 半字地址 0x0002（二进制 10）。</p>
+</li>
+<li>
+<p>字节地址 → 字地址：</p>
+<p>字节地址逻辑右移 2 位</p>
+<p>（4 字节 = 2²）；</p>
+<p>例：字节地址 0x0008（二进制 1000）右移 2 位 → 字地址 0x0002（二进制 10）。</p>
+</li>
+</ul>
+<h2 id="四、大端方式与小端方式（数据字节序）">四、大端方式与小端方式（数据字节序）</h2>
+<h3 id="1-核心定义-2">1. 核心定义</h3>
+<p>数据的 “字节序” 指多字节数据在主存中的字节排列顺序，核心区别在于<strong>低字节与高字节的地址分配</strong>：</p>
+<table>
+<thead>
+<tr>
+<th>存放方式</th>
+<th>定义</th>
+<th>优势</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>小端方式（Little-Endian）</td>
+<td>数据的<strong>低字节</strong>存放在主存<strong>低地址</strong>，<strong>高字节</strong>存放在主存<strong>高地址</strong></td>
+<td>符合地址与数据位权的逻辑（低地址对应低位数据），CPU 运算时无需调整字节顺序</td>
+</tr>
+<tr>
+<td>大端方式（Big-Endian）</td>
+<td>数据的<strong>高字节</strong>存放在主存<strong>低地址</strong>，<strong>低字节</strong>存放在主存<strong>高地址</strong></td>
+<td>符合人类（大人）读写习惯（如十六进制数据从左到右对应高到低字节），便于数据直观查看</td>
+</tr>
+</tbody>
+</table>
+<h3 id="2-实例对比（以-32-位数据-0x12345678-为例）">2. 实例对比（以 32 位数据 0x12345678 为例）</h3>
+<p>假设数据存放在主存地址 0x0000~0x0003 处，两种方式的字节分布如下：</p>
+<table>
+<thead>
+<tr>
+<th>地址</th>
+<th>小端方式（低字节存低地址）</th>
+<th>大端方式（高字节存低地址）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0x0000（低地址）</td>
+<td>0x78（数据低字节）</td>
+<td>0x12（数据高字节）</td>
+</tr>
+<tr>
+<td>0x0001</td>
+<td>0x56</td>
+<td>0x34</td>
+</tr>
+<tr>
+<td>0x0002</td>
+<td>0x34</td>
+<td>0x56</td>
+</tr>
+<tr>
+<td>0x0003（高地址）</td>
+<td>0x12（数据高字节）</td>
+<td>0x78（数据低字节）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-例题：小端方式下的数据读取">3. 例题：小端方式下的数据读取</h3>
+<p>已知某计算机采用小端方式，主存地址 0x0002~0x0005 处的字节数据依次为 0x88、0x77、0x66、0x55。若按 32 位字访问（地址 0x0002），读取的数据是多少？</p>
+<p><strong>解析</strong>：</p>
+<ul>
+<li>小端规则：低地址存低字节，高地址存高字节；</li>
+<li>地址 0x0002（低地址）→ 低字节 0x88，地址 0x0005（高地址）→ 高字节 0x55；</li>
+<li>拼接顺序：高字节→低字节（0x55 0x66 0x77 0x88），即读取的数据为 0x55667788。</li>
+</ul>
+<h2 id="五、数据的边界对齐">五、数据的边界对齐</h2>
+<h3 id="1-核心目的">1. 核心目的</h3>
+<p>为减少 CPU 访问主存的次数（提升效率）：CPU 访问主存时，通常按 “存储字长” 单次读取，若数据未对齐，需多次读取并拼接，增加延迟；对齐后可单次读取，降低开销。</p>
+<h3 id="2-对齐规则（按字节编址）">2. 对齐规则（按字节编址）</h3>
+<p>不同数据类型的起始地址需满足 “2ⁿ整数倍” 规则（n 为数据字节数的对数），具体如下：</p>
+<table>
+<thead>
+<tr>
+<th>数据类型</th>
+<th>字节数</th>
+<th>起始地址要求（最低 n 位）</th>
+<th>示例（合法地址 / 非法地址）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>字节（char）</td>
+<td>1</td>
+<td>无要求（n=0）</td>
+<td>合法：0x0001、0x0002；无非法地址</td>
+</tr>
+<tr>
+<td>半字（short）</td>
+<td>2</td>
+<td>最低 1 位为 0（n=1）</td>
+<td>合法：0x0002、0x0004；非法：0x0003</td>
+</tr>
+<tr>
+<td>字（int）</td>
+<td>4</td>
+<td>最低 2 位为 00（n=2）</td>
+<td>合法：0x0004、0x0008；非法：0x0005</td>
+</tr>
+<tr>
+<td>双字（long）</td>
+<td>8</td>
+<td>最低 3 位为 000（n=3）</td>
+<td>合法：0x0008、0x0010；非法：0x0009</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-对齐与存储空间的权衡">3. 对齐与存储空间的权衡</h3>
+<ul>
+<li>优势：提升访问效率（如 32 位 int 存于 0x0004，CPU 单次读取即可）；</li>
+<li>代价：可能浪费存储空间（称为 “内存空洞”）。</li>
+</ul>
+<h4 id="例题：结构体的边界对齐（32-位系统，编译器默认对齐）">例题：结构体的边界对齐（32 位系统，编译器默认对齐）</h4>
+<p>定义 C 语言结构体如下：</p>
+<figure class="highlight c"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line"><span class="class"><span class="keyword">struct</span> <span class="title">Data</span> &#123;</span></span><br><span class="line">    <span class="type">char</span> a;    <span class="comment">// 1字节</span></span><br><span class="line">    <span class="type">int</span> b;     <span class="comment">// 4字节</span></span><br><span class="line">    <span class="type">short</span> c;   <span class="comment">// 2字节</span></span><br><span class="line">&#125;;</span><br></pre></td></tr></table></figure>
+<p>求该结构体的总字节数（不考虑编译器优化）。</p>
+<p><strong>解析</strong>：</p>
+<ol>
+<li>成员<code>a</code>（char）：起始地址 0x0000（合法），占用 0x0000；</li>
+<li>成员<code>b</code>（int）：需起始地址最低 2 位为 00（4 的整数倍），因此从 0x0004 开始，占用 0x0004~0x0007（0x0001~0x0003 为内存空洞，浪费 3 字节）；</li>
+<li>成员<code>c</code>（short）：需起始地址最低 1 位为 0（2 的整数倍），从 0x0008 开始，占用 0x0008~0x0009；</li>
+<li>结构体总字节数：0x0009 - 0x0000 + 1 = 10 字节（实际占用 10 字节，含 3 字节空洞）。</li>
+</ol>
+<h2 id="六、408-真题实战（大端-小端-边界对齐）">六、408 真题实战（大端 / 小端 + 边界对齐）</h2>
+<h3 id="1-2012-年-408-真题（综合考察）">1. 2012 年 408 真题（综合考察）</h3>
+<h4 id="题目：">题目：</h4>
+<p>假设某计算机的主存按字节编址，Cache 采用直接映射方式，每个 Cache 块大小为 4 字节，主存块号为 3 的 Cache 块对应的主存地址范围是（ ）。</p>
+<p>（注：题目核心关联 “地址与块号的对应”，需结合边界对齐，选项略，重点讲分析逻辑）</p>
+<h4 id="解析：">解析：</h4>
+<ul>
+<li>
+<p>Cache 块大小 4 字节 → 块内偏移量占 2 位（$2^2=4$）；</p>
+</li>
+<li>
+<p>主存块号 = 3（二进制 11） → 主存地址结构：块号（高位）+ 块内偏移（低位）；</p>
+</li>
+<li>
+<p>块内偏移范围 0~3（二进制 00~11）；</p>
+</li>
+<li>
+<p>主存地址范围 = 块号 × 块大小～块号 × 块大小 + 块大小 - 1 = 3×4 ~ 3×4+3 = 12~15（十六进制 0x0C~0x0F）。</p>
+<p>答案：对应选项中地址范围为 0x0C~0x0F 的选项（通常为 D）。</p>
+</li>
+</ul>
+<h3 id="2-2018-年-408-真题（小端-补码）">2. 2018 年 408 真题（小端 + 补码）</h3>
+<h4 id="题目：-2">题目：</h4>
+<p>若计算机主存按字节编址，采用小端方式存放数据。某指令周期内，CPU 需读取地址 0x100 处的 16 位补码整数，该整数的十六进制表示为 0x8000，则该整数的十进制值为（ ）。</p>
+<p>$A. -32768$ $B. -128$ $C. 128$ $D. 32768$</p>
+<h4 id="解析：-2">解析：</h4>
+<ol>
+<li>
+<p>16 位补码 0x8000 的二进制：1000 0000 0000 0000；</p>
+</li>
+<li>
+<p>小端方式：地址 0x100 存低字节 0x00，地址 0x101 存高字节 0x80，拼接后仍为 0x8000；</p>
+</li>
+<li>
+<p>补码转十进制：最高位 1（负数），数值位取反加 1：0111 1111 1111 1111 +1 = 1000 0000 0000 0000（即 32768），故十进制值为 - 32768。</p>
+<p>答案：A。</p>
+</li>
+</ol>
+<h3 id="SRAM-定义与分类归属">SRAM 定义与分类归属</h3>
+<ul>
+<li><strong>全称</strong>：静态随机存取存储器（Static Random Access Memory）</li>
+<li><strong>核心特征</strong>：“静态” 指通电状态下，数据无需周期性刷新即可持续保持，区别于需定期刷新的动态随机存取存储器（DRAM）。</li>
+<li><strong>易失性属性</strong>：SRAM 与 DRAM 均为易失性存储器，断电后存储的数据会立即丢失；而 ROM（只读存储器）为非易失性存储器，断电后数据仍可保留。</li>
+</ul>
+<img src= "" data-lazy-src="C:\Users\woodfish\Desktop\MyBlog\计算机组成原理\存储器.assets\image-20251123210902992.png" alt="image-20251123210902992" style="zoom: 67%;" />
+<h3 id="存储元核心组成">存储元核心组成</h3>
+<p>典型 SRAM 存储元由 8 个 MOS 管（金属 - 氧化物 - 半导体场效应晶体管）构成，各 MOS 管功能分工明确：</p>
+<table>
+<thead>
+<tr>
+<th>MOS 管编号</th>
+<th>功能分类</th>
+<th>核心作用</th>
+<th>等效理解</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>T1、T2</td>
+<td>工作管</td>
+<td>构成反相器，存储二进制位（0/1）</td>
+<td>数据存储核心</td>
+</tr>
+<tr>
+<td>T3、T4</td>
+<td>负载管</td>
+<td>提供稳定偏置电压，维持工作管状态</td>
+<td>上拉电阻</td>
+</tr>
+<tr>
+<td>T5~T8</td>
+<td>门控管</td>
+<td>控制存储元与位线的通断，实现读写控制</td>
+<td>开关阀门</td>
+</tr>
+</tbody>
+</table>
+<h3 id="MOS-管开关工作原理">MOS 管开关工作原理</h3>
+<p>MOS 管是数字电路中的核心开关元件，其工作状态由栅极（G）输入电平控制：</p>
+<ul>
+<li>
+<p>栅极输入<strong>高电平（1）</strong>：源极（S）与漏极（D）导通，相当于开关闭合；</p>
+</li>
+<li>
+<p>栅极输入低电平（0）：源极（S）与漏极（D）截止，相当于开关断开。</p>
+<p>（注：MOS 管符号中，G 为栅极、S 为源极、D 为漏极，是理解存储元工作的关键）</p>
+</li>
+</ul>
+<p>SRAM 存储元上电后的初始状态<strong>随机</strong>（可能是 0，也可能是 1），需通过写操作写入目标数据。</p>
+<h2 id="四、SRAM-存储元读操作原理">四、SRAM 存储元读操作原理</h2>
+<h3 id="1-操作前提">1. 操作前提</h3>
+<p>行选通线 X、列选通线 Y 均输入<strong>高电平（1）</strong> ，门控管 T5~T8 导通，存储元内部 A、B 点与外部位线 IO、IO 反（IŌ）连通。</p>
+<h3 id="2-核心流程">2. 核心流程</h3>
+<ol>
+<li>存储元内部稳定电平（如 A 高 B 低）通过导通的门控管传递到位线；</li>
+<li>位线 IO 与 IŌ的电平信号输入<strong>差分放大器</strong>，通过检测两路信号的电流方向差异，还原存储的二进制数据；</li>
+<li>读操作<strong>不破坏原有数据</strong>：整个过程中 A、B 点电平保持不变，仅通过信号传递实现数据读取。</li>
+</ol>
+<h3 id="3-与-DRAM-的关键区别">3. 与 DRAM 的关键区别</h3>
+<p>DRAM 的读操作具有 “破坏性”（读取后存储元电平会改变），需立即执行写操作恢复数据；而 SRAM 读操作无破坏性，无需额外恢复步骤。</p>
+<h2 id="五、SRAM-存储元写操作原理">五、SRAM 存储元写操作原理</h2>
+<h3 id="1-操作前提-2">1. 操作前提</h3>
+<p>与读操作一致，行选通线 X、列选通线 Y 均输入<strong>高电平（1）</strong> ，门控管 T5~T8 导通，建立存储元与位线的连接。</p>
+<h3 id="2-核心流程（以-“写-0”-为例）">2. 核心流程（以 “写 0” 为例）</h3>
+<p>假设存储元当前存储<strong>比特 1</strong>（稳定状态：A 高 B 低），写入比特 0 的步骤：</p>
+<ol>
+<li>向位线 IO 输入<strong>低电平</strong>，向 IŌ输入<strong>高电平</strong>；</li>
+<li>低电平通过导通的 T5 传递到 A 点，将 A 点拉低；</li>
+<li>A 点变为低电平→T2 截止→B 点失去接地通路，被 T3 上拉为高电平；</li>
+<li>B 点变为高电平→T1 导通→A 点通过 T1 接地，保持低电平；</li>
+<li>最终形成稳定状态 “A 低 B 高”，完成比特 0 的写入。</li>
+</ol>
+<h3 id="3-写操作本质">3. 写操作本质</h3>
+<p>通过外部位线强制改变 A、B 点电平，打破原有稳定状态，建立新的对应存储数据的稳定状态。</p>
+<h3 id="例题-5：写操作流程分析">例题 5：写操作流程分析</h3>
+<p>若 SRAM 存储元当前存储比特 0（A 低 B 高），要写入比特 1，需执行的步骤是（ ）</p>
+<p>A. 向 IO 输入高电平，IŌ输入低电平 B. 向 IO 输入低电平，IŌ输入高电平</p>
+<p>C. 行选通线 X 输入低电平 D. 无需改变位线电平，直接断开门控管</p>
+<p><strong>答案</strong>：A</p>
+<p><strong>解析</strong>：写入比特 1 需最终形成 “A 高 B 低” 的稳定状态，需通过位线强制改变电平：IO 输入高电平（拉高 A 点），IŌ输入低电平（拉低 B 点），配合门控管导通实现状态切换（A 正确）；写操作需 X、Y 线为高电平（C 错误）。</p>
+<h2 id="六、操作后状态与-SRAM-存储元核心特点">六、操作后状态与 SRAM 存储元核心特点</h2>
+<h3 id="1-操作后状态维持">1. 操作后状态维持</h3>
+<p>读 / 写操作完成后，行选通线 X、列选通线 Y 恢复为低电平→门控管 T5~T8 截止→存储元与位线断开；电源 VCC 通过 T3、T4 持续为工作管供电，维持 A、B 点的稳定电平，数据在断电前保持不变。</p>
+<h3 id="2-核心特点（对比-DRAM）">2. 核心特点（对比 DRAM）</h3>
+<table>
+<thead>
+<tr>
+<th>特点</th>
+<th>SRAM（静态）</th>
+<th>DRAM（动态）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>数据保持</td>
+<td>无需刷新，通电即稳定</td>
+<td>需定期刷新（电容放电特性）</td>
+</tr>
+<tr>
+<td>读写速度</td>
+<td>快（无刷新延迟）</td>
+<td>慢（刷新占用时间）</td>
+</tr>
+<tr>
+<td>用管数量</td>
+<td>8 个 / 存储元</td>
+<td>1 个 / 存储元（电容 + MOS 管）</td>
+</tr>
+<tr>
+<td>芯片面积 / 成本</td>
+<td>面积大，成本高</td>
+<td>面积小，成本低</td>
+</tr>
+<tr>
+<td>功耗</td>
+<td>高（持续供电维持状态）</td>
+<td>低（仅刷新和读写时耗电）</td>
+</tr>
+<tr>
+<td>典型应用</td>
+<td>高速缓冲存储器（Cache）</td>
+<td>计算机主存（内存）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="例题-6：SRAM-应用场景判断">例题 6：SRAM 应用场景判断</h3>
+<p>下列设备中，最可能使用 SRAM 作为存储介质的是（ ）</p>
+<p>A. 笔记本电脑内存 B. CPU 的 L1 缓存 C. U 盘 D. 硬盘</p>
+<p><strong>答案</strong>：B</p>
+<p><strong>解析</strong>：笔记本内存用 DRAM（A 错误）；U 盘和硬盘为非易失性存储（C、D 错误）；CPU 缓存需高速读写，SRAM 的速度优势适配该场景（B 正确）。</p>
+<h3 id="习题1解析（答案B）"><strong>习题1解析（答案B）</strong></h3>
+<p>题目：某SRAM中每个存储单元为8位</p>
+<ul>
+<li><strong>Ⅰ. 数据线为8位</strong> ✓<br>
+正确。存储单元位数决定了数据线的宽度，8位单元需要8根数据线并行读写。</li>
+<li><strong>Ⅱ. 地址线为3位</strong> ✗<br>
+错误。地址线数量由存储容量（地址空间大小）决定，与单元位数无关。8位字长可以是任意容量。</li>
+<li><strong>Ⅲ. 存储字长为8位</strong> ✓<br>
+正确。“存储单元为8位” 直接对应存储字长（每次存取的数据宽度）为8位。</li>
+<li><strong>Ⅳ. 机器字长为8位</strong> ✗<br>
+错误。机器字长是CPU的属性，由CPU架构决定，不能从存储器参数推断。</li>
+</ul>
+<p><strong>结论</strong>：仅Ⅰ、Ⅲ正确 → <strong>选B</strong></p>
+<hr>
+<h3 id="习题2解析（答案B）"><strong>习题2解析（答案B）</strong></h3>
+<p>题目：某SRAM的存储容量为8<em>K</em>×8 位</p>
+<ul>
+<li><strong>地址线计算</strong>：<br>
+8<em>K</em>=8×1024=213 个存储单元<br>
+需要 <strong>13根</strong>地址线（<em>A</em>0​ ~ <em>A</em>12​ ）才能寻址 213 个位置</li>
+<li><strong>数据线计算</strong>：<br>
+每个单元8位 → 需要 <strong>8根</strong>数据线（<em>D</em>0​ ~ <em>D</em>7​ ）</li>
+</ul>
+<p><strong>结论</strong>：13根地址线，8根数据线 → <strong>选B</strong></p>
+<hr>
+<h3 id="习题3解析（答案D）"><strong>习题3解析（答案D）</strong></h3>
+<p>题目：某SRAM芯片容量为256<em>K</em>×16 位，求除电源和接地外的最小引脚数</p>
+<p><strong>计算过程</strong>：</p>
+<ol>
+<li><strong>地址线</strong>：<br>
+256<em>K</em>=256×1024=218 → <strong>18根</strong>地址线</li>
+<li><strong>数据线</strong>：<br>
+16位字长 → <strong>16根</strong>数据线</li>
+<li><strong>控制线（最小配置）</strong>：
+<ul>
+<li><strong>片选信号</strong>（CS/CE）：1根（必选，使能芯片）</li>
+<li><strong>读/写控制</strong>（R/W）：1根（高电平读，低电平写）<br>
+最小情况下可省略独立的输出使能（OE），通过CS和R/W组合控制双向数据总线。</li>
+</ul>
+</li>
+<li><strong>总引脚数</strong>：<br>
+18+16+2=36 根</li>
+</ol>
+<p><strong>结论</strong>：最小引脚数为36 → <strong>选D</strong></p>
+<h4 id="2-2-1-硬件组成">2.2.1 硬件组成</h4>
+<ul>
+<li>核心元件：1 个增强型 MOS 管（控制数据读写通路）、1 个存储电容 C（暂存电荷表示数据）。</li>
+<li>电路连接：MOS 管漏极接存储电容 C，电容另一端接地（GND）；MOS 管源极接位线（列线），栅极接字线（行线）。</li>
+<li>
+<img src= "" data-lazy-src="C:\Users\woodfish\Desktop\MyBlog\计算机组成原理\存储器.assets\image-20251126194049025.png" alt="image-20251126194049025" style="zoom:50%;" />
+</li>
+</ul>
+<h4 id="2-2-2-数据表示原理（二进制-0-1-的物理映射）">2.2.2 数据表示原理（二进制 0/1 的物理映射）</h4>
+<table>
+<thead>
+<tr>
+<th>二进制数据</th>
+<th>实现方式</th>
+<th>关键过程</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>存储电容 C 充满电荷</td>
+<td>MOS 管栅极加高电平（字线有效）→ 源漏极导通 → 位线提供高电平 → 电容充电至 VCC</td>
+</tr>
+<tr>
+<td>0</td>
+<td>存储电容 C 完全放电</td>
+<td>MOS 管栅极加高电平（字线有效）→ 源漏极导通 → 电容通过位线放电 → 电荷释放至 GND</td>
+</tr>
+</tbody>
+</table>
+<ul>
+<li>电容参数：容量约为<strong>几十飞法（fF，1fF=10⁻¹⁵F）</strong>，充电速度极快（&lt;10ns），满足高频读写需求。</li>
+</ul>
+<h2 id="三、DRAM-的特殊问题：破坏性读与动态刷新">三、DRAM 的特殊问题：破坏性读与动态刷新</h2>
+<h3 id="3-1-破坏性读操作（核心特性）">3.1 破坏性读操作（核心特性）</h3>
+<h4 id="3-1-1-现象与原因">3.1.1 现象与原因</h4>
+<ul>
+<li>现象：读取存储电容中的 “1”（充满电荷）时，电容会通过导通的 MOS 管向位线放电，导致电容电荷流失，数据从 “1” 变为 “0”，即读操作破坏原有数据。</li>
+<li>解决措施：<strong>数据恢复</strong>—— 读取数据后，立即通过位线重新向电容充电，恢复原有数据（由灵敏读出恢复放大器完成）。</li>
+</ul>
+<h4 id="3-1-2-例题：破坏性读操作的影响分析">3.1.2 例题：破坏性读操作的影响分析</h4>
+<p>若某 DRAM 存储元存储数据 “1”，在未执行数据恢复的情况下连续读取 2 次，第二次读取的结果是什么？</p>
+<p>解：<strong>第二次读取结果为 0</strong>。理由：第一次读取时，存储电容向位线放电，数据从 “1” 变为 “0”；因未执行数据恢复，电容未重新充电，第二次读取时电容已无电荷，故结果为 0。</p>
+<h3 id="3-2-动态刷新（“动态”-的核心含义）">3.2 动态刷新（“动态” 的核心含义）</h3>
+<h4 id="3-2-1-刷新原因">3.2.1 刷新原因</h4>
+<p>MOS 管存在<strong>漏电流</strong>（无法完美关断），存储电容中的电荷会缓慢泄漏，通常 “1” 的电荷只能保持 64ms（行业标准），超过时间后数据丢失。</p>
+<h4 id="3-2-2-刷新机制">3.2.2 刷新机制</h4>
+<ul>
+<li>本质：定期（如每 64ms）对所有存储元执行 “伪读操作”—— 通过导通 MOS 管检测电容电荷，若电荷不足则重新充电，补充电荷以维持数据。</li>
+<li>注意：刷新操作不影响正常读写，但会占用存储控制器的少量时间（通常可通过 “隐藏刷新” 优化，不影响用户感知）。</li>
+</ul>
+<h2 id="四、DRAM-存储阵列扩展：从单个存储元到多-bit-存储">四、DRAM 存储阵列扩展：从单个存储元到多 bit 存储</h2>
+<h3 id="4-1-扩展原理（以-16bit-存储为例）">4.1 扩展原理（以 16bit 存储为例）</h3>
+<h4 id="4-1-1-阵列结构">4.1.1 阵列结构</h4>
+<p>将 16 个 “1MOS+1 电容” 存储元排列为<strong>4 行 ×4 列的二维阵列</strong>，实现 “行选 + 列选” 的寻址方式：</p>
+<ul>
+<li>行线（字线）：每一行所有存储元的 MOS 管栅极连接到同一条行线，控制整行存储元的导通 / 截止。</li>
+<li>列线（位线）：每一列所有存储元的 MOS 管源极连接到同一条列线，传输列内存储元的数据。</li>
+<li>辅助电路：每一列需配备<strong>预充电控制电路</strong>和<strong>灵敏读出恢复放大器</strong>（核心功能：预充电、信号检测、数据恢复）。</li>
+</ul>
+<h4 id="4-1-2-关键概念：寄生电容">4.1.2 关键概念：寄生电容</h4>
+<ul>
+<li>定义：列线因连接多个 MOS 管，自身存在的 “非设计性电容”（并非额外添加，而是导线与基板间的寄生效应）。</li>
+<li>参数：容量约为存储电容的 10 倍（如存储电容为 50fF，寄生电容约为 500fF），会影响位线电压变化幅度，需通过灵敏放大器检测微弱信号。</li>
+</ul>
+<h3 id="4-2-读操作完整流程（五步）">4.2 读操作完整流程（五步）</h3>
+<p>以读取 “第 2 行第 3 列存储元（数据为 1）” 为例，流程如下：</p>
+<ol>
+<li><strong>预充电操作</strong>：预充电电路将所有列线电压充至 VCC/2（如 VCC=3.3V，则充至 1.65V），随后关闭预充电电路，列线寄生电容保持该电压。</li>
+<li><strong>访问操作</strong>：向第 2 行行线输入高电平（行选有效），该行所有 MOS 管导通；第 2 行第 3 列存储元的电容（充满电荷）向列线放电，列线电压从 1.65V 升至 1.65V+ΔV（ΔV 约 0.1-0.5mV，微弱信号）。</li>
+<li><strong>信号检测</strong>：灵敏读出恢复放大器检测列线电压变化 —— 若电压升高（+ΔV），判定存储数据为 1；若电压降低（-ΔV），判定为 0。</li>
+<li><strong>数据恢复</strong>：放大器根据检测结果，将列线电压拉至 VCC（数据 1）或 GND（数据 0），通过导通的 MOS 管向存储电容重新充电 / 放电，恢复原有数据。</li>
+<li><strong>数据输出</strong>：向第 3 列列线输入列选通信号，列线数据通过 I/O 接口输出到外部（如 CPU）。</li>
+</ol>
+<h3 id="4-3-写操作流程（与读操作的差异）">4.3 写操作流程（与读操作的差异）</h3>
+<ul>
+<li>前四步：与读操作完全相同（预充电→访问→检测→恢复），目的是通过 “行刷新” 维持该行所有存储元的数据。</li>
+<li>第五步：<strong>数据输入</strong>—— 外部数据通过 I/O 接口送至列线，放大器将列线电压拉至对应电平（1→VCC，0→GND），通过导通的 MOS 管向存储电容充电 / 放电，完成数据写入。</li>
+</ul>
+<p><img src= "" data-lazy-src="C:%5CUsers%5Cwoodfish%5CDesktop%5CMyBlog%5C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%5C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%5C%E5%AD%98%E5%82%A8%E5%99%A8.assets%5Cimage-20251126200230358.png" alt="image-20251126200230358"></p>
+<h3 id="4-4-例题：DRAM-阵列读操作电压变化分析">4.4 例题：DRAM 阵列读操作电压变化分析</h3>
+<p>已知某 DRAM 存储元的存储电容 C=40fF，列线寄生电容 C_par=400fF，预充电电压为 1.5V（VCC=3V）。当存储元存储 “1”（电容电压 3V）时，读取过程中列线电压最终变为多少？（忽略漏电流，电荷守恒：Q=C×V）</p>
+<p>解：根据电荷守恒，存储电容放电前电荷 Q1=C×VCC=40fF×3V=120fC；放电后，存储电容与寄生电容并联，总电容 C_total=40fF+400fF=440fF；总电荷不变，故列线最终电压 V=Q1/C_total=120fC/440fF≈0.27V？</p>
+<p><strong>注意：实际场景中，预充电后列线已有 1.5V 电压（寄生电容电荷 Q_par=400fF×1.5V=600fC），总电荷应为 Q1+Q_par=120fC+600fC=720fC，最终电压 V=720fC/440fF≈1.64V，即 ΔV≈0.14V，符合灵敏放大器的检测范围。</strong></p>
+<h2 id="五、DRAM-与-SRAM-核心特性对比（总结与区分）">五、DRAM 与 SRAM 核心特性对比（总结与区分）</h2>
+<table>
+<thead>
+<tr>
+<th>对比维度</th>
+<th>DRAM（动态随机存取存储器）</th>
+<th>SRAM（静态随机存取存储器）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>存储元结构</td>
+<td>1MOS 管 + 1 电容</td>
+<td>6MOS 管双稳态电路</td>
+</tr>
+<tr>
+<td>读操作特性</td>
+<td>破坏性读（需数据恢复）</td>
+<td>非破坏性读（无需恢复）</td>
+</tr>
+<tr>
+<td>刷新需求</td>
+<td>需定期刷新（64ms / 次）</td>
+<td>无需刷新（断电前稳定）</td>
+</tr>
+<tr>
+<td>地址线设计</td>
+<td>行 / 列地址线复用（减少引脚）</td>
+<td>行 / 列地址线独立（无需复用）</td>
+</tr>
+<tr>
+<td>速度</td>
+<td>慢（约 10-100ns，含刷新延迟）</td>
+<td>快（约 1-10ns，无延迟）</td>
+</tr>
+<tr>
+<td>集成度</td>
+<td>高（单位面积存储量约为 SRAM 的 4 倍）</td>
+<td>低（单位面积存储量小）</td>
+</tr>
+<tr>
+<td>功耗</td>
+<td>低（仅读写 / 刷新时耗电）</td>
+<td>高（持续供电维持状态）</td>
+</tr>
+<tr>
+<td>成本</td>
+<td>低（单位存储成本约为 SRAM 的 1/5）</td>
+<td>高（单位存储成本高）</td>
+</tr>
+<tr>
+<td>典型应用</td>
+<td>PC 内存（DDR4/DDR5）、服务器内存</td>
+<td>CPU Cache（L1/L2/L3 Cache）</td>
+</tr>
+</tbody>
+</table>
+<h3 id="例题：根据需求选择存储类型">例题：根据需求选择存储类型</h3>
+<p>某高性能服务器需设计 “CPU 与内存之间的高速数据缓冲层”，要求 “速度极快、支持随机读写、无需频繁维护”，应选择 DRAM 还是 SRAM？并说明理由。</p>
+<p>解：<strong>选择 SRAM</strong>。理由：高速数据缓冲层的核心需求是 “低延迟、无读写 / 刷新开销”，SRAM 无需刷新且读操作无破坏性，速度远快于 DRAM（可匹配 CPU 的 GHz 级主频）；虽 SRAM 成本高，但缓冲层容量通常较小（如 L3 Cache 为 32MB/64MB），成本可接受，符合 “高速缓冲” 的应用场景。</p>
+<h3 id="核心技术：地址复用技术">核心技术：地址复用技术</h3>
+<ol>
+<li>
+<p><strong>技术目的</strong>：减少地址引脚数量（针对大容量 DRAM，降低芯片封装复杂度）</p>
+</li>
+<li>
+<p>实现原理</p>
+<p>：行地址线与列地址线</p>
+<p>分时复用</p>
+<p>同一组地址引脚</p>
+<ul>
+<li>原需求：行地址 7 条 + 列地址 7 条 = 14 条地址线</li>
+<li>复用后：仅需 7 条地址引脚（行、列地址分不同时间通过这 7 条引脚传输）</li>
+</ul>
+</li>
+<li>
+<p>地址锁存控制</p>
+<ul>
+<li>行地址锁存：通过<strong>行地址选通信号（RAS，低电平有效）</strong>，将 7 位地址（A0-A6）锁存到行地址锁存器</li>
+<li>列地址锁存：通过<strong>列地址选通信号（CAS，低电平有效）</strong>，将 7 位地址锁存到列地址锁存器</li>
+<li>时序配合：由时钟发生器提供定时，确保行、列地址分时传输不冲突</li>
+</ul>
+</li>
+<li>
+<p><strong>地址复用的额外作用</strong>：7 条行地址线可作为<strong>刷新地址</strong>，用于 DRAM 的逐行刷新（后续 4-3-2 已讲刷新，此处关联应用）</p>
+</li>
+</ol>
+<h3 id="（三）数据输入-输出控制">（三）数据输入 / 输出控制</h3>
+<ol>
+<li>
+<p><strong>数据传输特性</strong>：每次仅能输入或输出 1 位二进制信息（因容量为 16K×1 位，无多位并行传输能力），且输入、输出通道分开并支持锁存</p>
+</li>
+<li>
+<p>控制信号规则</p>
+<table>
+<thead>
+<tr>
+<th>控制信号</th>
+<th>功能</th>
+<th>有效电平</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>CAS（列地址选通）</td>
+<td>控制数据输出</td>
+<td>低电平</td>
+</tr>
+<tr>
+<td>W（写使能）+CAS</td>
+<td>共同控制数据输入</td>
+<td>均为低电平</td>
+</tr>
+<tr>
+<td>RAS（行地址选通）</td>
+<td>控制行地址锁存，兼作片选</td>
+<td>低电平</td>
+</tr>
+<tr>
+<td>EN（使能）</td>
+<td>辅助功能使能</td>
+<td>高电平</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p><strong>特殊说明</strong>：2116 无独立片选信号（CS），由 RAS 和 CAS 共同代替片选功能（当 RAS、CAS 均为低电平时，芯片被选中）</p>
+</li>
+</ol>
+<h2 id="二、考研真题解析（2018-年-408-真题）">二、考研真题解析（2018 年 408 真题）</h2>
+<h3 id="（一）题目条件">（一）题目条件</h3>
+<p>已知 DRAM 芯片规格为 2K×1 位，采用地址复用技术，需确定行地址线、列地址线的合理分配（目标：减少刷新开销）</p>
+<h3 id="（二）解题步骤">（二）解题步骤</h3>
+<ol>
+<li>
+<p><strong>第一步：计算总地址线需求</strong></p>
+<ul>
+<li>2K=2¹¹，即需 11 条地址线才能寻址所有 2¹¹（2048）个存储单元</li>
+<li>因采用地址复用技术，实际地址引脚数为 “行地址线数 + 列地址线数” 的复用，需满足 “行地址线数 + 列地址线数 = 11”</li>
+</ul>
+</li>
+<li>
+<p><strong>第二步：列出两种地址分配方案</strong></p>
+<table>
+<thead>
+<tr>
+<th>方案</th>
+<th>行地址线数</th>
+<th>列地址线数</th>
+<th>行选通线条数（2^ 行地址线数）</th>
+<th>列选通线条数（2^ 列地址线数）</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>方案一</td>
+<td>6 条</td>
+<td>5 条</td>
+<td>2⁶=64 条</td>
+<td>2⁵=32 条</td>
+</tr>
+<tr>
+<td>方案二</td>
+<td>5 条</td>
+<td>6 条</td>
+<td>2⁵=32 条</td>
+<td>2⁶=64 条</td>
+</tr>
+</tbody>
+</table>
+</li>
+<li>
+<p><strong>第三步：根据刷新规则选择最优方案</strong></p>
+<ul>
+<li>DRAM 刷新原理：按行刷新（每次刷新一行，行数越多，刷新次数越多，刷新开销越大）</li>
+<li>核心原则：减少行数→降低刷新开销</li>
+<li>结论：方案二（行 32 条、列 64 条）更优，对应选项 C</li>
+</ul>
+</li>
+</ol>
+<h2 id="1-存储器扩展概述">1. 存储器扩展概述</h2>
+<h3 id="1-1-扩展的核心目的">1.1 扩展的核心目的</h3>
+<p>解决“单存储芯片的<strong>容量不足</strong>”或“<strong>位宽不匹配CPU/系统需求</strong>”的问题，通过多芯片组合实现目标存储器的参数（容量、位宽）。</p>
+<h3 id="1-2-扩展的三种类型">1.2 扩展的三种类型</h3>
+<ul>
+<li>字扩展：仅增加<strong>存储容量（字数）</strong>，位宽不变；</li>
+<li>位扩展：仅增加<strong>数据位宽</strong>，容量不变；</li>
+<li>字位同时扩展：同时增加<strong>容量+位宽</strong>。</li>
+</ul>
+<h2 id="2-字扩展（仅扩容，位宽不变）">2. 字扩展（仅扩容，位宽不变）</h2>
+<h3 id="2-1-定义">2.1 定义</h3>
+<p>通过多片<strong>位宽与目标一致</strong>的存储芯片，组合成更大容量的存储器（仅<strong>增加“可存储的单元数量”</strong>）。</p>
+<h3 id="2-2-适用场景">2.2 适用场景</h3>
+<p>单芯片<strong>位宽匹配CPU数据总线，但容量小于目标需求</strong>。<br>
+例：CPU数据总线是8位，单芯片是<code>256K×8位</code>，需构建<code>2M×8位</code>存储器。</p>
+<h3 id="2-3-核心步骤">2.3 核心步骤</h3>
+<ol>
+<li><strong>计算所需芯片数</strong>：<br>
+芯片数 = 目标容量 ÷ 单芯片容量</li>
+<li><strong>分配地址线</strong>：
+<ul>
+<li>片内地址线：数量由“单芯片容量”决定（公式：$2^n = 单芯片容量$，$n$为片内地址线数）；</li>
+<li>片选地址线：数量由“芯片数”决定（公式：$2^m = 芯片数$，$m$为片选地址线数）；</li>
+</ul>
+</li>
+<li><strong>连接片选信号</strong>：<br>
+用“地址译码器”将“片选地址线”转换为“片选信号”，每片芯片对应1个独立片选信号（同一时间仅1片被选中）；</li>
+<li><strong>统一连接公共信号</strong>：<br>
+所有芯片的<strong>地址线（片内部分）、数据线、控制线（读/写使能等）</strong> 直接并联。</li>
+</ol>
+<h3 id="2-4-典型例题">2.4 典型例题</h3>
+<p><strong>题目</strong>：CPU数据总线位宽8位，地址总线位宽21位；单SRAM芯片参数为<code>256K×8位</code>。需构建<code>2M×8位</code>存储器，完成以下步骤：</p>
+<ol>
+<li>计算芯片数；</li>
+<li>分配地址线；</li>
+<li>选择译码器类型。</li>
+</ol>
+<p><strong>解答</strong>：</p>
+<ol>
+<li>芯片数 = $2M ÷ 256K = 2048K ÷ 256K = 8$片；</li>
+<li>地址线分配：
+<ul>
+<li>片内地址线：$2^n = 256K = 2^{18}$ → $n=18$（用CPU地址线$A_{0}~A_{17}$）；</li>
+<li>片选地址线：$21-18=3$根（用CPU地址线$A_{18}~A_{20}$）；</li>
+</ul>
+</li>
+<li>译码器类型：3根输入对应8个输出 → 选择“3-8译码器”（输出$\overline{Y_0}~\overline{Y_7}$分别控制8片芯片的片选端）。</li>
+</ol>
+<h2 id="3-位扩展（仅加宽位宽，容量不变）">3. 位扩展（仅加宽位宽，容量不变）</h2>
+<h3 id="3-1-定义">3.1 定义</h3>
+<p>通过多片<strong>容量与目标一致</strong>的存储芯片，组合成更宽位宽的存储器（仅<strong>增加“一次能传输的数据位数”</strong>）。</p>
+<h3 id="3-2-适用场景">3.2 适用场景</h3>
+<p>单芯片<strong>容量匹配目标需求，但位宽小于CPU数据总线</strong>。<br>
+例：CPU数据总线是8位，单芯片是<code>1K×4位</code>，需构建<code>1K×8位</code>存储器。</p>
+<h3 id="3-3-核心步骤">3.3 核心步骤</h3>
+<ol>
+<li><strong>计算所需芯片数</strong>：<br>
+芯片数 = 目标位宽 ÷ 单芯片位宽</li>
+<li><strong>连接公共信号</strong>：<br>
+所有芯片的<strong>地址线、控制线、片选线</strong> 全部并联；</li>
+<li><strong>拼接数据线</strong>：<br>
+将各芯片的数据线按位拼接，组成目标位宽（如2片<code>1K×4位</code>芯片，分别输出$D_0~D_3$和$D_4~D_7$，拼接为8位）。</li>
+</ol>
+<h3 id="3-4-典型例题">3.4 典型例题</h3>
+<p><strong>题目</strong>：单存储芯片为<code>1K×4位</code>，需构建<code>1K×8位</code>存储器，完成以下步骤：</p>
+<ol>
+<li>计算芯片数；</li>
+<li>描述硬件连接逻辑。</li>
+</ol>
+<p><strong>解答</strong>：</p>
+<ol>
+<li>芯片数 = $8位 ÷ 4位 = 2$片；</li>
+<li>连接逻辑：
+<ul>
+<li>地址线：2片芯片的$A_0~A_9$（1K对应10根地址线）并联；</li>
+<li>控制线：2片芯片的“读使能$\overline{OE}$”“写使能$\overline{WE}$”并联；</li>
+<li>片选线：2片芯片的$\overline{CS}$并联；</li>
+<li>数据线：第1片输出$D_0~D_3$，第2片输出$D_4~D_7$，拼接为8位数据线。</li>
+</ul>
+</li>
+</ol>
+<h2 id="4-字位同时扩展（既扩容又加宽）">4. 字位同时扩展（既扩容又加宽）</h2>
+<h3 id="4-1-定义">4.1 定义</h3>
+<p>同时组合“位扩展模块”与“字扩展”，实现<strong>容量和位宽同时满足目标需求</strong>。</p>
+<h3 id="4-2-适用场景">4.2 适用场景</h3>
+<p>单芯片<strong>既容量不足，位宽也不匹配目标</strong>。<br>
+例：单芯片是<code>1K×4位</code>，需构建<code>4K×8位</code>存储器。</p>
+<h3 id="4-3-核心步骤">4.3 核心步骤</h3>
+<ol>
+<li><strong>计算总芯片数</strong>：<br>
+总芯片数 = 字扩展数 × 位扩展数
+<ul>
+<li>位扩展数 = 目标位宽 ÷ 单芯片位宽；</li>
+<li>字扩展数 = 目标容量 ÷ 单芯片容量；</li>
+</ul>
+</li>
+<li><strong>先构建“位扩展模块”</strong>：<br>
+用“位扩展”将多片芯片拼成“1组与目标位宽一致的模块”；</li>
+<li><strong>再做“字扩展”</strong>：<br>
+用“地址译码器”对多组“位扩展模块”做片选，实现容量扩展；</li>
+<li><strong>统一连接公共信号</strong>：<br>
+所有模块的<strong>地址线、数据线、控制线</strong> 保持并联。</li>
+</ol>
+<h3 id="4-4-典型例题">4.4 典型例题</h3>
+<p><strong>题目</strong>：单存储芯片为<code>1K×4位</code>，需构建<code>4K×8位</code>存储器，完成以下步骤：</p>
+<ol>
+<li>计算总芯片数；</li>
+<li>描述扩展逻辑。</li>
+</ol>
+<p><strong>解答</strong>：</p>
+<ol>
+<li>总芯片数：
+<ul>
+<li>位扩展数 = $8位 ÷ 4位 = 2$片/组；</li>
+<li>字扩展数 = $4K ÷ 1K = 4$组；</li>
+<li>总芯片数 = $4×2=8$片；</li>
+</ul>
+</li>
+<li>扩展逻辑：
+<ul>
+<li>位扩展：每2片<code>1K×4位</code>芯片拼成1组<code>1K×8位</code>模块（地址线、控制线、片选线并联，数据线拼接为8位）；</li>
+<li>字扩展：用“2-4译码器”（2根片选地址线）控制4组模块的片选端；</li>
+<li>最终：4组×1K=4K容量，8位位宽，满足<code>4K×8位</code>需求。</li>
+</ul>
+</li>
+</ol>
+<h2 id="5-三种扩展方式对比总结">5. 三种扩展方式对比总结</h2>
+<table>
+<thead>
+<tr>
+<th>扩展类型</th>
+<th>核心变化</th>
+<th>芯片数计算</th>
+<th>关键连接点</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>字扩展</td>
+<td>容量↑，位宽不变</td>
+<td>目标容量÷单芯片容量</td>
+<td>译码器分片选</td>
+</tr>
+<tr>
+<td>位扩展</td>
+<td>位宽↑，容量不变</td>
+<td>目标位宽÷单芯片位宽</td>
+<td>数据线拼接</td>
+</tr>
+<tr>
+<td>字位同时扩展</td>
+<td>容量↑+位宽↑</td>
+<td>字扩展数×位扩展数</td>
+<td>先位扩展拼组，再字扩展分片选</td>
+</tr>
+</tbody>
+</table>
+<h1>主存系统优化方法总览（4-6-1 至 4-6-4）</h1>
+<h2 id="一、4-6-1-主存系统的优化-—-双端口存储器">一、4-6-1 主存系统的优化 — 双端口存储器</h2>
+<h3 id="1-1-核心定义与解决的问题">1.1 核心定义与解决的问题</h3>
+<p>双端口存储器是一种具有<strong>两个独立读写端口</strong>（每个端口包含独立的地址线、数据线和控制线）的存储模块，可同时响应两个独立设备（如CPU与DMA控制器、两个CPU）的读写请求，核心解决“单端口存储器同一时间只能处理一个访问请求”的瓶颈问题。</p>
+<h3 id="1-2-关键结构特点">1.2 关键结构特点</h3>
+<ul>
+<li><strong>双端口设计</strong>：两个端口（通常称为Port A和Port B）完全独立，各自有一套地址寄存器（AR）、数据寄存器（DR）和控制逻辑（如读/写信号R/W）。</li>
+<li><strong>存储体共享</strong>：两个端口共用同一存储体（存储单元阵列），需通过冲突检测机制避免“同时访问同一存储单元”的冲突。</li>
+</ul>
+<h3 id="1-3-冲突检测与处理">1.3 冲突检测与处理</h3>
+<ul>
+<li><strong>冲突场景</strong>：当两个端口的地址寄存器（ARₐ、ARᵦ）同时指向同一存储单元，且至少有一个端口发出“写请求”时，会产生访问冲突。</li>
+<li><strong>处理方式</strong>：
+<ol>
+<li>硬件优先级：默认一个端口（如Port A）优先级更高，优先执行其请求，另一个端口等待一个时钟周期。</li>
+<li>忙信号反馈：冲突时，向优先级低的端口输出“忙信号（Busy）”，使其暂停访问，直至冲突解除。</li>
+</ol>
+</li>
+</ul>
+<h3 id="1-4-应用场景与优势">1.4 应用场景与优势</h3>
+<ul>
+<li><strong>典型场景</strong>：CPU与DMA控制器协同工作（如磁盘数据读写）——CPU通过Port A执行指令读写，DMA通过Port B直接与存储器交换数据，无需CPU干预，提升数据传输效率。</li>
+<li><strong>核心优势</strong>：在不增加存储体数量的前提下，通过双端口并行访问，提升主存的“访问并行度”，减少设备等待时间。</li>
+</ul>
+<h2 id="二、4-6-2-主存系统的优化-—-单体多字存储器">二、4-6-2 主存系统的优化 — 单体多字存储器</h2>
+<h3 id="2-1-核心定义与解决的问题">2.1 核心定义与解决的问题</h3>
+<p>单体多字存储器是“单个存储体 + 多字数据总线”的设计，存储体每次读写时，会同时读出/写入<strong>多个连续的字</strong>（如一次读4个字），核心解决“单字存储器每次仅能传输1个字，数据吞吐量低”的问题。</p>
+<h3 id="2-2-关键结构与工作原理">2.2 关键结构与工作原理</h3>
+<ul>
+<li><strong>存储体</strong>：仅一个存储体，存储单元按“字块”（如4字/块）连续排列，地址按“块号”编制（而非单个字地址）。</li>
+<li><strong>多字数据总线</strong>：数据总线宽度是“单字总线”的N倍（如N=4，总线宽度为4×32位），可一次性传输N个字。</li>
+<li><strong>工作流程</strong>（以N=4为例）：
+<ol>
+<li>CPU给出“块地址”（如块号0），指向存储体中第0~3号字的连续块。</li>
+<li>存储体一次读出块内4个连续字，通过4字数据总线传输到CPU的“多字缓冲寄存器”。</li>
+<li>CPU从缓冲寄存器中按顺序取用单个字，无需多次访问存储体。</li>
+</ol>
+</li>
+</ul>
+<h3 id="2-3-优势与局限性">2.3 优势与局限性</h3>
+<ul>
+<li><strong>优势</strong>：提升“数据吞吐量”（单位时间传输的总字数）——若单字访问时间为t，单字存储器每秒传输1/t个字，而4字存储器每秒传输4/t个字，吞吐量提升N倍（N为每次传输的字数）。</li>
+<li><strong>局限性</strong>：
+<ol>
+<li>依赖“程序的空间局部性”：仅当CPU需要连续字（如数组、连续指令）时，才能发挥优势；若访问离散字（如随机访问不同地址的单个字），会读出无用数据，浪费总线带宽。</li>
+<li>存储体未并行：本质仍是“单个存储体”，每次访问需占用存储体完整周期，无法实现多个独立请求的并行处理。</li>
+</ol>
+</li>
+</ul>
+<h2 id="三、4-6-3-主存系统的优化-—-多体交叉存储器（1）高位多体交叉">三、4-6-3 主存系统的优化 — 多体交叉存储器（1）高位多体交叉</h2>
+<p><img src= "" data-lazy-src="C:%5CUsers%5Cwoodfish%5CDesktop%5CMyBlog%5C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%5C%E5%AD%98%E5%82%A8%E5%99%A8%EF%BC%8C%E4%B8%BB%E5%AD%98%E6%89%A9%E5%B1%95.assets%5Cimage-20251203124454964.png" alt="image-20251203124454964"></p>
+<h3 id="3-1-核心定义与基础结构">3.1 核心定义与基础结构</h3>
+<p>多体交叉存储器由<strong>N个独立存储模块</strong>（M₀~Mₙ₋₁）构成，每个模块容量、存取速度完全相同，且共用一套系统总线。高位多体交叉的核心特征是“<strong>高位地址区分模块，低位地址区分块内单元</strong>”，也称为“顺序编制模式”。</p>
+<h3 id="3-2-地址结构与分配（结合例题）">3.2 地址结构与分配（结合例题）</h3>
+<h4 id="例题：4个模块（M₀-M₃），每个模块8个存储单元">例题：4个模块（M₀~M₃），每个模块8个存储单元</h4>
+<ul>
+<li><strong>地址拆分</strong>：
+<ol>
+<li>模块地址（高位）：模块数=4=2²，需2位二进制（00~11，对应M₀~M₃）。</li>
+<li>块内地址（低位）：单个模块单元数=8=2³，需3位二进制（000~111，对应模块内第0~7单元）。</li>
+<li>总地址位数：2+3=5位（总容量=4×8=32单元=2⁵，匹配地址位数）。</li>
+</ol>
+</li>
+<li><strong>地址分配规律</strong>：连续地址先全部分配给一个模块，再顺序分配给下一个模块（如下表）：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>存储模块</th>
+<th>模块地址（高位2位）</th>
+<th>块内地址（低位3位）</th>
+<th>完整地址（5位）</th>
+<th>十进制地址</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>M₀</td>
+<td>00</td>
+<td>000~111</td>
+<td>00000~00111</td>
+<td>0~7</td>
+</tr>
+<tr>
+<td>M₁</td>
+<td>01</td>
+<td>000~111</td>
+<td>01000~01111</td>
+<td>8~15</td>
+</tr>
+<tr>
+<td>M₂</td>
+<td>10</td>
+<td>000~111</td>
+<td>10000~10111</td>
+<td>16~23</td>
+</tr>
+<tr>
+<td>M₃</td>
+<td>11</td>
+<td>000~111</td>
+<td>11000~11111</td>
+<td>24~31</td>
+</tr>
+</tbody>
+</table>
+<h3 id="3-3-核心局限性与作用">3.3 核心局限性与作用</h3>
+<ul>
+<li><strong>局限性：无法并行访问</strong>：因程序具有“局部性”（指令/数据连续存储），CPU会频繁访问单个模块（如地址0~10仅涉及M₀和M₁），其他模块空闲，无法发挥多模块并行优势。</li>
+<li><strong>主要作用：扩充容量</strong>：本质是“存储器字扩展”——N个模块的总容量=单个模块容量×N，如4个1KB模块可扩展为4KB主存。</li>
+</ul>
+<h2 id="四、4-6-4-主存系统的优化-—-多体交叉存储器（2）低位多体交叉">四、4-6-4 主存系统的优化 — 多体交叉存储器（2）低位多体交叉</h2>
+<p><img src= "" data-lazy-src="C:%5CUsers%5Cwoodfish%5CDesktop%5CMyBlog%5C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%5C%E5%AD%98%E5%82%A8%E5%99%A8%EF%BC%8C%E4%B8%BB%E5%AD%98%E6%89%A9%E5%B1%95.assets%5Cimage-20251203124954973.png" alt="image-20251203124954973"></p>
+<h3 id="4-1-核心定义与解决的问题">4.1 核心定义与解决的问题</h3>
+<p>低位多体交叉是多体交叉存储器的另一种编制方式，核心特征是“<strong>低位地址区分模块，高位地址区分块内单元</strong>”，也称为“交叉编制模式”。其设计目的是解决“高位多体交叉无法并行访问”的问题，实现多模块并行工作。</p>
+<h3 id="4-2-地址结构与分配（结合例题）">4.2 地址结构与分配（结合例题）</h3>
+<h4 id="例题：4个模块（M₀-M₃），每个模块8个存储单元（总容量32单元，5位地址）">例题：4个模块（M₀~M₃），每个模块8个存储单元（总容量32单元，5位地址）</h4>
+<ul>
+<li><strong>地址拆分</strong>：
+<ol>
+<li>模块地址（低位）：模块数=4=2²，需<strong>最低2位</strong>二进制（00~11，对应M₀~M₃）。</li>
+<li>块内地址（高位）：单个模块单元数=8=2³，需<strong>高3位</strong>二进制（000~111，对应模块内第0~7单元）。</li>
+</ol>
+</li>
+<li><strong>地址分配规律</strong>：连续地址“交叉分配”给不同模块，即第k个地址分配给“模块k mod N”（N=4），如下表：</li>
+</ul>
+<table>
+<thead>
+<tr>
+<th>十进制地址</th>
+<th>5位二进制地址</th>
+<th>模块地址（低位2位）</th>
+<th>块内地址（高位3位）</th>
+<th>对应模块</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>0</td>
+<td>00000</td>
+<td>00</td>
+<td>000</td>
+<td>M₀</td>
+</tr>
+<tr>
+<td>1</td>
+<td>00001</td>
+<td>01</td>
+<td>000</td>
+<td>M₁</td>
+</tr>
+<tr>
+<td>2</td>
+<td>00010</td>
+<td>10</td>
+<td>000</td>
+<td>M₂</td>
+</tr>
+<tr>
+<td>3</td>
+<td>00011</td>
+<td>11</td>
+<td>000</td>
+<td>M₃</td>
+</tr>
+<tr>
+<td>4</td>
+<td>00100</td>
+<td>00</td>
+<td>001</td>
+<td>M₀</td>
+</tr>
+<tr>
+<td>5</td>
+<td>00101</td>
+<td>01</td>
+<td>001</td>
+<td>M₁</td>
+</tr>
+<tr>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+<td>…</td>
+</tr>
+</tbody>
+</table>
+<h3 id="4-3-并行访问原理（关键优势）">4.3 并行访问原理（关键优势）</h3>
+<p>基于“交叉地址分配”，程序的连续指令/数据会分散在不同模块中，结合“存储模块存取周期重叠”，实现并行访问：</p>
+<ul>
+<li><strong>示例</strong>：CPU连续读取地址0~3（4个字），流程如下：
+<ol>
+<li>时间t₀：CPU向M₀发送地址0（读请求），M₀开始读取（存取周期为T）。</li>
+<li>时间t₀+Δt（Δt为地址发送延迟）：CPU向M₁发送地址1（读请求），M₁开始读取（与M₀重叠工作）。</li>
+<li>时间t₀+2Δt：向M₂发送地址2，M₂启动；t₀+3Δt：向M₃发送地址3，M₃启动。</li>
+<li>时间t₀+T：M₀完成读取，输出数据；随后M₁（t₀+T+Δt）、M₂（t₀+T+2Δt）、M₃（t₀+T+3Δt）依次输出数据。</li>
+</ol>
+</li>
+<li><strong>结果</strong>：原本“4个模块串行读取需4T”，现在仅需T+3Δt（Δt远小于T），数据吞吐量接近原来的4倍，实现“多模块并行访问”。</li>
+</ul>
+<h3 id="4-4-局限性">4.4 局限性</h3>
+<ul>
+<li>对“离散地址访问”不友好：若CPU随机访问非连续地址（如地址0、4、8、12，均指向M₀），会导致M₀连续忙碌，其他模块空闲，并行优势失效。</li>
+<li>需复杂的地址控制逻辑：需将CPU给出的“连续地址”拆分为“低位模块地址+高位块内地址”，并协调多个模块的访问时序，硬件成本略高于高位多体交叉。</li>
+</ul>
+<h2 id="五、四种优化方法对比总结">五、四种优化方法对比总结</h2>
+<table>
+<thead>
+<tr>
+<th>优化方法</th>
+<th>核心特征</th>
+<th>核心优势</th>
+<th>核心局限性</th>
+<th>适用场景</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>双端口存储器</td>
+<td>单存储体+双独立端口</td>
+<td>支持两个设备并行访问</td>
+<td>仅1个存储体，无多体并行性</td>
+<td>CPU与DMA协同、双CPU共享存储器</td>
+</tr>
+<tr>
+<td>单体多字存储器</td>
+<td>单存储体+多字数据总线</td>
+<td>提升连续字的吞吐量</td>
+<td>依赖空间局部性，无多体并行</td>
+<td>连续数据访问（如数组、连续指令）</td>
+</tr>
+<tr>
+<td>高位多体交叉</td>
+<td>多模块+高位地址分模块</td>
+<td>扩充主存容量</td>
+<td>无法并行访问，仅单模块工作</td>
+<td>需扩展容量但对并行性要求低的场景</td>
+</tr>
+<tr>
+<td>低位多体交叉</td>
+<td>多模块+低位地址分模块</td>
+<td>多模块并行，大幅提升吞吐量</td>
+<td>依赖连续地址，离散访问失效</td>
+<td>需高吞吐量的连续数据访问（如内存）</td>
+</tr>
+</tbody>
+</table>
+<p><img src= "" data-lazy-src="C:%5CUsers%5Cwoodfish%5CDesktop%5CMyBlog%5C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%5C%E5%AD%98%E5%82%A8%E5%99%A8%EF%BC%8C%E4%B8%BB%E5%AD%98%E6%89%A9%E5%B1%95.assets%5Cimage-20251203125313806.png" alt="image-20251203125313806"></p>
+<p><img src= "" data-lazy-src="C:%5CUsers%5Cwoodfish%5CDesktop%5CMyBlog%5C%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86%5C%E5%AD%98%E5%82%A8%E5%99%A8%EF%BC%8C%E4%B8%BB%E5%AD%98%E6%89%A9%E5%B1%95.assets%5Cimage-20251203130019851.png" alt="image-20251203130019851"></p>
+</article><div class="post-copyright"><div class="post-copyright__author_group"><div class="post-copyright__author_img"><img class="post-copyright__author_img_front" src="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg"></div><div class="post-copyright__author_name">woodfish</div><div class="post-copyright__author_desc">HOLA,this is woodfish!</div></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div id="quit-box" onclick="RemoveRewardMask()"></div><div class="post-reward"><div class="reward-button" title="赞赏作者" onclick="AddRewardMask()"><i class="solitude fas fa-heart"></i>赞赏作者</div><div class="reward-main"><ul class="reward-all"><span class="reward-title"></span><ul class="reward-group"><li class="reward-item"><a href="/null"><img class="post-qr-code-img nolazyload" src="https://www.woodfishhhh.xyz/images/e926e309585e5a5826ab0c3b485f8b6.png?_t=1751445131356" alt="微信" style="border-color: var(--efu-main)"></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/null"><img class="post-qr-code-img nolazyload" src="https://www.woodfishhhh.xyz/images/8147e2d92fa8287fac8774305c99661.jpg.jpeg?_t=1751445131356" alt="支付宝" style="border-color: var(--efu-main)"></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/"><div class="reward-text">赞赏名单</div><div class="reward-dec"></div></a></ul></div></div><script>function RemoveRewardMask() {
+    let rewardMainElements = document.querySelectorAll(".reward-main");
+    let quitBoxElement = document.querySelector("#quit-box");
+
+    rewardMainElements.forEach(element => {
+        element.style.display = "none";
+    });
+
+    if (quitBoxElement) {
+        quitBoxElement.style.display = "none";
+    }
+}
+
+function AddRewardMask() {
+    let rewardMainElements = document.querySelectorAll(".reward-main");
+    let quitBoxElement = document.querySelector("#quit-box");
+
+    rewardMainElements.forEach(element => {
+        element.style.display = "flex";
+    });
+
+    if (quitBoxElement) {
+        quitBoxElement.style.display = "flex";
+    }
+}</script></div></div><div class="social-share"><a class="social-share-ico icon-qq" target="_blank" rel="noopener" href="https://connect.qq.com/widget/shareqq/index.html?url=https%3A%2F%2Fwww.woodfishhhh.xyz%2F2026%2F01%2F06%2F%25E8%25AE%25A1%25E7%25AE%2597%25E6%259C%25BA%25E7%25BB%2584%25E6%2588%2590%25E5%258E%259F%25E7%2590%2586%2F%25E5%25AD%2598%25E5%2582%25A8%25E5%2599%25A8%25EF%25BC%258C%25E4%25B8%25BB%25E5%25AD%2598%25E6%2589%25A9%25E5%25B1%2595%2F&amp;title=%E5%AD%98%E5%82%A8%E5%99%A8%E4%B8%BB%E5%AD%98%E6%89%A9%E5%B1%95&amp;desc=undefined&amp;summary=undefined&amp;site=%E5%AD%98%E5%82%A8%E5%99%A8%E4%B8%BB%E5%AD%98%E6%89%A9%E5%B1%95&amp;pics=https%3A%2F%2Fpic1.imgdb.cn%2Fitem%2F682f3d1658cb8da5c807b704.jpg" title="分享到QQ"><i class="solitude fab fa-qq"></i></a><a class="social-share-ico icon-weibo" target="_blank" rel="noopener" href="http://service.weibo.com/share/share.php?url=https%3A%2F%2Fwww.woodfishhhh.xyz%2F2026%2F01%2F06%2F%25E8%25AE%25A1%25E7%25AE%2597%25E6%259C%25BA%25E7%25BB%2584%25E6%2588%2590%25E5%258E%259F%25E7%2590%2586%2F%25E5%25AD%2598%25E5%2582%25A8%25E5%2599%25A8%25EF%25BC%258C%25E4%25B8%25BB%25E5%25AD%2598%25E6%2589%25A9%25E5%25B1%2595%2F&amp;title=%E5%AD%98%E5%82%A8%E5%99%A8%E4%B8%BB%E5%AD%98%E6%89%A9%E5%B1%95&amp;pic=https%3A%2F%2Fpic1.imgdb.cn%2Fitem%2F682f3d1658cb8da5c807b704.jpg" title="分享到微博"><i class="solitude fab fa-weibo"></i></a><a class="social-share-ico icon-twitter" target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.woodfishhhh.xyz%2F2026%2F01%2F06%2F%25E8%25AE%25A1%25E7%25AE%2597%25E6%259C%25BA%25E7%25BB%2584%25E6%2588%2590%25E5%258E%259F%25E7%2590%2586%2F%25E5%25AD%2598%25E5%2582%25A8%25E5%2599%25A8%25EF%25BC%258C%25E4%25B8%25BB%25E5%25AD%2598%25E6%2589%25A9%25E5%25B1%2595%2F&amp;text=%E5%AD%98%E5%82%A8%E5%99%A8%E4%B8%BB%E5%AD%98%E6%89%A9%E5%B1%95" title="分享到Twitter"><i class="solitude fab fa-twitter"></i></a><a class="social-share-ico icon-facebook" target="_blank" rel="noopener" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.woodfishhhh.xyz%2F2026%2F01%2F06%2F%25E8%25AE%25A1%25E7%25AE%2597%25E6%259C%25BA%25E7%25BB%2584%25E6%2588%2590%25E5%258E%259F%25E7%2590%2586%2F%25E5%25AD%2598%25E5%2582%25A8%25E5%2599%25A8%25EF%25BC%258C%25E4%25B8%25BB%25E5%25AD%2598%25E6%2589%25A9%25E5%25B1%2595%2F" title="分享到Facebook"><i class="solitude fab fa-facebook"></i></a><div class="social-share-ico icon-link" onclick="utils.copy(&quot;https://www.woodfishhhh.xyz/2026/01/06/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E5%AD%98%E5%82%A8%E5%99%A8%EF%BC%8C%E4%B8%BB%E5%AD%98%E6%89%A9%E5%B1%95/&quot;)" title="复制文章链接"><i class="solitude fas fa-link"></i></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本文是原创文章，采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>协议，完整转载请注明来自<a href="/">木鱼的鱼窝</a></span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/"><span class="tags-punctuation"><i class="solitude fas fa-hashtag"></i>计算机组成原理<span class="tagsPageCount">6</span></span></a><a class="post-meta__tags" href="/tags/%E5%AD%98%E5%82%A8%E5%99%A8/"><span class="tags-punctuation"><i class="solitude fas fa-hashtag"></i>存储器<span class="tagsPageCount">2</span></span></a></div></div></div><nav class="needEndHide pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2026/01/06/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/Cache%E7%BC%93%E5%AD%98/"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">Cache缓存</div></div></a></div><div class="next-post pull-right"><a href="/2026/01/06/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/%E6%8C%87%E4%BB%A4%E7%B3%BB%E7%BB%9F/"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">指令系统</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="card-info-avatar is-center"><div class="top-group"><div class="sayhi" id="sayhi" onclick="sco.changeWittyWord()"></div></div></div><div class="avatar"><img alt="头像" src="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg"></div><div class="description">欢迎来到我的鱼窝~</div><div class="bottom-group"><span class="left"><div class="name">woodfish</div><div class="desc">河汉微明星乍稀，碧莲香湿袭人衣。夜凉如水琉璃滑，自起开窗放月归。</div></span><div class="social-icons is-center"><a class="social-icon" target="_blank" rel="noopener" href="https://github.com/woodfishhhh" title="Github"><i class="solitude  fab fa-github"></i></a><a class="social-icon" target="_blank" rel="noopener" href="https://space.bilibili.com/359728114" title="Bilibili"><i class="solitude  fab fa-bilibili"></i></a><a class="social-icon" href="https://www.woodfishhhh.xyz/images/af1a055d14e4f7f6eae2886f2865d13.jpg.jpeg?_t=1750312382930" title="QQ"><i class="solitude  fab fa-qq"></i></a><a class="social-icon" href="https://www.woodfishhhh.xyz/images/f59723db9159310b6056abe8341f5d7.jpg.jpeg?_t=1750312263368" title="Wechat"><i class="solitude  fab fa-weixin"></i></a><a class="social-icon" href="https://www.woodfishhhh.xyz/images/d8d58d2f2c7ac5790fd37f388da41db4.png?_t=1759286665402" title="Email"><i class="solitude  far fa-envelope"></i></a><a class="social-icon" target="_blank" rel="noopener" href="https://www.douyin.com/user/MS4wLjABAAAAgbOrIhdi7Rl5RfaQ3fE3i7c2WnyR3zEOyLiK2Cjtcqk?from_tab_name=main" title="Douyin"><i class="solitude  fab fa-tiktok"></i></a></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="solitude fas fa-bars"></i><span>文章目录</span></div><div class="toc-content" id="toc-content"><ol class="toc"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-1-%E5%AD%98%E5%8F%96%E6%97%B6%E9%97%B4"><span class="toc-text">2.2.1 存取时间</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-2-%E5%AD%98%E5%8F%96%E5%91%A8%E6%9C%9F"><span class="toc-text">2.2.2 存取周期</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-3-%E5%AD%98%E5%82%A8%E5%99%A8%E5%B8%A6%E5%AE%BD"><span class="toc-text">2.2.3 存储器带宽</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%BB%E5%AD%98%E7%9A%84%E6%A0%B8%E5%BF%83%E6%A6%82%E5%BF%B5%E4%B8%8E%E5%9F%BA%E6%9C%AC%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90"><span class="toc-text">主存的核心概念与基本硬件组成</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E4%B8%BB%E5%AD%98%E7%9A%84%E5%AE%9A%E4%B9%89%E4%B8%8E%E8%AE%BF%E9%97%AE%E7%89%B9%E6%80%A7"><span class="toc-text">2.1 主存的定义与访问特性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E4%B8%BB%E5%AD%98%E7%9A%84%E4%B8%89%E5%A4%A7%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90%E9%83%A8%E5%88%86"><span class="toc-text">2.2 主存的三大硬件组成部分</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-1-%E5%AD%98%E5%82%A8%E4%BD%93"><span class="toc-text">2.2.1 存储体</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-2-%E5%AD%98%E5%82%A8%E5%99%A8%E6%95%B0%E6%8D%AE%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%88MDR%EF%BC%89"><span class="toc-text">2.2.2 存储器数据寄存器（MDR）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-3-%E5%AD%98%E5%82%A8%E5%99%A8%E5%9C%B0%E5%9D%80%E5%AF%84%E5%AD%98%E5%99%A8%EF%BC%88MAR%EF%BC%89"><span class="toc-text">2.2.3 存储器地址寄存器（MAR）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8D%95%E8%AF%91%E7%A0%81%E7%BB%93%E6%9E%84%EF%BC%88%E7%BA%BF%E6%80%A7%E8%AF%91%E7%A0%81%E7%BB%93%E6%9E%84%EF%BC%89"><span class="toc-text">单译码结构（线性译码结构）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86"><span class="toc-text">2.1 核心原理</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%8F%8C%E8%AF%91%E7%A0%81%E7%BB%93%E6%9E%84%EF%BC%88%E4%BA%8C%E7%BB%B4%E8%AF%91%E7%A0%81%E7%BB%93%E6%9E%84%EF%BC%89"><span class="toc-text">双译码结构（二维译码结构）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-%E6%A0%B8%E5%BF%83%E5%8E%9F%E7%90%86"><span class="toc-text">3.1 核心原理</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E6%9C%BA%E5%99%A8%E5%AD%97%E9%95%BF%E4%B8%8E%E5%AD%98%E5%82%A8%E5%AD%97%E9%95%BF%E7%9A%84%E5%8C%BA%E5%88%AB"><span class="toc-text">二、机器字长与存储字长的区别</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%A0%B8%E5%BF%83%E5%AE%9A%E4%B9%89"><span class="toc-text">1. 核心定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E4%BE%8B%E9%A2%98%EF%BC%9A%E6%9C%BA%E5%99%A8%E5%AD%97%E9%95%BF%E4%B8%8E%E5%AD%98%E5%82%A8%E5%AD%97%E9%95%BF%E5%8C%B9%E9%85%8D%E5%88%86%E6%9E%90"><span class="toc-text">2. 例题：机器字长与存储字长匹配分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81%E5%9C%B0%E5%9D%80%E8%AE%BF%E9%97%AE%E6%A8%A1%E5%BC%8F%EF%BC%88%E4%B8%BB%E5%AD%98%E6%8C%89%E5%AD%97%E8%8A%82%E7%BC%96%E5%9D%80%EF%BC%89"><span class="toc-text">三、地址访问模式（主存按字节编址）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E5%9F%BA%E7%A1%80%E8%A7%84%E5%88%99"><span class="toc-text">1. 基础规则</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%9C%B0%E5%9D%80%E8%BD%AC%E6%8D%A2%E5%85%B3%E7%B3%BB%EF%BC%8832-%E4%BD%8D%E6%9C%BA%E5%99%A8%E7%A4%BA%E4%BE%8B%EF%BC%89"><span class="toc-text">2. 地址转换关系（32 位机器示例）</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81%E5%A4%A7%E7%AB%AF%E6%96%B9%E5%BC%8F%E4%B8%8E%E5%B0%8F%E7%AB%AF%E6%96%B9%E5%BC%8F%EF%BC%88%E6%95%B0%E6%8D%AE%E5%AD%97%E8%8A%82%E5%BA%8F%EF%BC%89"><span class="toc-text">四、大端方式与小端方式（数据字节序）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%A0%B8%E5%BF%83%E5%AE%9A%E4%B9%89-2"><span class="toc-text">1. 核心定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%AE%9E%E4%BE%8B%E5%AF%B9%E6%AF%94%EF%BC%88%E4%BB%A5-32-%E4%BD%8D%E6%95%B0%E6%8D%AE-0x12345678-%E4%B8%BA%E4%BE%8B%EF%BC%89"><span class="toc-text">2. 实例对比（以 32 位数据 0x12345678 为例）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%BE%8B%E9%A2%98%EF%BC%9A%E5%B0%8F%E7%AB%AF%E6%96%B9%E5%BC%8F%E4%B8%8B%E7%9A%84%E6%95%B0%E6%8D%AE%E8%AF%BB%E5%8F%96"><span class="toc-text">3. 例题：小端方式下的数据读取</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E6%95%B0%E6%8D%AE%E7%9A%84%E8%BE%B9%E7%95%8C%E5%AF%B9%E9%BD%90"><span class="toc-text">五、数据的边界对齐</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%A0%B8%E5%BF%83%E7%9B%AE%E7%9A%84"><span class="toc-text">1. 核心目的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E5%AF%B9%E9%BD%90%E8%A7%84%E5%88%99%EF%BC%88%E6%8C%89%E5%AD%97%E8%8A%82%E7%BC%96%E5%9D%80%EF%BC%89"><span class="toc-text">2. 对齐规则（按字节编址）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%AF%B9%E9%BD%90%E4%B8%8E%E5%AD%98%E5%82%A8%E7%A9%BA%E9%97%B4%E7%9A%84%E6%9D%83%E8%A1%A1"><span class="toc-text">3. 对齐与存储空间的权衡</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98%EF%BC%9A%E7%BB%93%E6%9E%84%E4%BD%93%E7%9A%84%E8%BE%B9%E7%95%8C%E5%AF%B9%E9%BD%90%EF%BC%8832-%E4%BD%8D%E7%B3%BB%E7%BB%9F%EF%BC%8C%E7%BC%96%E8%AF%91%E5%99%A8%E9%BB%98%E8%AE%A4%E5%AF%B9%E9%BD%90%EF%BC%89"><span class="toc-text">例题：结构体的边界对齐（32 位系统，编译器默认对齐）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81408-%E7%9C%9F%E9%A2%98%E5%AE%9E%E6%88%98%EF%BC%88%E5%A4%A7%E7%AB%AF-%E5%B0%8F%E7%AB%AF-%E8%BE%B9%E7%95%8C%E5%AF%B9%E9%BD%90%EF%BC%89"><span class="toc-text">六、408 真题实战（大端 &#x2F; 小端 + 边界对齐）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2012-%E5%B9%B4-408-%E7%9C%9F%E9%A2%98%EF%BC%88%E7%BB%BC%E5%90%88%E8%80%83%E5%AF%9F%EF%BC%89"><span class="toc-text">1. 2012 年 408 真题（综合考察）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%EF%BC%9A"><span class="toc-text">题目：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E6%9E%90%EF%BC%9A"><span class="toc-text">解析：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2018-%E5%B9%B4-408-%E7%9C%9F%E9%A2%98%EF%BC%88%E5%B0%8F%E7%AB%AF-%E8%A1%A5%E7%A0%81%EF%BC%89"><span class="toc-text">2. 2018 年 408 真题（小端 + 补码）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E9%A2%98%E7%9B%AE%EF%BC%9A-2"><span class="toc-text">题目：</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#%E8%A7%A3%E6%9E%90%EF%BC%9A-2"><span class="toc-text">解析：</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#SRAM-%E5%AE%9A%E4%B9%89%E4%B8%8E%E5%88%86%E7%B1%BB%E5%BD%92%E5%B1%9E"><span class="toc-text">SRAM 定义与分类归属</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E5%AD%98%E5%82%A8%E5%85%83%E6%A0%B8%E5%BF%83%E7%BB%84%E6%88%90"><span class="toc-text">存储元核心组成</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#MOS-%E7%AE%A1%E5%BC%80%E5%85%B3%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-text">MOS 管开关工作原理</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81SRAM-%E5%AD%98%E5%82%A8%E5%85%83%E8%AF%BB%E6%93%8D%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-text">四、SRAM 存储元读操作原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%93%8D%E4%BD%9C%E5%89%8D%E6%8F%90"><span class="toc-text">1. 操作前提</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%A0%B8%E5%BF%83%E6%B5%81%E7%A8%8B"><span class="toc-text">2. 核心流程</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E4%B8%8E-DRAM-%E7%9A%84%E5%85%B3%E9%94%AE%E5%8C%BA%E5%88%AB"><span class="toc-text">3. 与 DRAM 的关键区别</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81SRAM-%E5%AD%98%E5%82%A8%E5%85%83%E5%86%99%E6%93%8D%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-text">五、SRAM 存储元写操作原理</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%93%8D%E4%BD%9C%E5%89%8D%E6%8F%90-2"><span class="toc-text">1. 操作前提</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%A0%B8%E5%BF%83%E6%B5%81%E7%A8%8B%EF%BC%88%E4%BB%A5-%E2%80%9C%E5%86%99-0%E2%80%9D-%E4%B8%BA%E4%BE%8B%EF%BC%89"><span class="toc-text">2. 核心流程（以 “写 0” 为例）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-%E5%86%99%E6%93%8D%E4%BD%9C%E6%9C%AC%E8%B4%A8"><span class="toc-text">3. 写操作本质</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98-5%EF%BC%9A%E5%86%99%E6%93%8D%E4%BD%9C%E6%B5%81%E7%A8%8B%E5%88%86%E6%9E%90"><span class="toc-text">例题 5：写操作流程分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%85%AD%E3%80%81%E6%93%8D%E4%BD%9C%E5%90%8E%E7%8A%B6%E6%80%81%E4%B8%8E-SRAM-%E5%AD%98%E5%82%A8%E5%85%83%E6%A0%B8%E5%BF%83%E7%89%B9%E7%82%B9"><span class="toc-text">六、操作后状态与 SRAM 存储元核心特点</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-%E6%93%8D%E4%BD%9C%E5%90%8E%E7%8A%B6%E6%80%81%E7%BB%B4%E6%8C%81"><span class="toc-text">1. 操作后状态维持</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-%E6%A0%B8%E5%BF%83%E7%89%B9%E7%82%B9%EF%BC%88%E5%AF%B9%E6%AF%94-DRAM%EF%BC%89"><span class="toc-text">2. 核心特点（对比 DRAM）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98-6%EF%BC%9ASRAM-%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E5%88%A4%E6%96%AD"><span class="toc-text">例题 6：SRAM 应用场景判断</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B9%A0%E9%A2%981%E8%A7%A3%E6%9E%90%EF%BC%88%E7%AD%94%E6%A1%88B%EF%BC%89"><span class="toc-text">习题1解析（答案B）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B9%A0%E9%A2%982%E8%A7%A3%E6%9E%90%EF%BC%88%E7%AD%94%E6%A1%88B%EF%BC%89"><span class="toc-text">习题2解析（答案B）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%B9%A0%E9%A2%983%E8%A7%A3%E6%9E%90%EF%BC%88%E7%AD%94%E6%A1%88D%EF%BC%89"><span class="toc-text">习题3解析（答案D）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-1-%E7%A1%AC%E4%BB%B6%E7%BB%84%E6%88%90"><span class="toc-text">2.2.1 硬件组成</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-2-%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A4%BA%E5%8E%9F%E7%90%86%EF%BC%88%E4%BA%8C%E8%BF%9B%E5%88%B6-0-1-%E7%9A%84%E7%89%A9%E7%90%86%E6%98%A0%E5%B0%84%EF%BC%89"><span class="toc-text">2.2.2 数据表示原理（二进制 0&#x2F;1 的物理映射）</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%81DRAM-%E7%9A%84%E7%89%B9%E6%AE%8A%E9%97%AE%E9%A2%98%EF%BC%9A%E7%A0%B4%E5%9D%8F%E6%80%A7%E8%AF%BB%E4%B8%8E%E5%8A%A8%E6%80%81%E5%88%B7%E6%96%B0"><span class="toc-text">三、DRAM 的特殊问题：破坏性读与动态刷新</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E7%A0%B4%E5%9D%8F%E6%80%A7%E8%AF%BB%E6%93%8D%E4%BD%9C%EF%BC%88%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%EF%BC%89"><span class="toc-text">3.1 破坏性读操作（核心特性）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-1-%E7%8E%B0%E8%B1%A1%E4%B8%8E%E5%8E%9F%E5%9B%A0"><span class="toc-text">3.1.1 现象与原因</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-1-2-%E4%BE%8B%E9%A2%98%EF%BC%9A%E7%A0%B4%E5%9D%8F%E6%80%A7%E8%AF%BB%E6%93%8D%E4%BD%9C%E7%9A%84%E5%BD%B1%E5%93%8D%E5%88%86%E6%9E%90"><span class="toc-text">3.1.2 例题：破坏性读操作的影响分析</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E5%8A%A8%E6%80%81%E5%88%B7%E6%96%B0%EF%BC%88%E2%80%9C%E5%8A%A8%E6%80%81%E2%80%9D-%E7%9A%84%E6%A0%B8%E5%BF%83%E5%90%AB%E4%B9%89%EF%BC%89"><span class="toc-text">3.2 动态刷新（“动态” 的核心含义）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-1-%E5%88%B7%E6%96%B0%E5%8E%9F%E5%9B%A0"><span class="toc-text">3.2.1 刷新原因</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#3-2-2-%E5%88%B7%E6%96%B0%E6%9C%BA%E5%88%B6"><span class="toc-text">3.2.2 刷新机制</span></a></li></ol></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%81DRAM-%E5%AD%98%E5%82%A8%E9%98%B5%E5%88%97%E6%89%A9%E5%B1%95%EF%BC%9A%E4%BB%8E%E5%8D%95%E4%B8%AA%E5%AD%98%E5%82%A8%E5%85%83%E5%88%B0%E5%A4%9A-bit-%E5%AD%98%E5%82%A8"><span class="toc-text">四、DRAM 存储阵列扩展：从单个存储元到多 bit 存储</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E6%89%A9%E5%B1%95%E5%8E%9F%E7%90%86%EF%BC%88%E4%BB%A5-16bit-%E5%AD%98%E5%82%A8%E4%B8%BA%E4%BE%8B%EF%BC%89"><span class="toc-text">4.1 扩展原理（以 16bit 存储为例）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-1-%E9%98%B5%E5%88%97%E7%BB%93%E6%9E%84"><span class="toc-text">4.1.1 阵列结构</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#4-1-2-%E5%85%B3%E9%94%AE%E6%A6%82%E5%BF%B5%EF%BC%9A%E5%AF%84%E7%94%9F%E7%94%B5%E5%AE%B9"><span class="toc-text">4.1.2 关键概念：寄生电容</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E8%AF%BB%E6%93%8D%E4%BD%9C%E5%AE%8C%E6%95%B4%E6%B5%81%E7%A8%8B%EF%BC%88%E4%BA%94%E6%AD%A5%EF%BC%89"><span class="toc-text">4.2 读操作完整流程（五步）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E5%86%99%E6%93%8D%E4%BD%9C%E6%B5%81%E7%A8%8B%EF%BC%88%E4%B8%8E%E8%AF%BB%E6%93%8D%E4%BD%9C%E7%9A%84%E5%B7%AE%E5%BC%82%EF%BC%89"><span class="toc-text">4.3 写操作流程（与读操作的差异）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-%E4%BE%8B%E9%A2%98%EF%BC%9ADRAM-%E9%98%B5%E5%88%97%E8%AF%BB%E6%93%8D%E4%BD%9C%E7%94%B5%E5%8E%8B%E5%8F%98%E5%8C%96%E5%88%86%E6%9E%90"><span class="toc-text">4.4 例题：DRAM 阵列读操作电压变化分析</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81DRAM-%E4%B8%8E-SRAM-%E6%A0%B8%E5%BF%83%E7%89%B9%E6%80%A7%E5%AF%B9%E6%AF%94%EF%BC%88%E6%80%BB%E7%BB%93%E4%B8%8E%E5%8C%BA%E5%88%86%EF%BC%89"><span class="toc-text">五、DRAM 与 SRAM 核心特性对比（总结与区分）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98%EF%BC%9A%E6%A0%B9%E6%8D%AE%E9%9C%80%E6%B1%82%E9%80%89%E6%8B%A9%E5%AD%98%E5%82%A8%E7%B1%BB%E5%9E%8B"><span class="toc-text">例题：根据需求选择存储类型</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%E6%A0%B8%E5%BF%83%E6%8A%80%E6%9C%AF%EF%BC%9A%E5%9C%B0%E5%9D%80%E5%A4%8D%E7%94%A8%E6%8A%80%E6%9C%AF"><span class="toc-text">核心技术：地址复用技术</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E4%B8%89%EF%BC%89%E6%95%B0%E6%8D%AE%E8%BE%93%E5%85%A5-%E8%BE%93%E5%87%BA%E6%8E%A7%E5%88%B6"><span class="toc-text">（三）数据输入 &#x2F; 输出控制</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81%E8%80%83%E7%A0%94%E7%9C%9F%E9%A2%98%E8%A7%A3%E6%9E%90%EF%BC%882018-%E5%B9%B4-408-%E7%9C%9F%E9%A2%98%EF%BC%89"><span class="toc-text">二、考研真题解析（2018 年 408 真题）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E4%B8%80%EF%BC%89%E9%A2%98%E7%9B%AE%E6%9D%A1%E4%BB%B6"><span class="toc-text">（一）题目条件</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#%EF%BC%88%E4%BA%8C%EF%BC%89%E8%A7%A3%E9%A2%98%E6%AD%A5%E9%AA%A4"><span class="toc-text">（二）解题步骤</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#1-%E5%AD%98%E5%82%A8%E5%99%A8%E6%89%A9%E5%B1%95%E6%A6%82%E8%BF%B0"><span class="toc-text">1. 存储器扩展概述</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E6%89%A9%E5%B1%95%E7%9A%84%E6%A0%B8%E5%BF%83%E7%9B%AE%E7%9A%84"><span class="toc-text">1.1 扩展的核心目的</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E6%89%A9%E5%B1%95%E7%9A%84%E4%B8%89%E7%A7%8D%E7%B1%BB%E5%9E%8B"><span class="toc-text">1.2 扩展的三种类型</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#2-%E5%AD%97%E6%89%A9%E5%B1%95%EF%BC%88%E4%BB%85%E6%89%A9%E5%AE%B9%EF%BC%8C%E4%BD%8D%E5%AE%BD%E4%B8%8D%E5%8F%98%EF%BC%89"><span class="toc-text">2. 字扩展（仅扩容，位宽不变）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E5%AE%9A%E4%B9%89"><span class="toc-text">2.1 定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">2.2 适用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E6%A0%B8%E5%BF%83%E6%AD%A5%E9%AA%A4"><span class="toc-text">2.3 核心步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-%E5%85%B8%E5%9E%8B%E4%BE%8B%E9%A2%98"><span class="toc-text">2.4 典型例题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#3-%E4%BD%8D%E6%89%A9%E5%B1%95%EF%BC%88%E4%BB%85%E5%8A%A0%E5%AE%BD%E4%BD%8D%E5%AE%BD%EF%BC%8C%E5%AE%B9%E9%87%8F%E4%B8%8D%E5%8F%98%EF%BC%89"><span class="toc-text">3. 位扩展（仅加宽位宽，容量不变）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E5%AE%9A%E4%B9%89"><span class="toc-text">3.1 定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">3.2 适用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E6%A0%B8%E5%BF%83%E6%AD%A5%E9%AA%A4"><span class="toc-text">3.3 核心步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-4-%E5%85%B8%E5%9E%8B%E4%BE%8B%E9%A2%98"><span class="toc-text">3.4 典型例题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#4-%E5%AD%97%E4%BD%8D%E5%90%8C%E6%97%B6%E6%89%A9%E5%B1%95%EF%BC%88%E6%97%A2%E6%89%A9%E5%AE%B9%E5%8F%88%E5%8A%A0%E5%AE%BD%EF%BC%89"><span class="toc-text">4. 字位同时扩展（既扩容又加宽）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E5%AE%9A%E4%B9%89"><span class="toc-text">4.1 定义</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">4.2 适用场景</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E6%A0%B8%E5%BF%83%E6%AD%A5%E9%AA%A4"><span class="toc-text">4.3 核心步骤</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-%E5%85%B8%E5%9E%8B%E4%BE%8B%E9%A2%98"><span class="toc-text">4.4 典型例题</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#5-%E4%B8%89%E7%A7%8D%E6%89%A9%E5%B1%95%E6%96%B9%E5%BC%8F%E5%AF%B9%E6%AF%94%E6%80%BB%E7%BB%93"><span class="toc-text">5. 三种扩展方式对比总结</span></a></li></ol></li><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">主存系统优化方法总览（4-6-1 至 4-6-4）</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%814-6-1-%E4%B8%BB%E5%AD%98%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BC%98%E5%8C%96-%E2%80%94-%E5%8F%8C%E7%AB%AF%E5%8F%A3%E5%AD%98%E5%82%A8%E5%99%A8"><span class="toc-text">一、4-6-1 主存系统的优化 — 双端口存储器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E6%A0%B8%E5%BF%83%E5%AE%9A%E4%B9%89%E4%B8%8E%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-text">1.1 核心定义与解决的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E5%85%B3%E9%94%AE%E7%BB%93%E6%9E%84%E7%89%B9%E7%82%B9"><span class="toc-text">1.2 关键结构特点</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-3-%E5%86%B2%E7%AA%81%E6%A3%80%E6%B5%8B%E4%B8%8E%E5%A4%84%E7%90%86"><span class="toc-text">1.3 冲突检测与处理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-4-%E5%BA%94%E7%94%A8%E5%9C%BA%E6%99%AF%E4%B8%8E%E4%BC%98%E5%8A%BF"><span class="toc-text">1.4 应用场景与优势</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%814-6-2-%E4%B8%BB%E5%AD%98%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BC%98%E5%8C%96-%E2%80%94-%E5%8D%95%E4%BD%93%E5%A4%9A%E5%AD%97%E5%AD%98%E5%82%A8%E5%99%A8"><span class="toc-text">二、4-6-2 主存系统的优化 — 单体多字存储器</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E6%A0%B8%E5%BF%83%E5%AE%9A%E4%B9%89%E4%B8%8E%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-text">2.1 核心定义与解决的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E5%85%B3%E9%94%AE%E7%BB%93%E6%9E%84%E4%B8%8E%E5%B7%A5%E4%BD%9C%E5%8E%9F%E7%90%86"><span class="toc-text">2.2 关键结构与工作原理</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E4%BC%98%E5%8A%BF%E4%B8%8E%E5%B1%80%E9%99%90%E6%80%A7"><span class="toc-text">2.3 优势与局限性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%89%E3%80%814-6-3-%E4%B8%BB%E5%AD%98%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BC%98%E5%8C%96-%E2%80%94-%E5%A4%9A%E4%BD%93%E4%BA%A4%E5%8F%89%E5%AD%98%E5%82%A8%E5%99%A8%EF%BC%881%EF%BC%89%E9%AB%98%E4%BD%8D%E5%A4%9A%E4%BD%93%E4%BA%A4%E5%8F%89"><span class="toc-text">三、4-6-3 主存系统的优化 — 多体交叉存储器（1）高位多体交叉</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#3-1-%E6%A0%B8%E5%BF%83%E5%AE%9A%E4%B9%89%E4%B8%8E%E5%9F%BA%E7%A1%80%E7%BB%93%E6%9E%84"><span class="toc-text">3.1 核心定义与基础结构</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-2-%E5%9C%B0%E5%9D%80%E7%BB%93%E6%9E%84%E4%B8%8E%E5%88%86%E9%85%8D%EF%BC%88%E7%BB%93%E5%90%88%E4%BE%8B%E9%A2%98%EF%BC%89"><span class="toc-text">3.2 地址结构与分配（结合例题）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98%EF%BC%9A4%E4%B8%AA%E6%A8%A1%E5%9D%97%EF%BC%88M%E2%82%80-M%E2%82%83%EF%BC%89%EF%BC%8C%E6%AF%8F%E4%B8%AA%E6%A8%A1%E5%9D%978%E4%B8%AA%E5%AD%98%E5%82%A8%E5%8D%95%E5%85%83"><span class="toc-text">例题：4个模块（M₀~M₃），每个模块8个存储单元</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#3-3-%E6%A0%B8%E5%BF%83%E5%B1%80%E9%99%90%E6%80%A7%E4%B8%8E%E4%BD%9C%E7%94%A8"><span class="toc-text">3.3 核心局限性与作用</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E5%9B%9B%E3%80%814-6-4-%E4%B8%BB%E5%AD%98%E7%B3%BB%E7%BB%9F%E7%9A%84%E4%BC%98%E5%8C%96-%E2%80%94-%E5%A4%9A%E4%BD%93%E4%BA%A4%E5%8F%89%E5%AD%98%E5%82%A8%E5%99%A8%EF%BC%882%EF%BC%89%E4%BD%8E%E4%BD%8D%E5%A4%9A%E4%BD%93%E4%BA%A4%E5%8F%89"><span class="toc-text">四、4-6-4 主存系统的优化 — 多体交叉存储器（2）低位多体交叉</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#4-1-%E6%A0%B8%E5%BF%83%E5%AE%9A%E4%B9%89%E4%B8%8E%E8%A7%A3%E5%86%B3%E7%9A%84%E9%97%AE%E9%A2%98"><span class="toc-text">4.1 核心定义与解决的问题</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-2-%E5%9C%B0%E5%9D%80%E7%BB%93%E6%9E%84%E4%B8%8E%E5%88%86%E9%85%8D%EF%BC%88%E7%BB%93%E5%90%88%E4%BE%8B%E9%A2%98%EF%BC%89"><span class="toc-text">4.2 地址结构与分配（结合例题）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#%E4%BE%8B%E9%A2%98%EF%BC%9A4%E4%B8%AA%E6%A8%A1%E5%9D%97%EF%BC%88M%E2%82%80-M%E2%82%83%EF%BC%89%EF%BC%8C%E6%AF%8F%E4%B8%AA%E6%A8%A1%E5%9D%978%E4%B8%AA%E5%AD%98%E5%82%A8%E5%8D%95%E5%85%83%EF%BC%88%E6%80%BB%E5%AE%B9%E9%87%8F32%E5%8D%95%E5%85%83%EF%BC%8C5%E4%BD%8D%E5%9C%B0%E5%9D%80%EF%BC%89"><span class="toc-text">例题：4个模块（M₀~M₃），每个模块8个存储单元（总容量32单元，5位地址）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-3-%E5%B9%B6%E8%A1%8C%E8%AE%BF%E9%97%AE%E5%8E%9F%E7%90%86%EF%BC%88%E5%85%B3%E9%94%AE%E4%BC%98%E5%8A%BF%EF%BC%89"><span class="toc-text">4.3 并行访问原理（关键优势）</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#4-4-%E5%B1%80%E9%99%90%E6%80%A7"><span class="toc-text">4.4 局限性</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%94%E3%80%81%E5%9B%9B%E7%A7%8D%E4%BC%98%E5%8C%96%E6%96%B9%E6%B3%95%E5%AF%B9%E6%AF%94%E6%80%BB%E7%BB%93"><span class="toc-text">五、四种优化方法对比总结</span></a></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="solitude fas fa-map"></i><span>最近发布</span></div><div class="aside-list"><a class="aside-list-item" href="/2026/01/06/Udemy%20TS/ts%E7%AC%94%E8%AE%B0/" title="TypeScript笔记"><div class="content"><span class="title" href="/2026/01/06/Udemy%20TS/ts%E7%AC%94%E8%AE%B0/" title="TypeScript笔记">TypeScript笔记</span><span class="categories" href="/2026/01/06/Udemy%20TS/ts%E7%AC%94%E8%AE%B0/">编程</span></div></a><a class="aside-list-item" href="/2026/01/06/Udemy%20JS/099%20Primitives%20vs.%20Objects%20(Primitive%20vs.%20Reference%20Types)%20/" title="基本类型与对象类型"><div class="content"><span class="title" href="/2026/01/06/Udemy%20JS/099%20Primitives%20vs.%20Objects%20(Primitive%20vs.%20Reference%20Types)%20/" title="基本类型与对象类型">基本类型与对象类型</span><span class="categories" href="/2026/01/06/Udemy%20JS/099%20Primitives%20vs.%20Objects%20(Primitive%20vs.%20Reference%20Types)%20/">前端</span></div></a><a class="aside-list-item" href="/2026/01/06/Udemy%20JS/103%20Destructuring%20Arrays%EF%BC%89%E7%AC%94%E8%AE%B0/" title="数组解构"><div class="content"><span class="title" href="/2026/01/06/Udemy%20JS/103%20Destructuring%20Arrays%EF%BC%89%E7%AC%94%E8%AE%B0/" title="数组解构">数组解构</span><span class="categories" href="/2026/01/06/Udemy%20JS/103%20Destructuring%20Arrays%EF%BC%89%E7%AC%94%E8%AE%B0/">前端</span></div></a><a class="aside-list-item" href="/2026/01/06/Udemy%20JS/104%20Destructuring%20Objects%EF%BC%88%E5%AF%B9%E8%B1%A1%E8%A7%A3%E6%9E%84%EF%BC%89/" title="对象解构"><div class="content"><span class="title" href="/2026/01/06/Udemy%20JS/104%20Destructuring%20Objects%EF%BC%88%E5%AF%B9%E8%B1%A1%E8%A7%A3%E6%9E%84%EF%BC%89/" title="对象解构">对象解构</span><span class="categories" href="/2026/01/06/Udemy%20JS/104%20Destructuring%20Objects%EF%BC%88%E5%AF%B9%E8%B1%A1%E8%A7%A3%E6%9E%84%EF%BC%89/">前端</span></div></a><a class="aside-list-item" href="/2026/01/06/Udemy%20JS/098%20Regular%20Functions%20vs.%20Arrow%20Functions%EF%BC%88%E5%B8%B8%E8%A7%84%E5%87%BD%E6%95%B0%E4%B8%8E%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%EF%BC%89/" title="常规函数与箭头函数"><div class="content"><span class="title" href="/2026/01/06/Udemy%20JS/098%20Regular%20Functions%20vs.%20Arrow%20Functions%EF%BC%88%E5%B8%B8%E8%A7%84%E5%87%BD%E6%95%B0%E4%B8%8E%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%EF%BC%89/" title="常规函数与箭头函数">常规函数与箭头函数</span><span class="categories" href="/2026/01/06/Udemy%20JS/098%20Regular%20Functions%20vs.%20Arrow%20Functions%EF%BC%88%E5%B8%B8%E8%A7%84%E5%87%BD%E6%95%B0%E4%B8%8E%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%EF%BC%89/">前端</span></div></a></div></div></div></div></main><footer id="footer"><div id="footer_deal"><a class="deal_link" target="_blank" rel="noopener" href="https://github.com/woodfishhhh" title="Github"><i class="solitude  fab fa-github"></i></a><a class="deal_link" href="https://www.woodfishhhh.xyz/images/d8d58d2f2c7ac5790fd37f388da41db4.png?_t=1759286665402" title="Email"><i class="solitude  far fa-envelope"></i></a><div><div class="nolazyload footer_mini_logo" id="footer_mini_logo" title="返回顶部" onclick="sco.toTop()"><img src= "" data-lazy-src="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg" alt="返回顶部"></div></div><a class="deal_link" target="_blank" rel="noopener" href="https://space.bilibili.com/359728114" title="Bilibili"><i class="solitude  fab fa-bilibili"></i></a><a class="deal_link" target="_blank" rel="noopener" href="https://www.douyin.com/user/MS4wLjABAAAAgbOrIhdi7Rl5RfaQ3fE3i7c2WnyR3zEOyLiK2Cjtcqk?from_tab_name=main" title="Douyin"><i class="solitude  fab fa-tiktok"></i></a></div><div><div id="st-footer"><div class="footer-group"><h3 class="footer-title">导航</h3><div class="footer-links"><a class="footer-item" href="/archives/" title="Archives">Archives</a><a class="footer-item" href="/categories/" title="Categories">Categories</a><a class="footer-item" href="/tags/" title="Tags">Tags</a></div></div><div class="footer-group"><h3 class="footer-title">排列</h3><div class="footer-links"><a class="footer-item" href="/about/" title="About">About</a><a class="footer-item" href="/link/" title="Friends">Friends</a></div></div><div class="footer-group"><div class="footer-title-group"><h3 class="footer-title">友链</h3><button class="random-friends-btn" onclick="randomLinksList()" title="友链"><i class="solitude fas fa-arrows-rotate"></i></button></div><div class="footer-links" id="friend-links-in-footer"></div></div></div></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div class="copyright">© 2025 - 2026 By<a class="footer-bar-link" href="/" title="woodfish">woodfish</a></div><div class="beian-group"><div></div><a class="footer-bar-link" target="_blank" rel="noopener" href="https://hexo.io/" title="框架：Hexo">框架：Hexo</a><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/everfu/hexo-theme-solitude" title="主题：Solitude">主题：Solitude</a></div></div><div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/everfu/hexo-theme-solitude" title="">主题</a><a class="footer-bar-link" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" title="">License</a></div></div></div></div><div class="comment-barrage needEndHide"></div></footer></div><div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="solitude fas fa-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="solitude fas fa-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="solitude fas fa-arrows-rotate"></i></div><div class="rightMenu-item" id="menu-top"><i class="solitude fas fa-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="solitude fas fa-clone"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="solitude fas fa-clipboard"></i><span>粘贴文本</span></div><div class="rightMenu-item" id="menu-newwindow"><i class="solitude far fa-window-maximize"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="solitude fas fa-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="solitude fas fa-clone"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="solitude fas fa-cloud-arrow-down"></i><span>下载此图片</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><div class="rightMenu-item" id="menu-randomPost" onclick="toRandomPost()||rm.hideRightMenu()"><i class="solitude fas fa-tower-broadcast"></i><span>随机文章</span></div><div class="rightMenu-item" onclick="pjax.loadUrl('/categories/')||rm.hideRightMenu()"><i class="solitude fas fa-clone"></i><span>全部分类</span></div><div class="rightMenu-item" onclick="pjax.loadUrl('/tags/')||rm.hideRightMenu()"><i class="solitude fas fa-tags"></i><span>全部标签</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><div class="rightMenu-item" id="menu-darkmode" onclick="sco.switchDarkMode()"><i class="solitude fas fa-circle-half-stroke"></i><span class="menu-darkmode-text">浅色模式</span></div><div class="rightMenu-item" id="menu-translate"><i class="solitude fas fa-language"></i><span>轉為繁體</span></div></div></div><div id="rightmenu-mask"></div></div><div><!-- Critical scripts loaded synchronously--><script src="/js/utils.js?v=3.0.20"></script><script src="/js/main.js?v=3.0.20"></script><!-- Non-critical scripts loaded asynchronously--><script async src="/js/third_party/waterfall.min.js?v=3.0.20"></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><!-- Feature-specific scripts loaded asynchronously--><script defer src="/js/third_party/universe.min.js?v=3.0.20"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  if (typeof dark === 'function') dark();
+});
+</script><script defer src="/js/tw_cn.js?v=3.0.20"></script><!-- UI enhancement scripts--><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.iife.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><!-- Music player scripts--><!-- Cover color processing scripts--><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+utils.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+</script><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!-- Search functionality--><!-- Right menu functionality--><script defer src="/js/right_menu.js?v=3.0.20"></script><div class="js-pjax"><script defer pjax src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.min.js"></script></div></div><!-- pjax--><script>let pjax = null;
+
+function initPjax() {
+    if (typeof Pjax === 'undefined') {
+        console.warn('Pjax is not loaded yet, retrying...');
+        setTimeout(initPjax, 100);
+        return;
+    }
+
+    pjax = new Pjax({
+        elements: 'a:not([target="_blank"])',
+        selectors: ["title","#body-wrap","#site-config","meta[name=\"description\"]",".js-pjax","meta[property^=\"og:\"]","#config-diff",".rs_show",".rs_hide"],
+        cacheBust: false,
+        analytics: false,
+        scrollRestoration: false
+    })
+
+    // 将 pjax 实例挂载到全局
+    window.pjax = pjax;
+
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+        const newScript = document.createElement('script')
+        const content = item.text || item.textContent || item.innerHTML || ""
+        Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+        newScript.appendChild(document.createTextNode(content))
+        item.parentNode.replaceChild(newScript, item)
+    })
+
+    document.addEventListener('pjax:complete', () => {
+        window.refreshFn()
+
+        document.querySelectorAll('script[data-pjax]').forEach(item => {
+            const newScript = document.createElement('script')
+            const content = item.text || item.textContent || item.innerHTML || ""
+            Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+            newScript.appendChild(document.createTextNode(content))
+            item.parentNode.replaceChild(newScript, item)
+        })
+
+        GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+    })
+
+    document.addEventListener('pjax:error', (e) => {
+        if (e.request.status === 404) {
+            pjax.loadUrl('/404.html')
+        }
+    })
+}
+
+// 初始化 Pjax
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPjax);
+} else {
+    initPjax();
+}</script><!-- google adsense--></body></html>
+        <script>
+            const posts = ["2026/01/06/Udemy TS/ts笔记/","2026/01/06/Udemy JS/099 Primitives vs. Objects (Primitive vs. Reference Types) /","2026/01/06/Udemy JS/103 Destructuring Arrays）笔记/","2026/01/06/Udemy JS/104 Destructuring Objects（对象解构）/","2026/01/06/Udemy JS/098 Regular Functions vs. Arrow Functions（常规函数与箭头函数）/","2026/01/06/Udemy JS/105 JavaScript 扩展运算符（...）/","2026/01/06/Udemy JS/106 Rest Pattern and Parameters/","2026/01/06/Udemy JS/108 空值合并运算符（Nullish Coalescing Operator）/","2026/01/06/Udemy JS/109 Logical Assignment Operators）/","2026/01/06/Udemy JS/111 for-of 循环笔记/","2026/01/06/Udemy JS/112 Enhanced Object Literals（ES6 增强对象字面量）/","2026/01/06/Udemy JS/113 可选链（Optional Chaining）笔记/","2026/01/06/Udemy JS/112 JavaScript数组方法(forEach, map, filter, reduce等)/","2026/01/06/Udemy JS/231 How to Plan a Web Project /","2026/01/06/Udemy JS/256 JavaScript 异步编程核心笔记/","2026/01/06/Udemy JS/258 The Event Loop in Practice/","2026/01/06/Udemy JS/262 Consuming Promises with Async_Await/","2026/01/06/Udemy JS/263 Error Handling With try...catch/","2026/01/06/Udemy JS/268-280 现代js开发/","2026/01/06/Udemy JS/264 Returning Values from Async Functions/","2026/01/06/杂项/Udemy Vue/","2026/01/06/杂项/new JS/","2026/01/06/杂项/数据结构期末速通/","2026/01/06/杂项/管理模拟卷/","2026/01/06/杂项/马原模拟卷/","2026/01/06/前端/AJAX基础入门教程/","2026/01/06/题解/Day5题解/","2026/01/06/题解/E题超详解：帮哈基鱼算标签/","2026/01/06/题解/F. Beautiful Intervals/","2026/01/06/题解/JUFE国庆新生编程语法培训/","2026/01/06/计算机网络/划分子网/","2026/01/06/计算机网络/最长前缀匹配原则/","2026/01/06/计算机网络/计算机网络第一章：概论/","2026/01/06/计算机网络/计算机网络第二章：物理层/","2026/01/06/计算机网络/计算机网络第三章：链路层/","2026/01/06/计算机网络/计算机网络第五章：运输层/","2026/01/06/计算机网络/计算机网络第六章：应用层/","2026/01/06/计算机组成原理/加减乘除/","2026/01/06/计算机组成原理/Cache缓存/","2026/01/06/计算机组成原理/存储器，主存扩展/","2026/01/06/计算机组成原理/指令系统/","2026/01/06/计算机组成原理/数据的表示/","2026/01/06/计算机组成原理/计算机存储器/","2025/10/21/计算机网络/计算机网络第四章：网络层/","2025/10/21/计算机网络/计算机网络第四章：网络层（edit）/","2025/09/11/前端/Day04_AJAX进阶/","2025/09/10/前端/Day03_AJAX原理/","2025/09/09/前端/Day02_AJAX综合案例/","2025/09/08/前端/Day01_AJAX入门/","2025/08/25/Linux/Linux课程笔记/","2025/08/13/前端/js易错点/","2025/08/11/前端/JavaScript 学习笔记（9）：深浅拷贝、异常处理、this 指向与防抖节流/","2025/08/03/前端/JavaScript 学习笔记（8）：面向对象编程与原型机制详解/","2025/08/02/前端/JavaScript 学习笔记（7）：面向对象与内置构造函数/","2025/07/31/前端/JavaScript 学习笔记（6）：作用域、闭包与函数进阶/","2025/07/28/前端/Web API 学习笔记（6）：正则表达式与表单验证/","2025/07/27/前端/Web API 学习笔记（5）：BOM 操作与本地存储/","2025/07/26/前端/Web API 学习笔记（4）：Date 对象与 DOM-节点操作要点/","2025/07/23/前端/Web API 学习笔记（3）：事件流与事件委托/","2025/07/22/前端/Web API 学习笔记（2）：事件处理与-this-指向/","2025/07/21/前端/Web API 学习笔记（1）：DOM 基础操作/","2025/07/20/前端/JavaScript 学习笔记（5）：对象数据类型与内置数学对象/","2025/07/19/前端/JavaScript 学习笔记（4）：函数封装与对象基础/","2025/07/18/前端/JavaScript 学习笔记（3）：数组的增删操作方法详解/","2025/07/17/前端/JavaScript 学习笔记（2）：运算符、语句与综合案例/","2025/07/17/前端/JavaScript 学习笔记（1）：基础语法与数据类型/","2025/07/15/前端/CSS 学习笔记（12）：响应式布局与 Bootstrap 框架应用/","2025/07/14/前端/CSS 学习笔记（11）：移动 Web 开发之 vw 适配与酷我音乐案例实践/","2025/07/13/前端/CSS 学习笔记（10）：移动 Web 开发基础与 rem 布局、Less 预处理器/","2025/07/12/前端/CSS 学习笔记（9）：移动 Web 开发之空间转换与动画效果/","2025/07/11/前端/CSS 学习笔记（8）：移动 Web 开发之平面转换与渐变效果/","2025/07/10/前端/小兔仙/","2025/07/08/前端/学成在线/","2025/07/08/前端/CSS 学习笔记（6）：小兔鲜儿项目搭建及基础配置（目录结构、SEO 标签、版心设置）/","2025/07/04/前端/CSS我的易错点/","2025/07/03/前端/CSS 学习笔记（7）：CSS 优先级叠加计算规则详解/","2025/07/02/前端/CSS 学习笔记（5）：定位模式、CSS 精灵、字体图标及过渡效果应用/","2025/06/30/前端/CSS 学习笔记（4）：浮动布局与 Flex 弹性布局详解及应用案例/","2025/06/27/前端/CSS 学习笔记（3）：伪类与伪元素选择器、盒子模型及相关特性详解/","2025/06/24/前端/CSS 学习笔记（2）：复合选择器、CSS 特性及背景与显示模式设置/","2025/06/23/前端/CSS 学习笔记（1）：引入方式、选择器及文字样式控制/","2025/06/23/前端/HTML 学习笔记（2）：列表、表格、表单及布局标签详解/","2025/06/22/前端/HTML 学习笔记（1）：核心标签、文档结构及多媒体应用/","2025/06/19/JAVA/Java期末复习重点易错点/","2025/06/18/杂项/中国近代史复习重点/","2025/06/03/JAVA/Java的final/","2025/06/03/JAVA/Java的继承/","2025/06/03/JAVA/Java的多态/","2025/05/27/JAVA/Java的List集合/","2025/05/27/JAVA/Java的Collection集合/","2025/05/27/JAVA/Java的包装类/","2025/05/15/JAVA/Java的内部类/","2025/05/15/JAVA/Java的抽象与接口类/"];
+            function toRandomPost() {
+                const randomPost = posts[Math.floor(Math.random() * posts.length)];
+                pjax.loadUrl(GLOBAL_CONFIG.root + randomPost);
+            }
+        </script>
