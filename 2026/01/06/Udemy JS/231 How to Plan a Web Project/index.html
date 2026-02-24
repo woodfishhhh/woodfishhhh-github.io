@@ -1,0 +1,443 @@
+<!DOCTYPE html><html lang="zh-Hans" data-theme="light"><head><meta charset="utf-8"><meta http-equiv="X-UA-Compatible" content="IE=edge"><meta name="viewport" content="width=device-width, initial-scale=1"><title>如何规划Web项目 | 木鱼的鱼窝</title><noscript>开启JavaScript才能访问本站哦~</noscript><link rel="icon" href="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg"><link rel="stylesheet" href="/css/index.css?v=3.0.20"><link rel="canonical" href="https://www.woodfishhhh.xyz/2026/01/06/Udemy%20JS/231%20How%20to%20Plan%20a%20Web%20Project/index.html"><link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.7.2/css/all.min.css"><!-- Feature-specific CSS--><!-- aplayer--><!-- swiper--><!-- fancybox ui--><!-- katex--><!-- Open Graph--><meta name="description" content="231 How to Plan a Web Project 笔记 一、项目规划的重要性（核心前提） 1.1 规划的必要性  对复杂项目（如本课程的 Mapty 锻炼记录项目）而言，编码前规划可避免后续代码混乱、功能遗漏等问题。 此前课程项目多直接编码，未深入考虑功能逻辑与架构设计，而实际开发中 “先规划再开发” 是标准流程，能减少返工成本。  1.2 规划的适用场景  适用于中小型 Web 项目（">
+<meta property="og:type" content="article">
+<meta property="og:title" content="如何规划Web项目">
+<meta property="og:url" content="https://www.woodfishhhh.xyz/2026/01/06/Udemy%20JS/231%20How%20to%20Plan%20a%20Web%20Project/index.html">
+<meta property="og:site_name" content="木鱼的鱼窝">
+<meta property="og:description" content="231 How to Plan a Web Project 笔记 一、项目规划的重要性（核心前提） 1.1 规划的必要性  对复杂项目（如本课程的 Mapty 锻炼记录项目）而言，编码前规划可避免后续代码混乱、功能遗漏等问题。 此前课程项目多直接编码，未深入考虑功能逻辑与架构设计，而实际开发中 “先规划再开发” 是标准流程，能减少返工成本。  1.2 规划的适用场景  适用于中小型 Web 项目（">
+<meta property="og:locale">
+<meta property="og:image" content="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg">
+<meta property="article:published_time" content="2026-01-06T15:39:48.000Z">
+<meta property="article:modified_time" content="2026-01-22T07:17:45.363Z">
+<meta property="article:author" content="woodfish">
+<meta property="article:tag" content="项目管理">
+<meta property="article:tag" content="Web开发">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg"><!-- pwa--><meta name="apple-mobile-web-app-capable" content="木鱼的鱼窝"><meta name="theme-color" content="var(--efu-main)"><meta name="apple-mobile-web-app-status-bar-style" content="var(--efu-main)"><link rel="bookmark" href="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg"><link rel="apple-touch-icon" href="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg" sizes="180x180"><script>console.log(' %c Solitude %c ' + '3.0.20' + ' %c https://github.com/everfu/hexo-theme-solitude',
+    'background:#35495e ; padding: 1px; border-radius: 3px 0 0 3px;  color: #fff',
+    'background:#ff9a9a ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff',
+    'background:unset ; padding: 1px; border-radius: 0 3px 3px 0;  color: #fff')
+</script><script>(()=>{
+        const saveToLocal = {
+            set: function setWithExpiry(key, value, ttl) {
+                if (ttl === 0)
+                    return
+                const now = new Date()
+                const expiryDay = ttl * 86400000
+                const item = {
+                    value: value,
+                    expiry: now.getTime() + expiryDay
+                }
+                localStorage.setItem(key, JSON.stringify(item))
+            },
+            get: function getWithExpiry(key) {
+                const itemStr = localStorage.getItem(key)
+
+                if (!itemStr) {
+                    return undefined
+                }
+                const item = JSON.parse(itemStr)
+                const now = new Date()
+
+                if (now.getTime() > item.expiry) {
+                    localStorage.removeItem(key)
+                    return undefined
+                }
+                return item.value
+            }
+        };
+        window.utils = {
+            saveToLocal: saveToLocal,
+            getCSS: (url, id = false) => new Promise((resolve, reject) => {
+              const link = document.createElement('link')
+              link.rel = 'stylesheet'
+              link.href = url
+              if (id) link.id = id
+              link.onerror = reject
+              link.onload = link.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                link.onload = link.onreadystatechange = null
+                resolve()
+              }
+              document.head.appendChild(link)
+            }),
+            getScript: (url, attr = {}) => new Promise((resolve, reject) => {
+              const script = document.createElement('script')
+              script.src = url
+              script.async = true
+              script.onerror = reject
+              script.onload = script.onreadystatechange = function() {
+                const loadState = this.readyState
+                if (loadState && loadState !== 'loaded' && loadState !== 'complete') return
+                script.onload = script.onreadystatechange = null
+                resolve()
+              }
+
+              Object.keys(attr).forEach(key => {
+                script.setAttribute(key, attr[key])
+              })
+
+              document.head.appendChild(script)
+            }),
+            addGlobalFn: (key, fn, name = false, parent = window) => {
+                const globalFn = parent.globalFn || {}
+                const keyObj = globalFn[key] || {}
+
+                if (name && keyObj[name]) return
+
+                name = name || Object.keys(keyObj).length
+                keyObj[name] = fn
+                globalFn[key] = keyObj
+                parent.globalFn = globalFn
+            },
+            addEventListenerPjax: (ele, event, fn, option = false) => {
+              ele.addEventListener(event, fn, option)
+              utils.addGlobalFn('pjax', () => {
+                  ele.removeEventListener(event, fn, option)
+              })
+            },
+            diffDateFormat: (selector) => {
+                selector.forEach(item => {
+                    const date = new Date(item.getAttribute('datetime') || item.textContent);
+                    item.textContent = (date.getMonth() + 1).toString()+'/'+date.getDate().toString();
+                });
+            },
+        }
+    })()</script><!-- theme--><script>initTheme = () => {
+    const cachedMode = utils.saveToLocal.get('theme');
+    if (cachedMode === undefined)
+        document.documentElement.setAttribute('data-theme', 'dark');
+    else
+        document.documentElement.setAttribute('data-theme', cachedMode);
+    typeof rm === 'object' && rm.mode(cachedMode === undefined || cachedMode === 'dark')
+}
+initTheme()</script><script>const GLOBAL_CONFIG = {
+    root: '/',
+    algolia: undefined,
+    localsearch: undefined,
+    runtime: '2025-06-02 00:00:00',
+    lazyload: {
+        enable: true,
+        error: 'https://pic1.imgdb.cn/item/684818ef58cb8da5c8419e1e.png'
+    },
+    copyright: {"limit":50,"author":"作者: woodfish","link":"链接: ","source":"来源: 木鱼的鱼窝","info":"著作权归作者所有。 商业转载请联系作者获得授权，非商业转载请注明出处。"},
+    highlight: {"limit":200,"expand":true,"copy":true,"syntax":"highlight.js"},
+    randomlink: false,
+    lang: {"theme":{"dark":"已切换至深色模式","light":"已切换至浅色模式"},"copy":{"success":"复制成功","error":"复制失败"},"backtop":"返回顶部","time":{"day":"天前","hour":"小时前","just":"刚刚","min":"分钟前","month":"个月前"},"day":" 天","f12":"开发者模式已打开，请遵循GPL协议。","totalk":"无需删除空行，直接输入评论即可"},
+    aside: {
+        state: {
+            morning: "✨ 早上好，新的一天开始了",
+            noon: "🍲 午餐时间",
+            afternoon: "🌞 下午好",
+            night: "早点休息",
+            goodnight: "晚安 😴",
+        },
+        witty_words: [],
+        witty_comment: {
+            prefix: '好久不见，',
+            back: '欢迎再次回来，',
+        },
+    },
+    covercolor: {
+        enable: false
+    },
+    comment: false,
+    lightbox: 'null',
+    right_menu: {"mode":{"dark":"深色模式","light":"浅色模式"},"img_error":"此图片无法复制与下载","translate":true},
+    translate: {"translateDelay":0,"defaultEncoding":2},
+    lure: false,
+    expire: false,
+};</script><script id="config-diff">var PAGE_CONFIG = {
+    is_post: true,
+    is_page: false,
+    is_home: false,
+    page: '',
+    toc: true,
+    comment: false,
+    ai_text: false,
+    color: false,
+}</script><meta name="generator" content="Hexo 7.3.0"></head><body id="body"><div><canvas id="universe"></canvas></div><div><div id="loading-box" onclick="preloader.endLoading();" style="zoom:1"><div class="loading-bg"><img class="loading-img nolazyload" src="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg" alt="loading image"></div></div><script>const preloader = {
+    isLoaded: false,
+    endLoading: () => {
+        if (!preloader.isLoaded) {
+            document.getElementById('loading-box').classList.add('loaded');
+            preloader.isLoaded = true;
+            preloader.togglePaceDone();
+        }
+    },
+    initLoading: () => {
+        document.getElementById('loading-box').classList.remove('loaded');
+        preloader.isLoaded = false;
+        preloader.togglePaceDone();
+    },
+    togglePaceDone: () => {
+        document.getElementById('body').className = preloader.isLoaded ? 'pace-done' : '';
+    }
+}
+
+window.addEventListener('load', () => {
+    preloader.endLoading();
+});
+
+window.addEventListener('pjax:send', () => {
+    preloader.initLoading();
+});
+
+document.addEventListener('pjax:complete', () => {
+    preloader.endLoading();
+});
+
+setTimeout(() => {
+    preloader.endLoading();
+}, 5000);</script></div><div><div id="console"><div class="close-btn" onclick="sco.hideConsole()"><i class="solitude fas fa-xmark"></i></div><div class="console-card-group"><div class="console-card-group-right"><div class="console-card tags" onclick="sco.hideConsole()"><div class="card-content"><div class="author-content-item-tips">标签</div><div class="author-content-item-title">寻找感兴趣的领域</div></div><div class="card-tag-cloud"><a href="/tags/JavaScript/">JavaScript<sup>37</sup></a><a href="/tags/%E5%87%BD%E6%95%B0/">函数<sup>1</sup></a><a href="/tags/Linux/">Linux<sup>1</sup></a><a href="/tags/ES6/">ES6<sup>5</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">数据类型<sup>1</sup></a><a href="/tags/ES2020/">ES2020<sup>2</sup></a><a href="/tags/ES2021/">ES2021<sup>1</sup></a><a href="/tags/%E5%BE%AA%E7%8E%AF/">循环<sup>1</sup></a><a href="/tags/%E6%95%B0%E7%BB%84/">数组<sup>1</sup></a><a href="/tags/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/">事件循环<sup>1</sup></a><a href="/tags/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/">异步编程<sup>1</sup></a><a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/">项目管理<sup>1</sup></a><a href="/tags/Web%E5%BC%80%E5%8F%91/">Web开发<sup>1</sup></a><a href="/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理<sup>1</sup></a><a href="/tags/%E5%BC%82%E6%AD%A5/">异步<sup>2</sup></a><a href="/tags/Java/">Java<sup>9</sup></a><a href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/">期末复习<sup>2</sup></a><a href="/tags/%E7%8E%B0%E4%BB%A3%E5%BC%80%E5%8F%91/">现代开发<sup>1</sup></a><a href="/tags/Vue/">Vue<sup>1</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/">前端框架<sup>1</sup></a><a href="/tags/TypeScript/">TypeScript<sup>1</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF/">前端<sup>1</sup></a><a href="/tags/C/">C++<sup>1</sup></a><a href="/tags/%E7%AE%97%E6%B3%95/">算法<sup>5</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构<sup>1</sup></a><a href="/tags/%E7%AE%A1%E7%90%86%E5%AD%A6/">管理学<sup>1</sup></a><a href="/tags/%E6%A8%A1%E6%8B%9F%E5%8D%B7/">模拟卷<sup>2</sup></a><a href="/tags/%E9%A9%AC%E5%85%8B%E6%80%9D%E4%B8%BB%E4%B9%89/">马克思主义<sup>1</sup></a><a href="/tags/AJAX/">AJAX<sup>1</sup></a><a href="/tags/HTTP/">HTTP<sup>1</sup></a><a href="/tags/CSS/">CSS<sup>15</sup></a><a href="/tags/HTML/">HTML<sup>17</sup></a><a href="/tags/web/">web<sup>11</sup></a><a href="/tags/Ajax/">Ajax<sup>4</sup></a><a href="/tags/%E9%A2%98%E8%A7%A3/">题解<sup>3</sup></a><a href="/tags/%E7%BC%96%E7%A8%8B/">编程<sup>1</sup></a><a href="/tags/%E5%9F%B9%E8%AE%AD/">培训<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">计算机组成原理<sup>6</sup></a><a href="/tags/%E7%BC%93%E5%AD%98/">缓存<sup>1</sup></a><a href="/tags/%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97/">算术运算<sup>1</sup></a><a href="/tags/%E5%AD%98%E5%82%A8%E5%99%A8/">存储器<sup>2</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A4%BA/">数据表示<sup>1</sup></a><a href="/tags/%E6%8C%87%E4%BB%A4%E7%B3%BB%E7%BB%9F/">指令系统<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络<sup>7</sup></a><a href="/tags/%E8%B7%AF%E7%94%B1/">路由<sup>1</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/">网络层<sup>1</sup></a><a href="/tags/%E6%A6%82%E8%AE%BA/">概论<sup>1</sup></a><a href="/tags/%E7%89%A9%E7%90%86%E5%B1%82/">物理层<sup>1</sup></a><a href="/tags/%E9%93%BE%E8%B7%AF%E5%B1%82/">链路层<sup>1</sup></a><a href="/tags/%E8%BF%90%E8%BE%93%E5%B1%82/">运输层<sup>1</sup></a><a href="/tags/%E5%BA%94%E7%94%A8%E5%B1%82/">应用层<sup>1</sup></a></div></div><div class="console-card history" onclick="sco.hideConsole()"><ul class="card-archive-list"><li class="item"><a href="/archives/2026/01/"><span class="date">2026/01</span><div class="count-group"><span class="count">43</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/10/"><span class="date">2025/10</span><div class="count-group"><span class="count">2</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/09/"><span class="date">2025/09</span><div class="count-group"><span class="count">4</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/08/"><span class="date">2025/08</span><div class="count-group"><span class="count">5</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/07/"><span class="date">2025/07</span><div class="count-group"><span class="count">23</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/06/"><span class="date">2025/06</span><div class="count-group"><span class="count">11</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/2025/05/"><span class="date">2025/05</span><div class="count-group"><span class="count">5</span><span class="unit">篇</span></div></a></li><li class="item"><a href="/archives/"><span class="date">全部文章</span><div class="count-group"><span class="count">93</span><span class="unit">篇</span></div></a></li></ul></div></div></div><div class="button-group"><div class="console-btn-item"><span class="darkmode_switchbutton" onclick="sco.switchDarkMode()" title="昼夜切换"><i class="solitude fas fa-circle-half-stroke"></i></span></div><div class="console-btn-item" id="consoleHideAside"><span class="asideSwitch" onclick="sco.switchHideAside()" title="边栏显示控制"><i class="solitude fas fa-arrows-left-right-to-line"></i></span></div></div><div class="console-mask" onclick="sco.hideConsole()"></div></div></div><div id="sidebar" style="zoom: 1;"><div id="menu-mask" style="display: none;"></div><div id="sidebar-menus"><div class="site-data"><div class="data-item is-center"><div class="data-item-link"><a href="/archives/"><div class="headline">文章</div><div class="length-num">93</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/categories/"><div class="headline">分类</div><div class="length-num">5</div></a></div></div><div class="data-item is-center"><div class="data-item-link"><a href="/tags/"><div class="headline">标签</div><div class="length-num">51</div></a></div></div></div><span class="sidebar-menu-item-title">功能</span><div class="sidebar-menu-item"><span class="darkmode_switchbutton menu-child" onclick="sco.switchDarkMode()"><i class="solitude fas fa-circle-half-stroke"></i><span>显示模式</span></span></div><div class="back-menu-list-groups"><div class="back-menu-list-group"><div class="back-menu-list-title">网页</div><div class="back-menu-list"><a class="back-menu-item" href="https://www.woodfishhhh.xyz/" title="woodfishhhh博客"><img class="nolazyload back-menu-item-icon" src="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg" alt="woodfishhhh博客"><span class="back-menu-item-text">woodfishhhh博客</span></a></div></div></div><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span>主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><span>标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><span>分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><span>友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span>关于我</span></a></div></div><span class="sidebar-menu-item-title">标签</span><div class="card-tags"><div class="card-tag-cloud"><a href="/tags/JavaScript/">JavaScript<sup>37</sup></a><a href="/tags/%E5%87%BD%E6%95%B0/">函数<sup>1</sup></a><a href="/tags/Linux/">Linux<sup>1</sup></a><a href="/tags/ES6/">ES6<sup>5</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%B1%BB%E5%9E%8B/">数据类型<sup>1</sup></a><a href="/tags/ES2020/">ES2020<sup>2</sup></a><a href="/tags/ES2021/">ES2021<sup>1</sup></a><a href="/tags/%E5%BE%AA%E7%8E%AF/">循环<sup>1</sup></a><a href="/tags/%E6%95%B0%E7%BB%84/">数组<sup>1</sup></a><a href="/tags/%E4%BA%8B%E4%BB%B6%E5%BE%AA%E7%8E%AF/">事件循环<sup>1</sup></a><a href="/tags/%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B/">异步编程<sup>1</sup></a><a href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/">项目管理<sup>1</sup></a><a href="/tags/Web%E5%BC%80%E5%8F%91/">Web开发<sup>1</sup></a><a href="/tags/%E5%BC%82%E5%B8%B8%E5%A4%84%E7%90%86/">异常处理<sup>1</sup></a><a href="/tags/%E5%BC%82%E6%AD%A5/">异步<sup>2</sup></a><a href="/tags/Java/">Java<sup>9</sup></a><a href="/tags/%E6%9C%9F%E6%9C%AB%E5%A4%8D%E4%B9%A0/">期末复习<sup>2</sup></a><a href="/tags/%E7%8E%B0%E4%BB%A3%E5%BC%80%E5%8F%91/">现代开发<sup>1</sup></a><a href="/tags/Vue/">Vue<sup>1</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF%E6%A1%86%E6%9E%B6/">前端框架<sup>1</sup></a><a href="/tags/TypeScript/">TypeScript<sup>1</sup></a><a href="/tags/%E5%89%8D%E7%AB%AF/">前端<sup>1</sup></a><a href="/tags/C/">C++<sup>1</sup></a><a href="/tags/%E7%AE%97%E6%B3%95/">算法<sup>5</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E7%BB%93%E6%9E%84/">数据结构<sup>1</sup></a><a href="/tags/%E7%AE%A1%E7%90%86%E5%AD%A6/">管理学<sup>1</sup></a><a href="/tags/%E6%A8%A1%E6%8B%9F%E5%8D%B7/">模拟卷<sup>2</sup></a><a href="/tags/%E9%A9%AC%E5%85%8B%E6%80%9D%E4%B8%BB%E4%B9%89/">马克思主义<sup>1</sup></a><a href="/tags/AJAX/">AJAX<sup>1</sup></a><a href="/tags/HTTP/">HTTP<sup>1</sup></a><a href="/tags/CSS/">CSS<sup>15</sup></a><a href="/tags/HTML/">HTML<sup>17</sup></a><a href="/tags/web/">web<sup>11</sup></a><a href="/tags/Ajax/">Ajax<sup>4</sup></a><a href="/tags/%E9%A2%98%E8%A7%A3/">题解<sup>3</sup></a><a href="/tags/%E7%BC%96%E7%A8%8B/">编程<sup>1</sup></a><a href="/tags/%E5%9F%B9%E8%AE%AD/">培训<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BB%84%E6%88%90%E5%8E%9F%E7%90%86/">计算机组成原理<sup>6</sup></a><a href="/tags/%E7%BC%93%E5%AD%98/">缓存<sup>1</sup></a><a href="/tags/%E7%AE%97%E6%9C%AF%E8%BF%90%E7%AE%97/">算术运算<sup>1</sup></a><a href="/tags/%E5%AD%98%E5%82%A8%E5%99%A8/">存储器<sup>2</sup></a><a href="/tags/%E6%95%B0%E6%8D%AE%E8%A1%A8%E7%A4%BA/">数据表示<sup>1</sup></a><a href="/tags/%E6%8C%87%E4%BB%A4%E7%B3%BB%E7%BB%9F/">指令系统<sup>1</sup></a><a href="/tags/%E8%AE%A1%E7%AE%97%E6%9C%BA%E7%BD%91%E7%BB%9C/">计算机网络<sup>7</sup></a><a href="/tags/%E8%B7%AF%E7%94%B1/">路由<sup>1</sup></a><a href="/tags/%E7%BD%91%E7%BB%9C%E5%B1%82/">网络层<sup>1</sup></a><a href="/tags/%E6%A6%82%E8%AE%BA/">概论<sup>1</sup></a><a href="/tags/%E7%89%A9%E7%90%86%E5%B1%82/">物理层<sup>1</sup></a><a href="/tags/%E9%93%BE%E8%B7%AF%E5%B1%82/">链路层<sup>1</sup></a><a href="/tags/%E8%BF%90%E8%BE%93%E5%B1%82/">运输层<sup>1</sup></a><a href="/tags/%E5%BA%94%E7%94%A8%E5%B1%82/">应用层<sup>1</sup></a></div></div></div></div><div><div class="needEndHide" id="rightside"><div class="rs_hide"><button class="translate" type="button" title="简繁转换">简</button><button class="mode" type="button" title="显示模式切换" onclick="sco.switchDarkMode()"><i class="fas fa-circle-half-stroke"></i></button><button class="aside pc" type="button" title="侧边栏" onclick="sco.switchHideAside()"><i class="fas fa-arrows-alt-h"></i></button></div><div class="rs_show"><button class="config" type="button" title="扩展" onclick="document.querySelector(&quot;.rs_hide&quot;).classList.toggle(&quot;show&quot;)"><i class="fas fa-gear fa-spin"></i></button><button class="mobile toc" type="button" title="目录" onclick="document.querySelector('#card-toc').classList.toggle('open')"><i class="fas fa-list"></i></button><button class="top" type="button" title="返回顶部" onclick="sco.toTop()"><i class="fas fa-arrow-up"></i><span id="percent">0</span></button></div></div></div><div class="post" id="body-wrap"><header class="not-top-img" id="page-header"><nav class="show" id="nav"><div id="nav-group"><div id="blog_name"><a href="/" title="返回博客主页" id="site-name"><span class="title">木鱼的鱼窝</span><i class="solitude fas fa-home"></i></a></div><div id="page-name-mask"><div id="page-name"><a id="page-name-text" onclick="sco.toTop()">如何规划Web项目</a></div></div><div id="menus"><div class="menus_items"><div class="menus_item"><a class="site-page" href="/"><span>主页</span></a></div><div class="menus_item"><a class="site-page" href="/tags/"><span>标签</span></a></div><div class="menus_item"><a class="site-page" href="/categories/"><span>分类</span></a></div><div class="menus_item"><a class="site-page" href="/link/"><span>友链</span></a></div><div class="menus_item"><a class="site-page" href="/about/"><span>关于我</span></a></div></div></div><div id="nav-left"></div><div id="nav-right"><div class="nav-button" id="travellings_button"><a class="site-page" target="_blank" rel="noopener" href="https://www.travellings.cn/go.html" onclick="javascript:travelling()" title=""><i class="solitude fas fa-train"></i></a></div><div class="nav-button" id="randomPost_button"><a class="site-page" onclick="toRandomPost()" title="随机一篇文章" href="javascript:void(0);"><i class="solitude fas fa-dice-d6"></i></a></div><div class="nav-button" id="nav-console"><a class="console_switchbutton" onclick="sco.showConsole()" title="中控台" href="javascript:void(0);"><label><i class="left"></i><i class="center"></i><i class="right"></i></label></a></div><div id="toggle-menu"><a class="site-page"><i class="solitude fas fa-bars"></i></a></div></div></div></nav></header><main class="layout" id="content-inner"><div id="post"><div id="post-info"><div id="post-firstinfo"><div class="meta-firstline"><a class="post-meta-original" title="该文章为原创文章，注意版权协议">原创</a><span class="post-meta-categories"><a class="post-meta-categories" href="/categories/%E5%89%8D%E7%AB%AF/">前端</a></span><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/"><span class="tags-name tags-punctuation"><i class="solitude fas fa-hashtag"></i>项目管理</span></a><a class="post-meta__tags" href="/tags/Web%E5%BC%80%E5%8F%91/"><span class="tags-name tags-punctuation"><i class="solitude fas fa-hashtag"></i>Web开发</span></a></div></div></div></div><h1 class="post-title">如何规划Web项目</h1><div id="post-meta"><div class="meta-secondline"><span class="post-meta-date" title="发布于 2026-01-06 23:39:48"><i class="post-meta-icon solitude fas fa-calendar-days"></i><time datetime="2026-01-06T15:39:48.000Z">2026-01-06T15:39:48.000Z</time></span><span class="post-meta-date" title="最后更新于 2026-01-22 15:17:45"><i class="post-meta-icon solitude fas fa-arrows-rotate"></i><time datetime="2026-01-22T07:17:45.363Z">2026-01-22T07:17:45.363Z</time></span></div></div></div><div class="post-radius-bottom"></div><article class="post-content article-container"><h1>231 How to Plan a Web Project 笔记</h1>
+<h2 id="一、项目规划的重要性（核心前提）">一、项目规划的重要性（核心前提）</h2>
+<h3 id="1-1-规划的必要性">1.1 规划的必要性</h3>
+<ul>
+<li>对复杂项目（如本课程的 Mapty 锻炼记录项目）而言，编码前规划可避免后续代码混乱、功能遗漏等问题。</li>
+<li>此前课程项目多直接编码，未深入考虑功能逻辑与架构设计，而实际开发中 “先规划再开发” 是标准流程，能减少返工成本。</li>
+</ul>
+<h3 id="1-2-规划的适用场景">1.2 规划的适用场景</h3>
+<ul>
+<li>适用于<strong>中小型 Web 项目</strong>（本课程推荐流程），大型项目可在此基础上增加需求评审、技术选型评审等环节。</li>
+</ul>
+<h2 id="二、Web-项目规划四步流程（核心方法）">二、Web 项目规划四步流程（核心方法）</h2>
+<h3 id="2-1-第一步：定义用户故事（从用户视角明确功能）">2.1 第一步：定义用户故事（从用户视角明确功能）</h3>
+<h4 id="2-1-1-用户故事的概念">2.1.1 用户故事的概念</h4>
+<ul>
+<li>定义：以用户视角描述应用功能，明确 “谁用、做什么、为什么做”，多个用户故事组合可完整覆盖应用核心能力。</li>
+<li>标准格式：<code>作为[某类用户]，我想[执行某个动作]，以便我可以[获得某种好处]</code>。</li>
+<li>作用：帮助开发者脱离技术视角，聚焦用户真实需求，避免开发 “无用功能”。</li>
+</ul>
+<h4 id="2-1-2-Mapty-项目用户故事实例（结合需求落地）">2.1.2 Mapty 项目用户故事实例（结合需求落地）</h4>
+<table>
+<thead>
+<tr>
+<th>序号</th>
+<th>用户故事内容</th>
+<th>对应核心需求</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>1</td>
+<td>作为用户，我想记录跑步锻炼的位置、距离、时间、步速和每分钟步数，以便保存所有跑步记录</td>
+<td>跑步数据录入与存储</td>
+</tr>
+<tr>
+<td>2</td>
+<td>作为用户，我想记录骑行锻炼的位置、距离、时间、速度和海拔增益，以便保存所有骑行记录</td>
+<td>骑行数据录入与存储（与跑步差异化字段）</td>
+</tr>
+<tr>
+<td>3</td>
+<td>作为用户，我想一目了然查看所有锻炼记录，以便跟踪锻炼进度</td>
+<td>锻炼记录列表展示</td>
+</tr>
+<tr>
+<td>4</td>
+<td>作为用户，我想在地图上查看所有锻炼记录，以便了解锻炼集中区域</td>
+<td>地图可视化锻炼位置</td>
+</tr>
+<tr>
+<td>5</td>
+<td>作为用户，我想在离开应用后再次打开时查看之前的锻炼记录，以便持续使用</td>
+<td>数据持久化存储</td>
+</tr>
+</tbody>
+</table>
+<h4 id="2-1-3-从用户故事推导功能（例题）">2.1.3 从用户故事推导功能（例题）</h4>
+<ul>
+<li>例题：基于 “记录跑步锻炼” 的用户故事，推导需实现的具体功能。</li>
+<li>解析：
+<ol>
+<li>位置记录：需地图组件（支持点击选择锻炼位置）；</li>
+<li>数据录入：需表单（包含距离、时间、步速、每分钟步数输入框）；</li>
+<li>定位优化：需地理定位 API（自动获取用户当前位置，渲染中心地图）；</li>
+<li>数据保存：需本地存储（临时保存跑步记录，避免页面刷新丢失）。</li>
+</ol>
+</li>
+</ul>
+<h3 id="2-2-第二步：绘制流程图（梳理功能逻辑与数据流向）">2.2 第二步：绘制流程图（梳理功能逻辑与数据流向）</h3>
+<h4 id="2-2-1-流程图的核心要素">2.2.1 流程图的核心要素</h4>
+<ul>
+<li>包含内容：待实现功能、模块交互关系、触发事件、数据流向。</li>
+<li>视觉规范（推荐）：
+<ul>
+<li>黄色框：用户或系统触发的 “动作”（如 “点击地图”“提交表单”）；</li>
+<li>绿色框：“界面渲染” 操作（如 “显示地图”“渲染锻炼列表”）；</li>
+<li>红色框：“异步操作”（如 “调用地理定位 API”“读取本地存储”，需等待结果返回）。</li>
+</ul>
+</li>
+</ul>
+<h4 id="2-2-2-Mapty-项目核心流程实例（分场景梳理）">2.2.2 Mapty 项目核心流程实例（分场景梳理）</h4>
+<ol>
+<li><strong>页面加载场景</strong>：
+<ul>
+<li>事件触发：页面首次加载 / 刷新；</li>
+<li>流程：调用地理定位 API（红色，异步）→ 获取用户坐标 → 渲染中心地图（绿色）→ 读取本地存储锻炼数据（红色，异步）→ 渲染锻炼列表 + 地图标记（绿色）。</li>
+</ul>
+</li>
+<li><strong>添加锻炼场景</strong>：
+<ul>
+<li>事件触发：用户点击地图；</li>
+<li>流程：显示锻炼表单（绿色）→ 用户选择锻炼类型（跑步 / 骑行）并填写数据 → 提交表单（黄色）→ 验证数据 → 渲染锻炼列表 + 地图标记（绿色）→ 保存数据到本地存储（红色，异步）。</li>
+</ul>
+</li>
+<li><strong>锻炼定位场景</strong>：
+<ul>
+<li>事件触发：用户点击锻炼列表某条记录；</li>
+<li>流程：获取该记录的位置坐标（黄色）→ 地图自动定位到对应位置（绿色）。</li>
+</ul>
+</li>
+</ol>
+<h4 id="2-2-3-流程图绘制技巧（避坑指南）">2.2.3 流程图绘制技巧（避坑指南）</h4>
+<ul>
+<li>无需追求 “完美初始版本”：先画粗略草图，开发过程中补充细节（如初期可忽略 “数据验证” 步骤，后续完善）；</li>
+<li>从 “事件” 切入：所有流程以用户操作（点击、提交）或系统事件（页面加载）为起点，避免逻辑混乱；</li>
+<li>标注依赖关系：异步操作需明确 “等待结果后执行后续步骤”（如必须先获取定位，才能渲染地图）。</li>
+</ul>
+<h3 id="2-3-第三步：规划项目架构（确定代码组织方式）">2.3 第三步：规划项目架构（确定代码组织方式）</h3>
+<h4 id="2-3-1-架构的核心定义">2.3.1 架构的核心定义</h4>
+<ul>
+<li>本质：代码的组织形式 + 技术选型（如 “是否用类封装数据”“是否拆分多文件”“是否用框架”），无需过度复杂，以 “可维护、易扩展” 为目标。</li>
+</ul>
+<h4 id="2-3-2-中小型项目架构选择（推荐方案）">2.3.2 中小型项目架构选择（推荐方案）</h4>
+<ul>
+<li>基础架构（适合本课程 Mapty 项目）：
+<ol>
+<li>按 “功能模块” 拆分函数：
+<ul>
+<li>地图模块：<code>initMap()</code>（初始化地图）、<code>addMarker()</code>（添加锻炼标记）；</li>
+<li>表单模块：<code>showForm()</code>（显示表单）、<code>validateForm()</code>（验证数据）；</li>
+<li>存储模块：<code>saveToLocalStorage()</code>（保存数据）、<code>getFromLocalStorage()</code>（读取数据）。</li>
+</ul>
+</li>
+<li>用 “类” 封装锻炼数据（可选，提升代码复用）：
+<ul>
+<li>定义<code>Workout</code>父类，包含共同属性（位置、距离、时间）和方法（<code>save()</code>）；</li>
+<li>定义<code>Running</code>和<code>Cycling</code>子类，扩展差异化属性（跑步的 “步速”、骑行的 “海拔增益”）。</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h4 id="2-3-3-架构规划误区（例题：反例分析）">2.3.3 架构规划误区（例题：反例分析）</h4>
+<ul>
+<li>反例：将所有代码写在一个<code>script</code>标签中，无函数拆分，直接用全局变量存储锻炼数据（如<code>let workouts = []</code>）。</li>
+<li>问题：
+<ol>
+<li>全局变量污染：若引入其他脚本，可能覆盖<code>workouts</code>；</li>
+<li>维护困难：代码超过 500 行后，无法快速定位 “添加锻炼” 或 “保存数据” 的逻辑；</li>
+<li>扩展性差：后续新增 “锻炼数据编辑” 功能，需修改大量原有代码。</li>
+</ol>
+</li>
+<li>改进方案：用 IIFE（立即执行函数）包裹代码，避免全局变量；按模块拆分函数，如将 “存储相关” 逻辑单独封装。</li>
+</ul>
+<h3 id="2-4-第四步：进入开发阶段（落地规划）">2.4 第四步：进入开发阶段（落地规划）</h3>
+<h4 id="2-4-1-开发前的准备">2.4.1 开发前的准备</h4>
+<ul>
+<li>技术确认：明确依赖的 API 或库（如 Mapty 项目需 “Leaflet 地图库”“地理定位 API”“localStorage”）；</li>
+<li>资源准备：获取第三方库 CDN 链接（如 Leaflet 的 CSS 和 JS 文件）、定义数据格式（如锻炼记录的 JSON 结构：<code>&#123;type: &quot;running&quot;, distance: 5, time: 30, coords: &#123;lat: 30.123, lng: 120.456&#125;&#125;</code>）。</li>
+</ul>
+<h4 id="2-4-2-开发与规划的联动">2.4.2 开发与规划的联动</h4>
+<ul>
+<li>开发中若发现规划漏洞（如表单未考虑 “数据格式错误”），需回溯调整流程图和架构（如新增<code>validateForm()</code>函数，补充 “数据验证失败→提示用户” 流程）；</li>
+<li>优先实现 “核心功能”：先完成 “添加锻炼 + 显示地图”，再优化 “数据持久化”“列表点击定位” 等次要功能。</li>
+</ul>
+</article><div class="post-copyright"><div class="post-copyright__author_group"><div class="post-copyright__author_img"><img class="post-copyright__author_img_front" src="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg"></div><div class="post-copyright__author_name">woodfish</div><div class="post-copyright__author_desc">HOLA,this is woodfish!</div></div><div class="post-tools" id="post-tools"><div class="post-tools-left"><div id="quit-box" onclick="RemoveRewardMask()"></div><div class="post-reward"><div class="reward-button" title="赞赏作者" onclick="AddRewardMask()"><i class="solitude fas fa-heart"></i>赞赏作者</div><div class="reward-main"><ul class="reward-all"><span class="reward-title"></span><ul class="reward-group"><li class="reward-item"><a href="/null"><img class="post-qr-code-img nolazyload" src="https://www.woodfishhhh.xyz/images/e926e309585e5a5826ab0c3b485f8b6.png?_t=1751445131356" alt="微信" style="border-color: var(--efu-main)"></a><div class="post-qr-code-desc">微信</div></li><li class="reward-item"><a href="/null"><img class="post-qr-code-img nolazyload" src="https://www.woodfishhhh.xyz/images/8147e2d92fa8287fac8774305c99661.jpg.jpeg?_t=1751445131356" alt="支付宝" style="border-color: var(--efu-main)"></a><div class="post-qr-code-desc">支付宝</div></li></ul><a class="reward-main-btn" href="/about/"><div class="reward-text">赞赏名单</div><div class="reward-dec"></div></a></ul></div></div><script>function RemoveRewardMask() {
+    let rewardMainElements = document.querySelectorAll(".reward-main");
+    let quitBoxElement = document.querySelector("#quit-box");
+
+    rewardMainElements.forEach(element => {
+        element.style.display = "none";
+    });
+
+    if (quitBoxElement) {
+        quitBoxElement.style.display = "none";
+    }
+}
+
+function AddRewardMask() {
+    let rewardMainElements = document.querySelectorAll(".reward-main");
+    let quitBoxElement = document.querySelector("#quit-box");
+
+    rewardMainElements.forEach(element => {
+        element.style.display = "flex";
+    });
+
+    if (quitBoxElement) {
+        quitBoxElement.style.display = "flex";
+    }
+}</script></div></div><div class="social-share"><a class="social-share-ico icon-qq" target="_blank" rel="noopener" href="https://connect.qq.com/widget/shareqq/index.html?url=https%3A%2F%2Fwww.woodfishhhh.xyz%2F2026%2F01%2F06%2FUdemy%2520JS%2F231%2520How%2520to%2520Plan%2520a%2520Web%2520Project%2F&amp;title=%E5%A6%82%E4%BD%95%E8%A7%84%E5%88%92Web%E9%A1%B9%E7%9B%AE&amp;desc=undefined&amp;summary=undefined&amp;site=%E5%A6%82%E4%BD%95%E8%A7%84%E5%88%92Web%E9%A1%B9%E7%9B%AE&amp;pics=https%3A%2F%2Fpic1.imgdb.cn%2Fitem%2F682f3d1658cb8da5c807b704.jpg" title="分享到QQ"><i class="solitude fab fa-qq"></i></a><a class="social-share-ico icon-weibo" target="_blank" rel="noopener" href="http://service.weibo.com/share/share.php?url=https%3A%2F%2Fwww.woodfishhhh.xyz%2F2026%2F01%2F06%2FUdemy%2520JS%2F231%2520How%2520to%2520Plan%2520a%2520Web%2520Project%2F&amp;title=%E5%A6%82%E4%BD%95%E8%A7%84%E5%88%92Web%E9%A1%B9%E7%9B%AE&amp;pic=https%3A%2F%2Fpic1.imgdb.cn%2Fitem%2F682f3d1658cb8da5c807b704.jpg" title="分享到微博"><i class="solitude fab fa-weibo"></i></a><a class="social-share-ico icon-twitter" target="_blank" rel="noopener" href="https://twitter.com/intent/tweet?url=https%3A%2F%2Fwww.woodfishhhh.xyz%2F2026%2F01%2F06%2FUdemy%2520JS%2F231%2520How%2520to%2520Plan%2520a%2520Web%2520Project%2F&amp;text=%E5%A6%82%E4%BD%95%E8%A7%84%E5%88%92Web%E9%A1%B9%E7%9B%AE" title="分享到Twitter"><i class="solitude fab fa-twitter"></i></a><a class="social-share-ico icon-facebook" target="_blank" rel="noopener" href="https://www.facebook.com/sharer/sharer.php?u=https%3A%2F%2Fwww.woodfishhhh.xyz%2F2026%2F01%2F06%2FUdemy%2520JS%2F231%2520How%2520to%2520Plan%2520a%2520Web%2520Project%2F" title="分享到Facebook"><i class="solitude fab fa-facebook"></i></a><div class="social-share-ico icon-link" onclick="utils.copy(&quot;https://www.woodfishhhh.xyz/2026/01/06/Udemy%20JS/231%20How%20to%20Plan%20a%20Web%20Project/&quot;)" title="复制文章链接"><i class="solitude fas fa-link"></i></div></div><div class="post-copyright__notice"><span class="post-copyright-info">本文是原创文章，采用<a target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/">CC BY-NC-SA 4.0</a>协议，完整转载请注明来自<a href="/">木鱼的鱼窝</a></span></div></div><div class="post-tools-right"><div class="tag_share"><div class="post-meta__tag-list"><a class="post-meta__tags" href="/tags/%E9%A1%B9%E7%9B%AE%E7%AE%A1%E7%90%86/"><span class="tags-punctuation"><i class="solitude fas fa-hashtag"></i>项目管理<span class="tagsPageCount">1</span></span></a><a class="post-meta__tags" href="/tags/Web%E5%BC%80%E5%8F%91/"><span class="tags-punctuation"><i class="solitude fas fa-hashtag"></i>Web开发<span class="tagsPageCount">1</span></span></a></div></div></div><nav class="needEndHide pagination-post" id="pagination"><div class="prev-post pull-left"><a href="/2026/01/06/Udemy%20JS/256%20JavaScript%20%E5%BC%82%E6%AD%A5%E7%BC%96%E7%A8%8B%E6%A0%B8%E5%BF%83%E7%AC%94%E8%AE%B0/"><div class="pagination-info"><div class="label">上一篇</div><div class="prev_info">JavaScript异步编程核心笔记</div></div></a></div><div class="next-post pull-right"><a href="/2026/01/06/Udemy%20JS/263%20Error%20Handling%20With%20try...catch/"><div class="pagination-info"><div class="label">下一篇</div><div class="next_info">try...catch错误处理</div></div></a></div></nav></div><div class="aside-content" id="aside-content"><div class="card-widget card-info"><div class="card-content"><div class="author-info__sayhi sayhi" id="sayhi" onclick="sco.changeWittyWord()"></div><div class="author-info-avatar"><img class="avatar-img" alt="头像" src="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg"></div><div class="author-info__description">河汉微明星乍稀，碧莲香湿袭人衣。夜凉如水琉璃滑，自起开窗放月归。</div><div class="author-info__bottom-group"><span class="author-info__bottom-group-left"><h1 class="author-info__name">woodfish</h1><div class="author-info__desc">欢迎来到我的鱼窝~</div></span><div class="card-info-social-icons is-center"><a class="social-icon" target="_blank" rel="noopener" href="https://github.com/woodfishhhh" title="Github"><i class="solitude  fab fa-github"></i></a><a class="social-icon" target="_blank" rel="noopener" href="https://space.bilibili.com/359728114" title="Bilibili"><i class="solitude  fab fa-bilibili"></i></a><a class="social-icon" href="https://www.woodfishhhh.xyz/images/af1a055d14e4f7f6eae2886f2865d13.jpg.jpeg?_t=1750312382930" title="QQ"><i class="solitude  fab fa-qq"></i></a><a class="social-icon" href="https://www.woodfishhhh.xyz/images/f59723db9159310b6056abe8341f5d7.jpg.jpeg?_t=1750312263368" title="Wechat"><i class="solitude  fab fa-weixin"></i></a><a class="social-icon" href="https://www.woodfishhhh.xyz/images/d8d58d2f2c7ac5790fd37f388da41db4.png?_t=1759286665402" title="Email"><i class="solitude  far fa-envelope"></i></a><a class="social-icon" target="_blank" rel="noopener" href="https://www.douyin.com/user/MS4wLjABAAAAgbOrIhdi7Rl5RfaQ3fE3i7c2WnyR3zEOyLiK2Cjtcqk?from_tab_name=main" title="Douyin"><i class="solitude  fab fa-tiktok"></i></a></div></div></div></div><div class="sticky_layout"><div class="card-widget" id="card-toc"><div class="item-headline"><i class="solitude fas fa-bars"></i><span>文章目录</span></div><div class="toc-content" id="toc-content"><ol class="toc"><li class="toc-item toc-level-1"><a class="toc-link"><span class="toc-text">231 How to Plan a Web Project 笔记</span></a><ol class="toc-child"><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%B8%80%E3%80%81%E9%A1%B9%E7%9B%AE%E8%A7%84%E5%88%92%E7%9A%84%E9%87%8D%E8%A6%81%E6%80%A7%EF%BC%88%E6%A0%B8%E5%BF%83%E5%89%8D%E6%8F%90%EF%BC%89"><span class="toc-text">一、项目规划的重要性（核心前提）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#1-1-%E8%A7%84%E5%88%92%E7%9A%84%E5%BF%85%E8%A6%81%E6%80%A7"><span class="toc-text">1.1 规划的必要性</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#1-2-%E8%A7%84%E5%88%92%E7%9A%84%E9%80%82%E7%94%A8%E5%9C%BA%E6%99%AF"><span class="toc-text">1.2 规划的适用场景</span></a></li></ol></li><li class="toc-item toc-level-2"><a class="toc-link" href="#%E4%BA%8C%E3%80%81Web-%E9%A1%B9%E7%9B%AE%E8%A7%84%E5%88%92%E5%9B%9B%E6%AD%A5%E6%B5%81%E7%A8%8B%EF%BC%88%E6%A0%B8%E5%BF%83%E6%96%B9%E6%B3%95%EF%BC%89"><span class="toc-text">二、Web 项目规划四步流程（核心方法）</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#2-1-%E7%AC%AC%E4%B8%80%E6%AD%A5%EF%BC%9A%E5%AE%9A%E4%B9%89%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%EF%BC%88%E4%BB%8E%E7%94%A8%E6%88%B7%E8%A7%86%E8%A7%92%E6%98%8E%E7%A1%AE%E5%8A%9F%E8%83%BD%EF%BC%89"><span class="toc-text">2.1 第一步：定义用户故事（从用户视角明确功能）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-1-%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%E7%9A%84%E6%A6%82%E5%BF%B5"><span class="toc-text">2.1.1 用户故事的概念</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-2-Mapty-%E9%A1%B9%E7%9B%AE%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%E5%AE%9E%E4%BE%8B%EF%BC%88%E7%BB%93%E5%90%88%E9%9C%80%E6%B1%82%E8%90%BD%E5%9C%B0%EF%BC%89"><span class="toc-text">2.1.2 Mapty 项目用户故事实例（结合需求落地）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-1-3-%E4%BB%8E%E7%94%A8%E6%88%B7%E6%95%85%E4%BA%8B%E6%8E%A8%E5%AF%BC%E5%8A%9F%E8%83%BD%EF%BC%88%E4%BE%8B%E9%A2%98%EF%BC%89"><span class="toc-text">2.1.3 从用户故事推导功能（例题）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-2-%E7%AC%AC%E4%BA%8C%E6%AD%A5%EF%BC%9A%E7%BB%98%E5%88%B6%E6%B5%81%E7%A8%8B%E5%9B%BE%EF%BC%88%E6%A2%B3%E7%90%86%E5%8A%9F%E8%83%BD%E9%80%BB%E8%BE%91%E4%B8%8E%E6%95%B0%E6%8D%AE%E6%B5%81%E5%90%91%EF%BC%89"><span class="toc-text">2.2 第二步：绘制流程图（梳理功能逻辑与数据流向）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-1-%E6%B5%81%E7%A8%8B%E5%9B%BE%E7%9A%84%E6%A0%B8%E5%BF%83%E8%A6%81%E7%B4%A0"><span class="toc-text">2.2.1 流程图的核心要素</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-2-Mapty-%E9%A1%B9%E7%9B%AE%E6%A0%B8%E5%BF%83%E6%B5%81%E7%A8%8B%E5%AE%9E%E4%BE%8B%EF%BC%88%E5%88%86%E5%9C%BA%E6%99%AF%E6%A2%B3%E7%90%86%EF%BC%89"><span class="toc-text">2.2.2 Mapty 项目核心流程实例（分场景梳理）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-2-3-%E6%B5%81%E7%A8%8B%E5%9B%BE%E7%BB%98%E5%88%B6%E6%8A%80%E5%B7%A7%EF%BC%88%E9%81%BF%E5%9D%91%E6%8C%87%E5%8D%97%EF%BC%89"><span class="toc-text">2.2.3 流程图绘制技巧（避坑指南）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-3-%E7%AC%AC%E4%B8%89%E6%AD%A5%EF%BC%9A%E8%A7%84%E5%88%92%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84%EF%BC%88%E7%A1%AE%E5%AE%9A%E4%BB%A3%E7%A0%81%E7%BB%84%E7%BB%87%E6%96%B9%E5%BC%8F%EF%BC%89"><span class="toc-text">2.3 第三步：规划项目架构（确定代码组织方式）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-1-%E6%9E%B6%E6%9E%84%E7%9A%84%E6%A0%B8%E5%BF%83%E5%AE%9A%E4%B9%89"><span class="toc-text">2.3.1 架构的核心定义</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-2-%E4%B8%AD%E5%B0%8F%E5%9E%8B%E9%A1%B9%E7%9B%AE%E6%9E%B6%E6%9E%84%E9%80%89%E6%8B%A9%EF%BC%88%E6%8E%A8%E8%8D%90%E6%96%B9%E6%A1%88%EF%BC%89"><span class="toc-text">2.3.2 中小型项目架构选择（推荐方案）</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-3-3-%E6%9E%B6%E6%9E%84%E8%A7%84%E5%88%92%E8%AF%AF%E5%8C%BA%EF%BC%88%E4%BE%8B%E9%A2%98%EF%BC%9A%E5%8F%8D%E4%BE%8B%E5%88%86%E6%9E%90%EF%BC%89"><span class="toc-text">2.3.3 架构规划误区（例题：反例分析）</span></a></li></ol></li><li class="toc-item toc-level-3"><a class="toc-link" href="#2-4-%E7%AC%AC%E5%9B%9B%E6%AD%A5%EF%BC%9A%E8%BF%9B%E5%85%A5%E5%BC%80%E5%8F%91%E9%98%B6%E6%AE%B5%EF%BC%88%E8%90%BD%E5%9C%B0%E8%A7%84%E5%88%92%EF%BC%89"><span class="toc-text">2.4 第四步：进入开发阶段（落地规划）</span></a><ol class="toc-child"><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-1-%E5%BC%80%E5%8F%91%E5%89%8D%E7%9A%84%E5%87%86%E5%A4%87"><span class="toc-text">2.4.1 开发前的准备</span></a></li><li class="toc-item toc-level-4"><a class="toc-link" href="#2-4-2-%E5%BC%80%E5%8F%91%E4%B8%8E%E8%A7%84%E5%88%92%E7%9A%84%E8%81%94%E5%8A%A8"><span class="toc-text">2.4.2 开发与规划的联动</span></a></li></ol></li></ol></li></ol></li></ol></div></div><div class="card-widget card-recent-post"><div class="item-headline"><i class="solitude fas fa-map"></i><span>最近发布</span></div><div class="aside-list"><a class="aside-list-item" href="/2026/01/06/Udemy%20JS/098%20Regular%20Functions%20vs.%20Arrow%20Functions%EF%BC%88%E5%B8%B8%E8%A7%84%E5%87%BD%E6%95%B0%E4%B8%8E%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%EF%BC%89/" title="常规函数与箭头函数"><div class="content"><span class="title" href="/2026/01/06/Udemy%20JS/098%20Regular%20Functions%20vs.%20Arrow%20Functions%EF%BC%88%E5%B8%B8%E8%A7%84%E5%87%BD%E6%95%B0%E4%B8%8E%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%EF%BC%89/" title="常规函数与箭头函数">常规函数与箭头函数</span><span class="categories" href="/2026/01/06/Udemy%20JS/098%20Regular%20Functions%20vs.%20Arrow%20Functions%EF%BC%88%E5%B8%B8%E8%A7%84%E5%87%BD%E6%95%B0%E4%B8%8E%E7%AE%AD%E5%A4%B4%E5%87%BD%E6%95%B0%EF%BC%89/">前端</span></div></a><a class="aside-list-item" href="/2026/01/06/Udemy%20JS/103%20Destructuring%20Arrays%EF%BC%89%E7%AC%94%E8%AE%B0/" title="数组解构"><div class="content"><span class="title" href="/2026/01/06/Udemy%20JS/103%20Destructuring%20Arrays%EF%BC%89%E7%AC%94%E8%AE%B0/" title="数组解构">数组解构</span><span class="categories" href="/2026/01/06/Udemy%20JS/103%20Destructuring%20Arrays%EF%BC%89%E7%AC%94%E8%AE%B0/">前端</span></div></a><a class="aside-list-item" href="/2026/01/06/Udemy%20JS/099%20Primitives%20vs.%20Objects%20(Primitive%20vs.%20Reference%20Types)/" title="基本类型与对象类型"><div class="content"><span class="title" href="/2026/01/06/Udemy%20JS/099%20Primitives%20vs.%20Objects%20(Primitive%20vs.%20Reference%20Types)/" title="基本类型与对象类型">基本类型与对象类型</span><span class="categories" href="/2026/01/06/Udemy%20JS/099%20Primitives%20vs.%20Objects%20(Primitive%20vs.%20Reference%20Types)/">前端</span></div></a><a class="aside-list-item" href="/2026/01/06/Udemy%20JS/104%20Destructuring%20Objects%EF%BC%88%E5%AF%B9%E8%B1%A1%E8%A7%A3%E6%9E%84%EF%BC%89/" title="对象解构"><div class="content"><span class="title" href="/2026/01/06/Udemy%20JS/104%20Destructuring%20Objects%EF%BC%88%E5%AF%B9%E8%B1%A1%E8%A7%A3%E6%9E%84%EF%BC%89/" title="对象解构">对象解构</span><span class="categories" href="/2026/01/06/Udemy%20JS/104%20Destructuring%20Objects%EF%BC%88%E5%AF%B9%E8%B1%A1%E8%A7%A3%E6%9E%84%EF%BC%89/">前端</span></div></a><a class="aside-list-item" href="/2026/01/06/Udemy%20JS/105%20JavaScript%20%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6%EF%BC%88...%EF%BC%89/" title="JavaScript扩展运算符"><div class="content"><span class="title" href="/2026/01/06/Udemy%20JS/105%20JavaScript%20%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6%EF%BC%88...%EF%BC%89/" title="JavaScript扩展运算符">JavaScript扩展运算符</span><span class="categories" href="/2026/01/06/Udemy%20JS/105%20JavaScript%20%E6%89%A9%E5%B1%95%E8%BF%90%E7%AE%97%E7%AC%A6%EF%BC%88...%EF%BC%89/">前端</span></div></a></div></div></div></div></main><footer id="footer"><div id="footer_deal"><a class="deal_link" target="_blank" rel="noopener" href="https://github.com/woodfishhhh" title="Github"><i class="solitude  fab fa-github"></i></a><a class="deal_link" href="https://www.woodfishhhh.xyz/images/d8d58d2f2c7ac5790fd37f388da41db4.png?_t=1759286665402" title="Email"><i class="solitude  far fa-envelope"></i></a><div><div class="nolazyload footer_mini_logo" id="footer_mini_logo" title="返回顶部" onclick="sco.toTop()"><img src= "" data-lazy-src="https://pic1.imgdb.cn/item/682f3d1658cb8da5c807b704.jpg" alt="返回顶部"></div></div><a class="deal_link" target="_blank" rel="noopener" href="https://space.bilibili.com/359728114" title="Bilibili"><i class="solitude  fab fa-bilibili"></i></a><a class="deal_link" target="_blank" rel="noopener" href="https://www.douyin.com/user/MS4wLjABAAAAgbOrIhdi7Rl5RfaQ3fE3i7c2WnyR3zEOyLiK2Cjtcqk?from_tab_name=main" title="Douyin"><i class="solitude  fab fa-tiktok"></i></a></div><div><div id="st-footer"><div class="footer-group"><h3 class="footer-title">导航</h3><div class="footer-links"><a class="footer-item" href="/archives/" title="Archives">Archives</a><a class="footer-item" href="/categories/" title="Categories">Categories</a><a class="footer-item" href="/tags/" title="Tags">Tags</a></div></div><div class="footer-group"><h3 class="footer-title">排列</h3><div class="footer-links"><a class="footer-item" href="/about/" title="About">About</a><a class="footer-item" href="/link/" title="Friends">Friends</a></div></div><div class="footer-group"><div class="footer-title-group"><h3 class="footer-title">友链</h3><button class="random-friends-btn" onclick="randomLinksList()" title="友链"><i class="solitude fas fa-arrows-rotate"></i></button></div><div class="footer-links" id="friend-links-in-footer"></div></div></div></div><div id="footer-bar"><div class="footer-bar-links"><div class="footer-bar-left"><div class="copyright">© 2025 - 2026 By<a class="footer-bar-link" href="/" title="woodfish">woodfish</a></div><div class="beian-group"><div></div><a class="footer-bar-link" target="_blank" rel="noopener" href="https://hexo.io/" title="框架：Hexo">框架：Hexo</a><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/everfu/hexo-theme-solitude" title="主题：Solitude">主题：Solitude</a></div></div><div><div class="footer-bar-right"><a class="footer-bar-link" target="_blank" rel="noopener" href="https://github.com/everfu/hexo-theme-solitude" title="">主题</a><a class="footer-bar-link" target="_blank" rel="noopener" href="https://creativecommons.org/licenses/by-nc-sa/4.0/" title="">License</a></div></div></div></div><div class="comment-barrage needEndHide"></div></footer></div><div><div id="rightMenu"><div class="rightMenu-group rightMenu-small"><div class="rightMenu-item" id="menu-backward"><i class="solitude fas fa-arrow-left"></i></div><div class="rightMenu-item" id="menu-forward"><i class="solitude fas fa-arrow-right"></i></div><div class="rightMenu-item" id="menu-refresh"><i class="solitude fas fa-arrows-rotate"></i></div><div class="rightMenu-item" id="menu-top"><i class="solitude fas fa-arrow-up"></i></div></div><div class="rightMenu-group rightMenu-line rightMenuPlugin"><div class="rightMenu-item" id="menu-copytext"><i class="solitude fas fa-clone"></i><span>复制选中文本</span></div><div class="rightMenu-item" id="menu-pastetext"><i class="solitude fas fa-clipboard"></i><span>粘贴文本</span></div><div class="rightMenu-item" id="menu-newwindow"><i class="solitude far fa-window-maximize"></i><span>新窗口打开</span></div><div class="rightMenu-item" id="menu-copylink"><i class="solitude fas fa-link"></i><span>复制链接地址</span></div><div class="rightMenu-item" id="menu-copyimg"><i class="solitude fas fa-clone"></i><span>复制此图片</span></div><div class="rightMenu-item" id="menu-downloadimg"><i class="solitude fas fa-cloud-arrow-down"></i><span>下载此图片</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><div class="rightMenu-item" id="menu-randomPost" onclick="toRandomPost()||rm.hideRightMenu()"><i class="solitude fas fa-tower-broadcast"></i><span>随机文章</span></div><div class="rightMenu-item" onclick="pjax.loadUrl('/categories/')||rm.hideRightMenu()"><i class="solitude fas fa-clone"></i><span>全部分类</span></div><div class="rightMenu-item" onclick="pjax.loadUrl('/tags/')||rm.hideRightMenu()"><i class="solitude fas fa-tags"></i><span>全部标签</span></div></div><div class="rightMenu-group rightMenu-line rightMenuOther"><div class="rightMenu-item" id="menu-darkmode" onclick="sco.switchDarkMode()"><i class="solitude fas fa-circle-half-stroke"></i><span class="menu-darkmode-text">浅色模式</span></div><div class="rightMenu-item" id="menu-translate"><i class="solitude fas fa-language"></i><span>轉為繁體</span></div></div></div><div id="rightmenu-mask"></div></div><div><!-- Critical scripts loaded synchronously--><script src="/js/utils.js?v=3.0.20"></script><script src="/js/main.js?v=3.0.20"></script><!-- Non-critical scripts loaded asynchronously--><script async src="/js/third_party/waterfall.min.js?v=3.0.20"></script><script src="https://cdn.jsdelivr.net/npm/pjax@0.2.8/pjax.min.js"></script><!-- Feature-specific scripts loaded asynchronously--><script defer src="/js/third_party/universe.min.js?v=3.0.20"></script><script>document.addEventListener('DOMContentLoaded', () => {
+  if (typeof dark === 'function') dark();
+});
+</script><script defer src="/js/tw_cn.js?v=3.0.20"></script><!-- UI enhancement scripts--><script src="https://cdn.jsdelivr.net/npm/vanilla-lazyload@19.1.3/dist/lazyload.iife.min.js"></script><script defer src="https://cdn.jsdelivr.net/npm/node-snackbar@0.1.16/dist/snackbar.min.js"></script><!-- Music player scripts--><!-- Cover color processing scripts--><script>window.paceOptions = {
+  restartOnPushState: false
+}
+
+utils.addGlobalFn('pjaxSend', () => {
+  Pace.restart()
+}, 'pace_restart')
+</script><script src="https://cdn.jsdelivr.net/npm/pace-js@1.2.4/pace.min.js"></script><!-- Search functionality--><!-- Right menu functionality--><script defer src="/js/right_menu.js?v=3.0.20"></script><div class="js-pjax"><script defer pjax src="https://cdn.jsdelivr.net/npm/busuanzi@2.3.0/bsz.pure.mini.min.js"></script></div></div><!-- pjax--><script>let pjax = null;
+
+function initPjax() {
+    if (typeof Pjax === 'undefined') {
+        console.warn('Pjax is not loaded yet, retrying...');
+        setTimeout(initPjax, 100);
+        return;
+    }
+
+    pjax = new Pjax({
+        elements: 'a:not([target="_blank"])',
+        selectors: ["title","#body-wrap","#site-config","meta[name=\"description\"]",".js-pjax","meta[property^=\"og:\"]","#config-diff",".rs_show",".rs_hide"],
+        cacheBust: false,
+        analytics: false,
+        scrollRestoration: false
+    })
+
+    // 将 pjax 实例挂载到全局
+    window.pjax = pjax;
+
+    document.querySelectorAll('script[data-pjax]').forEach(item => {
+        const newScript = document.createElement('script')
+        const content = item.text || item.textContent || item.innerHTML || ""
+        Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+        newScript.appendChild(document.createTextNode(content))
+        item.parentNode.replaceChild(newScript, item)
+    })
+
+    document.addEventListener('pjax:complete', () => {
+        window.refreshFn()
+
+        document.querySelectorAll('script[data-pjax]').forEach(item => {
+            const newScript = document.createElement('script')
+            const content = item.text || item.textContent || item.innerHTML || ""
+            Array.from(item.attributes).forEach(attr => newScript.setAttribute(attr.name, attr.value))
+            newScript.appendChild(document.createTextNode(content))
+            item.parentNode.replaceChild(newScript, item)
+        })
+
+        GLOBAL_CONFIG.islazyload && window.lazyLoadInstance.update()
+
+    })
+
+    document.addEventListener('pjax:error', (e) => {
+        if (e.request.status === 404) {
+            pjax.loadUrl('/404.html')
+        }
+    })
+}
+
+// 初始化 Pjax
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initPjax);
+} else {
+    initPjax();
+}</script><!-- google adsense--></body></html>
+        <script>
+            const posts = ["2026/01/06/Udemy JS/098 Regular Functions vs. Arrow Functions（常规函数与箭头函数）/","2026/01/06/Udemy JS/103 Destructuring Arrays）笔记/","2026/01/06/Udemy JS/099 Primitives vs. Objects (Primitive vs. Reference Types)/","2026/01/06/Udemy JS/104 Destructuring Objects（对象解构）/","2026/01/06/Udemy JS/105 JavaScript 扩展运算符（...）/","2026/01/06/Udemy JS/106 Rest Pattern and Parameters/","2026/01/06/Udemy JS/108 空值合并运算符（Nullish Coalescing Operator）/","2026/01/06/Udemy JS/109 Logical Assignment Operators）/","2026/01/06/Udemy JS/111 for-of 循环笔记/","2026/01/06/Udemy JS/112 Enhanced Object Literals（ES6 增强对象字面量）/","2026/01/06/Udemy JS/112 JavaScript数组方法(forEach, map, filter, reduce等)/","2026/01/06/Udemy JS/113 可选链（Optional Chaining）笔记/","2026/01/06/Udemy JS/258 The Event Loop in Practice/","2026/01/06/Udemy JS/256 JavaScript 异步编程核心笔记/","2026/01/06/Udemy JS/231 How to Plan a Web Project/","2026/01/06/Udemy JS/263 Error Handling With try...catch/","2026/01/06/Udemy JS/262 Consuming Promises with Async_Await/","2026/01/06/Udemy JS/264 Returning Values from Async Functions/","2026/01/06/Udemy JS/268-280 现代js开发/","2026/01/06/杂项/Udemy Vue/","2026/01/06/Udemy TS/ts笔记/","2026/01/06/杂项/new JS/","2026/01/06/杂项/数据结构期末速通/","2026/01/06/杂项/管理模拟卷/","2026/01/06/杂项/马原模拟卷/","2026/01/06/前端/AJAX基础入门教程/","2026/01/06/题解/Day5题解/","2026/01/06/题解/E题超详解：帮哈基鱼算标签/","2026/01/06/题解/F. Beautiful Intervals/","2026/01/06/题解/JUFE国庆新生编程语法培训/","2026/01/06/计算机组成原理/Cache缓存/","2026/01/06/计算机组成原理/加减乘除/","2026/01/06/计算机组成原理/存储器，主存扩展/","2026/01/06/计算机组成原理/数据的表示/","2026/01/06/计算机组成原理/指令系统/","2026/01/06/计算机组成原理/计算机存储器/","2026/01/06/计算机网络/最长前缀匹配原则/","2026/01/06/计算机网络/划分子网/","2026/01/06/计算机网络/计算机网络第一章：概论/","2026/01/06/计算机网络/计算机网络第二章：物理层/","2026/01/06/计算机网络/计算机网络第三章：链路层/","2026/01/06/计算机网络/计算机网络第五章：运输层/","2026/01/06/计算机网络/计算机网络第六章：应用层/","2025/10/21/计算机网络/计算机网络第四章：网络层/","2025/10/21/计算机网络/计算机网络第四章：网络层（edit）/","2025/09/11/前端/Day04_AJAX进阶/","2025/09/10/前端/Day03_AJAX原理/","2025/09/09/前端/Day02_AJAX综合案例/","2025/09/08/前端/Day01_AJAX入门/","2025/08/25/Linux/Linux课程笔记/","2025/08/13/前端/js易错点/","2025/08/11/前端/JavaScript 学习笔记（9）：深浅拷贝、异常处理、this 指向与防抖节流/","2025/08/03/前端/JavaScript 学习笔记（8）：面向对象编程与原型机制详解/","2025/08/02/前端/JavaScript 学习笔记（7）：面向对象与内置构造函数/","2025/07/31/前端/JavaScript 学习笔记（6）：作用域、闭包与函数进阶/","2025/07/28/前端/Web API 学习笔记（6）：正则表达式与表单验证/","2025/07/27/前端/Web API 学习笔记（5）：BOM 操作与本地存储/","2025/07/26/前端/Web API 学习笔记（4）：Date 对象与 DOM-节点操作要点/","2025/07/23/前端/Web API 学习笔记（3）：事件流与事件委托/","2025/07/22/前端/Web API 学习笔记（2）：事件处理与-this-指向/","2025/07/21/前端/Web API 学习笔记（1）：DOM 基础操作/","2025/07/20/前端/JavaScript 学习笔记（5）：对象数据类型与内置数学对象/","2025/07/19/前端/JavaScript 学习笔记（4）：函数封装与对象基础/","2025/07/18/前端/JavaScript 学习笔记（3）：数组的增删操作方法详解/","2025/07/17/前端/JavaScript 学习笔记（2）：运算符、语句与综合案例/","2025/07/17/前端/JavaScript 学习笔记（1）：基础语法与数据类型/","2025/07/15/前端/CSS 学习笔记（12）：响应式布局与 Bootstrap 框架应用/","2025/07/14/前端/CSS 学习笔记（11）：移动 Web 开发之 vw 适配与酷我音乐案例实践/","2025/07/13/前端/CSS 学习笔记（10）：移动 Web 开发基础与 rem 布局、Less 预处理器/","2025/07/12/前端/CSS 学习笔记（9）：移动 Web 开发之空间转换与动画效果/","2025/07/11/前端/CSS 学习笔记（8）：移动 Web 开发之平面转换与渐变效果/","2025/07/10/前端/小兔仙/","2025/07/08/前端/学成在线/","2025/07/08/前端/CSS 学习笔记（6）：小兔鲜儿项目搭建及基础配置（目录结构、SEO 标签、版心设置）/","2025/07/04/前端/CSS我的易错点/","2025/07/03/前端/CSS 学习笔记（7）：CSS 优先级叠加计算规则详解/","2025/07/02/前端/CSS 学习笔记（5）：定位模式、CSS 精灵、字体图标及过渡效果应用/","2025/06/30/前端/CSS 学习笔记（4）：浮动布局与 Flex 弹性布局详解及应用案例/","2025/06/27/前端/CSS 学习笔记（3）：伪类与伪元素选择器、盒子模型及相关特性详解/","2025/06/24/前端/CSS 学习笔记（2）：复合选择器、CSS 特性及背景与显示模式设置/","2025/06/23/前端/CSS 学习笔记（1）：引入方式、选择器及文字样式控制/","2025/06/23/前端/HTML 学习笔记（2）：列表、表格、表单及布局标签详解/","2025/06/22/前端/HTML 学习笔记（1）：核心标签、文档结构及多媒体应用/","2025/06/19/JAVA/Java期末复习重点易错点/","2025/06/18/杂项/中国近代史复习重点/","2025/06/03/JAVA/Java的final/","2025/06/03/JAVA/Java的继承/","2025/06/03/JAVA/Java的多态/","2025/05/27/JAVA/Java的List集合/","2025/05/27/JAVA/Java的Collection集合/","2025/05/27/JAVA/Java的包装类/","2025/05/15/JAVA/Java的内部类/","2025/05/15/JAVA/Java的抽象与接口类/"];
+            function toRandomPost() {
+                const randomPost = posts[Math.floor(Math.random() * posts.length)];
+                pjax.loadUrl(GLOBAL_CONFIG.root + randomPost);
+            }
+        </script>
